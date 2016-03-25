@@ -5,6 +5,8 @@
  * @version $Id$
  */
  module.exports=function(app){
+ 	console.log(app.get("env"));
+ 	console.log(process.env.NODE_ENV);
 
  	var router=app.loopback.Router();
  	router.get('/api/test',function(req,res){
