@@ -8,14 +8,15 @@ var socketHandle=function(socket){
 	var room='friends';
 	socket.join(room,function(){
 		console.log(socket.rooms);
+		socket.emit('news',{msg:'hello world'});
+		socket.on('sendMsg',function(msg){
+			console.log(msg);
+			msg.type=2;
+			socket.to('friends').emit('news',msg);
+			
+		})
 	});
-	socket.emit('news',{msg:'hello world'});
-	socket.on('sendMsg',function(msg){
-		console.log(msg);
-		msg.type=2;
-		socket.to('friends').emit('news',msg);
-		
-	})
+
 }
 
 module.exports=socketHandle;
