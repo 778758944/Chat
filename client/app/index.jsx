@@ -3,6 +3,7 @@ import {render} from 'react-dom'
 import {Router,Route,IndexRoute,Link,hashHistory,Redirect,browserHistory} from 'react-router'
 import {ChatCtrl} from './component/chat/chatCtrl'
 import {RegisterCtrl} from './component/register/registerCtrl'
+import './lib/ajax.js'
 
 require('./main.css');
 require('./reset.css');

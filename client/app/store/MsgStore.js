@@ -7,8 +7,8 @@
 import {EventEmitter} from 'events'
 import io from './socket.io'
 var io_url=location.protocol+'//'+location.hostname+':'+location.port;
-console.log(io_url);
-var socket=io(io_url);
+// console.log(io_url);
+// var socket=io(io_url);
 
 
 class MSGSTORE extends EventEmitter{
@@ -28,7 +28,7 @@ class MSGSTORE extends EventEmitter{
 
 	sendMsg(data){
 		this.updateMsg(data);
-		socket.emit("sendMsg",data);
+		// socket.emit("sendMsg",data);
 	}
 
 	addUpdateListener(callback){
@@ -47,9 +47,9 @@ class MSGSTORE extends EventEmitter{
 var MsgStore=new MSGSTORE();
 
 
-socket.on('news',function(data){
-	MsgStore.updateMsg(data);
-});
+// socket.on('news',function(data){
+// 	MsgStore.updateMsg(data);
+// });
 export {MsgStore}
 
 

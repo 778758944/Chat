@@ -31,8 +31,8 @@ module.exports={
 		inline:true,
 		progress:true,
 		proxy:{
-			'/api/test':{
-				target:"http://0.0.0.0:3000",
+			'/api/yonghus/login':{
+				target:"http://0.0.0.0:3002",
 				secure:false
 			}
 		}

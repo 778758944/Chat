@@ -31,5 +31,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "user": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "yonghu": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }

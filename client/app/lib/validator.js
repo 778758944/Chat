@@ -6,14 +6,10 @@
  */
 
 
-var Config=function(name,type){
+var Config=function(name,type,actionRight){
 	this.ipt=typeof(name)=="Object"? name:document.getElementsByName(name)[0];
 	this.type=type;
-	if(this.ipt.value){
-		this.result=true;
-	}else{
-		this.result=false;
-	}
+	this.actionRight=actionRight||false;
 }
 
 
@@ -28,68 +24,48 @@ var Validator=function(config,form,noRightAction,rightfn,errorfn){
 	this.form=typeof(form)=="Object"? form:document.getElementById(form);
 	// console.log(this.config);
 	var that=this;
-	for(var i=0;i<this.config.length;i++){
-		this.config[i].ipt.addEventListener("blur",function(e){
-			that.validate(e);
+	for(let i=0;i<this.config.length;i++){
+		// var type=this.config[i].type;
+		this.config[i].ipt.addEventListener("change",function(e){
+			that.validate(that.config[i].ipt,i);
 		},false);
 	}
 
-	this.form.addEventListener("submit",function(e){
-		var aa=true;
-		// alert("jaja");
-		for(var j=0;j<that.config.length;j++){
-			console.log(that.config[j].result);
-			if(!that.config[j].result){
-				that.wwaction(that.config[j].ipt);
-				aa=false;
-				e.preventDefault();
-			}
+	var event=this.form.tagName=='FORM' ? 'submit':'mousedown';
+
+	this.form.addEventListener(event,function(e){
+		for(let j=0;j<that.config.length;j++){
+			that.validate(that.config[j].ipt,j);
 		}
-		// console.log(aa);
 	},false);
 }
 
 Validator.prototype={
 	//onblur
-	validate:function(e){
-		var ele=e.target;
-		var name=ele.name;
-		// console.log(that.config);
-		for(var i=0;i<this.config.length;i++){
-			if(this.config[i].ipt.name==name){
-				this.result_ok=Validator.types[this.config[i].type](ele.value,this.already);
+	validate:function(ele,index){
+		// var ele=e.target;
+		var type=this.config[index].type;
+		if(typeof(type) == 'string'){
+			this.result_ok=Validator.types[type](ele.value);
+			if(!this.result_ok.isTrue){
+				this.errorfn(ele,this.result_ok);
+				this.config[index].actionRight=true;
+			}else if(this.result_ok.isTrue&&this.config[index].actionRight){
+				this.rightfn(ele,this.result_ok);
+			}
+		}
+		else{
+			this.result_ok=this.config[index].type.call(this,ele.value);
+			if(this.result_ok){
 				if(!this.result_ok.isTrue){
 					this.errorfn(ele,this.result_ok);
-				}else if(this.noRightAction){
+					this.config[index].actionRight=true;
+				}else if(this.result_ok.isTrue&&this.config[index].actionRight){
 					this.rightfn(ele,this.result_ok);
 				}
-				this.config[i].result=this.result_ok.isTrue;
 			}
-		} 
-	},
-
-	// waction:function(ele,data){
-	// 	var animate="animated shake";
-	// 	var animatend="webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-	// 	$(ele).css("border","1px solid red");
-	// 	if($(".err")){
-	// 		$(ele).parent().children(".err").remove();
-	// 	}
-	// 	var p=$("<p></p>").attr("class","err").text(data.info);
-	// 	$(ele).parent().append(p);
-	// 	$(ele).addClass(animate).one(animatend,function(){
-	// 		$(this).removeClass(animate);
-	// 	})
-	// },
-
-	// raction:function(ele){
-	// 	$(ele).parent().children(".err").remove();
-	// 	$(ele).css("borderColor","#ccc");
-	// },
-
-	// wwaction:function(ele){
-	// 	$(ele).css("border","1px solid red");
-	// }
+		}
+	}
 }
 
 Validator.types=(function(){
@@ -164,11 +140,32 @@ Validator.types=(function(){
 		}
 	}
 
+	var isEmail=function(val,ele){
+		if(!val){
+			return {
+				isTrue:false,
+				info:"该选项不能为空"
+			}
+		}
+		var filter=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		if(filter.test(val)){
+			return {
+				isTrue:true,
+				info:'邮箱填写正确'
+			}
+		}
+		return {
+			isTrue:false,
+			info:"请输入正确的邮箱地址"
+		}
+	}
+
 	return {
 		isEmpty:isEmpty,
 		isTel:tel,
 		isNumber:isNumber,
-		isRepeat:isRepeat
+		isRepeat:isRepeat,
+		isEmail:isEmail
 	}
 }());
 

@@ -6,6 +6,7 @@
  */
 import {Dispatcher} from 'flux'
 import {MsgStore} from '../store/MsgStore'
+import {LoginStore} from '../store/loginStore'
 
 var AppDispatcher=new Dispatcher();
 AppDispatcher.register(function(actions){
@@ -13,6 +14,11 @@ AppDispatcher.register(function(actions){
 		case 'SEND MESSAGE':
 			MsgStore.sendMsg(actions.text);
 			break;
+
+		case 'LOGIN':
+			LoginStore.login(actions.email,actions.password);
+			break;
+
 
 		default:
 	}
