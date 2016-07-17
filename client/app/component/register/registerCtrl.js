@@ -6,9 +6,13 @@
  */
 import React from 'react'
 import {Register} from './register'
-import {Config,Validator} from '../../lib/validator'
+// import {Config,Validator} from '../../lib/validator'
 import {LoginStore} from '../../store/loginStore'
 import {LoginAction} from '../../actions/LoginAction'
+// import {RouterContext} from 'react-router'
+import {Router} from 'react-router'
+
+// var router=RouterContext.router;
 
 // console.log(Config);
 
@@ -17,7 +21,7 @@ class RegisterCtrl extends React.Component{
 		super(props);
 		this.state={
 			email:'778758944@qq.com',
-			password:''
+			password:'123456'
 		}
 
 		this.changeEmail=function(e){
@@ -25,6 +29,8 @@ class RegisterCtrl extends React.Component{
 				email:e.target.value
 			})
 		}.bind(this)
+
+		this.rel='';
 
 
 		this.changePasswd=function(e){
@@ -35,27 +41,51 @@ class RegisterCtrl extends React.Component{
 
 
 		this.submit=function(e){
+			console.log('sdsd');
 			LoginAction.toLogin(this.state.email,this.state.password);
 		}.bind(this);
 
 	}
 
+	// static:{}
+
 	componentDidMount(){
+		// setTimeout(function(){
+		// 	this.ref.getName()
+		// }.bind(this),5000)
+		var router=this.context.router;
 		LoginStore.addLoginHandle(function(res){
 			console.log(res);
 			if(res.id){
-				window.location.hash='#/chat';
+				// Router.go('/friend')
+				router.push({
+					pathname:'/friend',
+					state:{token:res.id,id:res.userId}
+				})
+				// window.location.hash='#/register';
 			}
 		})
 	}
 
 	render(){
 		return (
-			<Register email={this.state.email} password={this.state.password} changeEmail={this.changeEmail} changePasswd={this.changePasswd} submit={this.submit}/>
+			<Register 
+				email={this.state.email} 
+				password={this.state.password} 
+				changeEmail={this.changeEmail} 
+				changePasswd={this.changePasswd} 
+				submit={this.submit}
+				ref={(e)=>{this.ref=e}}
+			/>
 			)
 	}
 }
-export {RegisterCtrl}
+
+
+RegisterCtrl.contextTypes={
+	router:React.PropTypes.object
+}
+module.exports=RegisterCtrl
 
 
 

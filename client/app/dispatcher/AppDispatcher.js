@@ -5,18 +5,32 @@
  * @version $Id$
  */
 import {Dispatcher} from 'flux'
-import {MsgStore} from '../store/MsgStore'
-import {LoginStore} from '../store/loginStore'
+
+var MsgStore,LoginStore,FrinedStore;
+
 
 var AppDispatcher=new Dispatcher();
 AppDispatcher.register(function(actions){
 	switch(actions.actionType){
 		case 'SEND MESSAGE':
-			MsgStore.sendMsg(actions.text);
+			require.ensure([],function(require){
+				MsgStore=require('../store/MsgStore').MsgStore;
+				MsgStore.sendMsg(actions.text);
+			})
 			break;
 
 		case 'LOGIN':
-			LoginStore.login(actions.email,actions.password);
+			require.ensure([],function(require){
+				LoginStore=require('../store/loginStore').LoginStore;
+				LoginStore.login(actions.email,actions.password);
+			})
+			break;
+
+		case 'GET USER':
+			require.ensure([],function(require){
+				FrinedStore=require('../store/friendStore').FriendStore;
+				FrinedStore.getUsers(actions.token);
+			})
 			break;
 
 

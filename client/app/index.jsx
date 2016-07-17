@@ -1,31 +1,69 @@
 import React from 'react'
 import {render} from 'react-dom'
 import {Router,Route,IndexRoute,Link,hashHistory,Redirect,browserHistory} from 'react-router'
-import {ChatCtrl} from './component/chat/chatCtrl'
-import {RegisterCtrl} from './component/register/registerCtrl'
 import './lib/ajax.js'
+import {app} from './component/index'
+var ReactCSSTransitionGroup=require('react-addons-css-transition-group');
+// import {registerCtrl} from './component/register/registerCtrl'
 
 require('./main.css');
 require('./reset.css');
 
 
 const App=React.createClass({
+	transitionName:'viewchange',
+	getInitialState(){
+		return {
+			transitionName:"viewchange"
+		}
+	},
+	componentDidMount(){
+	},
+	componentWillReceiveProps(nextProps){
+		var action=nextProps.location.action;
+		if(action=='POP'){
+			this.setState({transitionName:'viewback'});
+		}
+		else{
+			this.setState({transitionName:"viewchange"});
+		}
+
+	},
 	render(){
 		return (
 				<div className="wrap">
-					{this.props.children}
+					<ReactCSSTransitionGroup transitionName={this.state.transitionName}>
+						{React.cloneElement(this.props.children, {
+				            key: this.props.location.pathname
+				          })}
+					</ReactCSSTransitionGroup>
 				</div>
 			)
 	}
 });
 
+App.contextTypes={
+	router:React.PropTypes.object
+}
+
+const routes={
+	path:'/',
+	component:App,
+	onEnter:(params)=>{console.log('params',params)},
+	indexRoute:{
+		getComponent(nextState,cb){
+			require.ensure([],function(require){
+				cb(null,require('./component/register/registerCtrl'));
+			})
+		}
+	},
+	childRoutes:app
+}
+
 
 render((
-	<Router history={hashHistory}>
-		<Route path='/' component={App}>
-			<Route path='chat' component={ChatCtrl}/>
-			<Route path="register" component={RegisterCtrl}/>
-		</Route>
+	<Router history={hashHistory} routes={routes}>
+		
 	</Router>
 	),document.getElementById('wrap'));
 

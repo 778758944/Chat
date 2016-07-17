@@ -5,9 +5,28 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "socket": {
+      "type": "number"
+    }
+  },
   "validations": [],
   "relations": {},
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "friendList"
+    }
+  ],
   "methods": {}
 }

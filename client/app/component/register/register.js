@@ -6,11 +6,21 @@
  */
 import React from 'react'
 import {Config,Validator} from '../../lib/validator'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
 
 class Register extends React.Component{
 	constructor(props){
 		super(props);
+		this.state={
+			nana:'wrong'
+		}
+		this.getName=function(){
+			console.log('nana');
+			this.setState({
+				nana:"right"
+			})
+		}
 	}
 
 	componentDidMount(){
@@ -38,7 +48,7 @@ class Register extends React.Component{
 						</div>
 						<div className="input_area_line">
 							<input type="password" name="password" placeholder="请输入您的密码" value={this.props.password} onChange={this.props.changePasswd}/>
-							<span>错误</span>
+							<span>{this.state.nana}</span>
 						</div>
 					</form>
 				</div>

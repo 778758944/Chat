@@ -6,10 +6,10 @@
  */
 var path=require('path');
 var HtmlwebpackPlugin=require("html-webpack-plugin");
-
 var ROOT_PATH=path.resolve(__dirname);
 var APP_PATH=path.resolve(ROOT_PATH,'client/app');
 var BUILD_PATH=path.resolve(ROOT_PATH,'client/build');
+
 
 
 module.exports={
@@ -31,10 +31,10 @@ module.exports={
 		inline:true,
 		progress:true,
 		proxy:{
-			'/api/yonghus/login':{
+			'/api/*':{
 				target:"http://0.0.0.0:3002",
-				secure:false
-			}
+				secure:true
+			},
 		}
 	},
 	module:{

@@ -5,10 +5,18 @@
  * @version $Id$
  */
 import {EventEmitter} from 'events'
-import io from './socket.io'
-var io_url=location.protocol+'//'+location.hostname+':'+location.port;
+// var io=require('socket.io-client');
+// import io from './socket.io'
+// var io=require('socket.io-client')
+// var io_url=location.protocol+'//'+location.hostname+':'+location.port;
 // console.log(io_url);
+// var io_url="http://0.0.0.0:3002"
 // var socket=io(io_url);
+
+// alert('kjsndjks');
+import {socket} from './friendStore'
+
+console.log(socket);
 
 
 class MSGSTORE extends EventEmitter{
@@ -28,7 +36,7 @@ class MSGSTORE extends EventEmitter{
 
 	sendMsg(data){
 		this.updateMsg(data);
-		// socket.emit("sendMsg",data);
+		socket.emit("sendMsg",data);
 	}
 
 	addUpdateListener(callback){
@@ -47,9 +55,9 @@ class MSGSTORE extends EventEmitter{
 var MsgStore=new MSGSTORE();
 
 
-// socket.on('news',function(data){
-// 	MsgStore.updateMsg(data);
-// });
+socket.on('news',function(data){
+	MsgStore.updateMsg(data);
+});
 export {MsgStore}
 
 

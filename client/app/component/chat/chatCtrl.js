@@ -16,8 +16,9 @@ class ChatCtrl extends React.Component{
 			msg:MsgStore.getAll()
 		}
 
+		this.audio='';
+
 		this.sendMsg=function(msg){
-			console.log(msg);
 			MsgActions.sendMsg(msg);
 		}
 
@@ -29,6 +30,7 @@ class ChatCtrl extends React.Component{
 	}
 
 	componentDidMount(){
+		// console.log(this.props.params.id);
 		MsgStore.addUpdateListener(this._onUpdate);
 	}
 
@@ -38,10 +40,12 @@ class ChatCtrl extends React.Component{
 
 
 	render(){
+		// console.log('kkk');
 		return (
 			<div className="wrapBox">
-				<InfoBox msg={this.state.msg}/>
-				<FormBox handle={this.sendMsg}/>
+				<audio ref={(e)=>this.audio=e}></audio>
+				<InfoBox msg={this.state.msg} audio={this.audio}/>
+				<FormBox handle={this.sendMsg} to={this.props.params.id}/>
 			</div>
 			)
 	}
@@ -49,7 +53,7 @@ class ChatCtrl extends React.Component{
 
 }
 
-export {ChatCtrl}
+module.exports=ChatCtrl
 
 
 

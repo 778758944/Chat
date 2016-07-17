@@ -4,11 +4,35 @@ var boot = require('loopback-boot');
 var http=require('http');
 var https=require('https');
 var sslConfig=require('./ssl-config.js');
+var handle=require('./handle/routeHandle.js');
+
+// console.log('ksds')
 
 
 
-var app = module.exports = loopback();
-var socketHandle=require('./handle/socketHandle');
+var app = loopback();
+
+// app.use(loopback.context());
+// app.use(loopback.token({
+//   model:app.models.acessToken,
+//   currentUserLiteral:'me',
+//   searchDefaultTokenKeys:false,
+//   cookies:['access_token'],
+//   headers:['access_token','X-Access-Token'],
+//   params:['access_token']
+// }))
+app.use(loopback.cookieParser('abc'));
+app.use(loopback.context());
+app.use(loopback.token({
+  model: app.models.accessToken
+}));
+// app.use(function setCurrentUser(req,res,next){
+//   if(!req.accessToken){
+//     return next();
+//   }
+
+//   app.models.Yonghu.findById()
+// })
 boot(app,__dirname);
 
 
@@ -28,7 +52,7 @@ app.start = function(httpOnly) {
   }
 
   server.listen(app.get('port'),function(){
-    var baseUrl=(httpOnly? 'http://':'https://')+app.get('host')+':'+app.get('port');
+    var baseUrl=(1? 'http://':'https://')+app.get('host')+':'+app.get('port');
     app.emit('started',baseUrl);
     console.log('Loopback server listen at %s',baseUrl);
     if(app.get('loopback-component-explorer')){
@@ -36,7 +60,7 @@ app.start = function(httpOnly) {
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
   });
-  return server;
+  // return server;
   // return app.listen(function() {
   //   app.emit('started');
   //   var baseUrl = app.get('url').replace(/\/$/, '');
@@ -53,10 +77,14 @@ app.start = function(httpOnly) {
 
 
   // start the server if `$ node server.js`
-    var server=app.start(1);
-    var io=require('socket.io')(server);
-    io.on('connection',socketHandle);
+app.start(1);
 
+var io=require('socket.io')(server)
+
+// console.log(io);
+io.on('connection',handle.socketConnection);
+
+// module.exports=io;
 
 
 

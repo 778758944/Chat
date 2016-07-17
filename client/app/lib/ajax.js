@@ -64,7 +64,7 @@
 		if (!multi) {
 			if (data && data instanceof Object) {
 				for (var i in data) {
-					console.log(i);
+					// console.log(i);
 					if (data.hasOwnProperty(i)) {
 						form += i + '=' + data[i] + '&';
 					}
@@ -101,7 +101,7 @@
 			}
 		}
 
-		console.log(obj);
+		// console.log(obj);
 
 		if (!obj.url) {
 			throw new Error('no url');
@@ -124,6 +124,7 @@
 					xhr.onerror = function (e) {
 						reject(e);
 					};
+					xhr.withCredentials = true
 					xhr.onprogress = obj.progress;
 					xhr.onabort = obj.abort;
 					xhr.onloadend = obj.loadend;
@@ -177,7 +178,7 @@
 	}
 
 	function get(url, fn) {
-		var conf = { url: url, responseType: "text" };
+		var conf = { url: url, responseType: "json" };
 		if (fn) {
 			conf.success = fn;
 		}
