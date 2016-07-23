@@ -35,6 +35,7 @@ class Cvs extends React.Component{
 			gradient.addColorStop(1,"rgba(255,0,0,0)");
 			this.ctx.fillStyle=gradient;
 			this.ctx.fill();
+			this.ctx.closePath();
 			this.ctx.restore();
 			if(!this.isRecive){
 				var msg={
@@ -46,6 +47,73 @@ class Cvs extends React.Component{
 			}
 		}
 
+		this.drawLineStart=function(x,y,isRecive){
+			var ctx=this.ctx;
+			ctx.beginPath();
+			var gradient=this.ctx.createRadialGradient(x,y,0,x,y,5);
+			gradient.addColorStop(0,"rgba(255,0,0,1)");
+			gradient.addColorStop(1,"rgba(255,0,0,0.2)");
+			ctx.fillStyle='#00f';
+			ctx.strokeStyle=gradient;
+			ctx.lineWidth=5;
+			ctx.moveTo(x,y);
+			if(!isRecive){
+				var msg={
+					posx:x/this.state.width,
+					posy:y/this.state.height,
+					state:'start'
+				}
+				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
+			}
+		}.bind(this);
+
+		this.drawLine=function(x,y,isRecive){
+			var ctx=this.ctx;
+			ctx.lineTo(x,y);
+			ctx.stroke();
+			if(!isRecive){
+				var msg={
+					posx:x/this.state.width,
+					posy:y/this.state.height,
+					state:'move'
+				}
+				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
+			}
+			// ctx.fill();
+		}.bind(this);
+
+		this.drawLineEnd=function(isRecive){
+			// ctx.lineTo(x,y);
+			this.ctx.closePath();
+			// ctx.stroke();
+			this.ctx.restore();
+
+			if(!isRecive){
+				MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
+			}
+		}.bind(this);
+
+		this.autoDraw=function(x,y,state){
+			// if(this.beDraw){
+				// console.log(state);
+
+				if(state=='start'){
+					var posx=this.state.width*x;
+					var posy=this.state.height*y;
+					this.drawLineStart(posx,posy,true);
+				}
+				else if(state=='move'){
+					// console.log()
+					var posx=this.state.width*x;
+					var posy=this.state.height*y;
+					this.drawLine(posx,posy,true);
+				}
+				else if(state=='end'){
+					this.drawLineEnd(true);
+				}
+			// }
+		}.bind(this)
+
 		this.clear=function(){
 			this.ctx.clearRect(0,0,this.state.width,this.state.height);
 		}.bind(this);
@@ -56,11 +124,12 @@ class Cvs extends React.Component{
 	}
 
 	componentDidMount(){
-		MsgStore.addDrawListener(function(x,y,isRecive){
+		MsgStore.addDrawListener(function(x,y,state){
 			if(this.beDraw){
-				var posx=this.state.width*x;
-				var posy=this.state.height*y;
-				this.draw(posx,posy,true);
+				// console.log(state);
+				// var posx=this.state.width*x;
+				// var posy=this.state.height*y;
+				this.autoDraw(x,y,state);
 			}
 		}.bind(this));
 
@@ -78,13 +147,18 @@ class Cvs extends React.Component{
 				}} onTouchStart={(e)=>{
 					e.nativeEvent.preventDefault()
 					this.beDraw=false;
+					this.drawLineStart(e.nativeEvent.touches[0].clientX,e.nativeEvent.touches[0].clientY);
 				}} onTouchMove={(e)=>{
 					var native=e.nativeEvent;
 					// console.log(native);
 					var posx=native.touches[0].clientX;
 					var posy=native.touches[0].clientY;
-					this.draw(posx,posy,false);
-				}} onTouchEnd={()=>this.beDraw=true}></canvas>
+					// this.draw(posx,posy,false);
+					this.drawLine(posx,posy);
+				}} onTouchEnd={(e)=>{
+					this.beDraw=true
+					this.drawLineEnd()
+				}}></canvas>
 			</div>
 			)
 	}

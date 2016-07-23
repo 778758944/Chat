@@ -35,7 +35,7 @@ class MSGSTORE extends EventEmitter{
 			this.emitUpdate();
 		}
 		else{
-			this.emitDraw(data.msg);
+			this.emitDraw(data);
 		}
 	}
 
@@ -63,9 +63,9 @@ class MSGSTORE extends EventEmitter{
 	}
 
 	addDrawListener(callback){
-		this.on('draw',function(msg){
-			// console.log('msg',msg);
-			callback&&callback(msg.posx,msg.posy,true);
+		this.on('draw',function(data){
+			// console.log('msg',data);
+			callback&&callback(data.msg.posx,data.msg.posy,data.msg.state);
 		});
 	}
 
