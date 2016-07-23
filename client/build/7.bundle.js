@@ -1,4 +1,4 @@
-webpackJsonp([6,4],{
+webpackJsonp([7,2,4],{
 
 /***/ 232:
 /***/ function(module, exports) {
@@ -669,6 +669,189 @@ webpackJsonp([6,4],{
 
 	module.exports = invariant;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+
+/***/ 238:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.MsgStore = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _events = __webpack_require__(232);
+
+	var _friendStore = __webpack_require__(239);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 21:35:27
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// var io=require('socket.io-client');
+	// import io from './socket.io'
+	// var io=require('socket.io-client')
+	// var io_url=location.protocol+'//'+location.hostname+':'+location.port;
+	// console.log(io_url);
+	// var io_url="http://0.0.0.0:3002"
+	// var socket=io(io_url);
+
+	// alert('kjsndjks');
+
+
+	console.log(_friendStore.socket);
+
+	var MSGSTORE = function (_EventEmitter) {
+		_inherits(MSGSTORE, _EventEmitter);
+
+		function MSGSTORE() {
+			_classCallCheck(this, MSGSTORE);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MSGSTORE).call(this));
+
+			_this.messages = [];
+			return _this;
+		}
+
+		_createClass(MSGSTORE, [{
+			key: 'getAll',
+			value: function getAll() {
+				return this.messages;
+			}
+		}, {
+			key: 'updateMsg',
+			value: function updateMsg(data) {
+				if (data.lx != 'draw') {
+					this.messages.push(data);
+					this.emitUpdate();
+				} else {
+					this.emitDraw(data.msg);
+				}
+			}
+		}, {
+			key: 'sendMsg',
+			value: function sendMsg(data) {
+				if (data.lx != 'draw') {
+					this.updateMsg(data);
+				}
+				_friendStore.socket.emit("sendMsg", data);
+			}
+		}, {
+			key: 'addUpdateListener',
+			value: function addUpdateListener(callback) {
+				this.on('update', callback);
+			}
+		}, {
+			key: 'removeUpdateListener',
+			value: function removeUpdateListener(callback) {
+				this.removeListener('update', callback);
+			}
+		}, {
+			key: 'emitUpdate',
+			value: function emitUpdate() {
+				this.emit('update');
+			}
+		}, {
+			key: 'emitDraw',
+			value: function emitDraw(msg) {
+				this.emit('draw', msg);
+			}
+		}, {
+			key: 'addDrawListener',
+			value: function addDrawListener(callback) {
+				this.on('draw', function (msg) {
+					// console.log('msg',msg);
+					callback && callback(msg.posx, msg.posy, true);
+				});
+			}
+		}, {
+			key: 'removeDrawListener',
+			value: function removeDrawListener(callback) {
+				this.removeListener('draw', callback);
+			}
+		}]);
+
+		return MSGSTORE;
+	}(_events.EventEmitter);
+
+	var MsgStore = new MSGSTORE();
+
+	_friendStore.socket.on('news', function (data) {
+		// console.log('data',data);
+		MsgStore.updateMsg(data);
+	});
+	exports.MsgStore = MsgStore;
+
+	// var a={
+	// 	name:"jack",
+	// 	add:function(a,b){
+	// 		console.log(this);           
+	// 		var c = function (argument) {
+	// 			console.log(this)
+	// 		}
+	// 		c()
+	// 	}
+	// }
+	// a.add()
+
+	// b.apply(a);
+
+	// var a=function(array,type){
+	// 	if(array instanceof Array||array instanceof Object){
+	// 		if(Object.prototype.toString.apply(array)=="[object Array]"){
+	// 			array.forEach(function(n){
+	// 				console.log(n);
+	// 			})
+	// 		}
+	// 		else{
+	// 			for(j in array){
+	// 				if(type){
+	// 					console.log(j);
+	// 				}
+	// 				else{
+	// 					if(array.hasOwnProperty(j)){
+	// 						console.log(j)
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	else{
+	// 		console.log("can not itera");
+	// 	}
+	// }
+
+	// var each = function (obj, callback) {
+	// 	if(Object.prototype.toString.apply(obj)==="[object Array]"){
+	// 		var value = "";
+	// 		for (var i = 0, l = obj.length; i < l; i++) {
+	// 			value = callback.call(obj[i], i, obj[i]);
+	// 			if (value === false) break;
+	// 		}
+	// 	} else if(Object.prototype.toString.apply(obj)==="[object Object]"){
+	// 		var value="";
+	// 		for (j in obj){
+	// 			if(obj.hasOwnProperty(j)){
+	// 				value=callback.call(obj[j],j,obj[j]);
+	// 				if(value===false) break;
+	// 			}
+	// 		}
+	// 	}
+	// 	return obj;
+	// }
+
+	// $.each()
 
 /***/ },
 
@@ -8202,107 +8385,7 @@ webpackJsonp([6,4],{
 
 /***/ },
 
-/***/ 293:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _friend = __webpack_require__(294);
-
-	var _friend2 = _interopRequireDefault(_friend);
-
-	var _friendStore = __webpack_require__(239);
-
-	var _friendAction = __webpack_require__(295);
-
-	var _friendAction2 = _interopRequireDefault(_friendAction);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:49:59
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-
-	var FriendCtrl = function (_Component) {
-		_inherits(FriendCtrl, _Component);
-
-		function FriendCtrl(props) {
-			_classCallCheck(this, FriendCtrl);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FriendCtrl).call(this, props));
-
-			_this.state = {
-				friends: []
-			};
-
-			_this._onGet = function () {
-				this.setState({
-					friends: _friendStore.FriendStore.users
-				});
-			}.bind(_this);
-
-			return _this;
-		}
-
-		_createClass(FriendCtrl, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				_friendStore.FriendStore.addGetListener(this._onGet);
-				// var token=this.props.location.state.token;
-				_friendAction2.default.getUsers(123);
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
-		}, {
-			key: 'componentWillUnmount',
-			value: function componentWillUnmount() {
-				_friendStore.FriendStore.removeGetListener(this._onGet);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				// console.log(this.state.friends);
-				var friend = this.state.friends.map(function (friend) {
-					// if(friend.id==this.props.location.state.id){
-					// 	return
-					// }
-					return _react2.default.createElement(_friend2.default, { email: friend.email, id: friend.id, key: friend.id });
-				}.bind(this));
-				return _react2.default.createElement(
-					'div',
-					null,
-					friend
-				);
-			}
-		}]);
-
-		return FriendCtrl;
-	}(_react.Component);
-
-	FriendCtrl.contextTypes = {
-		router: _react2.default.PropTypes.object,
-		state: _react2.default.PropTypes.object
-	};
-	module.exports = FriendCtrl;
-
-/***/ },
-
-/***/ 294:
+/***/ 288:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8310,109 +8393,163 @@ webpackJsonp([6,4],{
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:43:06
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-
-	var Friend = function (_Component) {
-		_inherits(Friend, _Component);
-
-		function Friend(props) {
-			_classCallCheck(this, Friend);
-
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Friend).call(this, props));
-		}
-
-		_createClass(Friend, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				// console.log(this.props.location);
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				// console.log(this.context);
-				// console.log(this.router);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var path = '/chat/' + this.props.id;
-				return _react2.default.createElement(
-					'div',
-					{ className: 'friendWrap' },
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: path },
-						_react2.default.createElement(
-							'div',
-							{ className: 'friendText' },
-							this.props.email
-						)
-					)
-				);
-			}
-		}]);
-
-		return Friend;
-	}(_react.Component);
-
-	Friend.contextTypes = {
-		color: _react2.default.PropTypes.string,
-		router: _react2.default.PropTypes.object
-	};
-
-	exports.default = Friend;
-
-/***/ },
-
-/***/ 295:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
+	exports.MsgActions = undefined;
 
 	var _AppDispatcher = __webpack_require__(234);
 
-	var FriendAction = {
-		getUsers: function getUsers(token) {
-			// console.log("kk");
+	var MsgActions = {
+		sendMsg: function sendMsg(msg) {
 			_AppDispatcher.AppDispatcher.dispatch({
-				actionType: 'GET USER',
-				token: '123'
+				actionType: 'SEND MESSAGE',
+				text: msg
 			});
 		}
 	}; /**
 	    * 
 	    * @authors Your Name (you@example.org)
-	    * @date    2016-05-15 11:24:32
+	    * @date    2016-03-23 22:11:54
 	    * @version $Id$
 	    */
 
 
-	exports.default = FriendAction;
+	exports.MsgActions = MsgActions;
+
+/***/ },
+
+/***/ 296:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _MsgAction = __webpack_require__(288);
+
+	var _MsgStore = __webpack_require__(238);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-07-23 10:49:13
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+	// console.log('welcome cvs');
+
+	var Cvs = function (_React$Component) {
+		_inherits(Cvs, _React$Component);
+
+		function Cvs(props) {
+			_classCallCheck(this, Cvs);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cvs).call(this, props));
+
+			_this.state = {
+				width: document.documentElement.clientWidth,
+				height: document.documentElement.clientHeight
+			};
+			_this.cvs = '';
+			_this.ctx = '';
+			_this.beDraw = true;
+
+			_this.drawRect = function () {
+				// this.ctx.fillStyle='#f00',
+				// this.ctx.fillRect(0,0,100,100);
+			};
+
+			_this.draw = function (x, y, isRecive) {
+				this.ctx.save();
+				this.ctx.beginPath();
+				this.ctx.arc(x, y, 10, Math.PI * 2, false);
+				var gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 10);
+				gradient.addColorStop(0, "rgba(255,0,0,0.8)");
+				gradient.addColorStop(1, "rgba(255,0,0,0)");
+				this.ctx.fillStyle = gradient;
+				this.ctx.fill();
+				this.ctx.restore();
+				if (!this.isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height
+					};
+					// console.log(this.props.params);
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw' });
+				}
+			};
+
+			_this.clear = function () {
+				this.ctx.clearRect(0, 0, this.state.width, this.state.height);
+			}.bind(_this);
+			return _this;
+		}
+
+		_createClass(Cvs, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				_MsgStore.MsgStore.addDrawListener(function (x, y, isRecive) {
+					if (this.beDraw) {
+						var posx = this.state.width * x;
+						var posy = this.state.height * y;
+						this.draw(posx, posy, true);
+					}
+				}.bind(this));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.clear, style: { position: 'absolute', top: 0, left: 0 } },
+						'清除'
+					),
+					_react2.default.createElement('canvas', { width: this.state.width, height: this.state.height, ref: function ref(e) {
+							if (e) {
+								_this2.ctx = e.getContext('2d');
+								_this2.cvs = e;
+							}
+						}, onTouchStart: function onTouchStart(e) {
+							e.nativeEvent.preventDefault();
+							_this2.beDraw = false;
+						}, onTouchMove: function onTouchMove(e) {
+							var native = e.nativeEvent;
+							// console.log(native);
+							var posx = native.touches[0].clientX;
+							var posy = native.touches[0].clientY;
+							_this2.draw(posx, posy, false);
+						}, onTouchEnd: function onTouchEnd() {
+							return _this2.beDraw = true;
+						} })
+				);
+			}
+		}]);
+
+		return Cvs;
+	}(_react2.default.Component);
+
+	Cvs.contextTypes = {
+		state: _react2.default.PropTypes.object
+	};
+
+	module.exports = Cvs;
 
 /***/ }
 

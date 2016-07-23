@@ -31,6 +31,14 @@ var app=[
 				cb(null,require('./friend/friendCtrl'));
 			})
 		}
+	},
+	{
+		path:'cvs/:id',
+		getComponent(nextState,cb){
+			require.ensure([],function(require){
+				cb(null,require('./canvas/cvs'));
+			})
+		}
 	}
 ];
 

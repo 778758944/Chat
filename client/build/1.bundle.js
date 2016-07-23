@@ -3,105 +3,1480 @@ webpackJsonp([1,3],{
 /***/ 223:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(1);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _register = __webpack_require__(224);\n\nvar _loginStore = __webpack_require__(231);\n\nvar _LoginAction = __webpack_require__(233);\n\nvar _reactRouter = __webpack_require__(159);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * \n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-31 16:39:07\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */\n\n// import {Config,Validator} from '../../lib/validator'\n\n// import {RouterContext} from 'react-router'\n\n\n// var router=RouterContext.router;\n\n// console.log(Config);\n\nvar RegisterCtrl = function (_React$Component) {\n\t_inherits(RegisterCtrl, _React$Component);\n\n\tfunction RegisterCtrl(props) {\n\t\t_classCallCheck(this, RegisterCtrl);\n\n\t\tvar _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterCtrl).call(this, props));\n\n\t\t_this.state = {\n\t\t\temail: '778758944@qq.com',\n\t\t\tpassword: '123456'\n\t\t};\n\n\t\t_this.changeEmail = function (e) {\n\t\t\tthis.setState({\n\t\t\t\temail: e.target.value\n\t\t\t});\n\t\t}.bind(_this);\n\n\t\t_this.rel = '';\n\n\t\t_this.changePasswd = function (e) {\n\t\t\tthis.setState({\n\t\t\t\tpassword: e.target.value\n\t\t\t});\n\t\t}.bind(_this);\n\n\t\t_this.submit = function (e) {\n\t\t\tconsole.log('sdsd');\n\t\t\t_LoginAction.LoginAction.toLogin(this.state.email, this.state.password);\n\t\t}.bind(_this);\n\n\t\treturn _this;\n\t}\n\n\t// static:{}\n\n\t_createClass(RegisterCtrl, [{\n\t\tkey: 'componentDidMount',\n\t\tvalue: function componentDidMount() {\n\t\t\t// setTimeout(function(){\n\t\t\t// \tthis.ref.getName()\n\t\t\t// }.bind(this),5000)\n\t\t\tvar router = this.context.router;\n\t\t\t_loginStore.LoginStore.addLoginHandle(function (res) {\n\t\t\t\tconsole.log(res);\n\t\t\t\tif (res.id) {\n\t\t\t\t\t// Router.go('/friend')\n\t\t\t\t\trouter.push({\n\t\t\t\t\t\tpathname: '/friend',\n\t\t\t\t\t\tstate: { token: res.id, id: res.userId }\n\t\t\t\t\t});\n\t\t\t\t\t// window.location.hash='#/register';\n\t\t\t\t}\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\tvar _this2 = this;\n\n\t\t\treturn _react2.default.createElement(_register.Register, {\n\t\t\t\temail: this.state.email,\n\t\t\t\tpassword: this.state.password,\n\t\t\t\tchangeEmail: this.changeEmail,\n\t\t\t\tchangePasswd: this.changePasswd,\n\t\t\t\tsubmit: this.submit,\n\t\t\t\tref: function ref(e) {\n\t\t\t\t\t_this2.ref = e;\n\t\t\t\t}\n\t\t\t});\n\t\t}\n\t}]);\n\n\treturn RegisterCtrl;\n}(_react2.default.Component);\n\nRegisterCtrl.contextTypes = {\n\trouter: _react2.default.PropTypes.object\n};\nmodule.exports = RegisterCtrl;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL2NvbXBvbmVudC9yZWdpc3Rlci9yZWdpc3RlckN0cmwuanM/YjNhOCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBTUE7Ozs7QUFDQTs7QUFFQTs7QUFDQTs7QUFFQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBTU0sWTs7O0FBQ0wsdUJBQVksS0FBWixFQUFrQjtBQUFBOztBQUFBLDhGQUNYLEtBRFc7O0FBRWpCLFFBQUssS0FBTCxHQUFXO0FBQ1YsVUFBTSxrQkFESTtBQUVWLGFBQVM7QUFGQyxHQUFYOztBQUtBLFFBQUssV0FBTCxHQUFpQixVQUFTLENBQVQsRUFBVztBQUMzQixRQUFLLFFBQUwsQ0FBYztBQUNiLFdBQU0sRUFBRSxNQUFGLENBQVM7QUFERixJQUFkO0FBR0EsR0FKZ0IsQ0FJZixJQUplLE9BQWpCOztBQU1BLFFBQUssR0FBTCxHQUFTLEVBQVQ7O0FBR0EsUUFBSyxZQUFMLEdBQWtCLFVBQVMsQ0FBVCxFQUFXO0FBQzVCLFFBQUssUUFBTCxDQUFjO0FBQ2IsY0FBUyxFQUFFLE1BQUYsQ0FBUztBQURMLElBQWQ7QUFHQSxHQUppQixDQUloQixJQUpnQixPQUFsQjs7QUFPQSxRQUFLLE1BQUwsR0FBWSxVQUFTLENBQVQsRUFBVztBQUN0QixXQUFRLEdBQVIsQ0FBWSxNQUFaO0FBQ0EsNEJBQVksT0FBWixDQUFvQixLQUFLLEtBQUwsQ0FBVyxLQUEvQixFQUFxQyxLQUFLLEtBQUwsQ0FBVyxRQUFoRDtBQUNBLEdBSFcsQ0FHVixJQUhVLE9BQVo7O0FBdkJpQjtBQTRCakI7Ozs7OztzQ0FJa0I7Ozs7QUFJbEIsT0FBSSxTQUFPLEtBQUssT0FBTCxDQUFhLE1BQXhCO0FBQ0EsMEJBQVcsY0FBWCxDQUEwQixVQUFTLEdBQVQsRUFBYTtBQUN0QyxZQUFRLEdBQVIsQ0FBWSxHQUFaO0FBQ0EsUUFBRyxJQUFJLEVBQVAsRUFBVTs7QUFFVCxZQUFPLElBQVAsQ0FBWTtBQUNYLGdCQUFTLFNBREU7QUFFWCxhQUFNLEVBQUMsT0FBTSxJQUFJLEVBQVgsRUFBYyxJQUFHLElBQUksTUFBckI7QUFGSyxNQUFaOztBQUtBO0FBQ0QsSUFWRDtBQVdBOzs7MkJBRU87QUFBQTs7QUFDUCxVQUNDO0FBQ0MsV0FBTyxLQUFLLEtBQUwsQ0FBVyxLQURuQjtBQUVDLGNBQVUsS0FBSyxLQUFMLENBQVcsUUFGdEI7QUFHQyxpQkFBYSxLQUFLLFdBSG5CO0FBSUMsa0JBQWMsS0FBSyxZQUpwQjtBQUtDLFlBQVEsS0FBSyxNQUxkO0FBTUMsU0FBSyxhQUFDLENBQUQsRUFBSztBQUFDLFlBQUssR0FBTCxHQUFTLENBQVQ7QUFBVztBQU52QixLQUREO0FBVUE7Ozs7RUE5RHlCLGdCQUFNLFM7O0FBa0VqQyxhQUFhLFlBQWIsR0FBMEI7QUFDekIsU0FBTyxnQkFBTSxTQUFOLENBQWdCO0FBREUsQ0FBMUI7QUFHQSxPQUFPLE9BQVAsR0FBZSxZQUFmIiwiZmlsZSI6IjIyMy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogXG4gKiBAYXV0aG9ycyBZb3VyIE5hbWUgKHlvdUBleGFtcGxlLm9yZylcbiAqIEBkYXRlICAgIDIwMTYtMDMtMzEgMTY6Mzk6MDdcbiAqIEB2ZXJzaW9uICRJZCRcbiAqL1xuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xuaW1wb3J0IHtSZWdpc3Rlcn0gZnJvbSAnLi9yZWdpc3Rlcidcbi8vIGltcG9ydCB7Q29uZmlnLFZhbGlkYXRvcn0gZnJvbSAnLi4vLi4vbGliL3ZhbGlkYXRvcidcbmltcG9ydCB7TG9naW5TdG9yZX0gZnJvbSAnLi4vLi4vc3RvcmUvbG9naW5TdG9yZSdcbmltcG9ydCB7TG9naW5BY3Rpb259IGZyb20gJy4uLy4uL2FjdGlvbnMvTG9naW5BY3Rpb24nXG4vLyBpbXBvcnQge1JvdXRlckNvbnRleHR9IGZyb20gJ3JlYWN0LXJvdXRlcidcbmltcG9ydCB7Um91dGVyfSBmcm9tICdyZWFjdC1yb3V0ZXInXG5cbi8vIHZhciByb3V0ZXI9Um91dGVyQ29udGV4dC5yb3V0ZXI7XG5cbi8vIGNvbnNvbGUubG9nKENvbmZpZyk7XG5cbmNsYXNzIFJlZ2lzdGVyQ3RybCBleHRlbmRzIFJlYWN0LkNvbXBvbmVudHtcblx0Y29uc3RydWN0b3IocHJvcHMpe1xuXHRcdHN1cGVyKHByb3BzKTtcblx0XHR0aGlzLnN0YXRlPXtcblx0XHRcdGVtYWlsOic3Nzg3NTg5NDRAcXEuY29tJyxcblx0XHRcdHBhc3N3b3JkOicxMjM0NTYnXG5cdFx0fVxuXG5cdFx0dGhpcy5jaGFuZ2VFbWFpbD1mdW5jdGlvbihlKXtcblx0XHRcdHRoaXMuc2V0U3RhdGUoe1xuXHRcdFx0XHRlbWFpbDplLnRhcmdldC52YWx1ZVxuXHRcdFx0fSlcblx0XHR9LmJpbmQodGhpcylcblxuXHRcdHRoaXMucmVsPScnO1xuXG5cblx0XHR0aGlzLmNoYW5nZVBhc3N3ZD1mdW5jdGlvbihlKXtcblx0XHRcdHRoaXMuc2V0U3RhdGUoe1xuXHRcdFx0XHRwYXNzd29yZDplLnRhcmdldC52YWx1ZVxuXHRcdFx0fSlcblx0XHR9LmJpbmQodGhpcylcblxuXG5cdFx0dGhpcy5zdWJtaXQ9ZnVuY3Rpb24oZSl7XG5cdFx0XHRjb25zb2xlLmxvZygnc2RzZCcpO1xuXHRcdFx0TG9naW5BY3Rpb24udG9Mb2dpbih0aGlzLnN0YXRlLmVtYWlsLHRoaXMuc3RhdGUucGFzc3dvcmQpO1xuXHRcdH0uYmluZCh0aGlzKTtcblxuXHR9XG5cblx0Ly8gc3RhdGljOnt9XG5cblx0Y29tcG9uZW50RGlkTW91bnQoKXtcblx0XHQvLyBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7XG5cdFx0Ly8gXHR0aGlzLnJlZi5nZXROYW1lKClcblx0XHQvLyB9LmJpbmQodGhpcyksNTAwMClcblx0XHR2YXIgcm91dGVyPXRoaXMuY29udGV4dC5yb3V0ZXI7XG5cdFx0TG9naW5TdG9yZS5hZGRMb2dpbkhhbmRsZShmdW5jdGlvbihyZXMpe1xuXHRcdFx0Y29uc29sZS5sb2cocmVzKTtcblx0XHRcdGlmKHJlcy5pZCl7XG5cdFx0XHRcdC8vIFJvdXRlci5nbygnL2ZyaWVuZCcpXG5cdFx0XHRcdHJvdXRlci5wdXNoKHtcblx0XHRcdFx0XHRwYXRobmFtZTonL2ZyaWVuZCcsXG5cdFx0XHRcdFx0c3RhdGU6e3Rva2VuOnJlcy5pZCxpZDpyZXMudXNlcklkfVxuXHRcdFx0XHR9KVxuXHRcdFx0XHQvLyB3aW5kb3cubG9jYXRpb24uaGFzaD0nIy9yZWdpc3Rlcic7XG5cdFx0XHR9XG5cdFx0fSlcblx0fVxuXG5cdHJlbmRlcigpe1xuXHRcdHJldHVybiAoXG5cdFx0XHQ8UmVnaXN0ZXIgXG5cdFx0XHRcdGVtYWlsPXt0aGlzLnN0YXRlLmVtYWlsfSBcblx0XHRcdFx0cGFzc3dvcmQ9e3RoaXMuc3RhdGUucGFzc3dvcmR9IFxuXHRcdFx0XHRjaGFuZ2VFbWFpbD17dGhpcy5jaGFuZ2VFbWFpbH0gXG5cdFx0XHRcdGNoYW5nZVBhc3N3ZD17dGhpcy5jaGFuZ2VQYXNzd2R9IFxuXHRcdFx0XHRzdWJtaXQ9e3RoaXMuc3VibWl0fVxuXHRcdFx0XHRyZWY9eyhlKT0+e3RoaXMucmVmPWV9fVxuXHRcdFx0Lz5cblx0XHRcdClcblx0fVxufVxuXG5cblJlZ2lzdGVyQ3RybC5jb250ZXh0VHlwZXM9e1xuXHRyb3V0ZXI6UmVhY3QuUHJvcFR5cGVzLm9iamVjdFxufVxubW9kdWxlLmV4cG9ydHM9UmVnaXN0ZXJDdHJsXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9jb21wb25lbnQvcmVnaXN0ZXIvcmVnaXN0ZXJDdHJsLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _register = __webpack_require__(224);
+
+	var _loginStore = __webpack_require__(231);
+
+	var _LoginAction = __webpack_require__(233);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-31 16:39:07
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// import {Config,Validator} from '../../lib/validator'
+
+	// import {RouterContext} from 'react-router'
+
+
+	// var router=RouterContext.router;
+
+	// console.log(Config);
+
+	var RegisterCtrl = function (_React$Component) {
+		_inherits(RegisterCtrl, _React$Component);
+
+		function RegisterCtrl(props) {
+			_classCallCheck(this, RegisterCtrl);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterCtrl).call(this, props));
+
+			_this.state = {
+				email: '778758944@qq.com',
+				password: '123456'
+			};
+
+			_this.changeEmail = function (e) {
+				this.setState({
+					email: e.target.value
+				});
+			}.bind(_this);
+
+			_this.rel = '';
+
+			_this.changePasswd = function (e) {
+				this.setState({
+					password: e.target.value
+				});
+			}.bind(_this);
+
+			_this.submit = function (e) {
+				console.log('sdsd');
+				_LoginAction.LoginAction.toLogin(this.state.email, this.state.password);
+			}.bind(_this);
+
+			return _this;
+		}
+
+		// static:{}
+
+		_createClass(RegisterCtrl, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				// setTimeout(function(){
+				// 	this.ref.getName()
+				// }.bind(this),5000)
+				var router = this.context.router;
+				_loginStore.LoginStore.addLoginHandle(function (res) {
+					console.log(res);
+					if (res.id) {
+						// Router.go('/friend')
+						router.push({
+							pathname: '/friend',
+							state: { token: res.id, id: res.userId }
+						});
+						// window.location.hash='#/register';
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				return _react2.default.createElement(_register.Register, {
+					email: this.state.email,
+					password: this.state.password,
+					changeEmail: this.changeEmail,
+					changePasswd: this.changePasswd,
+					submit: this.submit,
+					ref: function ref(e) {
+						_this2.ref = e;
+					}
+				});
+			}
+		}]);
+
+		return RegisterCtrl;
+	}(_react2.default.Component);
+
+	RegisterCtrl.contextTypes = {
+		router: _react2.default.PropTypes.object
+	};
+	module.exports = RegisterCtrl;
 
 /***/ },
 
 /***/ 224:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.Register = undefined;\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(1);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _validator = __webpack_require__(225);\n\nvar _reactTapEventPlugin = __webpack_require__(226);\n\nvar _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * \n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-31 16:31:53\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */\n\n\nvar Register = function (_React$Component) {\n\t_inherits(Register, _React$Component);\n\n\tfunction Register(props) {\n\t\t_classCallCheck(this, Register);\n\n\t\tvar _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props));\n\n\t\t_this.state = {\n\t\t\tnana: 'wrong'\n\t\t};\n\t\t_this.getName = function () {\n\t\t\tconsole.log('nana');\n\t\t\tthis.setState({\n\t\t\t\tnana: \"right\"\n\t\t\t});\n\t\t};\n\t\treturn _this;\n\t}\n\n\t_createClass(Register, [{\n\t\tkey: 'componentDidMount',\n\t\tvalue: function componentDidMount() {\n\t\t\tvar configs = [new _validator.Config('email', \"isEmail\", true), new _validator.Config('password', \"isEmpty\", true)];\n\n\t\t\tnew _validator.Validator(configs, \"register\", true, function (ele, results) {\n\t\t\t\tele.nextSibling.innerHTML = results.info;\n\t\t\t}, function (ele, results) {\n\t\t\t\tele.nextSibling.innerHTML = results.info;\n\t\t\t});\n\t\t}\n\t}, {\n\t\tkey: 'render',\n\t\tvalue: function render() {\n\t\t\treturn _react2.default.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'wrap' },\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ className: 'input_area' },\n\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t'form',\n\t\t\t\t\t\t{ id: 'form1' },\n\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t{ className: 'input_area_line' },\n\t\t\t\t\t\t\t_react2.default.createElement('input', { type: 'text', name: 'email', placeholder: '请输入您的邮箱', value: this.props.email, onChange: this.props.changeEmail }),\n\t\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t\t'span',\n\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\t'请输入正确的邮箱'\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t),\n\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t{ className: 'input_area_line' },\n\t\t\t\t\t\t\t_react2.default.createElement('input', { type: 'password', name: 'password', placeholder: '请输入您的密码', value: this.props.password, onChange: this.props.changePasswd }),\n\t\t\t\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t\t\t\t'span',\n\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\tthis.state.nana\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\t_react2.default.createElement(\n\t\t\t\t\t'button',\n\t\t\t\t\t{ className: 'btn', id: 'register', onClick: this.props.submit },\n\t\t\t\t\t'登录'\n\t\t\t\t)\n\t\t\t);\n\t\t}\n\t}]);\n\n\treturn Register;\n}(_react2.default.Component);\n\n// class Register extends React.Component{\n// \tconstructor(props){\n// \t\tsuper(props);\n// \t}\n\n// \trender(){\n// \t\treturn (\n// \t\t\t<div className=\"wrap\">\n// \t\t\t\t<Input/>\n// \t\t\t\t<button className=\"btn\" id='register'>登录</button>\n// \t\t\t</div>\n// \t\t\t)\n// \t}\n// }\n\nexports.Register = Register;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL2NvbXBvbmVudC9yZWdpc3Rlci9yZWdpc3Rlci5qcz9hNjg3Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQU1BOzs7O0FBQ0E7O0FBQ0E7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUdNLFE7OztBQUNMLG1CQUFZLEtBQVosRUFBa0I7QUFBQTs7QUFBQSwwRkFDWCxLQURXOztBQUVqQixRQUFLLEtBQUwsR0FBVztBQUNWLFNBQUs7QUFESyxHQUFYO0FBR0EsUUFBSyxPQUFMLEdBQWEsWUFBVTtBQUN0QixXQUFRLEdBQVIsQ0FBWSxNQUFaO0FBQ0EsUUFBSyxRQUFMLENBQWM7QUFDYixVQUFLO0FBRFEsSUFBZDtBQUdBLEdBTEQ7QUFMaUI7QUFXakI7Ozs7c0NBRWtCO0FBQ2xCLE9BQUksVUFBUSxDQUNYLHNCQUFXLE9BQVgsRUFBbUIsU0FBbkIsRUFBNkIsSUFBN0IsQ0FEVyxFQUVYLHNCQUFXLFVBQVgsRUFBc0IsU0FBdEIsRUFBZ0MsSUFBaEMsQ0FGVyxDQUFaOztBQUtBLDRCQUFjLE9BQWQsRUFBc0IsVUFBdEIsRUFBaUMsSUFBakMsRUFBc0MsVUFBUyxHQUFULEVBQWEsT0FBYixFQUFxQjtBQUMxRCxRQUFJLFdBQUosQ0FBZ0IsU0FBaEIsR0FBMEIsUUFBUSxJQUFsQztBQUNBLElBRkQsRUFFRSxVQUFTLEdBQVQsRUFBYSxPQUFiLEVBQXFCO0FBQ3RCLFFBQUksV0FBSixDQUFnQixTQUFoQixHQUEwQixRQUFRLElBQWxDO0FBQ0EsSUFKRDtBQUtBOzs7MkJBR087QUFDUCxVQUNDO0FBQUE7QUFBQSxNQUFLLFdBQVUsTUFBZjtBQUNDO0FBQUE7QUFBQSxPQUFLLFdBQVUsWUFBZjtBQUNDO0FBQUE7QUFBQSxRQUFNLElBQUcsT0FBVDtBQUNDO0FBQUE7QUFBQSxTQUFLLFdBQVUsaUJBQWY7QUFDQyxnREFBTyxNQUFLLE1BQVosRUFBbUIsTUFBSyxPQUF4QixFQUFnQyxhQUFZLFNBQTVDLEVBQXNELE9BQU8sS0FBSyxLQUFMLENBQVcsS0FBeEUsRUFBK0UsVUFBVSxLQUFLLEtBQUwsQ0FBVyxXQUFwRyxHQUREO0FBRUM7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUZELE9BREQ7QUFLQztBQUFBO0FBQUEsU0FBSyxXQUFVLGlCQUFmO0FBQ0MsZ0RBQU8sTUFBSyxVQUFaLEVBQXVCLE1BQUssVUFBNUIsRUFBdUMsYUFBWSxTQUFuRCxFQUE2RCxPQUFPLEtBQUssS0FBTCxDQUFXLFFBQS9FLEVBQXlGLFVBQVUsS0FBSyxLQUFMLENBQVcsWUFBOUcsR0FERDtBQUVDO0FBQUE7QUFBQTtBQUFPLGFBQUssS0FBTCxDQUFXO0FBQWxCO0FBRkQ7QUFMRDtBQURELEtBREQ7QUFhQztBQUFBO0FBQUEsT0FBUSxXQUFVLEtBQWxCLEVBQXdCLElBQUcsVUFBM0IsRUFBc0MsU0FBUyxLQUFLLEtBQUwsQ0FBVyxNQUExRDtBQUFBO0FBQUE7QUFiRCxJQUREO0FBaUJBOzs7O0VBOUNxQixnQkFBTSxTOzs7Ozs7Ozs7Ozs7Ozs7OztRQWdFckIsUSxHQUFBLFEiLCJmaWxlIjoiMjI0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBcbiAqIEBhdXRob3JzIFlvdXIgTmFtZSAoeW91QGV4YW1wbGUub3JnKVxuICogQGRhdGUgICAgMjAxNi0wMy0zMSAxNjozMTo1M1xuICogQHZlcnNpb24gJElkJFxuICovXG5pbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnXG5pbXBvcnQge0NvbmZpZyxWYWxpZGF0b3J9IGZyb20gJy4uLy4uL2xpYi92YWxpZGF0b3InXG5pbXBvcnQgaW5qZWN0VGFwRXZlbnRQbHVnaW4gZnJvbSAncmVhY3QtdGFwLWV2ZW50LXBsdWdpbidcblxuXG5jbGFzcyBSZWdpc3RlciBleHRlbmRzIFJlYWN0LkNvbXBvbmVudHtcblx0Y29uc3RydWN0b3IocHJvcHMpe1xuXHRcdHN1cGVyKHByb3BzKTtcblx0XHR0aGlzLnN0YXRlPXtcblx0XHRcdG5hbmE6J3dyb25nJ1xuXHRcdH1cblx0XHR0aGlzLmdldE5hbWU9ZnVuY3Rpb24oKXtcblx0XHRcdGNvbnNvbGUubG9nKCduYW5hJyk7XG5cdFx0XHR0aGlzLnNldFN0YXRlKHtcblx0XHRcdFx0bmFuYTpcInJpZ2h0XCJcblx0XHRcdH0pXG5cdFx0fVxuXHR9XG5cblx0Y29tcG9uZW50RGlkTW91bnQoKXtcblx0XHR2YXIgY29uZmlncz1bXG5cdFx0XHRuZXcgQ29uZmlnKCdlbWFpbCcsXCJpc0VtYWlsXCIsdHJ1ZSksXG5cdFx0XHRuZXcgQ29uZmlnKCdwYXNzd29yZCcsXCJpc0VtcHR5XCIsdHJ1ZSlcblx0XHRdO1xuXG5cdFx0bmV3IFZhbGlkYXRvcihjb25maWdzLFwicmVnaXN0ZXJcIix0cnVlLGZ1bmN0aW9uKGVsZSxyZXN1bHRzKXtcblx0XHRcdGVsZS5uZXh0U2libGluZy5pbm5lckhUTUw9cmVzdWx0cy5pbmZvO1xuXHRcdH0sZnVuY3Rpb24oZWxlLHJlc3VsdHMpe1xuXHRcdFx0ZWxlLm5leHRTaWJsaW5nLmlubmVySFRNTD1yZXN1bHRzLmluZm87XG5cdFx0fSlcblx0fVxuXG5cblx0cmVuZGVyKCl7XG5cdFx0cmV0dXJuIChcblx0XHRcdDxkaXYgY2xhc3NOYW1lPVwid3JhcFwiPlxuXHRcdFx0XHQ8ZGl2IGNsYXNzTmFtZT1cImlucHV0X2FyZWFcIj5cblx0XHRcdFx0XHQ8Zm9ybSBpZD1cImZvcm0xXCI+XG5cdFx0XHRcdFx0XHQ8ZGl2IGNsYXNzTmFtZT1cImlucHV0X2FyZWFfbGluZVwiPlxuXHRcdFx0XHRcdFx0XHQ8aW5wdXQgdHlwZT1cInRleHRcIiBuYW1lPVwiZW1haWxcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpeaCqOeahOmCrueusVwiIHZhbHVlPXt0aGlzLnByb3BzLmVtYWlsfSBvbkNoYW5nZT17dGhpcy5wcm9wcy5jaGFuZ2VFbWFpbH0vPlxuXHRcdFx0XHRcdFx0XHQ8c3Bhbj7or7fovpPlhaXmraPnoa7nmoTpgq7nrrE8L3NwYW4+XG5cdFx0XHRcdFx0XHQ8L2Rpdj5cblx0XHRcdFx0XHRcdDxkaXYgY2xhc3NOYW1lPVwiaW5wdXRfYXJlYV9saW5lXCI+XG5cdFx0XHRcdFx0XHRcdDxpbnB1dCB0eXBlPVwicGFzc3dvcmRcIiBuYW1lPVwicGFzc3dvcmRcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpeaCqOeahOWvhueggVwiIHZhbHVlPXt0aGlzLnByb3BzLnBhc3N3b3JkfSBvbkNoYW5nZT17dGhpcy5wcm9wcy5jaGFuZ2VQYXNzd2R9Lz5cblx0XHRcdFx0XHRcdFx0PHNwYW4+e3RoaXMuc3RhdGUubmFuYX08L3NwYW4+XG5cdFx0XHRcdFx0XHQ8L2Rpdj5cblx0XHRcdFx0XHQ8L2Zvcm0+XG5cdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHQ8YnV0dG9uIGNsYXNzTmFtZT1cImJ0blwiIGlkPSdyZWdpc3Rlcicgb25DbGljaz17dGhpcy5wcm9wcy5zdWJtaXR9PueZu+W9lTwvYnV0dG9uPlxuXHRcdFx0PC9kaXY+XG5cdFx0XHQpXG5cdH1cbn1cblxuLy8gY2xhc3MgUmVnaXN0ZXIgZXh0ZW5kcyBSZWFjdC5Db21wb25lbnR7XG4vLyBcdGNvbnN0cnVjdG9yKHByb3BzKXtcbi8vIFx0XHRzdXBlcihwcm9wcyk7XG4vLyBcdH1cblxuLy8gXHRyZW5kZXIoKXtcbi8vIFx0XHRyZXR1cm4gKFxuLy8gXHRcdFx0PGRpdiBjbGFzc05hbWU9XCJ3cmFwXCI+XG4vLyBcdFx0XHRcdDxJbnB1dC8+XG4vLyBcdFx0XHRcdDxidXR0b24gY2xhc3NOYW1lPVwiYnRuXCIgaWQ9J3JlZ2lzdGVyJz7nmbvlvZU8L2J1dHRvbj5cbi8vIFx0XHRcdDwvZGl2PlxuLy8gXHRcdFx0KVxuLy8gXHR9XG4vLyB9XG5cbmV4cG9ydCB7UmVnaXN0ZXJ9XG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG4vKiogV0VCUEFDSyBGT09URVIgKipcbiAqKiAuL2NsaWVudC9hcHAvY29tcG9uZW50L3JlZ2lzdGVyL3JlZ2lzdGVyLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.Register = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _validator = __webpack_require__(225);
+
+	var _reactTapEventPlugin = __webpack_require__(226);
+
+	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-31 16:31:53
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+	var Register = function (_React$Component) {
+		_inherits(Register, _React$Component);
+
+		function Register(props) {
+			_classCallCheck(this, Register);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props));
+
+			_this.state = {
+				nana: 'wrong'
+			};
+			_this.getName = function () {
+				console.log('nana');
+				this.setState({
+					nana: "right"
+				});
+			};
+			return _this;
+		}
+
+		_createClass(Register, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var configs = [new _validator.Config('email', "isEmail", true), new _validator.Config('password', "isEmpty", true)];
+
+				new _validator.Validator(configs, "register", true, function (ele, results) {
+					ele.nextSibling.innerHTML = results.info;
+				}, function (ele, results) {
+					ele.nextSibling.innerHTML = results.info;
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'wrap' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'input_area' },
+						_react2.default.createElement(
+							'form',
+							{ id: 'form1' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'input_area_line' },
+								_react2.default.createElement('input', { type: 'text', name: 'email', placeholder: '请输入您的邮箱', value: this.props.email, onChange: this.props.changeEmail }),
+								_react2.default.createElement(
+									'span',
+									null,
+									'请输入正确的邮箱'
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'input_area_line' },
+								_react2.default.createElement('input', { type: 'password', name: 'password', placeholder: '请输入您的密码', value: this.props.password, onChange: this.props.changePasswd }),
+								_react2.default.createElement(
+									'span',
+									null,
+									this.state.nana
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'button',
+						{ className: 'btn', id: 'register', onClick: this.props.submit },
+						'登录'
+					)
+				);
+			}
+		}]);
+
+		return Register;
+	}(_react2.default.Component);
+
+	// class Register extends React.Component{
+	// 	constructor(props){
+	// 		super(props);
+	// 	}
+
+	// 	render(){
+	// 		return (
+	// 			<div className="wrap">
+	// 				<Input/>
+	// 				<button className="btn" id='register'>登录</button>
+	// 			</div>
+	// 			)
+	// 	}
+	// }
+
+	exports.Register = Register;
 
 /***/ },
 
 /***/ 225:
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n/**\n * \n * @authors Your Name (you@example.org)\n * @date    2015-07-03 12:17:48\n * @version $Id$\n */\n\nvar Config = function Config(name, type, actionRight) {\n\tthis.ipt = typeof name == \"Object\" ? name : document.getElementsByName(name)[0];\n\tthis.type = type;\n\tthis.actionRight = actionRight || false;\n};\n\nvar Validator = function Validator(config, form, noRightAction, rightfn, errorfn) {\n\tvar _this = this;\n\n\tthis.config = config;\n\tthis.result_ok;\n\tthis.result = [];\n\t// this.already=already;\n\tthis.rightfn = rightfn;\n\tthis.errorfn = errorfn;\n\tthis.noRightAction = noRightAction || false;\n\tthis.form = typeof form == \"Object\" ? form : document.getElementById(form);\n\t// console.log(this.config);\n\tvar that = this;\n\n\tvar _loop = function _loop(i) {\n\t\t// var type=this.config[i].type;\n\t\t_this.config[i].ipt.addEventListener(\"change\", function (e) {\n\t\t\tthat.validate(that.config[i].ipt, i);\n\t\t}, false);\n\t};\n\n\tfor (var i = 0; i < this.config.length; i++) {\n\t\t_loop(i);\n\t}\n\n\tvar event = this.form.tagName == 'FORM' ? 'submit' : 'mousedown';\n\n\tthis.form.addEventListener(event, function (e) {\n\t\tfor (var j = 0; j < that.config.length; j++) {\n\t\t\tthat.validate(that.config[j].ipt, j);\n\t\t}\n\t}, false);\n};\n\nValidator.prototype = {\n\t//onblur\n\tvalidate: function validate(ele, index) {\n\t\t// var ele=e.target;\n\t\tvar type = this.config[index].type;\n\t\tif (typeof type == 'string') {\n\t\t\tthis.result_ok = Validator.types[type](ele.value);\n\t\t\tif (!this.result_ok.isTrue) {\n\t\t\t\tthis.errorfn(ele, this.result_ok);\n\t\t\t\tthis.config[index].actionRight = true;\n\t\t\t} else if (this.result_ok.isTrue && this.config[index].actionRight) {\n\t\t\t\tthis.rightfn(ele, this.result_ok);\n\t\t\t}\n\t\t} else {\n\t\t\tthis.result_ok = this.config[index].type.call(this, ele.value);\n\t\t\tif (this.result_ok) {\n\t\t\t\tif (!this.result_ok.isTrue) {\n\t\t\t\t\tthis.errorfn(ele, this.result_ok);\n\t\t\t\t\tthis.config[index].actionRight = true;\n\t\t\t\t} else if (this.result_ok.isTrue && this.config[index].actionRight) {\n\t\t\t\t\tthis.rightfn(ele, this.result_ok);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n};\n\nValidator.types = function () {\n\tvar isEmpty = function isEmpty(val, data) {\n\t\tif (!val) {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"该选项不能为空\"\n\t\t\t};\n\t\t} else {\n\t\t\treturn {\n\t\t\t\tisTrue: true\n\t\t\t};\n\t\t}\n\t};\n\n\tvar tel = function tel(val) {\n\t\tvar reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\\d{8})$/;\n\t\tvar num = parseInt(val, 10);\n\t\tif (!reg.test(val)) {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"请输入正确的电话号码\"\n\t\t\t};\n\t\t} else {\n\t\t\treturn {\n\t\t\t\tisTrue: true\n\t\t\t};\n\t\t}\n\t};\n\n\tvar isNumber = function isNumber(val) {\n\t\tif (!val) {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"请输入数字\"\n\t\t\t};\n\t\t}\n\t\tif (!isNaN(val)) {\n\t\t\treturn {\n\t\t\t\tisTrue: true\n\t\t\t};\n\t\t} else {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"请输入数字\"\n\t\t\t};\n\t\t}\n\t};\n\n\tvar isRepeat = function isRepeat(val, data) {\n\t\tif (!val) {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"该选项不能为空\"\n\t\t\t};\n\t\t}\n\t\tvar len = data.length;\n\t\tfor (var i = 0; i < data.length; i++) {\n\t\t\tif (val == data[i]) {\n\t\t\t\treturn {\n\t\t\t\t\tisTrue: false,\n\t\t\t\t\tinfo: \"该选项不能重复\"\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\t\treturn {\n\t\t\tisTrue: true\n\t\t};\n\t};\n\n\tvar isEmail = function isEmail(val, ele) {\n\t\tif (!val) {\n\t\t\treturn {\n\t\t\t\tisTrue: false,\n\t\t\t\tinfo: \"该选项不能为空\"\n\t\t\t};\n\t\t}\n\t\tvar filter = /^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$/;\n\t\tif (filter.test(val)) {\n\t\t\treturn {\n\t\t\t\tisTrue: true,\n\t\t\t\tinfo: '邮箱填写正确'\n\t\t\t};\n\t\t}\n\t\treturn {\n\t\t\tisTrue: false,\n\t\t\tinfo: \"请输入正确的邮箱地址\"\n\t\t};\n\t};\n\n\treturn {\n\t\tisEmpty: isEmpty,\n\t\tisTel: tel,\n\t\tisNumber: isNumber,\n\t\tisRepeat: isRepeat,\n\t\tisEmail: isEmail\n\t};\n}();\n\nexports.Config = Config;\nexports.Validator = Validator;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL2xpYi92YWxpZGF0b3IuanM/ZjdkZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFRQSxJQUFJLFNBQU8sU0FBUCxNQUFPLENBQVMsSUFBVCxFQUFjLElBQWQsRUFBbUIsV0FBbkIsRUFBK0I7QUFDekMsTUFBSyxHQUFMLEdBQVMsT0FBTyxJQUFQLElBQWMsUUFBZCxHQUF3QixJQUF4QixHQUE2QixTQUFTLGlCQUFULENBQTJCLElBQTNCLEVBQWlDLENBQWpDLENBQXRDO0FBQ0EsTUFBSyxJQUFMLEdBQVUsSUFBVjtBQUNBLE1BQUssV0FBTCxHQUFpQixlQUFhLEtBQTlCO0FBQ0EsQ0FKRDs7QUFPQSxJQUFJLFlBQVUsU0FBVixTQUFVLENBQVMsTUFBVCxFQUFnQixJQUFoQixFQUFxQixhQUFyQixFQUFtQyxPQUFuQyxFQUEyQyxPQUEzQyxFQUFtRDtBQUFBOztBQUNoRSxNQUFLLE1BQUwsR0FBWSxNQUFaO0FBQ0EsTUFBSyxTQUFMO0FBQ0EsTUFBSyxNQUFMLEdBQVksRUFBWjs7QUFFQSxNQUFLLE9BQUwsR0FBYSxPQUFiO0FBQ0EsTUFBSyxPQUFMLEdBQWEsT0FBYjtBQUNBLE1BQUssYUFBTCxHQUFtQixpQkFBZSxLQUFsQztBQUNBLE1BQUssSUFBTCxHQUFVLE9BQU8sSUFBUCxJQUFjLFFBQWQsR0FBd0IsSUFBeEIsR0FBNkIsU0FBUyxjQUFULENBQXdCLElBQXhCLENBQXZDOztBQUVBLEtBQUksT0FBSyxJQUFUOztBQVZnRSw0QkFXeEQsQ0FYd0Q7O0FBYS9ELFFBQUssTUFBTCxDQUFZLENBQVosRUFBZSxHQUFmLENBQW1CLGdCQUFuQixDQUFvQyxRQUFwQyxFQUE2QyxVQUFTLENBQVQsRUFBVztBQUN2RCxRQUFLLFFBQUwsQ0FBYyxLQUFLLE1BQUwsQ0FBWSxDQUFaLEVBQWUsR0FBN0IsRUFBaUMsQ0FBakM7QUFDQSxHQUZELEVBRUUsS0FGRjtBQWIrRDs7QUFXaEUsTUFBSSxJQUFJLElBQUUsQ0FBVixFQUFZLElBQUUsS0FBSyxNQUFMLENBQVksTUFBMUIsRUFBaUMsR0FBakMsRUFBcUM7QUFBQSxRQUE3QixDQUE2QjtBQUtwQzs7QUFFRCxLQUFJLFFBQU0sS0FBSyxJQUFMLENBQVUsT0FBVixJQUFtQixNQUFuQixHQUE0QixRQUE1QixHQUFxQyxXQUEvQzs7QUFFQSxNQUFLLElBQUwsQ0FBVSxnQkFBVixDQUEyQixLQUEzQixFQUFpQyxVQUFTLENBQVQsRUFBVztBQUMzQyxPQUFJLElBQUksSUFBRSxDQUFWLEVBQVksSUFBRSxLQUFLLE1BQUwsQ0FBWSxNQUExQixFQUFpQyxHQUFqQyxFQUFxQztBQUNwQyxRQUFLLFFBQUwsQ0FBYyxLQUFLLE1BQUwsQ0FBWSxDQUFaLEVBQWUsR0FBN0IsRUFBaUMsQ0FBakM7QUFDQTtBQUNELEVBSkQsRUFJRSxLQUpGO0FBS0EsQ0F6QkQ7O0FBMkJBLFVBQVUsU0FBVixHQUFvQjs7QUFFbkIsV0FBUyxrQkFBUyxHQUFULEVBQWEsS0FBYixFQUFtQjs7QUFFM0IsTUFBSSxPQUFLLEtBQUssTUFBTCxDQUFZLEtBQVosRUFBbUIsSUFBNUI7QUFDQSxNQUFHLE9BQU8sSUFBUCxJQUFnQixRQUFuQixFQUE0QjtBQUMzQixRQUFLLFNBQUwsR0FBZSxVQUFVLEtBQVYsQ0FBZ0IsSUFBaEIsRUFBc0IsSUFBSSxLQUExQixDQUFmO0FBQ0EsT0FBRyxDQUFDLEtBQUssU0FBTCxDQUFlLE1BQW5CLEVBQTBCO0FBQ3pCLFNBQUssT0FBTCxDQUFhLEdBQWIsRUFBaUIsS0FBSyxTQUF0QjtBQUNBLFNBQUssTUFBTCxDQUFZLEtBQVosRUFBbUIsV0FBbkIsR0FBK0IsSUFBL0I7QUFDQSxJQUhELE1BR00sSUFBRyxLQUFLLFNBQUwsQ0FBZSxNQUFmLElBQXVCLEtBQUssTUFBTCxDQUFZLEtBQVosRUFBbUIsV0FBN0MsRUFBeUQ7QUFDOUQsU0FBSyxPQUFMLENBQWEsR0FBYixFQUFpQixLQUFLLFNBQXRCO0FBQ0E7QUFDRCxHQVJELE1BU0k7QUFDSCxRQUFLLFNBQUwsR0FBZSxLQUFLLE1BQUwsQ0FBWSxLQUFaLEVBQW1CLElBQW5CLENBQXdCLElBQXhCLENBQTZCLElBQTdCLEVBQWtDLElBQUksS0FBdEMsQ0FBZjtBQUNBLE9BQUcsS0FBSyxTQUFSLEVBQWtCO0FBQ2pCLFFBQUcsQ0FBQyxLQUFLLFNBQUwsQ0FBZSxNQUFuQixFQUEwQjtBQUN6QixVQUFLLE9BQUwsQ0FBYSxHQUFiLEVBQWlCLEtBQUssU0FBdEI7QUFDQSxVQUFLLE1BQUwsQ0FBWSxLQUFaLEVBQW1CLFdBQW5CLEdBQStCLElBQS9CO0FBQ0EsS0FIRCxNQUdNLElBQUcsS0FBSyxTQUFMLENBQWUsTUFBZixJQUF1QixLQUFLLE1BQUwsQ0FBWSxLQUFaLEVBQW1CLFdBQTdDLEVBQXlEO0FBQzlELFVBQUssT0FBTCxDQUFhLEdBQWIsRUFBaUIsS0FBSyxTQUF0QjtBQUNBO0FBQ0Q7QUFDRDtBQUNEO0FBekJrQixDQUFwQjs7QUE0QkEsVUFBVSxLQUFWLEdBQWlCLFlBQVU7QUFDMUIsS0FBSSxVQUFRLFNBQVIsT0FBUSxDQUFTLEdBQVQsRUFBYSxJQUFiLEVBQWtCO0FBQzdCLE1BQUcsQ0FBQyxHQUFKLEVBQVE7QUFDUCxVQUFPO0FBQ04sWUFBTyxLQUREO0FBRU4sVUFBSztBQUZDLElBQVA7QUFJQSxHQUxELE1BTUk7QUFDSCxVQUFPO0FBQ04sWUFBTztBQURELElBQVA7QUFHQTtBQUNELEVBWkQ7O0FBY0EsS0FBSSxNQUFJLFNBQUosR0FBSSxDQUFTLEdBQVQsRUFBYTtBQUNwQixNQUFJLE1BQUksaUVBQVI7QUFDQSxNQUFJLE1BQUksU0FBUyxHQUFULEVBQWEsRUFBYixDQUFSO0FBQ0EsTUFBRyxDQUFDLElBQUksSUFBSixDQUFTLEdBQVQsQ0FBSixFQUFrQjtBQUNqQixVQUFPO0FBQ04sWUFBTyxLQUREO0FBRU4sVUFBSztBQUZDLElBQVA7QUFJQSxHQUxELE1BTUk7QUFDSCxVQUFPO0FBQ04sWUFBTztBQURELElBQVA7QUFHQTtBQUNELEVBZEQ7O0FBZ0JBLEtBQUksV0FBUyxTQUFULFFBQVMsQ0FBUyxHQUFULEVBQWE7QUFDekIsTUFBRyxDQUFDLEdBQUosRUFBUTtBQUNQLFVBQU87QUFDTixZQUFPLEtBREQ7QUFFTixVQUFLO0FBRkMsSUFBUDtBQUlBO0FBQ0QsTUFBRyxDQUFDLE1BQU0sR0FBTixDQUFKLEVBQWU7QUFDZCxVQUFPO0FBQ04sWUFBTztBQURELElBQVA7QUFHQSxHQUpELE1BS0k7QUFDSCxVQUFPO0FBQ04sWUFBTyxLQUREO0FBRU4sVUFBSztBQUZDLElBQVA7QUFJQTtBQUNELEVBbEJEOztBQW9CQSxLQUFJLFdBQVMsU0FBVCxRQUFTLENBQVMsR0FBVCxFQUFhLElBQWIsRUFBa0I7QUFDOUIsTUFBRyxDQUFDLEdBQUosRUFBUTtBQUNQLFVBQU87QUFDTixZQUFPLEtBREQ7QUFFTixVQUFLO0FBRkMsSUFBUDtBQUlBO0FBQ0QsTUFBSSxNQUFJLEtBQUssTUFBYjtBQUNBLE9BQUksSUFBSSxJQUFFLENBQVYsRUFBWSxJQUFFLEtBQUssTUFBbkIsRUFBMEIsR0FBMUIsRUFBOEI7QUFDN0IsT0FBRyxPQUFLLEtBQUssQ0FBTCxDQUFSLEVBQWdCO0FBQ2YsV0FBTztBQUNOLGFBQU8sS0FERDtBQUVOLFdBQUs7QUFGQyxLQUFQO0FBSUE7QUFDRDtBQUNELFNBQU07QUFDTCxXQUFPO0FBREYsR0FBTjtBQUdBLEVBbkJEOztBQXFCQSxLQUFJLFVBQVEsU0FBUixPQUFRLENBQVMsR0FBVCxFQUFhLEdBQWIsRUFBaUI7QUFDNUIsTUFBRyxDQUFDLEdBQUosRUFBUTtBQUNQLFVBQU87QUFDTixZQUFPLEtBREQ7QUFFTixVQUFLO0FBRkMsSUFBUDtBQUlBO0FBQ0QsTUFBSSxTQUFPLGlFQUFYO0FBQ0EsTUFBRyxPQUFPLElBQVAsQ0FBWSxHQUFaLENBQUgsRUFBb0I7QUFDbkIsVUFBTztBQUNOLFlBQU8sSUFERDtBQUVOLFVBQUs7QUFGQyxJQUFQO0FBSUE7QUFDRCxTQUFPO0FBQ04sV0FBTyxLQUREO0FBRU4sU0FBSztBQUZDLEdBQVA7QUFJQSxFQWxCRDs7QUFvQkEsUUFBTztBQUNOLFdBQVEsT0FERjtBQUVOLFNBQU0sR0FGQTtBQUdOLFlBQVMsUUFISDtBQUlOLFlBQVMsUUFKSDtBQUtOLFdBQVE7QUFMRixFQUFQO0FBT0EsQ0FuR2dCLEVBQWpCOztRQXVHUSxNLEdBQUEsTTtRQUFPLFMsR0FBQSxTIiwiZmlsZSI6IjIyNS5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogXG4gKiBAYXV0aG9ycyBZb3VyIE5hbWUgKHlvdUBleGFtcGxlLm9yZylcbiAqIEBkYXRlICAgIDIwMTUtMDctMDMgMTI6MTc6NDhcbiAqIEB2ZXJzaW9uICRJZCRcbiAqL1xuXG5cbnZhciBDb25maWc9ZnVuY3Rpb24obmFtZSx0eXBlLGFjdGlvblJpZ2h0KXtcblx0dGhpcy5pcHQ9dHlwZW9mKG5hbWUpPT1cIk9iamVjdFwiPyBuYW1lOmRvY3VtZW50LmdldEVsZW1lbnRzQnlOYW1lKG5hbWUpWzBdO1xuXHR0aGlzLnR5cGU9dHlwZTtcblx0dGhpcy5hY3Rpb25SaWdodD1hY3Rpb25SaWdodHx8ZmFsc2U7XG59XG5cblxudmFyIFZhbGlkYXRvcj1mdW5jdGlvbihjb25maWcsZm9ybSxub1JpZ2h0QWN0aW9uLHJpZ2h0Zm4sZXJyb3Jmbil7XG5cdHRoaXMuY29uZmlnPWNvbmZpZztcblx0dGhpcy5yZXN1bHRfb2s7XG5cdHRoaXMucmVzdWx0PVtdO1xuXHQvLyB0aGlzLmFscmVhZHk9YWxyZWFkeTtcblx0dGhpcy5yaWdodGZuPXJpZ2h0Zm47XG5cdHRoaXMuZXJyb3Jmbj1lcnJvcmZuO1xuXHR0aGlzLm5vUmlnaHRBY3Rpb249bm9SaWdodEFjdGlvbnx8ZmFsc2U7XG5cdHRoaXMuZm9ybT10eXBlb2YoZm9ybSk9PVwiT2JqZWN0XCI/IGZvcm06ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoZm9ybSk7XG5cdC8vIGNvbnNvbGUubG9nKHRoaXMuY29uZmlnKTtcblx0dmFyIHRoYXQ9dGhpcztcblx0Zm9yKGxldCBpPTA7aTx0aGlzLmNvbmZpZy5sZW5ndGg7aSsrKXtcblx0XHQvLyB2YXIgdHlwZT10aGlzLmNvbmZpZ1tpXS50eXBlO1xuXHRcdHRoaXMuY29uZmlnW2ldLmlwdC5hZGRFdmVudExpc3RlbmVyKFwiY2hhbmdlXCIsZnVuY3Rpb24oZSl7XG5cdFx0XHR0aGF0LnZhbGlkYXRlKHRoYXQuY29uZmlnW2ldLmlwdCxpKTtcblx0XHR9LGZhbHNlKTtcblx0fVxuXG5cdHZhciBldmVudD10aGlzLmZvcm0udGFnTmFtZT09J0ZPUk0nID8gJ3N1Ym1pdCc6J21vdXNlZG93bic7XG5cblx0dGhpcy5mb3JtLmFkZEV2ZW50TGlzdGVuZXIoZXZlbnQsZnVuY3Rpb24oZSl7XG5cdFx0Zm9yKGxldCBqPTA7ajx0aGF0LmNvbmZpZy5sZW5ndGg7aisrKXtcblx0XHRcdHRoYXQudmFsaWRhdGUodGhhdC5jb25maWdbal0uaXB0LGopO1xuXHRcdH1cblx0fSxmYWxzZSk7XG59XG5cblZhbGlkYXRvci5wcm90b3R5cGU9e1xuXHQvL29uYmx1clxuXHR2YWxpZGF0ZTpmdW5jdGlvbihlbGUsaW5kZXgpe1xuXHRcdC8vIHZhciBlbGU9ZS50YXJnZXQ7XG5cdFx0dmFyIHR5cGU9dGhpcy5jb25maWdbaW5kZXhdLnR5cGU7XG5cdFx0aWYodHlwZW9mKHR5cGUpID09ICdzdHJpbmcnKXtcblx0XHRcdHRoaXMucmVzdWx0X29rPVZhbGlkYXRvci50eXBlc1t0eXBlXShlbGUudmFsdWUpO1xuXHRcdFx0aWYoIXRoaXMucmVzdWx0X29rLmlzVHJ1ZSl7XG5cdFx0XHRcdHRoaXMuZXJyb3JmbihlbGUsdGhpcy5yZXN1bHRfb2spO1xuXHRcdFx0XHR0aGlzLmNvbmZpZ1tpbmRleF0uYWN0aW9uUmlnaHQ9dHJ1ZTtcblx0XHRcdH1lbHNlIGlmKHRoaXMucmVzdWx0X29rLmlzVHJ1ZSYmdGhpcy5jb25maWdbaW5kZXhdLmFjdGlvblJpZ2h0KXtcblx0XHRcdFx0dGhpcy5yaWdodGZuKGVsZSx0aGlzLnJlc3VsdF9vayk7XG5cdFx0XHR9XG5cdFx0fVxuXHRcdGVsc2V7XG5cdFx0XHR0aGlzLnJlc3VsdF9vaz10aGlzLmNvbmZpZ1tpbmRleF0udHlwZS5jYWxsKHRoaXMsZWxlLnZhbHVlKTtcblx0XHRcdGlmKHRoaXMucmVzdWx0X29rKXtcblx0XHRcdFx0aWYoIXRoaXMucmVzdWx0X29rLmlzVHJ1ZSl7XG5cdFx0XHRcdFx0dGhpcy5lcnJvcmZuKGVsZSx0aGlzLnJlc3VsdF9vayk7XG5cdFx0XHRcdFx0dGhpcy5jb25maWdbaW5kZXhdLmFjdGlvblJpZ2h0PXRydWU7XG5cdFx0XHRcdH1lbHNlIGlmKHRoaXMucmVzdWx0X29rLmlzVHJ1ZSYmdGhpcy5jb25maWdbaW5kZXhdLmFjdGlvblJpZ2h0KXtcblx0XHRcdFx0XHR0aGlzLnJpZ2h0Zm4oZWxlLHRoaXMucmVzdWx0X29rKTtcblx0XHRcdFx0fVxuXHRcdFx0fVxuXHRcdH1cblx0fVxufVxuXG5WYWxpZGF0b3IudHlwZXM9KGZ1bmN0aW9uKCl7XG5cdHZhciBpc0VtcHR5PWZ1bmN0aW9uKHZhbCxkYXRhKXtcblx0XHRpZighdmFsKXtcblx0XHRcdHJldHVybiB7XG5cdFx0XHRcdGlzVHJ1ZTpmYWxzZSxcblx0XHRcdFx0aW5mbzpcIuivpemAiemhueS4jeiDveS4uuepulwiXG5cdFx0XHR9XG5cdFx0fVxuXHRcdGVsc2V7XG5cdFx0XHRyZXR1cm4ge1xuXHRcdFx0XHRpc1RydWU6dHJ1ZVxuXHRcdFx0fTtcblx0XHR9XG5cdH1cblxuXHR2YXIgdGVsPWZ1bmN0aW9uKHZhbCl7XG5cdFx0dmFyIHJlZz0vXigoKDEzWzAtOV17MX0pfCgxNVswLTldezF9KXwoMThbMC05XXsxfSl8KDE3WzAtOV17MX0pKStcXGR7OH0pJC87XG5cdFx0dmFyIG51bT1wYXJzZUludCh2YWwsMTApO1xuXHRcdGlmKCFyZWcudGVzdCh2YWwpKXtcblx0XHRcdHJldHVybiB7XG5cdFx0XHRcdGlzVHJ1ZTpmYWxzZSxcblx0XHRcdFx0aW5mbzpcIuivt+i+k+WFpeato+ehrueahOeUteivneWPt+eggVwiXG5cdFx0XHR9XG5cdFx0fVxuXHRcdGVsc2V7XG5cdFx0XHRyZXR1cm4ge1xuXHRcdFx0XHRpc1RydWU6dHJ1ZVxuXHRcdFx0fVxuXHRcdH1cblx0fVxuXG5cdHZhciBpc051bWJlcj1mdW5jdGlvbih2YWwpe1xuXHRcdGlmKCF2YWwpe1xuXHRcdFx0cmV0dXJuIHtcblx0XHRcdFx0aXNUcnVlOmZhbHNlLFxuXHRcdFx0XHRpbmZvOlwi6K+36L6T5YWl5pWw5a2XXCJcblx0XHRcdH1cblx0XHR9XG5cdFx0aWYoIWlzTmFOKHZhbCkpe1xuXHRcdFx0cmV0dXJuIHtcblx0XHRcdFx0aXNUcnVlOnRydWVcblx0XHRcdH1cblx0XHR9XG5cdFx0ZWxzZXtcblx0XHRcdHJldHVybiB7XG5cdFx0XHRcdGlzVHJ1ZTpmYWxzZSxcblx0XHRcdFx0aW5mbzpcIuivt+i+k+WFpeaVsOWtl1wiXG5cdFx0XHR9XG5cdFx0fVxuXHR9O1xuXG5cdHZhciBpc1JlcGVhdD1mdW5jdGlvbih2YWwsZGF0YSl7XG5cdFx0aWYoIXZhbCl7XG5cdFx0XHRyZXR1cm4ge1xuXHRcdFx0XHRpc1RydWU6ZmFsc2UsXG5cdFx0XHRcdGluZm86XCLor6XpgInpobnkuI3og73kuLrnqbpcIlxuXHRcdFx0fVxuXHRcdH1cblx0XHR2YXIgbGVuPWRhdGEubGVuZ3RoO1xuXHRcdGZvcih2YXIgaT0wO2k8ZGF0YS5sZW5ndGg7aSsrKXtcblx0XHRcdGlmKHZhbD09ZGF0YVtpXSl7XG5cdFx0XHRcdHJldHVybiB7XG5cdFx0XHRcdFx0aXNUcnVlOmZhbHNlLFxuXHRcdFx0XHRcdGluZm86XCLor6XpgInpobnkuI3og73ph43lpI1cIlxuXHRcdFx0XHR9XG5cdFx0XHR9XG5cdFx0fVxuXHRcdHJldHVybntcblx0XHRcdGlzVHJ1ZTp0cnVlXG5cdFx0fVxuXHR9XG5cblx0dmFyIGlzRW1haWw9ZnVuY3Rpb24odmFsLGVsZSl7XG5cdFx0aWYoIXZhbCl7XG5cdFx0XHRyZXR1cm4ge1xuXHRcdFx0XHRpc1RydWU6ZmFsc2UsXG5cdFx0XHRcdGluZm86XCLor6XpgInpobnkuI3og73kuLrnqbpcIlxuXHRcdFx0fVxuXHRcdH1cblx0XHR2YXIgZmlsdGVyPS9eKFthLXpBLVowLTlfXFwuXFwtXSkrXFxAKChbYS16QS1aMC05XFwtXSkrXFwuKSsoW2EtekEtWjAtOV17Miw0fSkrJC87XG5cdFx0aWYoZmlsdGVyLnRlc3QodmFsKSl7XG5cdFx0XHRyZXR1cm4ge1xuXHRcdFx0XHRpc1RydWU6dHJ1ZSxcblx0XHRcdFx0aW5mbzon6YKu566x5aGr5YaZ5q2j56GuJ1xuXHRcdFx0fVxuXHRcdH1cblx0XHRyZXR1cm4ge1xuXHRcdFx0aXNUcnVlOmZhbHNlLFxuXHRcdFx0aW5mbzpcIuivt+i+k+WFpeato+ehrueahOmCrueuseWcsOWdgFwiXG5cdFx0fVxuXHR9XG5cblx0cmV0dXJuIHtcblx0XHRpc0VtcHR5OmlzRW1wdHksXG5cdFx0aXNUZWw6dGVsLFxuXHRcdGlzTnVtYmVyOmlzTnVtYmVyLFxuXHRcdGlzUmVwZWF0OmlzUmVwZWF0LFxuXHRcdGlzRW1haWw6aXNFbWFpbFxuXHR9XG59KCkpO1xuXG5cblxuZXhwb3J0IHtDb25maWcsVmFsaWRhdG9yfVxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9saWIvdmFsaWRhdG9yLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	/**
+	 * 
+	 * @authors Your Name (you@example.org)
+	 * @date    2015-07-03 12:17:48
+	 * @version $Id$
+	 */
+
+	var Config = function Config(name, type, actionRight) {
+		this.ipt = typeof name == "Object" ? name : document.getElementsByName(name)[0];
+		this.type = type;
+		this.actionRight = actionRight || false;
+	};
+
+	var Validator = function Validator(config, form, noRightAction, rightfn, errorfn) {
+		var _this = this;
+
+		this.config = config;
+		this.result_ok;
+		this.result = [];
+		// this.already=already;
+		this.rightfn = rightfn;
+		this.errorfn = errorfn;
+		this.noRightAction = noRightAction || false;
+		this.form = typeof form == "Object" ? form : document.getElementById(form);
+		// console.log(this.config);
+		var that = this;
+
+		var _loop = function _loop(i) {
+			// var type=this.config[i].type;
+			_this.config[i].ipt.addEventListener("change", function (e) {
+				that.validate(that.config[i].ipt, i);
+			}, false);
+		};
+
+		for (var i = 0; i < this.config.length; i++) {
+			_loop(i);
+		}
+
+		var event = this.form.tagName == 'FORM' ? 'submit' : 'mousedown';
+
+		this.form.addEventListener(event, function (e) {
+			for (var j = 0; j < that.config.length; j++) {
+				that.validate(that.config[j].ipt, j);
+			}
+		}, false);
+	};
+
+	Validator.prototype = {
+		//onblur
+		validate: function validate(ele, index) {
+			// var ele=e.target;
+			var type = this.config[index].type;
+			if (typeof type == 'string') {
+				this.result_ok = Validator.types[type](ele.value);
+				if (!this.result_ok.isTrue) {
+					this.errorfn(ele, this.result_ok);
+					this.config[index].actionRight = true;
+				} else if (this.result_ok.isTrue && this.config[index].actionRight) {
+					this.rightfn(ele, this.result_ok);
+				}
+			} else {
+				this.result_ok = this.config[index].type.call(this, ele.value);
+				if (this.result_ok) {
+					if (!this.result_ok.isTrue) {
+						this.errorfn(ele, this.result_ok);
+						this.config[index].actionRight = true;
+					} else if (this.result_ok.isTrue && this.config[index].actionRight) {
+						this.rightfn(ele, this.result_ok);
+					}
+				}
+			}
+		}
+	};
+
+	Validator.types = function () {
+		var isEmpty = function isEmpty(val, data) {
+			if (!val) {
+				return {
+					isTrue: false,
+					info: "该选项不能为空"
+				};
+			} else {
+				return {
+					isTrue: true
+				};
+			}
+		};
+
+		var tel = function tel(val) {
+			var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+			var num = parseInt(val, 10);
+			if (!reg.test(val)) {
+				return {
+					isTrue: false,
+					info: "请输入正确的电话号码"
+				};
+			} else {
+				return {
+					isTrue: true
+				};
+			}
+		};
+
+		var isNumber = function isNumber(val) {
+			if (!val) {
+				return {
+					isTrue: false,
+					info: "请输入数字"
+				};
+			}
+			if (!isNaN(val)) {
+				return {
+					isTrue: true
+				};
+			} else {
+				return {
+					isTrue: false,
+					info: "请输入数字"
+				};
+			}
+		};
+
+		var isRepeat = function isRepeat(val, data) {
+			if (!val) {
+				return {
+					isTrue: false,
+					info: "该选项不能为空"
+				};
+			}
+			var len = data.length;
+			for (var i = 0; i < data.length; i++) {
+				if (val == data[i]) {
+					return {
+						isTrue: false,
+						info: "该选项不能重复"
+					};
+				}
+			}
+			return {
+				isTrue: true
+			};
+		};
+
+		var isEmail = function isEmail(val, ele) {
+			if (!val) {
+				return {
+					isTrue: false,
+					info: "该选项不能为空"
+				};
+			}
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (filter.test(val)) {
+				return {
+					isTrue: true,
+					info: '邮箱填写正确'
+				};
+			}
+			return {
+				isTrue: false,
+				info: "请输入正确的邮箱地址"
+			};
+		};
+
+		return {
+			isEmpty: isEmpty,
+			isTel: tel,
+			isNumber: isNumber,
+			isRepeat: isRepeat,
+			isEmail: isEmail
+		};
+	}();
+
+	exports.Config = Config;
+	exports.Validator = Validator;
 
 /***/ },
 
 /***/ 226:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var defaultClickRejectionStrategy = __webpack_require__(227);\n\nmodule.exports = function injectTapEventPlugin (strategyOverrides) {\n  strategyOverrides = strategyOverrides || {}\n  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;\n\n  __webpack_require__(31).injection.injectEventPluginsByName({\n    \"TapEventPlugin\":       __webpack_require__(228)(shouldRejectClick)\n  });\n};\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L3JlYWN0LXRhcC1ldmVudC1wbHVnaW4vc3JjL2luamVjdFRhcEV2ZW50UGx1Z2luLmpzPzcwMTMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQSxHQUFHO0FBQ0giLCJmaWxlIjoiMjI2LmpzIiwic291cmNlc0NvbnRlbnQiOlsidmFyIGRlZmF1bHRDbGlja1JlamVjdGlvblN0cmF0ZWd5ID0gcmVxdWlyZShcIi4vZGVmYXVsdENsaWNrUmVqZWN0aW9uU3RyYXRlZ3lcIik7XG5cbm1vZHVsZS5leHBvcnRzID0gZnVuY3Rpb24gaW5qZWN0VGFwRXZlbnRQbHVnaW4gKHN0cmF0ZWd5T3ZlcnJpZGVzKSB7XG4gIHN0cmF0ZWd5T3ZlcnJpZGVzID0gc3RyYXRlZ3lPdmVycmlkZXMgfHwge31cbiAgdmFyIHNob3VsZFJlamVjdENsaWNrID0gc3RyYXRlZ3lPdmVycmlkZXMuc2hvdWxkUmVqZWN0Q2xpY2sgfHwgZGVmYXVsdENsaWNrUmVqZWN0aW9uU3RyYXRlZ3k7XG5cbiAgcmVxdWlyZSgncmVhY3QvbGliL0V2ZW50UGx1Z2luSHViJykuaW5qZWN0aW9uLmluamVjdEV2ZW50UGx1Z2luc0J5TmFtZSh7XG4gICAgXCJUYXBFdmVudFBsdWdpblwiOiAgICAgICByZXF1aXJlKCcuL1RhcEV2ZW50UGx1Z2luLmpzJykoc2hvdWxkUmVqZWN0Q2xpY2spXG4gIH0pO1xufTtcblxuXG5cbi8qKioqKioqKioqKioqKioqKlxuICoqIFdFQlBBQ0sgRk9PVEVSXG4gKiogLi9+L3JlYWN0LXRhcC1ldmVudC1wbHVnaW4vc3JjL2luamVjdFRhcEV2ZW50UGx1Z2luLmpzXG4gKiogbW9kdWxlIGlkID0gMjI2XG4gKiogbW9kdWxlIGNodW5rcyA9IDFcbiAqKi8iXSwic291cmNlUm9vdCI6IiJ9");
+	var defaultClickRejectionStrategy = __webpack_require__(227);
+
+	module.exports = function injectTapEventPlugin (strategyOverrides) {
+	  strategyOverrides = strategyOverrides || {}
+	  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
+
+	  __webpack_require__(31).injection.injectEventPluginsByName({
+	    "TapEventPlugin":       __webpack_require__(228)(shouldRejectClick)
+	  });
+	};
+
 
 /***/ },
 
 /***/ 227:
 /***/ function(module, exports) {
 
-	eval("module.exports = function(lastTouchEvent, clickTimestamp) {\n  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {\n    return true;\n  }\n};\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L3JlYWN0LXRhcC1ldmVudC1wbHVnaW4vc3JjL2RlZmF1bHRDbGlja1JlamVjdGlvblN0cmF0ZWd5LmpzPzlhODkiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiIyMjcuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uKGxhc3RUb3VjaEV2ZW50LCBjbGlja1RpbWVzdGFtcCkge1xuICBpZiAobGFzdFRvdWNoRXZlbnQgJiYgKGNsaWNrVGltZXN0YW1wIC0gbGFzdFRvdWNoRXZlbnQpIDwgNzUwKSB7XG4gICAgcmV0dXJuIHRydWU7XG4gIH1cbn07XG5cblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vfi9yZWFjdC10YXAtZXZlbnQtcGx1Z2luL3NyYy9kZWZhdWx0Q2xpY2tSZWplY3Rpb25TdHJhdGVneS5qc1xuICoqIG1vZHVsZSBpZCA9IDIyN1xuICoqIG1vZHVsZSBjaHVua3MgPSAxXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	module.exports = function(lastTouchEvent, clickTimestamp) {
+	  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {
+	    return true;
+	  }
+	};
+
 
 /***/ },
 
 /***/ 228:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/**\n * Copyright 2013-2014 Facebook, Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n *\n * @providesModule TapEventPlugin\n * @typechecks static-only\n */\n\n\"use strict\";\n\nvar EventConstants = __webpack_require__(30);\nvar EventPluginUtils = __webpack_require__(33);\nvar EventPropagators = __webpack_require__(73);\nvar SyntheticUIEvent = __webpack_require__(87);\nvar TouchEventUtils = __webpack_require__(229);\nvar ViewportMetrics = __webpack_require__(38);\n\nvar keyOf = __webpack_require__(230);\nvar topLevelTypes = EventConstants.topLevelTypes;\n\nvar isStartish = EventPluginUtils.isStartish;\nvar isEndish = EventPluginUtils.isEndish;\n\nvar isTouch = function(topLevelType) {\n  var touchTypes = [\n    topLevelTypes.topTouchCancel,\n    topLevelTypes.topTouchEnd,\n    topLevelTypes.topTouchStart,\n    topLevelTypes.topTouchMove\n  ];\n  return touchTypes.indexOf(topLevelType) >= 0;\n}\n\n/**\n * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`\n * in order to still be considered a 'tap' event.\n */\nvar tapMoveThreshold = 10;\nvar ignoreMouseThreshold = 750;\nvar startCoords = {x: null, y: null};\nvar lastTouchEvent = null;\n\nvar Axis = {\n  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},\n  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}\n};\n\nfunction getAxisCoordOfEvent(axis, nativeEvent) {\n  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);\n  if (singleTouch) {\n    return singleTouch[axis.page];\n  }\n  return axis.page in nativeEvent ?\n    nativeEvent[axis.page] :\n    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];\n}\n\nfunction getDistance(coords, nativeEvent) {\n  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);\n  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);\n  return Math.pow(\n    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),\n    0.5\n  );\n}\n\nvar touchEvents = [\n  topLevelTypes.topTouchStart,\n  topLevelTypes.topTouchCancel,\n  topLevelTypes.topTouchEnd,\n  topLevelTypes.topTouchMove,\n];\n\nvar dependencies = [\n  topLevelTypes.topMouseDown,\n  topLevelTypes.topMouseMove,\n  topLevelTypes.topMouseUp,\n].concat(touchEvents);\n\nvar eventTypes = {\n  touchTap: {\n    phasedRegistrationNames: {\n      bubbled: keyOf({onTouchTap: null}),\n      captured: keyOf({onTouchTapCapture: null})\n    },\n    dependencies: dependencies\n  }\n};\n\nvar now = (function() {\n  if (Date.now) {\n    return Date.now;\n  } else {\n    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in\n    return function () {\n      return +new Date;\n    }\n  }\n})();\n\nfunction createTapEventPlugin(shouldRejectClick) {\n  return {\n\n    tapMoveThreshold: tapMoveThreshold,\n\n    ignoreMouseThreshold: ignoreMouseThreshold,\n\n    eventTypes: eventTypes,\n\n    /**\n     * @param {string} topLevelType Record from `EventConstants`.\n     * @param {DOMEventTarget} topLevelTarget The listening component root node.\n     * @param {string} topLevelTargetID ID of `topLevelTarget`.\n     * @param {object} nativeEvent Native browser event.\n     * @return {*} An accumulation of synthetic events.\n     * @see {EventPluginHub.extractEvents}\n     */\n    extractEvents: function(\n        topLevelType,\n        topLevelTarget,\n        topLevelTargetID,\n        nativeEvent,\n        nativeEventTarget) {\n\n      if (isTouch(topLevelType)) {\n        lastTouchEvent = now();\n      } else {\n        if (shouldRejectClick(lastTouchEvent, now())) {\n          return null;\n        }\n      }\n\n      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {\n        return null;\n      }\n      var event = null;\n      var distance = getDistance(startCoords, nativeEvent);\n      if (isEndish(topLevelType) && distance < tapMoveThreshold) {\n        event = SyntheticUIEvent.getPooled(\n          eventTypes.touchTap,\n          topLevelTargetID,\n          nativeEvent,\n          nativeEventTarget\n        );\n      }\n      if (isStartish(topLevelType)) {\n        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);\n        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);\n      } else if (isEndish(topLevelType)) {\n        startCoords.x = 0;\n        startCoords.y = 0;\n      }\n      EventPropagators.accumulateTwoPhaseDispatches(event);\n      return event;\n    }\n\n  };\n}\n\nmodule.exports = createTapEventPlugin;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L3JlYWN0LXRhcC1ldmVudC1wbHVnaW4vc3JjL1RhcEV2ZW50UGx1Z2luLmpzPzY2MjQiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLG1CQUFtQjtBQUNuQjs7QUFFQTtBQUNBLE1BQU0scUVBQXFFO0FBQzNFLE1BQU07QUFDTjs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSxzQkFBc0IsaUJBQWlCO0FBQ3ZDLHVCQUF1Qix3QkFBd0I7QUFDL0MsS0FBSztBQUNMO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSxHQUFHO0FBQ0g7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLENBQUM7O0FBRUQ7QUFDQTs7QUFFQTs7QUFFQTs7QUFFQTs7QUFFQTtBQUNBLGVBQWUsT0FBTztBQUN0QixlQUFlLGVBQWU7QUFDOUIsZUFBZSxPQUFPO0FBQ3RCLGVBQWUsT0FBTztBQUN0QixnQkFBZ0IsRUFBRTtBQUNsQixhQUFhO0FBQ2I7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLE9BQU87QUFDUDtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU87QUFDUDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQSIsImZpbGUiOiIyMjguanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAyMDEzLTIwMTQgRmFjZWJvb2ssIEluYy5cbiAqXG4gKiBMaWNlbnNlZCB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wICh0aGUgXCJMaWNlbnNlXCIpO1xuICogeW91IG1heSBub3QgdXNlIHRoaXMgZmlsZSBleGNlcHQgaW4gY29tcGxpYW5jZSB3aXRoIHRoZSBMaWNlbnNlLlxuICogWW91IG1heSBvYnRhaW4gYSBjb3B5IG9mIHRoZSBMaWNlbnNlIGF0XG4gKlxuICogaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wXG4gKlxuICogVW5sZXNzIHJlcXVpcmVkIGJ5IGFwcGxpY2FibGUgbGF3IG9yIGFncmVlZCB0byBpbiB3cml0aW5nLCBzb2Z0d2FyZVxuICogZGlzdHJpYnV0ZWQgdW5kZXIgdGhlIExpY2Vuc2UgaXMgZGlzdHJpYnV0ZWQgb24gYW4gXCJBUyBJU1wiIEJBU0lTLFxuICogV0lUSE9VVCBXQVJSQU5USUVTIE9SIENPTkRJVElPTlMgT0YgQU5ZIEtJTkQsIGVpdGhlciBleHByZXNzIG9yIGltcGxpZWQuXG4gKiBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kXG4gKiBsaW1pdGF0aW9ucyB1bmRlciB0aGUgTGljZW5zZS5cbiAqXG4gKiBAcHJvdmlkZXNNb2R1bGUgVGFwRXZlbnRQbHVnaW5cbiAqIEB0eXBlY2hlY2tzIHN0YXRpYy1vbmx5XG4gKi9cblxuXCJ1c2Ugc3RyaWN0XCI7XG5cbnZhciBFdmVudENvbnN0YW50cyA9IHJlcXVpcmUoJ3JlYWN0L2xpYi9FdmVudENvbnN0YW50cycpO1xudmFyIEV2ZW50UGx1Z2luVXRpbHMgPSByZXF1aXJlKCdyZWFjdC9saWIvRXZlbnRQbHVnaW5VdGlscycpO1xudmFyIEV2ZW50UHJvcGFnYXRvcnMgPSByZXF1aXJlKCdyZWFjdC9saWIvRXZlbnRQcm9wYWdhdG9ycycpO1xudmFyIFN5bnRoZXRpY1VJRXZlbnQgPSByZXF1aXJlKCdyZWFjdC9saWIvU3ludGhldGljVUlFdmVudCcpO1xudmFyIFRvdWNoRXZlbnRVdGlscyA9IHJlcXVpcmUoJy4vVG91Y2hFdmVudFV0aWxzJyk7XG52YXIgVmlld3BvcnRNZXRyaWNzID0gcmVxdWlyZSgncmVhY3QvbGliL1ZpZXdwb3J0TWV0cmljcycpO1xuXG52YXIga2V5T2YgPSByZXF1aXJlKCdmYmpzL2xpYi9rZXlPZicpO1xudmFyIHRvcExldmVsVHlwZXMgPSBFdmVudENvbnN0YW50cy50b3BMZXZlbFR5cGVzO1xuXG52YXIgaXNTdGFydGlzaCA9IEV2ZW50UGx1Z2luVXRpbHMuaXNTdGFydGlzaDtcbnZhciBpc0VuZGlzaCA9IEV2ZW50UGx1Z2luVXRpbHMuaXNFbmRpc2g7XG5cbnZhciBpc1RvdWNoID0gZnVuY3Rpb24odG9wTGV2ZWxUeXBlKSB7XG4gIHZhciB0b3VjaFR5cGVzID0gW1xuICAgIHRvcExldmVsVHlwZXMudG9wVG91Y2hDYW5jZWwsXG4gICAgdG9wTGV2ZWxUeXBlcy50b3BUb3VjaEVuZCxcbiAgICB0b3BMZXZlbFR5cGVzLnRvcFRvdWNoU3RhcnQsXG4gICAgdG9wTGV2ZWxUeXBlcy50b3BUb3VjaE1vdmVcbiAgXTtcbiAgcmV0dXJuIHRvdWNoVHlwZXMuaW5kZXhPZih0b3BMZXZlbFR5cGUpID49IDA7XG59XG5cbi8qKlxuICogTnVtYmVyIG9mIHBpeGVscyB0aGF0IGFyZSB0b2xlcmF0ZWQgaW4gYmV0d2VlbiBhIGB0b3VjaFN0YXJ0YCBhbmQgYHRvdWNoRW5kYFxuICogaW4gb3JkZXIgdG8gc3RpbGwgYmUgY29uc2lkZXJlZCBhICd0YXAnIGV2ZW50LlxuICovXG52YXIgdGFwTW92ZVRocmVzaG9sZCA9IDEwO1xudmFyIGlnbm9yZU1vdXNlVGhyZXNob2xkID0gNzUwO1xudmFyIHN0YXJ0Q29vcmRzID0ge3g6IG51bGwsIHk6IG51bGx9O1xudmFyIGxhc3RUb3VjaEV2ZW50ID0gbnVsbDtcblxudmFyIEF4aXMgPSB7XG4gIHg6IHtwYWdlOiAncGFnZVgnLCBjbGllbnQ6ICdjbGllbnRYJywgZW52U2Nyb2xsOiAnY3VycmVudFBhZ2VTY3JvbGxMZWZ0J30sXG4gIHk6IHtwYWdlOiAncGFnZVknLCBjbGllbnQ6ICdjbGllbnRZJywgZW52U2Nyb2xsOiAnY3VycmVudFBhZ2VTY3JvbGxUb3AnfVxufTtcblxuZnVuY3Rpb24gZ2V0QXhpc0Nvb3JkT2ZFdmVudChheGlzLCBuYXRpdmVFdmVudCkge1xuICB2YXIgc2luZ2xlVG91Y2ggPSBUb3VjaEV2ZW50VXRpbHMuZXh0cmFjdFNpbmdsZVRvdWNoKG5hdGl2ZUV2ZW50KTtcbiAgaWYgKHNpbmdsZVRvdWNoKSB7XG4gICAgcmV0dXJuIHNpbmdsZVRvdWNoW2F4aXMucGFnZV07XG4gIH1cbiAgcmV0dXJuIGF4aXMucGFnZSBpbiBuYXRpdmVFdmVudCA/XG4gICAgbmF0aXZlRXZlbnRbYXhpcy5wYWdlXSA6XG4gICAgbmF0aXZlRXZlbnRbYXhpcy5jbGllbnRdICsgVmlld3BvcnRNZXRyaWNzW2F4aXMuZW52U2Nyb2xsXTtcbn1cblxuZnVuY3Rpb24gZ2V0RGlzdGFuY2UoY29vcmRzLCBuYXRpdmVFdmVudCkge1xuICB2YXIgcGFnZVggPSBnZXRBeGlzQ29vcmRPZkV2ZW50KEF4aXMueCwgbmF0aXZlRXZlbnQpO1xuICB2YXIgcGFnZVkgPSBnZXRBeGlzQ29vcmRPZkV2ZW50KEF4aXMueSwgbmF0aXZlRXZlbnQpO1xuICByZXR1cm4gTWF0aC5wb3coXG4gICAgTWF0aC5wb3cocGFnZVggLSBjb29yZHMueCwgMikgKyBNYXRoLnBvdyhwYWdlWSAtIGNvb3Jkcy55LCAyKSxcbiAgICAwLjVcbiAgKTtcbn1cblxudmFyIHRvdWNoRXZlbnRzID0gW1xuICB0b3BMZXZlbFR5cGVzLnRvcFRvdWNoU3RhcnQsXG4gIHRvcExldmVsVHlwZXMudG9wVG91Y2hDYW5jZWwsXG4gIHRvcExldmVsVHlwZXMudG9wVG91Y2hFbmQsXG4gIHRvcExldmVsVHlwZXMudG9wVG91Y2hNb3ZlLFxuXTtcblxudmFyIGRlcGVuZGVuY2llcyA9IFtcbiAgdG9wTGV2ZWxUeXBlcy50b3BNb3VzZURvd24sXG4gIHRvcExldmVsVHlwZXMudG9wTW91c2VNb3ZlLFxuICB0b3BMZXZlbFR5cGVzLnRvcE1vdXNlVXAsXG5dLmNvbmNhdCh0b3VjaEV2ZW50cyk7XG5cbnZhciBldmVudFR5cGVzID0ge1xuICB0b3VjaFRhcDoge1xuICAgIHBoYXNlZFJlZ2lzdHJhdGlvbk5hbWVzOiB7XG4gICAgICBidWJibGVkOiBrZXlPZih7b25Ub3VjaFRhcDogbnVsbH0pLFxuICAgICAgY2FwdHVyZWQ6IGtleU9mKHtvblRvdWNoVGFwQ2FwdHVyZTogbnVsbH0pXG4gICAgfSxcbiAgICBkZXBlbmRlbmNpZXM6IGRlcGVuZGVuY2llc1xuICB9XG59O1xuXG52YXIgbm93ID0gKGZ1bmN0aW9uKCkge1xuICBpZiAoRGF0ZS5ub3cpIHtcbiAgICByZXR1cm4gRGF0ZS5ub3c7XG4gIH0gZWxzZSB7XG4gICAgLy8gSUU4IHN1cHBvcnQ6IGh0dHA6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvOTQzMDM1Ny9wbGVhc2UtZXhwbGFpbi13aHktYW5kLWhvdy1uZXctZGF0ZS13b3Jrcy1hcy13b3JrYXJvdW5kLWZvci1kYXRlLW5vdy1pblxuICAgIHJldHVybiBmdW5jdGlvbiAoKSB7XG4gICAgICByZXR1cm4gK25ldyBEYXRlO1xuICAgIH1cbiAgfVxufSkoKTtcblxuZnVuY3Rpb24gY3JlYXRlVGFwRXZlbnRQbHVnaW4oc2hvdWxkUmVqZWN0Q2xpY2spIHtcbiAgcmV0dXJuIHtcblxuICAgIHRhcE1vdmVUaHJlc2hvbGQ6IHRhcE1vdmVUaHJlc2hvbGQsXG5cbiAgICBpZ25vcmVNb3VzZVRocmVzaG9sZDogaWdub3JlTW91c2VUaHJlc2hvbGQsXG5cbiAgICBldmVudFR5cGVzOiBldmVudFR5cGVzLFxuXG4gICAgLyoqXG4gICAgICogQHBhcmFtIHtzdHJpbmd9IHRvcExldmVsVHlwZSBSZWNvcmQgZnJvbSBgRXZlbnRDb25zdGFudHNgLlxuICAgICAqIEBwYXJhbSB7RE9NRXZlbnRUYXJnZXR9IHRvcExldmVsVGFyZ2V0IFRoZSBsaXN0ZW5pbmcgY29tcG9uZW50IHJvb3Qgbm9kZS5cbiAgICAgKiBAcGFyYW0ge3N0cmluZ30gdG9wTGV2ZWxUYXJnZXRJRCBJRCBvZiBgdG9wTGV2ZWxUYXJnZXRgLlxuICAgICAqIEBwYXJhbSB7b2JqZWN0fSBuYXRpdmVFdmVudCBOYXRpdmUgYnJvd3NlciBldmVudC5cbiAgICAgKiBAcmV0dXJuIHsqfSBBbiBhY2N1bXVsYXRpb24gb2Ygc3ludGhldGljIGV2ZW50cy5cbiAgICAgKiBAc2VlIHtFdmVudFBsdWdpbkh1Yi5leHRyYWN0RXZlbnRzfVxuICAgICAqL1xuICAgIGV4dHJhY3RFdmVudHM6IGZ1bmN0aW9uKFxuICAgICAgICB0b3BMZXZlbFR5cGUsXG4gICAgICAgIHRvcExldmVsVGFyZ2V0LFxuICAgICAgICB0b3BMZXZlbFRhcmdldElELFxuICAgICAgICBuYXRpdmVFdmVudCxcbiAgICAgICAgbmF0aXZlRXZlbnRUYXJnZXQpIHtcblxuICAgICAgaWYgKGlzVG91Y2godG9wTGV2ZWxUeXBlKSkge1xuICAgICAgICBsYXN0VG91Y2hFdmVudCA9IG5vdygpO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgaWYgKHNob3VsZFJlamVjdENsaWNrKGxhc3RUb3VjaEV2ZW50LCBub3coKSkpIHtcbiAgICAgICAgICByZXR1cm4gbnVsbDtcbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICBpZiAoIWlzU3RhcnRpc2godG9wTGV2ZWxUeXBlKSAmJiAhaXNFbmRpc2godG9wTGV2ZWxUeXBlKSkge1xuICAgICAgICByZXR1cm4gbnVsbDtcbiAgICAgIH1cbiAgICAgIHZhciBldmVudCA9IG51bGw7XG4gICAgICB2YXIgZGlzdGFuY2UgPSBnZXREaXN0YW5jZShzdGFydENvb3JkcywgbmF0aXZlRXZlbnQpO1xuICAgICAgaWYgKGlzRW5kaXNoKHRvcExldmVsVHlwZSkgJiYgZGlzdGFuY2UgPCB0YXBNb3ZlVGhyZXNob2xkKSB7XG4gICAgICAgIGV2ZW50ID0gU3ludGhldGljVUlFdmVudC5nZXRQb29sZWQoXG4gICAgICAgICAgZXZlbnRUeXBlcy50b3VjaFRhcCxcbiAgICAgICAgICB0b3BMZXZlbFRhcmdldElELFxuICAgICAgICAgIG5hdGl2ZUV2ZW50LFxuICAgICAgICAgIG5hdGl2ZUV2ZW50VGFyZ2V0XG4gICAgICAgICk7XG4gICAgICB9XG4gICAgICBpZiAoaXNTdGFydGlzaCh0b3BMZXZlbFR5cGUpKSB7XG4gICAgICAgIHN0YXJ0Q29vcmRzLnggPSBnZXRBeGlzQ29vcmRPZkV2ZW50KEF4aXMueCwgbmF0aXZlRXZlbnQpO1xuICAgICAgICBzdGFydENvb3Jkcy55ID0gZ2V0QXhpc0Nvb3JkT2ZFdmVudChBeGlzLnksIG5hdGl2ZUV2ZW50KTtcbiAgICAgIH0gZWxzZSBpZiAoaXNFbmRpc2godG9wTGV2ZWxUeXBlKSkge1xuICAgICAgICBzdGFydENvb3Jkcy54ID0gMDtcbiAgICAgICAgc3RhcnRDb29yZHMueSA9IDA7XG4gICAgICB9XG4gICAgICBFdmVudFByb3BhZ2F0b3JzLmFjY3VtdWxhdGVUd29QaGFzZURpc3BhdGNoZXMoZXZlbnQpO1xuICAgICAgcmV0dXJuIGV2ZW50O1xuICAgIH1cblxuICB9O1xufVxuXG5tb2R1bGUuZXhwb3J0cyA9IGNyZWF0ZVRhcEV2ZW50UGx1Z2luO1xuXG5cblxuLyoqKioqKioqKioqKioqKioqXG4gKiogV0VCUEFDSyBGT09URVJcbiAqKiAuL34vcmVhY3QtdGFwLWV2ZW50LXBsdWdpbi9zcmMvVGFwRXZlbnRQbHVnaW4uanNcbiAqKiBtb2R1bGUgaWQgPSAyMjhcbiAqKiBtb2R1bGUgY2h1bmtzID0gMVxuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TapEventPlugin
+	 * @typechecks static-only
+	 */
+
+	"use strict";
+
+	var EventConstants = __webpack_require__(30);
+	var EventPluginUtils = __webpack_require__(33);
+	var EventPropagators = __webpack_require__(73);
+	var SyntheticUIEvent = __webpack_require__(87);
+	var TouchEventUtils = __webpack_require__(229);
+	var ViewportMetrics = __webpack_require__(38);
+
+	var keyOf = __webpack_require__(230);
+	var topLevelTypes = EventConstants.topLevelTypes;
+
+	var isStartish = EventPluginUtils.isStartish;
+	var isEndish = EventPluginUtils.isEndish;
+
+	var isTouch = function(topLevelType) {
+	  var touchTypes = [
+	    topLevelTypes.topTouchCancel,
+	    topLevelTypes.topTouchEnd,
+	    topLevelTypes.topTouchStart,
+	    topLevelTypes.topTouchMove
+	  ];
+	  return touchTypes.indexOf(topLevelType) >= 0;
+	}
+
+	/**
+	 * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`
+	 * in order to still be considered a 'tap' event.
+	 */
+	var tapMoveThreshold = 10;
+	var ignoreMouseThreshold = 750;
+	var startCoords = {x: null, y: null};
+	var lastTouchEvent = null;
+
+	var Axis = {
+	  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},
+	  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}
+	};
+
+	function getAxisCoordOfEvent(axis, nativeEvent) {
+	  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);
+	  if (singleTouch) {
+	    return singleTouch[axis.page];
+	  }
+	  return axis.page in nativeEvent ?
+	    nativeEvent[axis.page] :
+	    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];
+	}
+
+	function getDistance(coords, nativeEvent) {
+	  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	  return Math.pow(
+	    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),
+	    0.5
+	  );
+	}
+
+	var touchEvents = [
+	  topLevelTypes.topTouchStart,
+	  topLevelTypes.topTouchCancel,
+	  topLevelTypes.topTouchEnd,
+	  topLevelTypes.topTouchMove,
+	];
+
+	var dependencies = [
+	  topLevelTypes.topMouseDown,
+	  topLevelTypes.topMouseMove,
+	  topLevelTypes.topMouseUp,
+	].concat(touchEvents);
+
+	var eventTypes = {
+	  touchTap: {
+	    phasedRegistrationNames: {
+	      bubbled: keyOf({onTouchTap: null}),
+	      captured: keyOf({onTouchTapCapture: null})
+	    },
+	    dependencies: dependencies
+	  }
+	};
+
+	var now = (function() {
+	  if (Date.now) {
+	    return Date.now;
+	  } else {
+	    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in
+	    return function () {
+	      return +new Date;
+	    }
+	  }
+	})();
+
+	function createTapEventPlugin(shouldRejectClick) {
+	  return {
+
+	    tapMoveThreshold: tapMoveThreshold,
+
+	    ignoreMouseThreshold: ignoreMouseThreshold,
+
+	    eventTypes: eventTypes,
+
+	    /**
+	     * @param {string} topLevelType Record from `EventConstants`.
+	     * @param {DOMEventTarget} topLevelTarget The listening component root node.
+	     * @param {string} topLevelTargetID ID of `topLevelTarget`.
+	     * @param {object} nativeEvent Native browser event.
+	     * @return {*} An accumulation of synthetic events.
+	     * @see {EventPluginHub.extractEvents}
+	     */
+	    extractEvents: function(
+	        topLevelType,
+	        topLevelTarget,
+	        topLevelTargetID,
+	        nativeEvent,
+	        nativeEventTarget) {
+
+	      if (isTouch(topLevelType)) {
+	        lastTouchEvent = now();
+	      } else {
+	        if (shouldRejectClick(lastTouchEvent, now())) {
+	          return null;
+	        }
+	      }
+
+	      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {
+	        return null;
+	      }
+	      var event = null;
+	      var distance = getDistance(startCoords, nativeEvent);
+	      if (isEndish(topLevelType) && distance < tapMoveThreshold) {
+	        event = SyntheticUIEvent.getPooled(
+	          eventTypes.touchTap,
+	          topLevelTargetID,
+	          nativeEvent,
+	          nativeEventTarget
+	        );
+	      }
+	      if (isStartish(topLevelType)) {
+	        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	      } else if (isEndish(topLevelType)) {
+	        startCoords.x = 0;
+	        startCoords.y = 0;
+	      }
+	      EventPropagators.accumulateTwoPhaseDispatches(event);
+	      return event;
+	    }
+
+	  };
+	}
+
+	module.exports = createTapEventPlugin;
+
 
 /***/ },
 
 /***/ 229:
 /***/ function(module, exports) {
 
-	eval("/**\n * Copyright 2013-2014 Facebook, Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n *\n * @providesModule TouchEventUtils\n */\n\nvar TouchEventUtils = {\n  /**\n   * Utility function for common case of extracting out the primary touch from a\n   * touch event.\n   * - `touchEnd` events usually do not have the `touches` property.\n   *   http://stackoverflow.com/questions/3666929/\n   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed\n   *\n   * @param {Event} nativeEvent Native event that may or may not be a touch.\n   * @return {TouchesObject?} an object with pageX and pageY or null.\n   */\n  extractSingleTouch: function(nativeEvent) {\n    var touches = nativeEvent.touches;\n    var changedTouches = nativeEvent.changedTouches;\n    var hasTouches = touches && touches.length > 0;\n    var hasChangedTouches = changedTouches && changedTouches.length > 0;\n\n    return !hasTouches && hasChangedTouches ? changedTouches[0] :\n           hasTouches ? touches[0] :\n           nativeEvent;\n  }\n};\n\nmodule.exports = TouchEventUtils;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L3JlYWN0LXRhcC1ldmVudC1wbHVnaW4vc3JjL1RvdWNoRXZlbnRVdGlscy5qcz8xYzIzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGFBQWEsTUFBTTtBQUNuQixjQUFjLGVBQWU7QUFDN0I7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUEiLCJmaWxlIjoiMjI5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDb3B5cmlnaHQgMjAxMy0yMDE0IEZhY2Vib29rLCBJbmMuXG4gKlxuICogTGljZW5zZWQgdW5kZXIgdGhlIEFwYWNoZSBMaWNlbnNlLCBWZXJzaW9uIDIuMCAodGhlIFwiTGljZW5zZVwiKTtcbiAqIHlvdSBtYXkgbm90IHVzZSB0aGlzIGZpbGUgZXhjZXB0IGluIGNvbXBsaWFuY2Ugd2l0aCB0aGUgTGljZW5zZS5cbiAqIFlvdSBtYXkgb2J0YWluIGEgY29weSBvZiB0aGUgTGljZW5zZSBhdFxuICpcbiAqIGh0dHA6Ly93d3cuYXBhY2hlLm9yZy9saWNlbnNlcy9MSUNFTlNFLTIuMFxuICpcbiAqIFVubGVzcyByZXF1aXJlZCBieSBhcHBsaWNhYmxlIGxhdyBvciBhZ3JlZWQgdG8gaW4gd3JpdGluZywgc29mdHdhcmVcbiAqIGRpc3RyaWJ1dGVkIHVuZGVyIHRoZSBMaWNlbnNlIGlzIGRpc3RyaWJ1dGVkIG9uIGFuIFwiQVMgSVNcIiBCQVNJUyxcbiAqIFdJVEhPVVQgV0FSUkFOVElFUyBPUiBDT05ESVRJT05TIE9GIEFOWSBLSU5ELCBlaXRoZXIgZXhwcmVzcyBvciBpbXBsaWVkLlxuICogU2VlIHRoZSBMaWNlbnNlIGZvciB0aGUgc3BlY2lmaWMgbGFuZ3VhZ2UgZ292ZXJuaW5nIHBlcm1pc3Npb25zIGFuZFxuICogbGltaXRhdGlvbnMgdW5kZXIgdGhlIExpY2Vuc2UuXG4gKlxuICogQHByb3ZpZGVzTW9kdWxlIFRvdWNoRXZlbnRVdGlsc1xuICovXG5cbnZhciBUb3VjaEV2ZW50VXRpbHMgPSB7XG4gIC8qKlxuICAgKiBVdGlsaXR5IGZ1bmN0aW9uIGZvciBjb21tb24gY2FzZSBvZiBleHRyYWN0aW5nIG91dCB0aGUgcHJpbWFyeSB0b3VjaCBmcm9tIGFcbiAgICogdG91Y2ggZXZlbnQuXG4gICAqIC0gYHRvdWNoRW5kYCBldmVudHMgdXN1YWxseSBkbyBub3QgaGF2ZSB0aGUgYHRvdWNoZXNgIHByb3BlcnR5LlxuICAgKiAgIGh0dHA6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzY2NjkyOS9cbiAgICogICBtb2JpbGUtc2FyYWktdG91Y2hlbmQtZXZlbnQtbm90LWZpcmluZy13aGVuLWxhc3QtdG91Y2gtaXMtcmVtb3ZlZFxuICAgKlxuICAgKiBAcGFyYW0ge0V2ZW50fSBuYXRpdmVFdmVudCBOYXRpdmUgZXZlbnQgdGhhdCBtYXkgb3IgbWF5IG5vdCBiZSBhIHRvdWNoLlxuICAgKiBAcmV0dXJuIHtUb3VjaGVzT2JqZWN0P30gYW4gb2JqZWN0IHdpdGggcGFnZVggYW5kIHBhZ2VZIG9yIG51bGwuXG4gICAqL1xuICBleHRyYWN0U2luZ2xlVG91Y2g6IGZ1bmN0aW9uKG5hdGl2ZUV2ZW50KSB7XG4gICAgdmFyIHRvdWNoZXMgPSBuYXRpdmVFdmVudC50b3VjaGVzO1xuICAgIHZhciBjaGFuZ2VkVG91Y2hlcyA9IG5hdGl2ZUV2ZW50LmNoYW5nZWRUb3VjaGVzO1xuICAgIHZhciBoYXNUb3VjaGVzID0gdG91Y2hlcyAmJiB0b3VjaGVzLmxlbmd0aCA+IDA7XG4gICAgdmFyIGhhc0NoYW5nZWRUb3VjaGVzID0gY2hhbmdlZFRvdWNoZXMgJiYgY2hhbmdlZFRvdWNoZXMubGVuZ3RoID4gMDtcblxuICAgIHJldHVybiAhaGFzVG91Y2hlcyAmJiBoYXNDaGFuZ2VkVG91Y2hlcyA/IGNoYW5nZWRUb3VjaGVzWzBdIDpcbiAgICAgICAgICAgaGFzVG91Y2hlcyA/IHRvdWNoZXNbMF0gOlxuICAgICAgICAgICBuYXRpdmVFdmVudDtcbiAgfVxufTtcblxubW9kdWxlLmV4cG9ydHMgPSBUb3VjaEV2ZW50VXRpbHM7XG5cblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vfi9yZWFjdC10YXAtZXZlbnQtcGx1Z2luL3NyYy9Ub3VjaEV2ZW50VXRpbHMuanNcbiAqKiBtb2R1bGUgaWQgPSAyMjlcbiAqKiBtb2R1bGUgY2h1bmtzID0gMVxuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TouchEventUtils
+	 */
+
+	var TouchEventUtils = {
+	  /**
+	   * Utility function for common case of extracting out the primary touch from a
+	   * touch event.
+	   * - `touchEnd` events usually do not have the `touches` property.
+	   *   http://stackoverflow.com/questions/3666929/
+	   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed
+	   *
+	   * @param {Event} nativeEvent Native event that may or may not be a touch.
+	   * @return {TouchesObject?} an object with pageX and pageY or null.
+	   */
+	  extractSingleTouch: function(nativeEvent) {
+	    var touches = nativeEvent.touches;
+	    var changedTouches = nativeEvent.changedTouches;
+	    var hasTouches = touches && touches.length > 0;
+	    var hasChangedTouches = changedTouches && changedTouches.length > 0;
+
+	    return !hasTouches && hasChangedTouches ? changedTouches[0] :
+	           hasTouches ? touches[0] :
+	           nativeEvent;
+	  }
+	};
+
+	module.exports = TouchEventUtils;
+
 
 /***/ },
 
 /***/ 230:
 /***/ function(module, exports) {
 
-	eval("/**\n * Copyright 2013-2015, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @providesModule keyOf\n */\n\n/**\n * Allows extraction of a minified key. Let's the build system minify keys\n * without losing the ability to dynamically use key strings as values\n * themselves. Pass in an object with a single key/val pair and it will return\n * you the string key of that single record. Suppose you want to grab the\n * value for a key 'className' inside of an object. Key/val minification may\n * have aliased that key to be 'xa12'. keyOf({className: null}) will return\n * 'xa12' in that case. Resolve keys you want to use once at startup time, then\n * reuse those resolutions.\n */\n\"use strict\";\n\nvar keyOf = function (oneKeyObj) {\n  var key;\n  for (key in oneKeyObj) {\n    if (!oneKeyObj.hasOwnProperty(key)) {\n      continue;\n    }\n    return key;\n  }\n  return null;\n};\n\nmodule.exports = keyOf;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2ZianMvbGliL2tleU9mLmpzPzNhZDIiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsOENBQThDLGdCQUFnQjtBQUM5RDtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQSIsImZpbGUiOiIyMzAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAyMDEzLTIwMTUsIEZhY2Vib29rLCBJbmMuXG4gKiBBbGwgcmlnaHRzIHJlc2VydmVkLlxuICpcbiAqIFRoaXMgc291cmNlIGNvZGUgaXMgbGljZW5zZWQgdW5kZXIgdGhlIEJTRC1zdHlsZSBsaWNlbnNlIGZvdW5kIGluIHRoZVxuICogTElDRU5TRSBmaWxlIGluIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLiBBbiBhZGRpdGlvbmFsIGdyYW50XG4gKiBvZiBwYXRlbnQgcmlnaHRzIGNhbiBiZSBmb3VuZCBpbiB0aGUgUEFURU5UUyBmaWxlIGluIHRoZSBzYW1lIGRpcmVjdG9yeS5cbiAqXG4gKiBAcHJvdmlkZXNNb2R1bGUga2V5T2ZcbiAqL1xuXG4vKipcbiAqIEFsbG93cyBleHRyYWN0aW9uIG9mIGEgbWluaWZpZWQga2V5LiBMZXQncyB0aGUgYnVpbGQgc3lzdGVtIG1pbmlmeSBrZXlzXG4gKiB3aXRob3V0IGxvc2luZyB0aGUgYWJpbGl0eSB0byBkeW5hbWljYWxseSB1c2Uga2V5IHN0cmluZ3MgYXMgdmFsdWVzXG4gKiB0aGVtc2VsdmVzLiBQYXNzIGluIGFuIG9iamVjdCB3aXRoIGEgc2luZ2xlIGtleS92YWwgcGFpciBhbmQgaXQgd2lsbCByZXR1cm5cbiAqIHlvdSB0aGUgc3RyaW5nIGtleSBvZiB0aGF0IHNpbmdsZSByZWNvcmQuIFN1cHBvc2UgeW91IHdhbnQgdG8gZ3JhYiB0aGVcbiAqIHZhbHVlIGZvciBhIGtleSAnY2xhc3NOYW1lJyBpbnNpZGUgb2YgYW4gb2JqZWN0LiBLZXkvdmFsIG1pbmlmaWNhdGlvbiBtYXlcbiAqIGhhdmUgYWxpYXNlZCB0aGF0IGtleSB0byBiZSAneGExMicuIGtleU9mKHtjbGFzc05hbWU6IG51bGx9KSB3aWxsIHJldHVyblxuICogJ3hhMTInIGluIHRoYXQgY2FzZS4gUmVzb2x2ZSBrZXlzIHlvdSB3YW50IHRvIHVzZSBvbmNlIGF0IHN0YXJ0dXAgdGltZSwgdGhlblxuICogcmV1c2UgdGhvc2UgcmVzb2x1dGlvbnMuXG4gKi9cblwidXNlIHN0cmljdFwiO1xuXG52YXIga2V5T2YgPSBmdW5jdGlvbiAob25lS2V5T2JqKSB7XG4gIHZhciBrZXk7XG4gIGZvciAoa2V5IGluIG9uZUtleU9iaikge1xuICAgIGlmICghb25lS2V5T2JqLmhhc093blByb3BlcnR5KGtleSkpIHtcbiAgICAgIGNvbnRpbnVlO1xuICAgIH1cbiAgICByZXR1cm4ga2V5O1xuICB9XG4gIHJldHVybiBudWxsO1xufTtcblxubW9kdWxlLmV4cG9ydHMgPSBrZXlPZjtcblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vfi9mYmpzL2xpYi9rZXlPZi5qc1xuICoqIG1vZHVsZSBpZCA9IDIzMFxuICoqIG1vZHVsZSBjaHVua3MgPSAxXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule keyOf
+	 */
+
+	/**
+	 * Allows extraction of a minified key. Let's the build system minify keys
+	 * without losing the ability to dynamically use key strings as values
+	 * themselves. Pass in an object with a single key/val pair and it will return
+	 * you the string key of that single record. Suppose you want to grab the
+	 * value for a key 'className' inside of an object. Key/val minification may
+	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+	 * reuse those resolutions.
+	 */
+	"use strict";
+
+	var keyOf = function (oneKeyObj) {
+	  var key;
+	  for (key in oneKeyObj) {
+	    if (!oneKeyObj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    return key;
+	  }
+	  return null;
+	};
+
+	module.exports = keyOf;
 
 /***/ },
 
 /***/ 231:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.LoginStore = undefined;\n\nvar _events = __webpack_require__(232);\n\nvar LoginStore = Object.assign({}, _events.EventEmitter.prototype, {\n\tlogin: function login(email, password) {\n\t\tpost('/api/yonghus/login', {\n\t\t\temail: email,\n\t\t\tpassword: password\n\t\t}, function (res) {\n\t\t\tthis.emit('tologin', res);\n\t\t}.bind(this));\n\t},\n\n\taddLoginHandle: function addLoginHandle(callback) {\n\t\tthis.on('tologin', callback);\n\t}\n}); /**\n     * \n     * @authors Your Name (you@example.org)\n     * @date    2016-05-02 21:48:32\n     * @version $Id$\n     */\n\n\nexports.LoginStore = LoginStore;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL3N0b3JlL2xvZ2luU3RvcmUuanM/NzdkNSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBTUE7O0FBRUEsSUFBSSxhQUFXLE9BQU8sTUFBUCxDQUFjLEVBQWQsRUFBaUIscUJBQWEsU0FBOUIsRUFBd0M7QUFDdEQsUUFBTSxlQUFTLEtBQVQsRUFBZSxRQUFmLEVBQXdCO0FBQzdCLE9BQUssb0JBQUwsRUFBMEI7QUFDekIsVUFBTSxLQURtQjtBQUV6QixhQUFTO0FBRmdCLEdBQTFCLEVBR0UsVUFBUyxHQUFULEVBQWE7QUFDZCxRQUFLLElBQUwsQ0FBVSxTQUFWLEVBQW9CLEdBQXBCO0FBQ0EsR0FGQyxDQUVBLElBRkEsQ0FFSyxJQUZMLENBSEY7QUFNQSxFQVJxRDs7QUFVdEQsaUJBQWUsd0JBQVMsUUFBVCxFQUFrQjtBQUNoQyxPQUFLLEVBQUwsQ0FBUSxTQUFSLEVBQWtCLFFBQWxCO0FBQ0E7QUFacUQsQ0FBeEMsQ0FBZixDOzs7Ozs7OztRQWVRLFUsR0FBQSxVIiwiZmlsZSI6IjIzMS5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogXG4gKiBAYXV0aG9ycyBZb3VyIE5hbWUgKHlvdUBleGFtcGxlLm9yZylcbiAqIEBkYXRlICAgIDIwMTYtMDUtMDIgMjE6NDg6MzJcbiAqIEB2ZXJzaW9uICRJZCRcbiAqL1xuaW1wb3J0IHtFdmVudEVtaXR0ZXJ9IGZyb20gJ2V2ZW50cydcblxudmFyIExvZ2luU3RvcmU9T2JqZWN0LmFzc2lnbih7fSxFdmVudEVtaXR0ZXIucHJvdG90eXBlLHtcblx0bG9naW46ZnVuY3Rpb24oZW1haWwscGFzc3dvcmQpe1xuXHRcdHBvc3QoJy9hcGkveW9uZ2h1cy9sb2dpbicse1xuXHRcdFx0ZW1haWw6ZW1haWwsXG5cdFx0XHRwYXNzd29yZDpwYXNzd29yZFxuXHRcdH0sZnVuY3Rpb24ocmVzKXtcblx0XHRcdHRoaXMuZW1pdCgndG9sb2dpbicscmVzKTtcblx0XHR9LmJpbmQodGhpcykpXG5cdH0sXG5cblx0YWRkTG9naW5IYW5kbGU6ZnVuY3Rpb24oY2FsbGJhY2spe1xuXHRcdHRoaXMub24oJ3RvbG9naW4nLGNhbGxiYWNrKTtcblx0fVxufSk7XG5cbmV4cG9ydCB7TG9naW5TdG9yZX07XG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9zdG9yZS9sb2dpblN0b3JlLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.LoginStore = undefined;
+
+	var _events = __webpack_require__(232);
+
+	var LoginStore = Object.assign({}, _events.EventEmitter.prototype, {
+		login: function login(email, password) {
+			post('/api/yonghus/login', {
+				email: email,
+				password: password
+			}, function (res) {
+				this.emit('tologin', res);
+			}.bind(this));
+		},
+
+		addLoginHandle: function addLoginHandle(callback) {
+			this.on('tologin', callback);
+		}
+	}); /**
+	     * 
+	     * @authors Your Name (you@example.org)
+	     * @date    2016-05-02 21:48:32
+	     * @version $Id$
+	     */
+
+
+	exports.LoginStore = LoginStore;
 
 /***/ },
 
 /***/ 232:
 /***/ function(module, exports) {
 
-	eval("// Copyright Joyent, Inc. and other Node contributors.\n//\n// Permission is hereby granted, free of charge, to any person obtaining a\n// copy of this software and associated documentation files (the\n// \"Software\"), to deal in the Software without restriction, including\n// without limitation the rights to use, copy, modify, merge, publish,\n// distribute, sublicense, and/or sell copies of the Software, and to permit\n// persons to whom the Software is furnished to do so, subject to the\n// following conditions:\n//\n// The above copyright notice and this permission notice shall be included\n// in all copies or substantial portions of the Software.\n//\n// THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN\n// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\n// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\n// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\n// USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nfunction EventEmitter() {\n  this._events = this._events || {};\n  this._maxListeners = this._maxListeners || undefined;\n}\nmodule.exports = EventEmitter;\n\n// Backwards-compat with node 0.10.x\nEventEmitter.EventEmitter = EventEmitter;\n\nEventEmitter.prototype._events = undefined;\nEventEmitter.prototype._maxListeners = undefined;\n\n// By default EventEmitters will print a warning if more than 10 listeners are\n// added to it. This is a useful default which helps finding memory leaks.\nEventEmitter.defaultMaxListeners = 10;\n\n// Obviously not all Emitters should be limited to 10. This function allows\n// that to be increased. Set to zero for unlimited.\nEventEmitter.prototype.setMaxListeners = function(n) {\n  if (!isNumber(n) || n < 0 || isNaN(n))\n    throw TypeError('n must be a positive number');\n  this._maxListeners = n;\n  return this;\n};\n\nEventEmitter.prototype.emit = function(type) {\n  var er, handler, len, args, i, listeners;\n\n  if (!this._events)\n    this._events = {};\n\n  // If there is no 'error' event listener then throw.\n  if (type === 'error') {\n    if (!this._events.error ||\n        (isObject(this._events.error) && !this._events.error.length)) {\n      er = arguments[1];\n      if (er instanceof Error) {\n        throw er; // Unhandled 'error' event\n      } else {\n        // At least give some kind of context to the user\n        var err = new Error('Uncaught, unspecified \"error\" event. (' + er + ')');\n        err.context = er;\n        throw err;\n      }\n    }\n  }\n\n  handler = this._events[type];\n\n  if (isUndefined(handler))\n    return false;\n\n  if (isFunction(handler)) {\n    switch (arguments.length) {\n      // fast cases\n      case 1:\n        handler.call(this);\n        break;\n      case 2:\n        handler.call(this, arguments[1]);\n        break;\n      case 3:\n        handler.call(this, arguments[1], arguments[2]);\n        break;\n      // slower\n      default:\n        args = Array.prototype.slice.call(arguments, 1);\n        handler.apply(this, args);\n    }\n  } else if (isObject(handler)) {\n    args = Array.prototype.slice.call(arguments, 1);\n    listeners = handler.slice();\n    len = listeners.length;\n    for (i = 0; i < len; i++)\n      listeners[i].apply(this, args);\n  }\n\n  return true;\n};\n\nEventEmitter.prototype.addListener = function(type, listener) {\n  var m;\n\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  if (!this._events)\n    this._events = {};\n\n  // To avoid recursion in the case that type === \"newListener\"! Before\n  // adding it to the listeners, first emit \"newListener\".\n  if (this._events.newListener)\n    this.emit('newListener', type,\n              isFunction(listener.listener) ?\n              listener.listener : listener);\n\n  if (!this._events[type])\n    // Optimize the case of one listener. Don't need the extra array object.\n    this._events[type] = listener;\n  else if (isObject(this._events[type]))\n    // If we've already got an array, just append.\n    this._events[type].push(listener);\n  else\n    // Adding the second element, need to change to array.\n    this._events[type] = [this._events[type], listener];\n\n  // Check for listener leak\n  if (isObject(this._events[type]) && !this._events[type].warned) {\n    if (!isUndefined(this._maxListeners)) {\n      m = this._maxListeners;\n    } else {\n      m = EventEmitter.defaultMaxListeners;\n    }\n\n    if (m && m > 0 && this._events[type].length > m) {\n      this._events[type].warned = true;\n      console.error('(node) warning: possible EventEmitter memory ' +\n                    'leak detected. %d listeners added. ' +\n                    'Use emitter.setMaxListeners() to increase limit.',\n                    this._events[type].length);\n      if (typeof console.trace === 'function') {\n        // not supported in IE 10\n        console.trace();\n      }\n    }\n  }\n\n  return this;\n};\n\nEventEmitter.prototype.on = EventEmitter.prototype.addListener;\n\nEventEmitter.prototype.once = function(type, listener) {\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  var fired = false;\n\n  function g() {\n    this.removeListener(type, g);\n\n    if (!fired) {\n      fired = true;\n      listener.apply(this, arguments);\n    }\n  }\n\n  g.listener = listener;\n  this.on(type, g);\n\n  return this;\n};\n\n// emits a 'removeListener' event iff the listener was removed\nEventEmitter.prototype.removeListener = function(type, listener) {\n  var list, position, length, i;\n\n  if (!isFunction(listener))\n    throw TypeError('listener must be a function');\n\n  if (!this._events || !this._events[type])\n    return this;\n\n  list = this._events[type];\n  length = list.length;\n  position = -1;\n\n  if (list === listener ||\n      (isFunction(list.listener) && list.listener === listener)) {\n    delete this._events[type];\n    if (this._events.removeListener)\n      this.emit('removeListener', type, listener);\n\n  } else if (isObject(list)) {\n    for (i = length; i-- > 0;) {\n      if (list[i] === listener ||\n          (list[i].listener && list[i].listener === listener)) {\n        position = i;\n        break;\n      }\n    }\n\n    if (position < 0)\n      return this;\n\n    if (list.length === 1) {\n      list.length = 0;\n      delete this._events[type];\n    } else {\n      list.splice(position, 1);\n    }\n\n    if (this._events.removeListener)\n      this.emit('removeListener', type, listener);\n  }\n\n  return this;\n};\n\nEventEmitter.prototype.removeAllListeners = function(type) {\n  var key, listeners;\n\n  if (!this._events)\n    return this;\n\n  // not listening for removeListener, no need to emit\n  if (!this._events.removeListener) {\n    if (arguments.length === 0)\n      this._events = {};\n    else if (this._events[type])\n      delete this._events[type];\n    return this;\n  }\n\n  // emit removeListener for all listeners on all events\n  if (arguments.length === 0) {\n    for (key in this._events) {\n      if (key === 'removeListener') continue;\n      this.removeAllListeners(key);\n    }\n    this.removeAllListeners('removeListener');\n    this._events = {};\n    return this;\n  }\n\n  listeners = this._events[type];\n\n  if (isFunction(listeners)) {\n    this.removeListener(type, listeners);\n  } else if (listeners) {\n    // LIFO order\n    while (listeners.length)\n      this.removeListener(type, listeners[listeners.length - 1]);\n  }\n  delete this._events[type];\n\n  return this;\n};\n\nEventEmitter.prototype.listeners = function(type) {\n  var ret;\n  if (!this._events || !this._events[type])\n    ret = [];\n  else if (isFunction(this._events[type]))\n    ret = [this._events[type]];\n  else\n    ret = this._events[type].slice();\n  return ret;\n};\n\nEventEmitter.prototype.listenerCount = function(type) {\n  if (this._events) {\n    var evlistener = this._events[type];\n\n    if (isFunction(evlistener))\n      return 1;\n    else if (evlistener)\n      return evlistener.length;\n  }\n  return 0;\n};\n\nEventEmitter.listenerCount = function(emitter, type) {\n  return emitter.listenerCount(type);\n};\n\nfunction isFunction(arg) {\n  return typeof arg === 'function';\n}\n\nfunction isNumber(arg) {\n  return typeof arg === 'number';\n}\n\nfunction isObject(arg) {\n  return typeof arg === 'object' && arg !== null;\n}\n\nfunction isUndefined(arg) {\n  return arg === void 0;\n}\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2V2ZW50cy9ldmVudHMuanM/N2M3MSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxpQkFBaUI7QUFDakIsT0FBTztBQUNQO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLEdBQUc7QUFDSDtBQUNBO0FBQ0E7QUFDQSxlQUFlLFNBQVM7QUFDeEI7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLEdBQUc7QUFDSCxvQkFBb0IsU0FBUztBQUM3QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0EsR0FBRztBQUNIO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQSIsImZpbGUiOiIyMzIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgSm95ZW50LCBJbmMuIGFuZCBvdGhlciBOb2RlIGNvbnRyaWJ1dG9ycy5cbi8vXG4vLyBQZXJtaXNzaW9uIGlzIGhlcmVieSBncmFudGVkLCBmcmVlIG9mIGNoYXJnZSwgdG8gYW55IHBlcnNvbiBvYnRhaW5pbmcgYVxuLy8gY29weSBvZiB0aGlzIHNvZnR3YXJlIGFuZCBhc3NvY2lhdGVkIGRvY3VtZW50YXRpb24gZmlsZXMgKHRoZVxuLy8gXCJTb2Z0d2FyZVwiKSwgdG8gZGVhbCBpbiB0aGUgU29mdHdhcmUgd2l0aG91dCByZXN0cmljdGlvbiwgaW5jbHVkaW5nXG4vLyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0cyB0byB1c2UsIGNvcHksIG1vZGlmeSwgbWVyZ2UsIHB1Ymxpc2gsXG4vLyBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3Igc2VsbCBjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLCBhbmQgdG8gcGVybWl0XG4vLyBwZXJzb25zIHRvIHdob20gdGhlIFNvZnR3YXJlIGlzIGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0byB0aGVcbi8vIGZvbGxvd2luZyBjb25kaXRpb25zOlxuLy9cbi8vIFRoZSBhYm92ZSBjb3B5cmlnaHQgbm90aWNlIGFuZCB0aGlzIHBlcm1pc3Npb24gbm90aWNlIHNoYWxsIGJlIGluY2x1ZGVkXG4vLyBpbiBhbGwgY29waWVzIG9yIHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS5cbi8vXG4vLyBUSEUgU09GVFdBUkUgSVMgUFJPVklERUQgXCJBUyBJU1wiLCBXSVRIT1VUIFdBUlJBTlRZIE9GIEFOWSBLSU5ELCBFWFBSRVNTXG4vLyBPUiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GXG4vLyBNRVJDSEFOVEFCSUxJVFksIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFORCBOT05JTkZSSU5HRU1FTlQuIElOXG4vLyBOTyBFVkVOVCBTSEFMTCBUSEUgQVVUSE9SUyBPUiBDT1BZUklHSFQgSE9MREVSUyBCRSBMSUFCTEUgRk9SIEFOWSBDTEFJTSxcbi8vIERBTUFHRVMgT1IgT1RIRVIgTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUlxuLy8gT1RIRVJXSVNFLCBBUklTSU5HIEZST00sIE9VVCBPRiBPUiBJTiBDT05ORUNUSU9OIFdJVEggVEhFIFNPRlRXQVJFIE9SIFRIRVxuLy8gVVNFIE9SIE9USEVSIERFQUxJTkdTIElOIFRIRSBTT0ZUV0FSRS5cblxuZnVuY3Rpb24gRXZlbnRFbWl0dGVyKCkge1xuICB0aGlzLl9ldmVudHMgPSB0aGlzLl9ldmVudHMgfHwge307XG4gIHRoaXMuX21heExpc3RlbmVycyA9IHRoaXMuX21heExpc3RlbmVycyB8fCB1bmRlZmluZWQ7XG59XG5tb2R1bGUuZXhwb3J0cyA9IEV2ZW50RW1pdHRlcjtcblxuLy8gQmFja3dhcmRzLWNvbXBhdCB3aXRoIG5vZGUgMC4xMC54XG5FdmVudEVtaXR0ZXIuRXZlbnRFbWl0dGVyID0gRXZlbnRFbWl0dGVyO1xuXG5FdmVudEVtaXR0ZXIucHJvdG90eXBlLl9ldmVudHMgPSB1bmRlZmluZWQ7XG5FdmVudEVtaXR0ZXIucHJvdG90eXBlLl9tYXhMaXN0ZW5lcnMgPSB1bmRlZmluZWQ7XG5cbi8vIEJ5IGRlZmF1bHQgRXZlbnRFbWl0dGVycyB3aWxsIHByaW50IGEgd2FybmluZyBpZiBtb3JlIHRoYW4gMTAgbGlzdGVuZXJzIGFyZVxuLy8gYWRkZWQgdG8gaXQuIFRoaXMgaXMgYSB1c2VmdWwgZGVmYXVsdCB3aGljaCBoZWxwcyBmaW5kaW5nIG1lbW9yeSBsZWFrcy5cbkV2ZW50RW1pdHRlci5kZWZhdWx0TWF4TGlzdGVuZXJzID0gMTA7XG5cbi8vIE9idmlvdXNseSBub3QgYWxsIEVtaXR0ZXJzIHNob3VsZCBiZSBsaW1pdGVkIHRvIDEwLiBUaGlzIGZ1bmN0aW9uIGFsbG93c1xuLy8gdGhhdCB0byBiZSBpbmNyZWFzZWQuIFNldCB0byB6ZXJvIGZvciB1bmxpbWl0ZWQuXG5FdmVudEVtaXR0ZXIucHJvdG90eXBlLnNldE1heExpc3RlbmVycyA9IGZ1bmN0aW9uKG4pIHtcbiAgaWYgKCFpc051bWJlcihuKSB8fCBuIDwgMCB8fCBpc05hTihuKSlcbiAgICB0aHJvdyBUeXBlRXJyb3IoJ24gbXVzdCBiZSBhIHBvc2l0aXZlIG51bWJlcicpO1xuICB0aGlzLl9tYXhMaXN0ZW5lcnMgPSBuO1xuICByZXR1cm4gdGhpcztcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUuZW1pdCA9IGZ1bmN0aW9uKHR5cGUpIHtcbiAgdmFyIGVyLCBoYW5kbGVyLCBsZW4sIGFyZ3MsIGksIGxpc3RlbmVycztcblxuICBpZiAoIXRoaXMuX2V2ZW50cylcbiAgICB0aGlzLl9ldmVudHMgPSB7fTtcblxuICAvLyBJZiB0aGVyZSBpcyBubyAnZXJyb3InIGV2ZW50IGxpc3RlbmVyIHRoZW4gdGhyb3cuXG4gIGlmICh0eXBlID09PSAnZXJyb3InKSB7XG4gICAgaWYgKCF0aGlzLl9ldmVudHMuZXJyb3IgfHxcbiAgICAgICAgKGlzT2JqZWN0KHRoaXMuX2V2ZW50cy5lcnJvcikgJiYgIXRoaXMuX2V2ZW50cy5lcnJvci5sZW5ndGgpKSB7XG4gICAgICBlciA9IGFyZ3VtZW50c1sxXTtcbiAgICAgIGlmIChlciBpbnN0YW5jZW9mIEVycm9yKSB7XG4gICAgICAgIHRocm93IGVyOyAvLyBVbmhhbmRsZWQgJ2Vycm9yJyBldmVudFxuICAgICAgfSBlbHNlIHtcbiAgICAgICAgLy8gQXQgbGVhc3QgZ2l2ZSBzb21lIGtpbmQgb2YgY29udGV4dCB0byB0aGUgdXNlclxuICAgICAgICB2YXIgZXJyID0gbmV3IEVycm9yKCdVbmNhdWdodCwgdW5zcGVjaWZpZWQgXCJlcnJvclwiIGV2ZW50LiAoJyArIGVyICsgJyknKTtcbiAgICAgICAgZXJyLmNvbnRleHQgPSBlcjtcbiAgICAgICAgdGhyb3cgZXJyO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIGhhbmRsZXIgPSB0aGlzLl9ldmVudHNbdHlwZV07XG5cbiAgaWYgKGlzVW5kZWZpbmVkKGhhbmRsZXIpKVxuICAgIHJldHVybiBmYWxzZTtcblxuICBpZiAoaXNGdW5jdGlvbihoYW5kbGVyKSkge1xuICAgIHN3aXRjaCAoYXJndW1lbnRzLmxlbmd0aCkge1xuICAgICAgLy8gZmFzdCBjYXNlc1xuICAgICAgY2FzZSAxOlxuICAgICAgICBoYW5kbGVyLmNhbGwodGhpcyk7XG4gICAgICAgIGJyZWFrO1xuICAgICAgY2FzZSAyOlxuICAgICAgICBoYW5kbGVyLmNhbGwodGhpcywgYXJndW1lbnRzWzFdKTtcbiAgICAgICAgYnJlYWs7XG4gICAgICBjYXNlIDM6XG4gICAgICAgIGhhbmRsZXIuY2FsbCh0aGlzLCBhcmd1bWVudHNbMV0sIGFyZ3VtZW50c1syXSk7XG4gICAgICAgIGJyZWFrO1xuICAgICAgLy8gc2xvd2VyXG4gICAgICBkZWZhdWx0OlxuICAgICAgICBhcmdzID0gQXJyYXkucHJvdG90eXBlLnNsaWNlLmNhbGwoYXJndW1lbnRzLCAxKTtcbiAgICAgICAgaGFuZGxlci5hcHBseSh0aGlzLCBhcmdzKTtcbiAgICB9XG4gIH0gZWxzZSBpZiAoaXNPYmplY3QoaGFuZGxlcikpIHtcbiAgICBhcmdzID0gQXJyYXkucHJvdG90eXBlLnNsaWNlLmNhbGwoYXJndW1lbnRzLCAxKTtcbiAgICBsaXN0ZW5lcnMgPSBoYW5kbGVyLnNsaWNlKCk7XG4gICAgbGVuID0gbGlzdGVuZXJzLmxlbmd0aDtcbiAgICBmb3IgKGkgPSAwOyBpIDwgbGVuOyBpKyspXG4gICAgICBsaXN0ZW5lcnNbaV0uYXBwbHkodGhpcywgYXJncyk7XG4gIH1cblxuICByZXR1cm4gdHJ1ZTtcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUuYWRkTGlzdGVuZXIgPSBmdW5jdGlvbih0eXBlLCBsaXN0ZW5lcikge1xuICB2YXIgbTtcblxuICBpZiAoIWlzRnVuY3Rpb24obGlzdGVuZXIpKVxuICAgIHRocm93IFR5cGVFcnJvcignbGlzdGVuZXIgbXVzdCBiZSBhIGZ1bmN0aW9uJyk7XG5cbiAgaWYgKCF0aGlzLl9ldmVudHMpXG4gICAgdGhpcy5fZXZlbnRzID0ge307XG5cbiAgLy8gVG8gYXZvaWQgcmVjdXJzaW9uIGluIHRoZSBjYXNlIHRoYXQgdHlwZSA9PT0gXCJuZXdMaXN0ZW5lclwiISBCZWZvcmVcbiAgLy8gYWRkaW5nIGl0IHRvIHRoZSBsaXN0ZW5lcnMsIGZpcnN0IGVtaXQgXCJuZXdMaXN0ZW5lclwiLlxuICBpZiAodGhpcy5fZXZlbnRzLm5ld0xpc3RlbmVyKVxuICAgIHRoaXMuZW1pdCgnbmV3TGlzdGVuZXInLCB0eXBlLFxuICAgICAgICAgICAgICBpc0Z1bmN0aW9uKGxpc3RlbmVyLmxpc3RlbmVyKSA/XG4gICAgICAgICAgICAgIGxpc3RlbmVyLmxpc3RlbmVyIDogbGlzdGVuZXIpO1xuXG4gIGlmICghdGhpcy5fZXZlbnRzW3R5cGVdKVxuICAgIC8vIE9wdGltaXplIHRoZSBjYXNlIG9mIG9uZSBsaXN0ZW5lci4gRG9uJ3QgbmVlZCB0aGUgZXh0cmEgYXJyYXkgb2JqZWN0LlxuICAgIHRoaXMuX2V2ZW50c1t0eXBlXSA9IGxpc3RlbmVyO1xuICBlbHNlIGlmIChpc09iamVjdCh0aGlzLl9ldmVudHNbdHlwZV0pKVxuICAgIC8vIElmIHdlJ3ZlIGFscmVhZHkgZ290IGFuIGFycmF5LCBqdXN0IGFwcGVuZC5cbiAgICB0aGlzLl9ldmVudHNbdHlwZV0ucHVzaChsaXN0ZW5lcik7XG4gIGVsc2VcbiAgICAvLyBBZGRpbmcgdGhlIHNlY29uZCBlbGVtZW50LCBuZWVkIHRvIGNoYW5nZSB0byBhcnJheS5cbiAgICB0aGlzLl9ldmVudHNbdHlwZV0gPSBbdGhpcy5fZXZlbnRzW3R5cGVdLCBsaXN0ZW5lcl07XG5cbiAgLy8gQ2hlY2sgZm9yIGxpc3RlbmVyIGxlYWtcbiAgaWYgKGlzT2JqZWN0KHRoaXMuX2V2ZW50c1t0eXBlXSkgJiYgIXRoaXMuX2V2ZW50c1t0eXBlXS53YXJuZWQpIHtcbiAgICBpZiAoIWlzVW5kZWZpbmVkKHRoaXMuX21heExpc3RlbmVycykpIHtcbiAgICAgIG0gPSB0aGlzLl9tYXhMaXN0ZW5lcnM7XG4gICAgfSBlbHNlIHtcbiAgICAgIG0gPSBFdmVudEVtaXR0ZXIuZGVmYXVsdE1heExpc3RlbmVycztcbiAgICB9XG5cbiAgICBpZiAobSAmJiBtID4gMCAmJiB0aGlzLl9ldmVudHNbdHlwZV0ubGVuZ3RoID4gbSkge1xuICAgICAgdGhpcy5fZXZlbnRzW3R5cGVdLndhcm5lZCA9IHRydWU7XG4gICAgICBjb25zb2xlLmVycm9yKCcobm9kZSkgd2FybmluZzogcG9zc2libGUgRXZlbnRFbWl0dGVyIG1lbW9yeSAnICtcbiAgICAgICAgICAgICAgICAgICAgJ2xlYWsgZGV0ZWN0ZWQuICVkIGxpc3RlbmVycyBhZGRlZC4gJyArXG4gICAgICAgICAgICAgICAgICAgICdVc2UgZW1pdHRlci5zZXRNYXhMaXN0ZW5lcnMoKSB0byBpbmNyZWFzZSBsaW1pdC4nLFxuICAgICAgICAgICAgICAgICAgICB0aGlzLl9ldmVudHNbdHlwZV0ubGVuZ3RoKTtcbiAgICAgIGlmICh0eXBlb2YgY29uc29sZS50cmFjZSA9PT0gJ2Z1bmN0aW9uJykge1xuICAgICAgICAvLyBub3Qgc3VwcG9ydGVkIGluIElFIDEwXG4gICAgICAgIGNvbnNvbGUudHJhY2UoKTtcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICByZXR1cm4gdGhpcztcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUub24gPSBFdmVudEVtaXR0ZXIucHJvdG90eXBlLmFkZExpc3RlbmVyO1xuXG5FdmVudEVtaXR0ZXIucHJvdG90eXBlLm9uY2UgPSBmdW5jdGlvbih0eXBlLCBsaXN0ZW5lcikge1xuICBpZiAoIWlzRnVuY3Rpb24obGlzdGVuZXIpKVxuICAgIHRocm93IFR5cGVFcnJvcignbGlzdGVuZXIgbXVzdCBiZSBhIGZ1bmN0aW9uJyk7XG5cbiAgdmFyIGZpcmVkID0gZmFsc2U7XG5cbiAgZnVuY3Rpb24gZygpIHtcbiAgICB0aGlzLnJlbW92ZUxpc3RlbmVyKHR5cGUsIGcpO1xuXG4gICAgaWYgKCFmaXJlZCkge1xuICAgICAgZmlyZWQgPSB0cnVlO1xuICAgICAgbGlzdGVuZXIuYXBwbHkodGhpcywgYXJndW1lbnRzKTtcbiAgICB9XG4gIH1cblxuICBnLmxpc3RlbmVyID0gbGlzdGVuZXI7XG4gIHRoaXMub24odHlwZSwgZyk7XG5cbiAgcmV0dXJuIHRoaXM7XG59O1xuXG4vLyBlbWl0cyBhICdyZW1vdmVMaXN0ZW5lcicgZXZlbnQgaWZmIHRoZSBsaXN0ZW5lciB3YXMgcmVtb3ZlZFxuRXZlbnRFbWl0dGVyLnByb3RvdHlwZS5yZW1vdmVMaXN0ZW5lciA9IGZ1bmN0aW9uKHR5cGUsIGxpc3RlbmVyKSB7XG4gIHZhciBsaXN0LCBwb3NpdGlvbiwgbGVuZ3RoLCBpO1xuXG4gIGlmICghaXNGdW5jdGlvbihsaXN0ZW5lcikpXG4gICAgdGhyb3cgVHlwZUVycm9yKCdsaXN0ZW5lciBtdXN0IGJlIGEgZnVuY3Rpb24nKTtcblxuICBpZiAoIXRoaXMuX2V2ZW50cyB8fCAhdGhpcy5fZXZlbnRzW3R5cGVdKVxuICAgIHJldHVybiB0aGlzO1xuXG4gIGxpc3QgPSB0aGlzLl9ldmVudHNbdHlwZV07XG4gIGxlbmd0aCA9IGxpc3QubGVuZ3RoO1xuICBwb3NpdGlvbiA9IC0xO1xuXG4gIGlmIChsaXN0ID09PSBsaXN0ZW5lciB8fFxuICAgICAgKGlzRnVuY3Rpb24obGlzdC5saXN0ZW5lcikgJiYgbGlzdC5saXN0ZW5lciA9PT0gbGlzdGVuZXIpKSB7XG4gICAgZGVsZXRlIHRoaXMuX2V2ZW50c1t0eXBlXTtcbiAgICBpZiAodGhpcy5fZXZlbnRzLnJlbW92ZUxpc3RlbmVyKVxuICAgICAgdGhpcy5lbWl0KCdyZW1vdmVMaXN0ZW5lcicsIHR5cGUsIGxpc3RlbmVyKTtcblxuICB9IGVsc2UgaWYgKGlzT2JqZWN0KGxpc3QpKSB7XG4gICAgZm9yIChpID0gbGVuZ3RoOyBpLS0gPiAwOykge1xuICAgICAgaWYgKGxpc3RbaV0gPT09IGxpc3RlbmVyIHx8XG4gICAgICAgICAgKGxpc3RbaV0ubGlzdGVuZXIgJiYgbGlzdFtpXS5saXN0ZW5lciA9PT0gbGlzdGVuZXIpKSB7XG4gICAgICAgIHBvc2l0aW9uID0gaTtcbiAgICAgICAgYnJlYWs7XG4gICAgICB9XG4gICAgfVxuXG4gICAgaWYgKHBvc2l0aW9uIDwgMClcbiAgICAgIHJldHVybiB0aGlzO1xuXG4gICAgaWYgKGxpc3QubGVuZ3RoID09PSAxKSB7XG4gICAgICBsaXN0Lmxlbmd0aCA9IDA7XG4gICAgICBkZWxldGUgdGhpcy5fZXZlbnRzW3R5cGVdO1xuICAgIH0gZWxzZSB7XG4gICAgICBsaXN0LnNwbGljZShwb3NpdGlvbiwgMSk7XG4gICAgfVxuXG4gICAgaWYgKHRoaXMuX2V2ZW50cy5yZW1vdmVMaXN0ZW5lcilcbiAgICAgIHRoaXMuZW1pdCgncmVtb3ZlTGlzdGVuZXInLCB0eXBlLCBsaXN0ZW5lcik7XG4gIH1cblxuICByZXR1cm4gdGhpcztcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUucmVtb3ZlQWxsTGlzdGVuZXJzID0gZnVuY3Rpb24odHlwZSkge1xuICB2YXIga2V5LCBsaXN0ZW5lcnM7XG5cbiAgaWYgKCF0aGlzLl9ldmVudHMpXG4gICAgcmV0dXJuIHRoaXM7XG5cbiAgLy8gbm90IGxpc3RlbmluZyBmb3IgcmVtb3ZlTGlzdGVuZXIsIG5vIG5lZWQgdG8gZW1pdFxuICBpZiAoIXRoaXMuX2V2ZW50cy5yZW1vdmVMaXN0ZW5lcikge1xuICAgIGlmIChhcmd1bWVudHMubGVuZ3RoID09PSAwKVxuICAgICAgdGhpcy5fZXZlbnRzID0ge307XG4gICAgZWxzZSBpZiAodGhpcy5fZXZlbnRzW3R5cGVdKVxuICAgICAgZGVsZXRlIHRoaXMuX2V2ZW50c1t0eXBlXTtcbiAgICByZXR1cm4gdGhpcztcbiAgfVxuXG4gIC8vIGVtaXQgcmVtb3ZlTGlzdGVuZXIgZm9yIGFsbCBsaXN0ZW5lcnMgb24gYWxsIGV2ZW50c1xuICBpZiAoYXJndW1lbnRzLmxlbmd0aCA9PT0gMCkge1xuICAgIGZvciAoa2V5IGluIHRoaXMuX2V2ZW50cykge1xuICAgICAgaWYgKGtleSA9PT0gJ3JlbW92ZUxpc3RlbmVyJykgY29udGludWU7XG4gICAgICB0aGlzLnJlbW92ZUFsbExpc3RlbmVycyhrZXkpO1xuICAgIH1cbiAgICB0aGlzLnJlbW92ZUFsbExpc3RlbmVycygncmVtb3ZlTGlzdGVuZXInKTtcbiAgICB0aGlzLl9ldmVudHMgPSB7fTtcbiAgICByZXR1cm4gdGhpcztcbiAgfVxuXG4gIGxpc3RlbmVycyA9IHRoaXMuX2V2ZW50c1t0eXBlXTtcblxuICBpZiAoaXNGdW5jdGlvbihsaXN0ZW5lcnMpKSB7XG4gICAgdGhpcy5yZW1vdmVMaXN0ZW5lcih0eXBlLCBsaXN0ZW5lcnMpO1xuICB9IGVsc2UgaWYgKGxpc3RlbmVycykge1xuICAgIC8vIExJRk8gb3JkZXJcbiAgICB3aGlsZSAobGlzdGVuZXJzLmxlbmd0aClcbiAgICAgIHRoaXMucmVtb3ZlTGlzdGVuZXIodHlwZSwgbGlzdGVuZXJzW2xpc3RlbmVycy5sZW5ndGggLSAxXSk7XG4gIH1cbiAgZGVsZXRlIHRoaXMuX2V2ZW50c1t0eXBlXTtcblxuICByZXR1cm4gdGhpcztcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUubGlzdGVuZXJzID0gZnVuY3Rpb24odHlwZSkge1xuICB2YXIgcmV0O1xuICBpZiAoIXRoaXMuX2V2ZW50cyB8fCAhdGhpcy5fZXZlbnRzW3R5cGVdKVxuICAgIHJldCA9IFtdO1xuICBlbHNlIGlmIChpc0Z1bmN0aW9uKHRoaXMuX2V2ZW50c1t0eXBlXSkpXG4gICAgcmV0ID0gW3RoaXMuX2V2ZW50c1t0eXBlXV07XG4gIGVsc2VcbiAgICByZXQgPSB0aGlzLl9ldmVudHNbdHlwZV0uc2xpY2UoKTtcbiAgcmV0dXJuIHJldDtcbn07XG5cbkV2ZW50RW1pdHRlci5wcm90b3R5cGUubGlzdGVuZXJDb3VudCA9IGZ1bmN0aW9uKHR5cGUpIHtcbiAgaWYgKHRoaXMuX2V2ZW50cykge1xuICAgIHZhciBldmxpc3RlbmVyID0gdGhpcy5fZXZlbnRzW3R5cGVdO1xuXG4gICAgaWYgKGlzRnVuY3Rpb24oZXZsaXN0ZW5lcikpXG4gICAgICByZXR1cm4gMTtcbiAgICBlbHNlIGlmIChldmxpc3RlbmVyKVxuICAgICAgcmV0dXJuIGV2bGlzdGVuZXIubGVuZ3RoO1xuICB9XG4gIHJldHVybiAwO1xufTtcblxuRXZlbnRFbWl0dGVyLmxpc3RlbmVyQ291bnQgPSBmdW5jdGlvbihlbWl0dGVyLCB0eXBlKSB7XG4gIHJldHVybiBlbWl0dGVyLmxpc3RlbmVyQ291bnQodHlwZSk7XG59O1xuXG5mdW5jdGlvbiBpc0Z1bmN0aW9uKGFyZykge1xuICByZXR1cm4gdHlwZW9mIGFyZyA9PT0gJ2Z1bmN0aW9uJztcbn1cblxuZnVuY3Rpb24gaXNOdW1iZXIoYXJnKSB7XG4gIHJldHVybiB0eXBlb2YgYXJnID09PSAnbnVtYmVyJztcbn1cblxuZnVuY3Rpb24gaXNPYmplY3QoYXJnKSB7XG4gIHJldHVybiB0eXBlb2YgYXJnID09PSAnb2JqZWN0JyAmJiBhcmcgIT09IG51bGw7XG59XG5cbmZ1bmN0aW9uIGlzVW5kZWZpbmVkKGFyZykge1xuICByZXR1cm4gYXJnID09PSB2b2lkIDA7XG59XG5cblxuXG4vKioqKioqKioqKioqKioqKipcbiAqKiBXRUJQQUNLIEZPT1RFUlxuICoqIC4vfi9ldmVudHMvZXZlbnRzLmpzXG4gKiogbW9kdWxlIGlkID0gMjMyXG4gKiogbW9kdWxlIGNodW5rcyA9IDEgNSA2XG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      } else {
+	        // At least give some kind of context to the user
+	        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+	        err.context = er;
+	        throw err;
+	      }
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
 
 /***/ },
 
 /***/ 233:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.LoginAction = undefined;\n\nvar _AppDispatcher = __webpack_require__(234);\n\nvar LoginAction = {\n\ttoLogin: function toLogin(email, password) {\n\t\t_AppDispatcher.AppDispatcher.dispatch({\n\t\t\tactionType: 'LOGIN',\n\t\t\temail: email,\n\t\t\tpassword: password\n\t\t});\n\t}\n}; /**\n    * \n    * @authors Your Name (you@example.org)\n    * @date    2016-05-02 22:01:15\n    * @version $Id$\n    */\n\n\nexports.LoginAction = LoginAction;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL2FjdGlvbnMvTG9naW5BY3Rpb24uanM/Y2IyMyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBTUE7O0FBRUEsSUFBSSxjQUFZO0FBQ2YsVUFBUSxpQkFBUyxLQUFULEVBQWUsUUFBZixFQUF3QjtBQUMvQiwrQkFBYyxRQUFkLENBQXVCO0FBQ3RCLGVBQVcsT0FEVztBQUV0QixVQUFNLEtBRmdCO0FBR3RCLGFBQVM7QUFIYSxHQUF2QjtBQUtBO0FBUGMsQ0FBaEIsQzs7Ozs7Ozs7UUFXUSxXLEdBQUEsVyIsImZpbGUiOiIyMzMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFxuICogQGF1dGhvcnMgWW91ciBOYW1lICh5b3VAZXhhbXBsZS5vcmcpXG4gKiBAZGF0ZSAgICAyMDE2LTA1LTAyIDIyOjAxOjE1XG4gKiBAdmVyc2lvbiAkSWQkXG4gKi9cbmltcG9ydCB7QXBwRGlzcGF0Y2hlcn0gZnJvbSAnLi4vZGlzcGF0Y2hlci9BcHBEaXNwYXRjaGVyJ1xuXG52YXIgTG9naW5BY3Rpb249e1xuXHR0b0xvZ2luOmZ1bmN0aW9uKGVtYWlsLHBhc3N3b3JkKXtcblx0XHRBcHBEaXNwYXRjaGVyLmRpc3BhdGNoKHtcblx0XHRcdGFjdGlvblR5cGU6J0xPR0lOJyxcblx0XHRcdGVtYWlsOmVtYWlsLFxuXHRcdFx0cGFzc3dvcmQ6cGFzc3dvcmRcblx0XHR9KVxuXHR9XG59XG5cblxuZXhwb3J0IHtMb2dpbkFjdGlvbn07XG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9hY3Rpb25zL0xvZ2luQWN0aW9uLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.LoginAction = undefined;
+
+	var _AppDispatcher = __webpack_require__(234);
+
+	var LoginAction = {
+		toLogin: function toLogin(email, password) {
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: 'LOGIN',
+				email: email,
+				password: password
+			});
+		}
+	}; /**
+	    * 
+	    * @authors Your Name (you@example.org)
+	    * @date    2016-05-02 22:01:15
+	    * @version $Id$
+	    */
+
+
+	exports.LoginAction = LoginAction;
 
 /***/ },
 
 /***/ 234:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.AppDispatcher = undefined;\n\nvar _flux = __webpack_require__(235);\n\nvar MsgStore, LoginStore, FrinedStore; /**\n                                        * \n                                        * @authors Your Name (you@example.org)\n                                        * @date    2016-03-23 22:14:17\n                                        * @version $Id$\n                                        */\n\n\nvar AppDispatcher = new _flux.Dispatcher();\nAppDispatcher.register(function (actions) {\n\tswitch (actions.actionType) {\n\t\tcase 'SEND MESSAGE':\n\t\t\t__webpack_require__.e/* nsure */(2, function (require) {\n\t\t\t\tMsgStore = __webpack_require__(238).MsgStore;\n\t\t\t\tMsgStore.sendMsg(actions.text);\n\t\t\t});\n\t\t\tbreak;\n\n\t\tcase 'LOGIN':\n\t\t\t__webpack_require__.e/* nsure */(3, function (require) {\n\t\t\t\tLoginStore = __webpack_require__(231).LoginStore;\n\t\t\t\tLoginStore.login(actions.email, actions.password);\n\t\t\t});\n\t\t\tbreak;\n\n\t\tcase 'GET USER':\n\t\t\t__webpack_require__.e/* nsure */(4, function (require) {\n\t\t\t\tFrinedStore = __webpack_require__(239).FriendStore;\n\t\t\t\tFrinedStore.getUsers(actions.token);\n\t\t\t});\n\t\t\tbreak;\n\n\t\tdefault:\n\t}\n});\n\nexports.AppDispatcher = AppDispatcher;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL2Rpc3BhdGNoZXIvQXBwRGlzcGF0Y2hlci5qcz9lYWI1Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFNQTs7QUFFQSxJQUFJLFFBQUosRUFBYSxVQUFiLEVBQXdCLFdBQXhCLEM7Ozs7Ozs7O0FBR0EsSUFBSSxnQkFBYyxzQkFBbEI7QUFDQSxjQUFjLFFBQWQsQ0FBdUIsVUFBUyxPQUFULEVBQWlCO0FBQ3ZDLFNBQU8sUUFBUSxVQUFmO0FBQ0MsT0FBSyxjQUFMO0FBQ0MsdUNBQWtCLFVBQVMsT0FBVCxFQUFpQjtBQUNsQyxlQUFTLG9CQUFRLEdBQVIsRUFBNkIsUUFBdEM7QUFDQSxhQUFTLE9BQVQsQ0FBaUIsUUFBUSxJQUF6QjtBQUNBLElBSEQ7QUFJQTs7QUFFRCxPQUFLLE9BQUw7QUFDQyx1Q0FBa0IsVUFBUyxPQUFULEVBQWlCO0FBQ2xDLGlCQUFXLG9CQUFRLEdBQVIsRUFBK0IsVUFBMUM7QUFDQSxlQUFXLEtBQVgsQ0FBaUIsUUFBUSxLQUF6QixFQUErQixRQUFRLFFBQXZDO0FBQ0EsSUFIRDtBQUlBOztBQUVELE9BQUssVUFBTDtBQUNDLHVDQUFrQixVQUFTLE9BQVQsRUFBaUI7QUFDbEMsa0JBQVksb0JBQVEsR0FBUixFQUFnQyxXQUE1QztBQUNBLGdCQUFZLFFBQVosQ0FBcUIsUUFBUSxLQUE3QjtBQUNBLElBSEQ7QUFJQTs7QUFHRDtBQXZCRDtBQXlCQSxDQTFCRDs7UUE0QlEsYSxHQUFBLGEiLCJmaWxlIjoiMjM0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBcbiAqIEBhdXRob3JzIFlvdXIgTmFtZSAoeW91QGV4YW1wbGUub3JnKVxuICogQGRhdGUgICAgMjAxNi0wMy0yMyAyMjoxNDoxN1xuICogQHZlcnNpb24gJElkJFxuICovXG5pbXBvcnQge0Rpc3BhdGNoZXJ9IGZyb20gJ2ZsdXgnXG5cbnZhciBNc2dTdG9yZSxMb2dpblN0b3JlLEZyaW5lZFN0b3JlO1xuXG5cbnZhciBBcHBEaXNwYXRjaGVyPW5ldyBEaXNwYXRjaGVyKCk7XG5BcHBEaXNwYXRjaGVyLnJlZ2lzdGVyKGZ1bmN0aW9uKGFjdGlvbnMpe1xuXHRzd2l0Y2goYWN0aW9ucy5hY3Rpb25UeXBlKXtcblx0XHRjYXNlICdTRU5EIE1FU1NBR0UnOlxuXHRcdFx0cmVxdWlyZS5lbnN1cmUoW10sZnVuY3Rpb24ocmVxdWlyZSl7XG5cdFx0XHRcdE1zZ1N0b3JlPXJlcXVpcmUoJy4uL3N0b3JlL01zZ1N0b3JlJykuTXNnU3RvcmU7XG5cdFx0XHRcdE1zZ1N0b3JlLnNlbmRNc2coYWN0aW9ucy50ZXh0KTtcblx0XHRcdH0pXG5cdFx0XHRicmVhaztcblxuXHRcdGNhc2UgJ0xPR0lOJzpcblx0XHRcdHJlcXVpcmUuZW5zdXJlKFtdLGZ1bmN0aW9uKHJlcXVpcmUpe1xuXHRcdFx0XHRMb2dpblN0b3JlPXJlcXVpcmUoJy4uL3N0b3JlL2xvZ2luU3RvcmUnKS5Mb2dpblN0b3JlO1xuXHRcdFx0XHRMb2dpblN0b3JlLmxvZ2luKGFjdGlvbnMuZW1haWwsYWN0aW9ucy5wYXNzd29yZCk7XG5cdFx0XHR9KVxuXHRcdFx0YnJlYWs7XG5cblx0XHRjYXNlICdHRVQgVVNFUic6XG5cdFx0XHRyZXF1aXJlLmVuc3VyZShbXSxmdW5jdGlvbihyZXF1aXJlKXtcblx0XHRcdFx0RnJpbmVkU3RvcmU9cmVxdWlyZSgnLi4vc3RvcmUvZnJpZW5kU3RvcmUnKS5GcmllbmRTdG9yZTtcblx0XHRcdFx0RnJpbmVkU3RvcmUuZ2V0VXNlcnMoYWN0aW9ucy50b2tlbik7XG5cdFx0XHR9KVxuXHRcdFx0YnJlYWs7XG5cblxuXHRcdGRlZmF1bHQ6XG5cdH1cbn0pXG5cbmV4cG9ydCB7QXBwRGlzcGF0Y2hlcn1cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9kaXNwYXRjaGVyL0FwcERpc3BhdGNoZXIuanNcbiAqKi8iXSwic291cmNlUm9vdCI6IiJ9");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.AppDispatcher = undefined;
+
+	var _flux = __webpack_require__(235);
+
+	var MsgStore, LoginStore, FrinedStore; /**
+	                                        * 
+	                                        * @authors Your Name (you@example.org)
+	                                        * @date    2016-03-23 22:14:17
+	                                        * @version $Id$
+	                                        */
+
+
+	var AppDispatcher = new _flux.Dispatcher();
+	AppDispatcher.register(function (actions) {
+		switch (actions.actionType) {
+			case 'SEND MESSAGE':
+				__webpack_require__.e/* nsure */(2, function (require) {
+					MsgStore = __webpack_require__(238).MsgStore;
+					MsgStore.sendMsg(actions.text);
+				});
+				break;
+
+			case 'LOGIN':
+				__webpack_require__.e/* nsure */(3, function (require) {
+					LoginStore = __webpack_require__(231).LoginStore;
+					LoginStore.login(actions.email, actions.password);
+				});
+				break;
+
+			case 'GET USER':
+				__webpack_require__.e/* nsure */(4, function (require) {
+					FrinedStore = __webpack_require__(239).FriendStore;
+					FrinedStore.getUsers(actions.token);
+				});
+				break;
+
+			default:
+		}
+	});
+
+	exports.AppDispatcher = AppDispatcher;
 
 /***/ },
 
 /***/ 235:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/**\n * Copyright (c) 2014-2015, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n */\n\nmodule.exports.Dispatcher = __webpack_require__(236);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2ZsdXgvaW5kZXguanM/NDRiNSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBIiwiZmlsZSI6IjIzNS5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQ29weXJpZ2h0IChjKSAyMDE0LTIwMTUsIEZhY2Vib29rLCBJbmMuXG4gKiBBbGwgcmlnaHRzIHJlc2VydmVkLlxuICpcbiAqIFRoaXMgc291cmNlIGNvZGUgaXMgbGljZW5zZWQgdW5kZXIgdGhlIEJTRC1zdHlsZSBsaWNlbnNlIGZvdW5kIGluIHRoZVxuICogTElDRU5TRSBmaWxlIGluIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLiBBbiBhZGRpdGlvbmFsIGdyYW50XG4gKiBvZiBwYXRlbnQgcmlnaHRzIGNhbiBiZSBmb3VuZCBpbiB0aGUgUEFURU5UUyBmaWxlIGluIHRoZSBzYW1lIGRpcmVjdG9yeS5cbiAqL1xuXG5tb2R1bGUuZXhwb3J0cy5EaXNwYXRjaGVyID0gcmVxdWlyZSgnLi9saWIvRGlzcGF0Y2hlcicpO1xuXG5cblxuLyoqKioqKioqKioqKioqKioqXG4gKiogV0VCUEFDSyBGT09URVJcbiAqKiAuL34vZmx1eC9pbmRleC5qc1xuICoqIG1vZHVsZSBpZCA9IDIzNVxuICoqIG1vZHVsZSBjaHVua3MgPSAxIDUgNlxuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	module.exports.Dispatcher = __webpack_require__(236);
+
 
 /***/ },
 
 /***/ 236:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(process) {/**\n * Copyright (c) 2014-2015, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @providesModule Dispatcher\n * \n * @preventMunge\n */\n\n'use strict';\n\nexports.__esModule = true;\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }\n\nvar invariant = __webpack_require__(237);\n\nvar _prefix = 'ID_';\n\n/**\n * Dispatcher is used to broadcast payloads to registered callbacks. This is\n * different from generic pub-sub systems in two ways:\n *\n *   1) Callbacks are not subscribed to particular events. Every payload is\n *      dispatched to every registered callback.\n *   2) Callbacks can be deferred in whole or part until other callbacks have\n *      been executed.\n *\n * For example, consider this hypothetical flight destination form, which\n * selects a default city when a country is selected:\n *\n *   var flightDispatcher = new Dispatcher();\n *\n *   // Keeps track of which country is selected\n *   var CountryStore = {country: null};\n *\n *   // Keeps track of which city is selected\n *   var CityStore = {city: null};\n *\n *   // Keeps track of the base flight price of the selected city\n *   var FlightPriceStore = {price: null}\n *\n * When a user changes the selected city, we dispatch the payload:\n *\n *   flightDispatcher.dispatch({\n *     actionType: 'city-update',\n *     selectedCity: 'paris'\n *   });\n *\n * This payload is digested by `CityStore`:\n *\n *   flightDispatcher.register(function(payload) {\n *     if (payload.actionType === 'city-update') {\n *       CityStore.city = payload.selectedCity;\n *     }\n *   });\n *\n * When the user selects a country, we dispatch the payload:\n *\n *   flightDispatcher.dispatch({\n *     actionType: 'country-update',\n *     selectedCountry: 'australia'\n *   });\n *\n * This payload is digested by both stores:\n *\n *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {\n *     if (payload.actionType === 'country-update') {\n *       CountryStore.country = payload.selectedCountry;\n *     }\n *   });\n *\n * When the callback to update `CountryStore` is registered, we save a reference\n * to the returned token. Using this token with `waitFor()`, we can guarantee\n * that `CountryStore` is updated before the callback that updates `CityStore`\n * needs to query its data.\n *\n *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {\n *     if (payload.actionType === 'country-update') {\n *       // `CountryStore.country` may not be updated.\n *       flightDispatcher.waitFor([CountryStore.dispatchToken]);\n *       // `CountryStore.country` is now guaranteed to be updated.\n *\n *       // Select the default city for the new country\n *       CityStore.city = getDefaultCityForCountry(CountryStore.country);\n *     }\n *   });\n *\n * The usage of `waitFor()` can be chained, for example:\n *\n *   FlightPriceStore.dispatchToken =\n *     flightDispatcher.register(function(payload) {\n *       switch (payload.actionType) {\n *         case 'country-update':\n *         case 'city-update':\n *           flightDispatcher.waitFor([CityStore.dispatchToken]);\n *           FlightPriceStore.price =\n *             getFlightPriceStore(CountryStore.country, CityStore.city);\n *           break;\n *     }\n *   });\n *\n * The `country-update` payload will be guaranteed to invoke the stores'\n * registered callbacks in order: `CountryStore`, `CityStore`, then\n * `FlightPriceStore`.\n */\n\nvar Dispatcher = (function () {\n  function Dispatcher() {\n    _classCallCheck(this, Dispatcher);\n\n    this._callbacks = {};\n    this._isDispatching = false;\n    this._isHandled = {};\n    this._isPending = {};\n    this._lastID = 1;\n  }\n\n  /**\n   * Registers a callback to be invoked with every dispatched payload. Returns\n   * a token that can be used with `waitFor()`.\n   */\n\n  Dispatcher.prototype.register = function register(callback) {\n    var id = _prefix + this._lastID++;\n    this._callbacks[id] = callback;\n    return id;\n  };\n\n  /**\n   * Removes a callback based on its token.\n   */\n\n  Dispatcher.prototype.unregister = function unregister(id) {\n    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;\n    delete this._callbacks[id];\n  };\n\n  /**\n   * Waits for the callbacks specified to be invoked before continuing execution\n   * of the current callback. This method should only be used by a callback in\n   * response to a dispatched payload.\n   */\n\n  Dispatcher.prototype.waitFor = function waitFor(ids) {\n    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;\n    for (var ii = 0; ii < ids.length; ii++) {\n      var id = ids[ii];\n      if (this._isPending[id]) {\n        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;\n        continue;\n      }\n      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;\n      this._invokeCallback(id);\n    }\n  };\n\n  /**\n   * Dispatches a payload to all registered callbacks.\n   */\n\n  Dispatcher.prototype.dispatch = function dispatch(payload) {\n    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;\n    this._startDispatching(payload);\n    try {\n      for (var id in this._callbacks) {\n        if (this._isPending[id]) {\n          continue;\n        }\n        this._invokeCallback(id);\n      }\n    } finally {\n      this._stopDispatching();\n    }\n  };\n\n  /**\n   * Is this Dispatcher currently dispatching.\n   */\n\n  Dispatcher.prototype.isDispatching = function isDispatching() {\n    return this._isDispatching;\n  };\n\n  /**\n   * Call the callback stored with the given id. Also do some internal\n   * bookkeeping.\n   *\n   * @internal\n   */\n\n  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {\n    this._isPending[id] = true;\n    this._callbacks[id](this._pendingPayload);\n    this._isHandled[id] = true;\n  };\n\n  /**\n   * Set up bookkeeping needed when dispatching.\n   *\n   * @internal\n   */\n\n  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {\n    for (var id in this._callbacks) {\n      this._isPending[id] = false;\n      this._isHandled[id] = false;\n    }\n    this._pendingPayload = payload;\n    this._isDispatching = true;\n  };\n\n  /**\n   * Clear bookkeeping used for dispatching.\n   *\n   * @internal\n   */\n\n  Dispatcher.prototype._stopDispatching = function _stopDispatching() {\n    delete this._pendingPayload;\n    this._isDispatching = false;\n  };\n\n  return Dispatcher;\n})();\n\nmodule.exports = Dispatcher;\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2ZsdXgvbGliL0Rpc3BhdGNoZXIuanM/MDNlYSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7O0FBRUE7O0FBRUEsaURBQWlELDBDQUEwQywwREFBMEQsRUFBRTs7QUFFdko7O0FBRUE7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EseUJBQXlCO0FBQ3pCO0FBQ0E7QUFDQSxzQkFBc0I7QUFDdEI7QUFDQTtBQUNBLDZCQUE2QjtBQUM3QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxNQUFNO0FBQ047QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxNQUFNO0FBQ047QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsTUFBTTtBQUNOO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsTUFBTTtBQUNOO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE1BQU07QUFDTjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE1BQU07QUFDTjtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0Esb0JBQW9CLGlCQUFpQjtBQUNyQztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0EsQ0FBQzs7QUFFRCw0QiIsImZpbGUiOiIyMzYuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAoYykgMjAxNC0yMDE1LCBGYWNlYm9vaywgSW5jLlxuICogQWxsIHJpZ2h0cyByZXNlcnZlZC5cbiAqXG4gKiBUaGlzIHNvdXJjZSBjb2RlIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBCU0Qtc3R5bGUgbGljZW5zZSBmb3VuZCBpbiB0aGVcbiAqIExJQ0VOU0UgZmlsZSBpbiB0aGUgcm9vdCBkaXJlY3Rvcnkgb2YgdGhpcyBzb3VyY2UgdHJlZS4gQW4gYWRkaXRpb25hbCBncmFudFxuICogb2YgcGF0ZW50IHJpZ2h0cyBjYW4gYmUgZm91bmQgaW4gdGhlIFBBVEVOVFMgZmlsZSBpbiB0aGUgc2FtZSBkaXJlY3RvcnkuXG4gKlxuICogQHByb3ZpZGVzTW9kdWxlIERpc3BhdGNoZXJcbiAqIFxuICogQHByZXZlbnRNdW5nZVxuICovXG5cbid1c2Ugc3RyaWN0JztcblxuZXhwb3J0cy5fX2VzTW9kdWxlID0gdHJ1ZTtcblxuZnVuY3Rpb24gX2NsYXNzQ2FsbENoZWNrKGluc3RhbmNlLCBDb25zdHJ1Y3RvcikgeyBpZiAoIShpbnN0YW5jZSBpbnN0YW5jZW9mIENvbnN0cnVjdG9yKSkgeyB0aHJvdyBuZXcgVHlwZUVycm9yKCdDYW5ub3QgY2FsbCBhIGNsYXNzIGFzIGEgZnVuY3Rpb24nKTsgfSB9XG5cbnZhciBpbnZhcmlhbnQgPSByZXF1aXJlKCdmYmpzL2xpYi9pbnZhcmlhbnQnKTtcblxudmFyIF9wcmVmaXggPSAnSURfJztcblxuLyoqXG4gKiBEaXNwYXRjaGVyIGlzIHVzZWQgdG8gYnJvYWRjYXN0IHBheWxvYWRzIHRvIHJlZ2lzdGVyZWQgY2FsbGJhY2tzLiBUaGlzIGlzXG4gKiBkaWZmZXJlbnQgZnJvbSBnZW5lcmljIHB1Yi1zdWIgc3lzdGVtcyBpbiB0d28gd2F5czpcbiAqXG4gKiAgIDEpIENhbGxiYWNrcyBhcmUgbm90IHN1YnNjcmliZWQgdG8gcGFydGljdWxhciBldmVudHMuIEV2ZXJ5IHBheWxvYWQgaXNcbiAqICAgICAgZGlzcGF0Y2hlZCB0byBldmVyeSByZWdpc3RlcmVkIGNhbGxiYWNrLlxuICogICAyKSBDYWxsYmFja3MgY2FuIGJlIGRlZmVycmVkIGluIHdob2xlIG9yIHBhcnQgdW50aWwgb3RoZXIgY2FsbGJhY2tzIGhhdmVcbiAqICAgICAgYmVlbiBleGVjdXRlZC5cbiAqXG4gKiBGb3IgZXhhbXBsZSwgY29uc2lkZXIgdGhpcyBoeXBvdGhldGljYWwgZmxpZ2h0IGRlc3RpbmF0aW9uIGZvcm0sIHdoaWNoXG4gKiBzZWxlY3RzIGEgZGVmYXVsdCBjaXR5IHdoZW4gYSBjb3VudHJ5IGlzIHNlbGVjdGVkOlxuICpcbiAqICAgdmFyIGZsaWdodERpc3BhdGNoZXIgPSBuZXcgRGlzcGF0Y2hlcigpO1xuICpcbiAqICAgLy8gS2VlcHMgdHJhY2sgb2Ygd2hpY2ggY291bnRyeSBpcyBzZWxlY3RlZFxuICogICB2YXIgQ291bnRyeVN0b3JlID0ge2NvdW50cnk6IG51bGx9O1xuICpcbiAqICAgLy8gS2VlcHMgdHJhY2sgb2Ygd2hpY2ggY2l0eSBpcyBzZWxlY3RlZFxuICogICB2YXIgQ2l0eVN0b3JlID0ge2NpdHk6IG51bGx9O1xuICpcbiAqICAgLy8gS2VlcHMgdHJhY2sgb2YgdGhlIGJhc2UgZmxpZ2h0IHByaWNlIG9mIHRoZSBzZWxlY3RlZCBjaXR5XG4gKiAgIHZhciBGbGlnaHRQcmljZVN0b3JlID0ge3ByaWNlOiBudWxsfVxuICpcbiAqIFdoZW4gYSB1c2VyIGNoYW5nZXMgdGhlIHNlbGVjdGVkIGNpdHksIHdlIGRpc3BhdGNoIHRoZSBwYXlsb2FkOlxuICpcbiAqICAgZmxpZ2h0RGlzcGF0Y2hlci5kaXNwYXRjaCh7XG4gKiAgICAgYWN0aW9uVHlwZTogJ2NpdHktdXBkYXRlJyxcbiAqICAgICBzZWxlY3RlZENpdHk6ICdwYXJpcydcbiAqICAgfSk7XG4gKlxuICogVGhpcyBwYXlsb2FkIGlzIGRpZ2VzdGVkIGJ5IGBDaXR5U3RvcmVgOlxuICpcbiAqICAgZmxpZ2h0RGlzcGF0Y2hlci5yZWdpc3RlcihmdW5jdGlvbihwYXlsb2FkKSB7XG4gKiAgICAgaWYgKHBheWxvYWQuYWN0aW9uVHlwZSA9PT0gJ2NpdHktdXBkYXRlJykge1xuICogICAgICAgQ2l0eVN0b3JlLmNpdHkgPSBwYXlsb2FkLnNlbGVjdGVkQ2l0eTtcbiAqICAgICB9XG4gKiAgIH0pO1xuICpcbiAqIFdoZW4gdGhlIHVzZXIgc2VsZWN0cyBhIGNvdW50cnksIHdlIGRpc3BhdGNoIHRoZSBwYXlsb2FkOlxuICpcbiAqICAgZmxpZ2h0RGlzcGF0Y2hlci5kaXNwYXRjaCh7XG4gKiAgICAgYWN0aW9uVHlwZTogJ2NvdW50cnktdXBkYXRlJyxcbiAqICAgICBzZWxlY3RlZENvdW50cnk6ICdhdXN0cmFsaWEnXG4gKiAgIH0pO1xuICpcbiAqIFRoaXMgcGF5bG9hZCBpcyBkaWdlc3RlZCBieSBib3RoIHN0b3JlczpcbiAqXG4gKiAgIENvdW50cnlTdG9yZS5kaXNwYXRjaFRva2VuID0gZmxpZ2h0RGlzcGF0Y2hlci5yZWdpc3RlcihmdW5jdGlvbihwYXlsb2FkKSB7XG4gKiAgICAgaWYgKHBheWxvYWQuYWN0aW9uVHlwZSA9PT0gJ2NvdW50cnktdXBkYXRlJykge1xuICogICAgICAgQ291bnRyeVN0b3JlLmNvdW50cnkgPSBwYXlsb2FkLnNlbGVjdGVkQ291bnRyeTtcbiAqICAgICB9XG4gKiAgIH0pO1xuICpcbiAqIFdoZW4gdGhlIGNhbGxiYWNrIHRvIHVwZGF0ZSBgQ291bnRyeVN0b3JlYCBpcyByZWdpc3RlcmVkLCB3ZSBzYXZlIGEgcmVmZXJlbmNlXG4gKiB0byB0aGUgcmV0dXJuZWQgdG9rZW4uIFVzaW5nIHRoaXMgdG9rZW4gd2l0aCBgd2FpdEZvcigpYCwgd2UgY2FuIGd1YXJhbnRlZVxuICogdGhhdCBgQ291bnRyeVN0b3JlYCBpcyB1cGRhdGVkIGJlZm9yZSB0aGUgY2FsbGJhY2sgdGhhdCB1cGRhdGVzIGBDaXR5U3RvcmVgXG4gKiBuZWVkcyB0byBxdWVyeSBpdHMgZGF0YS5cbiAqXG4gKiAgIENpdHlTdG9yZS5kaXNwYXRjaFRva2VuID0gZmxpZ2h0RGlzcGF0Y2hlci5yZWdpc3RlcihmdW5jdGlvbihwYXlsb2FkKSB7XG4gKiAgICAgaWYgKHBheWxvYWQuYWN0aW9uVHlwZSA9PT0gJ2NvdW50cnktdXBkYXRlJykge1xuICogICAgICAgLy8gYENvdW50cnlTdG9yZS5jb3VudHJ5YCBtYXkgbm90IGJlIHVwZGF0ZWQuXG4gKiAgICAgICBmbGlnaHREaXNwYXRjaGVyLndhaXRGb3IoW0NvdW50cnlTdG9yZS5kaXNwYXRjaFRva2VuXSk7XG4gKiAgICAgICAvLyBgQ291bnRyeVN0b3JlLmNvdW50cnlgIGlzIG5vdyBndWFyYW50ZWVkIHRvIGJlIHVwZGF0ZWQuXG4gKlxuICogICAgICAgLy8gU2VsZWN0IHRoZSBkZWZhdWx0IGNpdHkgZm9yIHRoZSBuZXcgY291bnRyeVxuICogICAgICAgQ2l0eVN0b3JlLmNpdHkgPSBnZXREZWZhdWx0Q2l0eUZvckNvdW50cnkoQ291bnRyeVN0b3JlLmNvdW50cnkpO1xuICogICAgIH1cbiAqICAgfSk7XG4gKlxuICogVGhlIHVzYWdlIG9mIGB3YWl0Rm9yKClgIGNhbiBiZSBjaGFpbmVkLCBmb3IgZXhhbXBsZTpcbiAqXG4gKiAgIEZsaWdodFByaWNlU3RvcmUuZGlzcGF0Y2hUb2tlbiA9XG4gKiAgICAgZmxpZ2h0RGlzcGF0Y2hlci5yZWdpc3RlcihmdW5jdGlvbihwYXlsb2FkKSB7XG4gKiAgICAgICBzd2l0Y2ggKHBheWxvYWQuYWN0aW9uVHlwZSkge1xuICogICAgICAgICBjYXNlICdjb3VudHJ5LXVwZGF0ZSc6XG4gKiAgICAgICAgIGNhc2UgJ2NpdHktdXBkYXRlJzpcbiAqICAgICAgICAgICBmbGlnaHREaXNwYXRjaGVyLndhaXRGb3IoW0NpdHlTdG9yZS5kaXNwYXRjaFRva2VuXSk7XG4gKiAgICAgICAgICAgRmxpZ2h0UHJpY2VTdG9yZS5wcmljZSA9XG4gKiAgICAgICAgICAgICBnZXRGbGlnaHRQcmljZVN0b3JlKENvdW50cnlTdG9yZS5jb3VudHJ5LCBDaXR5U3RvcmUuY2l0eSk7XG4gKiAgICAgICAgICAgYnJlYWs7XG4gKiAgICAgfVxuICogICB9KTtcbiAqXG4gKiBUaGUgYGNvdW50cnktdXBkYXRlYCBwYXlsb2FkIHdpbGwgYmUgZ3VhcmFudGVlZCB0byBpbnZva2UgdGhlIHN0b3JlcydcbiAqIHJlZ2lzdGVyZWQgY2FsbGJhY2tzIGluIG9yZGVyOiBgQ291bnRyeVN0b3JlYCwgYENpdHlTdG9yZWAsIHRoZW5cbiAqIGBGbGlnaHRQcmljZVN0b3JlYC5cbiAqL1xuXG52YXIgRGlzcGF0Y2hlciA9IChmdW5jdGlvbiAoKSB7XG4gIGZ1bmN0aW9uIERpc3BhdGNoZXIoKSB7XG4gICAgX2NsYXNzQ2FsbENoZWNrKHRoaXMsIERpc3BhdGNoZXIpO1xuXG4gICAgdGhpcy5fY2FsbGJhY2tzID0ge307XG4gICAgdGhpcy5faXNEaXNwYXRjaGluZyA9IGZhbHNlO1xuICAgIHRoaXMuX2lzSGFuZGxlZCA9IHt9O1xuICAgIHRoaXMuX2lzUGVuZGluZyA9IHt9O1xuICAgIHRoaXMuX2xhc3RJRCA9IDE7XG4gIH1cblxuICAvKipcbiAgICogUmVnaXN0ZXJzIGEgY2FsbGJhY2sgdG8gYmUgaW52b2tlZCB3aXRoIGV2ZXJ5IGRpc3BhdGNoZWQgcGF5bG9hZC4gUmV0dXJuc1xuICAgKiBhIHRva2VuIHRoYXQgY2FuIGJlIHVzZWQgd2l0aCBgd2FpdEZvcigpYC5cbiAgICovXG5cbiAgRGlzcGF0Y2hlci5wcm90b3R5cGUucmVnaXN0ZXIgPSBmdW5jdGlvbiByZWdpc3RlcihjYWxsYmFjaykge1xuICAgIHZhciBpZCA9IF9wcmVmaXggKyB0aGlzLl9sYXN0SUQrKztcbiAgICB0aGlzLl9jYWxsYmFja3NbaWRdID0gY2FsbGJhY2s7XG4gICAgcmV0dXJuIGlkO1xuICB9O1xuXG4gIC8qKlxuICAgKiBSZW1vdmVzIGEgY2FsbGJhY2sgYmFzZWQgb24gaXRzIHRva2VuLlxuICAgKi9cblxuICBEaXNwYXRjaGVyLnByb3RvdHlwZS51bnJlZ2lzdGVyID0gZnVuY3Rpb24gdW5yZWdpc3RlcihpZCkge1xuICAgICF0aGlzLl9jYWxsYmFja3NbaWRdID8gcHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJyA/IGludmFyaWFudChmYWxzZSwgJ0Rpc3BhdGNoZXIudW5yZWdpc3RlciguLi4pOiBgJXNgIGRvZXMgbm90IG1hcCB0byBhIHJlZ2lzdGVyZWQgY2FsbGJhY2suJywgaWQpIDogaW52YXJpYW50KGZhbHNlKSA6IHVuZGVmaW5lZDtcbiAgICBkZWxldGUgdGhpcy5fY2FsbGJhY2tzW2lkXTtcbiAgfTtcblxuICAvKipcbiAgICogV2FpdHMgZm9yIHRoZSBjYWxsYmFja3Mgc3BlY2lmaWVkIHRvIGJlIGludm9rZWQgYmVmb3JlIGNvbnRpbnVpbmcgZXhlY3V0aW9uXG4gICAqIG9mIHRoZSBjdXJyZW50IGNhbGxiYWNrLiBUaGlzIG1ldGhvZCBzaG91bGQgb25seSBiZSB1c2VkIGJ5IGEgY2FsbGJhY2sgaW5cbiAgICogcmVzcG9uc2UgdG8gYSBkaXNwYXRjaGVkIHBheWxvYWQuXG4gICAqL1xuXG4gIERpc3BhdGNoZXIucHJvdG90eXBlLndhaXRGb3IgPSBmdW5jdGlvbiB3YWl0Rm9yKGlkcykge1xuICAgICF0aGlzLl9pc0Rpc3BhdGNoaW5nID8gcHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJyA/IGludmFyaWFudChmYWxzZSwgJ0Rpc3BhdGNoZXIud2FpdEZvciguLi4pOiBNdXN0IGJlIGludm9rZWQgd2hpbGUgZGlzcGF0Y2hpbmcuJykgOiBpbnZhcmlhbnQoZmFsc2UpIDogdW5kZWZpbmVkO1xuICAgIGZvciAodmFyIGlpID0gMDsgaWkgPCBpZHMubGVuZ3RoOyBpaSsrKSB7XG4gICAgICB2YXIgaWQgPSBpZHNbaWldO1xuICAgICAgaWYgKHRoaXMuX2lzUGVuZGluZ1tpZF0pIHtcbiAgICAgICAgIXRoaXMuX2lzSGFuZGxlZFtpZF0gPyBwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gJ3Byb2R1Y3Rpb24nID8gaW52YXJpYW50KGZhbHNlLCAnRGlzcGF0Y2hlci53YWl0Rm9yKC4uLik6IENpcmN1bGFyIGRlcGVuZGVuY3kgZGV0ZWN0ZWQgd2hpbGUgJyArICd3YWl0aW5nIGZvciBgJXNgLicsIGlkKSA6IGludmFyaWFudChmYWxzZSkgOiB1bmRlZmluZWQ7XG4gICAgICAgIGNvbnRpbnVlO1xuICAgICAgfVxuICAgICAgIXRoaXMuX2NhbGxiYWNrc1tpZF0gPyBwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gJ3Byb2R1Y3Rpb24nID8gaW52YXJpYW50KGZhbHNlLCAnRGlzcGF0Y2hlci53YWl0Rm9yKC4uLik6IGAlc2AgZG9lcyBub3QgbWFwIHRvIGEgcmVnaXN0ZXJlZCBjYWxsYmFjay4nLCBpZCkgOiBpbnZhcmlhbnQoZmFsc2UpIDogdW5kZWZpbmVkO1xuICAgICAgdGhpcy5faW52b2tlQ2FsbGJhY2soaWQpO1xuICAgIH1cbiAgfTtcblxuICAvKipcbiAgICogRGlzcGF0Y2hlcyBhIHBheWxvYWQgdG8gYWxsIHJlZ2lzdGVyZWQgY2FsbGJhY2tzLlxuICAgKi9cblxuICBEaXNwYXRjaGVyLnByb3RvdHlwZS5kaXNwYXRjaCA9IGZ1bmN0aW9uIGRpc3BhdGNoKHBheWxvYWQpIHtcbiAgICAhIXRoaXMuX2lzRGlzcGF0Y2hpbmcgPyBwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gJ3Byb2R1Y3Rpb24nID8gaW52YXJpYW50KGZhbHNlLCAnRGlzcGF0Y2guZGlzcGF0Y2goLi4uKTogQ2Fubm90IGRpc3BhdGNoIGluIHRoZSBtaWRkbGUgb2YgYSBkaXNwYXRjaC4nKSA6IGludmFyaWFudChmYWxzZSkgOiB1bmRlZmluZWQ7XG4gICAgdGhpcy5fc3RhcnREaXNwYXRjaGluZyhwYXlsb2FkKTtcbiAgICB0cnkge1xuICAgICAgZm9yICh2YXIgaWQgaW4gdGhpcy5fY2FsbGJhY2tzKSB7XG4gICAgICAgIGlmICh0aGlzLl9pc1BlbmRpbmdbaWRdKSB7XG4gICAgICAgICAgY29udGludWU7XG4gICAgICAgIH1cbiAgICAgICAgdGhpcy5faW52b2tlQ2FsbGJhY2soaWQpO1xuICAgICAgfVxuICAgIH0gZmluYWxseSB7XG4gICAgICB0aGlzLl9zdG9wRGlzcGF0Y2hpbmcoKTtcbiAgICB9XG4gIH07XG5cbiAgLyoqXG4gICAqIElzIHRoaXMgRGlzcGF0Y2hlciBjdXJyZW50bHkgZGlzcGF0Y2hpbmcuXG4gICAqL1xuXG4gIERpc3BhdGNoZXIucHJvdG90eXBlLmlzRGlzcGF0Y2hpbmcgPSBmdW5jdGlvbiBpc0Rpc3BhdGNoaW5nKCkge1xuICAgIHJldHVybiB0aGlzLl9pc0Rpc3BhdGNoaW5nO1xuICB9O1xuXG4gIC8qKlxuICAgKiBDYWxsIHRoZSBjYWxsYmFjayBzdG9yZWQgd2l0aCB0aGUgZ2l2ZW4gaWQuIEFsc28gZG8gc29tZSBpbnRlcm5hbFxuICAgKiBib29ra2VlcGluZy5cbiAgICpcbiAgICogQGludGVybmFsXG4gICAqL1xuXG4gIERpc3BhdGNoZXIucHJvdG90eXBlLl9pbnZva2VDYWxsYmFjayA9IGZ1bmN0aW9uIF9pbnZva2VDYWxsYmFjayhpZCkge1xuICAgIHRoaXMuX2lzUGVuZGluZ1tpZF0gPSB0cnVlO1xuICAgIHRoaXMuX2NhbGxiYWNrc1tpZF0odGhpcy5fcGVuZGluZ1BheWxvYWQpO1xuICAgIHRoaXMuX2lzSGFuZGxlZFtpZF0gPSB0cnVlO1xuICB9O1xuXG4gIC8qKlxuICAgKiBTZXQgdXAgYm9va2tlZXBpbmcgbmVlZGVkIHdoZW4gZGlzcGF0Y2hpbmcuXG4gICAqXG4gICAqIEBpbnRlcm5hbFxuICAgKi9cblxuICBEaXNwYXRjaGVyLnByb3RvdHlwZS5fc3RhcnREaXNwYXRjaGluZyA9IGZ1bmN0aW9uIF9zdGFydERpc3BhdGNoaW5nKHBheWxvYWQpIHtcbiAgICBmb3IgKHZhciBpZCBpbiB0aGlzLl9jYWxsYmFja3MpIHtcbiAgICAgIHRoaXMuX2lzUGVuZGluZ1tpZF0gPSBmYWxzZTtcbiAgICAgIHRoaXMuX2lzSGFuZGxlZFtpZF0gPSBmYWxzZTtcbiAgICB9XG4gICAgdGhpcy5fcGVuZGluZ1BheWxvYWQgPSBwYXlsb2FkO1xuICAgIHRoaXMuX2lzRGlzcGF0Y2hpbmcgPSB0cnVlO1xuICB9O1xuXG4gIC8qKlxuICAgKiBDbGVhciBib29ra2VlcGluZyB1c2VkIGZvciBkaXNwYXRjaGluZy5cbiAgICpcbiAgICogQGludGVybmFsXG4gICAqL1xuXG4gIERpc3BhdGNoZXIucHJvdG90eXBlLl9zdG9wRGlzcGF0Y2hpbmcgPSBmdW5jdGlvbiBfc3RvcERpc3BhdGNoaW5nKCkge1xuICAgIGRlbGV0ZSB0aGlzLl9wZW5kaW5nUGF5bG9hZDtcbiAgICB0aGlzLl9pc0Rpc3BhdGNoaW5nID0gZmFsc2U7XG4gIH07XG5cbiAgcmV0dXJuIERpc3BhdGNoZXI7XG59KSgpO1xuXG5tb2R1bGUuZXhwb3J0cyA9IERpc3BhdGNoZXI7XG5cblxuLyoqKioqKioqKioqKioqKioqXG4gKiogV0VCUEFDSyBGT09URVJcbiAqKiAuL34vZmx1eC9saWIvRGlzcGF0Y2hlci5qc1xuICoqIG1vZHVsZSBpZCA9IDIzNlxuICoqIG1vZHVsZSBjaHVua3MgPSAxIDUgNlxuICoqLyJdLCJzb3VyY2VSb290IjoiIn0=");
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule Dispatcher
+	 * 
+	 * @preventMunge
+	 */
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var invariant = __webpack_require__(237);
+
+	var _prefix = 'ID_';
+
+	/**
+	 * Dispatcher is used to broadcast payloads to registered callbacks. This is
+	 * different from generic pub-sub systems in two ways:
+	 *
+	 *   1) Callbacks are not subscribed to particular events. Every payload is
+	 *      dispatched to every registered callback.
+	 *   2) Callbacks can be deferred in whole or part until other callbacks have
+	 *      been executed.
+	 *
+	 * For example, consider this hypothetical flight destination form, which
+	 * selects a default city when a country is selected:
+	 *
+	 *   var flightDispatcher = new Dispatcher();
+	 *
+	 *   // Keeps track of which country is selected
+	 *   var CountryStore = {country: null};
+	 *
+	 *   // Keeps track of which city is selected
+	 *   var CityStore = {city: null};
+	 *
+	 *   // Keeps track of the base flight price of the selected city
+	 *   var FlightPriceStore = {price: null}
+	 *
+	 * When a user changes the selected city, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'city-update',
+	 *     selectedCity: 'paris'
+	 *   });
+	 *
+	 * This payload is digested by `CityStore`:
+	 *
+	 *   flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'city-update') {
+	 *       CityStore.city = payload.selectedCity;
+	 *     }
+	 *   });
+	 *
+	 * When the user selects a country, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'country-update',
+	 *     selectedCountry: 'australia'
+	 *   });
+	 *
+	 * This payload is digested by both stores:
+	 *
+	 *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       CountryStore.country = payload.selectedCountry;
+	 *     }
+	 *   });
+	 *
+	 * When the callback to update `CountryStore` is registered, we save a reference
+	 * to the returned token. Using this token with `waitFor()`, we can guarantee
+	 * that `CountryStore` is updated before the callback that updates `CityStore`
+	 * needs to query its data.
+	 *
+	 *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       // `CountryStore.country` may not be updated.
+	 *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
+	 *       // `CountryStore.country` is now guaranteed to be updated.
+	 *
+	 *       // Select the default city for the new country
+	 *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
+	 *     }
+	 *   });
+	 *
+	 * The usage of `waitFor()` can be chained, for example:
+	 *
+	 *   FlightPriceStore.dispatchToken =
+	 *     flightDispatcher.register(function(payload) {
+	 *       switch (payload.actionType) {
+	 *         case 'country-update':
+	 *         case 'city-update':
+	 *           flightDispatcher.waitFor([CityStore.dispatchToken]);
+	 *           FlightPriceStore.price =
+	 *             getFlightPriceStore(CountryStore.country, CityStore.city);
+	 *           break;
+	 *     }
+	 *   });
+	 *
+	 * The `country-update` payload will be guaranteed to invoke the stores'
+	 * registered callbacks in order: `CountryStore`, `CityStore`, then
+	 * `FlightPriceStore`.
+	 */
+
+	var Dispatcher = (function () {
+	  function Dispatcher() {
+	    _classCallCheck(this, Dispatcher);
+
+	    this._callbacks = {};
+	    this._isDispatching = false;
+	    this._isHandled = {};
+	    this._isPending = {};
+	    this._lastID = 1;
+	  }
+
+	  /**
+	   * Registers a callback to be invoked with every dispatched payload. Returns
+	   * a token that can be used with `waitFor()`.
+	   */
+
+	  Dispatcher.prototype.register = function register(callback) {
+	    var id = _prefix + this._lastID++;
+	    this._callbacks[id] = callback;
+	    return id;
+	  };
+
+	  /**
+	   * Removes a callback based on its token.
+	   */
+
+	  Dispatcher.prototype.unregister = function unregister(id) {
+	    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	    delete this._callbacks[id];
+	  };
+
+	  /**
+	   * Waits for the callbacks specified to be invoked before continuing execution
+	   * of the current callback. This method should only be used by a callback in
+	   * response to a dispatched payload.
+	   */
+
+	  Dispatcher.prototype.waitFor = function waitFor(ids) {
+	    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;
+	    for (var ii = 0; ii < ids.length; ii++) {
+	      var id = ids[ii];
+	      if (this._isPending[id]) {
+	        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;
+	        continue;
+	      }
+	      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	      this._invokeCallback(id);
+	    }
+	  };
+
+	  /**
+	   * Dispatches a payload to all registered callbacks.
+	   */
+
+	  Dispatcher.prototype.dispatch = function dispatch(payload) {
+	    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;
+	    this._startDispatching(payload);
+	    try {
+	      for (var id in this._callbacks) {
+	        if (this._isPending[id]) {
+	          continue;
+	        }
+	        this._invokeCallback(id);
+	      }
+	    } finally {
+	      this._stopDispatching();
+	    }
+	  };
+
+	  /**
+	   * Is this Dispatcher currently dispatching.
+	   */
+
+	  Dispatcher.prototype.isDispatching = function isDispatching() {
+	    return this._isDispatching;
+	  };
+
+	  /**
+	   * Call the callback stored with the given id. Also do some internal
+	   * bookkeeping.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {
+	    this._isPending[id] = true;
+	    this._callbacks[id](this._pendingPayload);
+	    this._isHandled[id] = true;
+	  };
+
+	  /**
+	   * Set up bookkeeping needed when dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {
+	    for (var id in this._callbacks) {
+	      this._isPending[id] = false;
+	      this._isHandled[id] = false;
+	    }
+	    this._pendingPayload = payload;
+	    this._isDispatching = true;
+	  };
+
+	  /**
+	   * Clear bookkeeping used for dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._stopDispatching = function _stopDispatching() {
+	    delete this._pendingPayload;
+	    this._isDispatching = false;
+	  };
+
+	  return Dispatcher;
+	})();
+
+	module.exports = Dispatcher;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
 
 /***/ 237:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("/* WEBPACK VAR INJECTION */(function(process) {/**\n * Copyright 2013-2015, Facebook, Inc.\n * All rights reserved.\n *\n * This source code is licensed under the BSD-style license found in the\n * LICENSE file in the root directory of this source tree. An additional grant\n * of patent rights can be found in the PATENTS file in the same directory.\n *\n * @providesModule invariant\n */\n\n\"use strict\";\n\n/**\n * Use invariant() to assert state which your program assumes to be true.\n *\n * Provide sprintf-style format (only %s is supported) and arguments\n * to provide information about what broke and what you were\n * expecting.\n *\n * The invariant message will be stripped in production, but the invariant\n * will remain to ensure logic does not differ in production.\n */\n\nvar invariant = function (condition, format, a, b, c, d, e, f) {\n  if (process.env.NODE_ENV !== 'production') {\n    if (format === undefined) {\n      throw new Error('invariant requires an error message argument');\n    }\n  }\n\n  if (!condition) {\n    var error;\n    if (format === undefined) {\n      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');\n    } else {\n      var args = [a, b, c, d, e, f];\n      var argIndex = 0;\n      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {\n        return args[argIndex++];\n      }));\n    }\n\n    error.framesToPop = 1; // we don't care about invariant's own frame\n    throw error;\n  }\n};\n\nmodule.exports = invariant;\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9+L2ZsdXgvfi9mYmpzL2xpYi9pbnZhcmlhbnQuanM/YjdmYyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0EscURBQXFEO0FBQ3JELEtBQUs7QUFDTDtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU87QUFDUDs7QUFFQSwwQkFBMEI7QUFDMUI7QUFDQTtBQUNBOztBQUVBLDJCIiwiZmlsZSI6IjIzNy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQ29weXJpZ2h0IDIwMTMtMjAxNSwgRmFjZWJvb2ssIEluYy5cbiAqIEFsbCByaWdodHMgcmVzZXJ2ZWQuXG4gKlxuICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgQlNELXN0eWxlIGxpY2Vuc2UgZm91bmQgaW4gdGhlXG4gKiBMSUNFTlNFIGZpbGUgaW4gdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuIEFuIGFkZGl0aW9uYWwgZ3JhbnRcbiAqIG9mIHBhdGVudCByaWdodHMgY2FuIGJlIGZvdW5kIGluIHRoZSBQQVRFTlRTIGZpbGUgaW4gdGhlIHNhbWUgZGlyZWN0b3J5LlxuICpcbiAqIEBwcm92aWRlc01vZHVsZSBpbnZhcmlhbnRcbiAqL1xuXG5cInVzZSBzdHJpY3RcIjtcblxuLyoqXG4gKiBVc2UgaW52YXJpYW50KCkgdG8gYXNzZXJ0IHN0YXRlIHdoaWNoIHlvdXIgcHJvZ3JhbSBhc3N1bWVzIHRvIGJlIHRydWUuXG4gKlxuICogUHJvdmlkZSBzcHJpbnRmLXN0eWxlIGZvcm1hdCAob25seSAlcyBpcyBzdXBwb3J0ZWQpIGFuZCBhcmd1bWVudHNcbiAqIHRvIHByb3ZpZGUgaW5mb3JtYXRpb24gYWJvdXQgd2hhdCBicm9rZSBhbmQgd2hhdCB5b3Ugd2VyZVxuICogZXhwZWN0aW5nLlxuICpcbiAqIFRoZSBpbnZhcmlhbnQgbWVzc2FnZSB3aWxsIGJlIHN0cmlwcGVkIGluIHByb2R1Y3Rpb24sIGJ1dCB0aGUgaW52YXJpYW50XG4gKiB3aWxsIHJlbWFpbiB0byBlbnN1cmUgbG9naWMgZG9lcyBub3QgZGlmZmVyIGluIHByb2R1Y3Rpb24uXG4gKi9cblxudmFyIGludmFyaWFudCA9IGZ1bmN0aW9uIChjb25kaXRpb24sIGZvcm1hdCwgYSwgYiwgYywgZCwgZSwgZikge1xuICBpZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJykge1xuICAgIGlmIChmb3JtYXQgPT09IHVuZGVmaW5lZCkge1xuICAgICAgdGhyb3cgbmV3IEVycm9yKCdpbnZhcmlhbnQgcmVxdWlyZXMgYW4gZXJyb3IgbWVzc2FnZSBhcmd1bWVudCcpO1xuICAgIH1cbiAgfVxuXG4gIGlmICghY29uZGl0aW9uKSB7XG4gICAgdmFyIGVycm9yO1xuICAgIGlmIChmb3JtYXQgPT09IHVuZGVmaW5lZCkge1xuICAgICAgZXJyb3IgPSBuZXcgRXJyb3IoJ01pbmlmaWVkIGV4Y2VwdGlvbiBvY2N1cnJlZDsgdXNlIHRoZSBub24tbWluaWZpZWQgZGV2IGVudmlyb25tZW50ICcgKyAnZm9yIHRoZSBmdWxsIGVycm9yIG1lc3NhZ2UgYW5kIGFkZGl0aW9uYWwgaGVscGZ1bCB3YXJuaW5ncy4nKTtcbiAgICB9IGVsc2Uge1xuICAgICAgdmFyIGFyZ3MgPSBbYSwgYiwgYywgZCwgZSwgZl07XG4gICAgICB2YXIgYXJnSW5kZXggPSAwO1xuICAgICAgZXJyb3IgPSBuZXcgRXJyb3IoJ0ludmFyaWFudCBWaW9sYXRpb246ICcgKyBmb3JtYXQucmVwbGFjZSgvJXMvZywgZnVuY3Rpb24gKCkge1xuICAgICAgICByZXR1cm4gYXJnc1thcmdJbmRleCsrXTtcbiAgICAgIH0pKTtcbiAgICB9XG5cbiAgICBlcnJvci5mcmFtZXNUb1BvcCA9IDE7IC8vIHdlIGRvbid0IGNhcmUgYWJvdXQgaW52YXJpYW50J3Mgb3duIGZyYW1lXG4gICAgdGhyb3cgZXJyb3I7XG4gIH1cbn07XG5cbm1vZHVsZS5leHBvcnRzID0gaW52YXJpYW50O1xuXG5cbi8qKioqKioqKioqKioqKioqKlxuICoqIFdFQlBBQ0sgRk9PVEVSXG4gKiogLi9+L2ZsdXgvfi9mYmpzL2xpYi9pbnZhcmlhbnQuanNcbiAqKiBtb2R1bGUgaWQgPSAyMzdcbiAqKiBtb2R1bGUgY2h1bmtzID0gMSA1IDZcbiAqKi8iXSwic291cmNlUm9vdCI6IiJ9");
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule invariant
+	 */
+
+	"use strict";
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var invariant = function (condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }
 

@@ -24,19 +24,19 @@ module.exports={
 			template:'./client/app/index-tem.html'
 		})
 	],
-	devtool:"eval-source-map",
-	devServer:{
-		historyApiFallback:true,
-		hot:true,
-		inline:true,
-		progress:true,
-		proxy:{
-			'/api/*':{
-				target:"http://0.0.0.0:3002",
-				secure:true
-			},
-		}
-	},
+	// devtool:"eval-source-map",
+	// devServer:{
+	// 	historyApiFallback:true,
+	// 	hot:true,
+	// 	inline:true,
+	// 	progress:true,
+	// 	proxy:{
+	// 		'/api/*':{
+	// 			target:"http://0.0.0.0:3002",
+	// 			secure:true
+	// 		},
+	// 	}
+	// },
 	module:{
 		loaders:[
 			{

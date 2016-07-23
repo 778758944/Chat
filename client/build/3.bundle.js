@@ -3,7 +3,37 @@ webpackJsonp([3],{
 /***/ 231:
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.LoginStore = undefined;\n\nvar _events = __webpack_require__(232);\n\nvar LoginStore = Object.assign({}, _events.EventEmitter.prototype, {\n\tlogin: function login(email, password) {\n\t\tpost('/api/yonghus/login', {\n\t\t\temail: email,\n\t\t\tpassword: password\n\t\t}, function (res) {\n\t\t\tthis.emit('tologin', res);\n\t\t}.bind(this));\n\t},\n\n\taddLoginHandle: function addLoginHandle(callback) {\n\t\tthis.on('tologin', callback);\n\t}\n}); /**\n     * \n     * @authors Your Name (you@example.org)\n     * @date    2016-05-02 21:48:32\n     * @version $Id$\n     */\n\n\nexports.LoginStore = LoginStore;//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jbGllbnQvYXBwL3N0b3JlL2xvZ2luU3RvcmUuanM/NzdkNSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBTUE7O0FBRUEsSUFBSSxhQUFXLE9BQU8sTUFBUCxDQUFjLEVBQWQsRUFBaUIscUJBQWEsU0FBOUIsRUFBd0M7QUFDdEQsUUFBTSxlQUFTLEtBQVQsRUFBZSxRQUFmLEVBQXdCO0FBQzdCLE9BQUssb0JBQUwsRUFBMEI7QUFDekIsVUFBTSxLQURtQjtBQUV6QixhQUFTO0FBRmdCLEdBQTFCLEVBR0UsVUFBUyxHQUFULEVBQWE7QUFDZCxRQUFLLElBQUwsQ0FBVSxTQUFWLEVBQW9CLEdBQXBCO0FBQ0EsR0FGQyxDQUVBLElBRkEsQ0FFSyxJQUZMLENBSEY7QUFNQSxFQVJxRDs7QUFVdEQsaUJBQWUsd0JBQVMsUUFBVCxFQUFrQjtBQUNoQyxPQUFLLEVBQUwsQ0FBUSxTQUFSLEVBQWtCLFFBQWxCO0FBQ0E7QUFacUQsQ0FBeEMsQ0FBZixDOzs7Ozs7OztRQWVRLFUsR0FBQSxVIiwiZmlsZSI6IjIzMS5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogXG4gKiBAYXV0aG9ycyBZb3VyIE5hbWUgKHlvdUBleGFtcGxlLm9yZylcbiAqIEBkYXRlICAgIDIwMTYtMDUtMDIgMjE6NDg6MzJcbiAqIEB2ZXJzaW9uICRJZCRcbiAqL1xuaW1wb3J0IHtFdmVudEVtaXR0ZXJ9IGZyb20gJ2V2ZW50cydcblxudmFyIExvZ2luU3RvcmU9T2JqZWN0LmFzc2lnbih7fSxFdmVudEVtaXR0ZXIucHJvdG90eXBlLHtcblx0bG9naW46ZnVuY3Rpb24oZW1haWwscGFzc3dvcmQpe1xuXHRcdHBvc3QoJy9hcGkveW9uZ2h1cy9sb2dpbicse1xuXHRcdFx0ZW1haWw6ZW1haWwsXG5cdFx0XHRwYXNzd29yZDpwYXNzd29yZFxuXHRcdH0sZnVuY3Rpb24ocmVzKXtcblx0XHRcdHRoaXMuZW1pdCgndG9sb2dpbicscmVzKTtcblx0XHR9LmJpbmQodGhpcykpXG5cdH0sXG5cblx0YWRkTG9naW5IYW5kbGU6ZnVuY3Rpb24oY2FsbGJhY2spe1xuXHRcdHRoaXMub24oJ3RvbG9naW4nLGNhbGxiYWNrKTtcblx0fVxufSk7XG5cbmV4cG9ydCB7TG9naW5TdG9yZX07XG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cblxuXG5cbi8qKiBXRUJQQUNLIEZPT1RFUiAqKlxuICoqIC4vY2xpZW50L2FwcC9zdG9yZS9sb2dpblN0b3JlLmpzXG4gKiovIl0sInNvdXJjZVJvb3QiOiIifQ==");
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.LoginStore = undefined;
+
+	var _events = __webpack_require__(232);
+
+	var LoginStore = Object.assign({}, _events.EventEmitter.prototype, {
+		login: function login(email, password) {
+			post('/api/yonghus/login', {
+				email: email,
+				password: password
+			}, function (res) {
+				this.emit('tologin', res);
+			}.bind(this));
+		},
+
+		addLoginHandle: function addLoginHandle(callback) {
+			this.on('tologin', callback);
+		}
+	}); /**
+	     * 
+	     * @authors Your Name (you@example.org)
+	     * @date    2016-05-02 21:48:32
+	     * @version $Id$
+	     */
+
+
+	exports.LoginStore = LoginStore;
 
 /***/ }
 

@@ -30,12 +30,19 @@ class MSGSTORE extends EventEmitter{
 	}
 
 	updateMsg(data){
-		this.messages.push(data);
-		this.emitUpdate();
+		if(data.lx!='draw'){
+			this.messages.push(data);
+			this.emitUpdate();
+		}
+		else{
+			this.emitDraw(data.msg);
+		}
 	}
 
 	sendMsg(data){
-		this.updateMsg(data);
+		if(data.lx!='draw'){
+			this.updateMsg(data);
+		}
 		socket.emit("sendMsg",data);
 	}
 
@@ -50,12 +57,28 @@ class MSGSTORE extends EventEmitter{
 	emitUpdate(){
 		this.emit('update');
 	}
+
+	emitDraw(msg){
+		this.emit('draw',msg);
+	}
+
+	addDrawListener(callback){
+		this.on('draw',function(msg){
+			// console.log('msg',msg);
+			callback&&callback(msg.posx,msg.posy,true);
+		});
+	}
+
+	removeDrawListener(callback){
+		this.removeListener('draw',callback);
+	}
 }
 
 var MsgStore=new MSGSTORE();
 
 
 socket.on('news',function(data){
+	// console.log('data',data);
 	MsgStore.updateMsg(data);
 });
 export {MsgStore}

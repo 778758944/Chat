@@ -27,6 +27,14 @@ class ChatCtrl extends React.Component{
 				msg:MsgStore.getAll()
 			});
 		}.bind(this);
+
+		this.toCvs=function(){
+			// console.log('sdsds');
+			this.context.router.push({
+				pathname:'/cvs/'+this.props.params.id,
+			})
+			// console.log('cvs end');
+		}
 	}
 
 	componentDidMount(){
@@ -44,13 +52,15 @@ class ChatCtrl extends React.Component{
 		return (
 			<div className="wrapBox">
 				<audio ref={(e)=>this.audio=e}></audio>
-				<InfoBox msg={this.state.msg} audio={this.audio}/>
-				<FormBox handle={this.sendMsg} to={this.props.params.id}/>
+				<InfoBox msg={this.state.msg} audio={this.audio} toCvs={this.toCvs.bind(this)}/>
+				<FormBox handle={this.sendMsg} to={this.props.params.id} toCvs={this.toCvs.bind(this)}/>
 			</div>
 			)
 	}
+}
 
-
+ChatCtrl.contextTypes={
+	router:React.PropTypes.object
 }
 
 module.exports=ChatCtrl

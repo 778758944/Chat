@@ -54,12 +54,20 @@ class MineMsg extends React.Component{
 			</div>
 			)
 		}
+		else{
+			return <div></div>
+		}
 	}
 }
 
 class OtherMsg extends React.Component{
 	constructor(props){
 		super(props);
+	}
+	componentWillMount(){
+		if(this.props.data.lx=='tocvs'){
+			this.props.toCvs();
+		}
 	}
 	render(){
 		var data=this.props.data;
@@ -98,6 +106,9 @@ class OtherMsg extends React.Component{
   			      </div>
   			   </div>
 				)
+		}
+		else{
+			return <div></div>
 		}
 	}
 }
@@ -151,6 +162,7 @@ class FormBox extends React.Component{
 
 
 		this.onRecoderEnd=function(e){
+			e.nativeEvent.preventDefault();
 			this.recoder.play(this.audio);
 			this.props.handle({msg:this.recoder.getBlob(true),to:this.props.to,type:1,lx:'wav'})
 		}.bind(this);
@@ -168,14 +180,18 @@ class FormBox extends React.Component{
 				<div>
 					<label htmlFor="fileup" className='iconGn'>图片</label>
 					<input type="file" id='fileup' onChange={this.onFileChange}/>
-					<button className='iconGn' onTouchStart={()=>{
+					<button className='iconGn' onTouchStart={(e)=>{
+						e.preventDefault();
 						console.log('start');
 						HZRecorder.get(function(rec){
 							this.recoder=rec;
 							this.recoder.start();
 						}.bind(this))
 					}} onTouchEnd={this.onRecoderEnd}>语音</button>
-					<button>语音</button>
+					<button onClick={()=>{
+						this.props.handle({msg:{lx:'tocvs'},lx:'tocvs',to:this.props.to,type:1})
+						this.props.toCvs()
+					}}>我画你猜</button>
 					<button>上传图片</button>
 					<button>上传图片</button>
 					<button>上传图片</button>
@@ -205,7 +221,7 @@ class InfoBox extends React.Component{
 				return <MineMsg data={value} key={index} audio={this.props.audio}/>
 			}
 			else{
-				return <OtherMsg data={value} key={index} audio={this.props.audio}/>
+				return <OtherMsg data={value} key={index} audio={this.props.audio} toCvs={this.props.toCvs}/>
 			}
 		}.bind(this));
 		return (
