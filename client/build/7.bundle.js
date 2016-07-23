@@ -736,7 +736,7 @@ webpackJsonp([7,2,4],{
 					this.messages.push(data);
 					this.emitUpdate();
 				} else {
-					this.emitDraw(data.msg);
+					this.emitDraw(data);
 				}
 			}
 		}, {
@@ -770,9 +770,9 @@ webpackJsonp([7,2,4],{
 		}, {
 			key: 'addDrawListener',
 			value: function addDrawListener(callback) {
-				this.on('draw', function (msg) {
-					// console.log('msg',msg);
-					callback && callback(msg.posx, msg.posy, true);
+				this.on('draw', function (data) {
+					// console.log('msg',data);
+					callback && callback(data.msg.posx, data.msg.posy, data.msg.state);
 				});
 			}
 		}, {
@@ -8477,6 +8477,7 @@ webpackJsonp([7,2,4],{
 				gradient.addColorStop(1, "rgba(255,0,0,0)");
 				this.ctx.fillStyle = gradient;
 				this.ctx.fill();
+				this.ctx.closePath();
 				this.ctx.restore();
 				if (!this.isRecive) {
 					var msg = {
@@ -8487,6 +8488,71 @@ webpackJsonp([7,2,4],{
 					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw' });
 				}
 			};
+
+			_this.drawLineStart = function (x, y, isRecive) {
+				var ctx = this.ctx;
+				ctx.beginPath();
+				var gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 5);
+				gradient.addColorStop(0, "rgba(255,0,0,1)");
+				gradient.addColorStop(1, "rgba(255,0,0,0.2)");
+				ctx.fillStyle = '#00f';
+				ctx.strokeStyle = gradient;
+				ctx.lineWidth = 5;
+				ctx.moveTo(x, y);
+				if (!isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height,
+						state: 'start'
+					};
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "start" });
+				}
+			}.bind(_this);
+
+			_this.drawLine = function (x, y, isRecive) {
+				var ctx = this.ctx;
+				ctx.lineTo(x, y);
+				ctx.stroke();
+				if (!isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height,
+						state: 'move'
+					};
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "move" });
+				}
+				// ctx.fill();
+			}.bind(_this);
+
+			_this.drawLineEnd = function (isRecive) {
+				// ctx.lineTo(x,y);
+				this.ctx.closePath();
+				// ctx.stroke();
+				this.ctx.restore();
+
+				if (!isRecive) {
+					_MsgAction.MsgActions.sendMsg({ msg: { state: 'end' }, to: this.props.params.id, lx: 'draw', state: "end" });
+				}
+			}.bind(_this);
+
+			_this.autoDraw = function (x, y, state) {
+				// if(this.beDraw){
+				// console.log(state);
+
+				if (state == 'start') {
+					var posx = this.state.width * x;
+					var posy = this.state.height * y;
+					this.drawLineStart(posx, posy, true);
+				} else if (state == 'move') {
+					// console.log()
+					var posx = this.state.width * x;
+					var posy = this.state.height * y;
+					this.drawLine(posx, posy, true);
+				} else if (state == 'end') {
+					this.drawLineEnd(true);
+				}
+				// }
+			}.bind(_this);
 
 			_this.clear = function () {
 				this.ctx.clearRect(0, 0, this.state.width, this.state.height);
@@ -8500,11 +8566,12 @@ webpackJsonp([7,2,4],{
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				_MsgStore.MsgStore.addDrawListener(function (x, y, isRecive) {
+				_MsgStore.MsgStore.addDrawListener(function (x, y, state) {
 					if (this.beDraw) {
-						var posx = this.state.width * x;
-						var posy = this.state.height * y;
-						this.draw(posx, posy, true);
+						// console.log(state);
+						// var posx=this.state.width*x;
+						// var posy=this.state.height*y;
+						this.autoDraw(x, y, state);
 					}
 				}.bind(this));
 			}
@@ -8529,14 +8596,17 @@ webpackJsonp([7,2,4],{
 						}, onTouchStart: function onTouchStart(e) {
 							e.nativeEvent.preventDefault();
 							_this2.beDraw = false;
+							_this2.drawLineStart(e.nativeEvent.touches[0].clientX, e.nativeEvent.touches[0].clientY);
 						}, onTouchMove: function onTouchMove(e) {
 							var native = e.nativeEvent;
 							// console.log(native);
 							var posx = native.touches[0].clientX;
 							var posy = native.touches[0].clientY;
-							_this2.draw(posx, posy, false);
-						}, onTouchEnd: function onTouchEnd() {
-							return _this2.beDraw = true;
+							// this.draw(posx,posy,false);
+							_this2.drawLine(posx, posy);
+						}, onTouchEnd: function onTouchEnd(e) {
+							_this2.beDraw = true;
+							_this2.drawLineEnd();
 						} })
 				);
 			}

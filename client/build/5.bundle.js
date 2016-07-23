@@ -736,7 +736,7 @@ webpackJsonp([5,2,4],{
 					this.messages.push(data);
 					this.emitUpdate();
 				} else {
-					this.emitDraw(data.msg);
+					this.emitDraw(data);
 				}
 			}
 		}, {
@@ -770,9 +770,9 @@ webpackJsonp([5,2,4],{
 		}, {
 			key: 'addDrawListener',
 			value: function addDrawListener(callback) {
-				this.on('draw', function (msg) {
-					// console.log('msg',msg);
-					callback && callback(msg.posx, msg.posy, true);
+				this.on('draw', function (data) {
+					// console.log('msg',data);
+					callback && callback(data.msg.posx, data.msg.posy, data.msg.state);
 				});
 			}
 		}, {
