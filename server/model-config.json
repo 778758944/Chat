@@ -14,7 +14,7 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mysqlDs"
   },
   "AccessToken": {
     "dataSource": "mysqlDs",
@@ -31,10 +31,6 @@
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "user": {
-    "dataSource": "mysqlDs",
-    "public": true
   },
   "yonghu": {
     "dataSource": "mysqlDs",
