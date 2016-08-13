@@ -7,6 +7,8 @@
 import React,{Component} from 'react'
 import {Router,Link} from 'react-router'
 
+var img=require('../../11.png');
+
 
 class Friend extends Component{
 	constructor(props){
@@ -23,14 +25,27 @@ class Friend extends Component{
 	}
 
 	render(){
-		var path='/chat/'+this.props.id;
+		var path=this.props.path;
+		if(!path){
+			path='/chat/'+this.props.id;
+		}
 		return (
 			<div className="friendWrap">
-				<Link to={path}><div className="friendText">{this.props.email}</div></Link>
+				<Link to={{
+					pathname:path,
+					state:{
+						other_img:this.props.img ? this.props.img:img,
+						mine_img:this.props.myimg ? this.props.myimg:img
+					}
+				}}>
+					<img src={this.props.img ? this.props.img:img} className='tx'/>
+					<div className="friendText">{this.props.email}</div>
+				</Link>
 			</div>
 			)
 	}
 }
+
 
 Friend.contextTypes={
 	color:React.PropTypes.string,

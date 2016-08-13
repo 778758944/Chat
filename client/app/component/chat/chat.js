@@ -7,8 +7,6 @@
 import React from 'react'
 import {HZRecorder,dealWav} from '../../lib/getaudio'
 
-console.log(HZRecorder);
-
 var my_img=require('../../11.png');
 var other_img=require('../../22.png');
 
@@ -22,7 +20,7 @@ class MineMsg extends React.Component{
 		if(!data.lx){
 			return (
 				<div className='otherMsg oneMsg'>
-					<img className='otherMsg_img' width={35} src={my_img}/>
+					<img className='otherMsg_img' width={35} src={this.props.img}/>
 					<div className='msgWrap otherWrap'>
 						<p className='otherMsg_text oneText'>{this.props.data.msg}</p>
 					</div>
@@ -74,7 +72,7 @@ class OtherMsg extends React.Component{
 		if(!data.lx){
 			return (
 				<div className="mineMsg oneMsg">
-		  			      <img width={35} className="mineMsg_img" src={other_img}/>
+		  			      <img width={35} className="mineMsg_img" src={this.props.img}/>
 		  			      <div className="msgWrap mineWrap">
 			  			      <p className="mineMsg oneText">{this.props.data.msg}</p>
 			  			      <span className="caret"></span>
@@ -212,16 +210,16 @@ class InfoBox extends React.Component{
 		super(props)
 	}
 	componentDidMount(){
-		// console.log(this.props.msg);
+		console.log(this.props.img);
 	}
 	render(){
 		// console.log(this.props.msg);
 		var inner=this.props.msg.map(function(value,index){
 			if(value.type==1){
-				return <MineMsg data={value} key={index} audio={this.props.audio}/>
+				return <MineMsg data={value} key={index} audio={this.props.audio} img={this.props.mine_img}/>
 			}
 			else{
-				return <OtherMsg data={value} key={index} audio={this.props.audio} toCvs={this.props.toCvs}/>
+				return <OtherMsg data={value} key={index} audio={this.props.audio} toCvs={this.props.toCvs} img={this.props.img}/>
 			}
 		}.bind(this));
 		return (

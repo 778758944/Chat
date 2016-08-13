@@ -5,6 +5,9 @@
  * @version $Id$
  */
 var loopback=require('loopback');
+var formidable=require('formidable');
+var Path=require('path');
+var fs=require('fs');
 var sockets={},
 	id;
 
@@ -54,9 +57,69 @@ var login=function(req,res){
 	})
 }
 
+var updateInfo=function(req,res){
+	var yonghu=loopback.findModel('yonghu');
+	var ctx=loopback.getCurrentContext();
+	var token=ctx.get('accessToken');
+	console.log(token);
+	var userId=token.userId;
+	var form=formidable.IncomingForm();
+	form.parse(req,function(err,fields,files){
+		var username=fields.username;
+		var img=files.tx;
+		// console.log(img);
+		var imgPath=img.path;
+		var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+img.name);
+		var filePath=Path.resolve("/userImg/"+userId+img.name);
+		var read=fs.createReadStream(imgPath);
+		var write=fs.createWriteStream(savePath);
+		read.pipe(write);
+
+		yonghu.updateAll({id:userId},{username:username,img:filePath},function(err,data){
+			if(err){
+				console.log(err);
+			}
+			else{
+				console.log(data);
+				res.json({code:200,msg:'success'});
+			}
+		})
+	});
+
+	// res.json({name:'jack'});
+}
+
+
+var uploadImg=function(req,res){
+	var ctx=loopback.getCurrentContext();
+	var userId=ctx.get('accessToken').userId;
+	console.log(userId);
+	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+'.png');
+	var filePath=Path.resolve("/userImg/"+userId+'.png');
+	var data=new Buffer(req.body.data,'base64');
+	fs.exists(savePath,function(exits){
+		if(exits){
+			fs.unlinkSync(savePath);
+		}
+
+		fs.writeFile(savePath,data,function(err){
+			if(err){
+				console.log(err);
+			}
+			else{
+				console.log('ok');
+				res.json({path:filePath});
+			}
+
+		})
+	})
+}
+
 module.exports={
 	login:login,
-	socketConnection:socketConnection
+	socketConnection:socketConnection,
+	updateInfo:updateInfo,
+	uploadImg:uploadImg
 }
 
 

@@ -1,4 +1,4 @@
-webpackJsonp([4],{
+webpackJsonp([8,2,4],{
 
 /***/ 232:
 /***/ function(module, exports) {
@@ -306,6 +306,559 @@ webpackJsonp([4],{
 	  return arg === void 0;
 	}
 
+
+/***/ },
+
+/***/ 234:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.AppDispatcher = undefined;
+
+	var _flux = __webpack_require__(235);
+
+	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	                                                      * 
+	                                                      * @authors Your Name (you@example.org)
+	                                                      * @date    2016-03-23 22:14:17
+	                                                      * @version $Id$
+	                                                      */
+
+
+	var AppDispatcher = new _flux.Dispatcher();
+	AppDispatcher.register(function (actions) {
+		switch (actions.actionType) {
+			case 'SEND MESSAGE':
+				__webpack_require__.e/* nsure */(2, function (require) {
+					MsgStore = __webpack_require__(238).MsgStore;
+					MsgStore.sendMsg(actions.text);
+				});
+				break;
+
+			case 'LOGIN':
+				__webpack_require__.e/* nsure */(3, function (require) {
+					LoginStore = __webpack_require__(231).LoginStore;
+					LoginStore.login(actions.email, actions.password);
+				});
+				break;
+
+			case 'GET USER':
+				__webpack_require__.e/* nsure */(4, function (require) {
+					FrinedStore = __webpack_require__(239).FriendStore;
+					FrinedStore.getUsers(actions.token);
+				});
+				break;
+
+			case 'SAVE INFO':
+				__webpack_require__.e/* nsure */(5, function (require) {
+					SettingStore = __webpack_require__(287).SettingStore;
+					SettingStore.save(actions.username, actions.path);
+				});
+				break;
+
+			default:
+		}
+	});
+
+	exports.AppDispatcher = AppDispatcher;
+
+/***/ },
+
+/***/ 235:
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	module.exports.Dispatcher = __webpack_require__(236);
+
+
+/***/ },
+
+/***/ 236:
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule Dispatcher
+	 * 
+	 * @preventMunge
+	 */
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var invariant = __webpack_require__(237);
+
+	var _prefix = 'ID_';
+
+	/**
+	 * Dispatcher is used to broadcast payloads to registered callbacks. This is
+	 * different from generic pub-sub systems in two ways:
+	 *
+	 *   1) Callbacks are not subscribed to particular events. Every payload is
+	 *      dispatched to every registered callback.
+	 *   2) Callbacks can be deferred in whole or part until other callbacks have
+	 *      been executed.
+	 *
+	 * For example, consider this hypothetical flight destination form, which
+	 * selects a default city when a country is selected:
+	 *
+	 *   var flightDispatcher = new Dispatcher();
+	 *
+	 *   // Keeps track of which country is selected
+	 *   var CountryStore = {country: null};
+	 *
+	 *   // Keeps track of which city is selected
+	 *   var CityStore = {city: null};
+	 *
+	 *   // Keeps track of the base flight price of the selected city
+	 *   var FlightPriceStore = {price: null}
+	 *
+	 * When a user changes the selected city, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'city-update',
+	 *     selectedCity: 'paris'
+	 *   });
+	 *
+	 * This payload is digested by `CityStore`:
+	 *
+	 *   flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'city-update') {
+	 *       CityStore.city = payload.selectedCity;
+	 *     }
+	 *   });
+	 *
+	 * When the user selects a country, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'country-update',
+	 *     selectedCountry: 'australia'
+	 *   });
+	 *
+	 * This payload is digested by both stores:
+	 *
+	 *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       CountryStore.country = payload.selectedCountry;
+	 *     }
+	 *   });
+	 *
+	 * When the callback to update `CountryStore` is registered, we save a reference
+	 * to the returned token. Using this token with `waitFor()`, we can guarantee
+	 * that `CountryStore` is updated before the callback that updates `CityStore`
+	 * needs to query its data.
+	 *
+	 *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       // `CountryStore.country` may not be updated.
+	 *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
+	 *       // `CountryStore.country` is now guaranteed to be updated.
+	 *
+	 *       // Select the default city for the new country
+	 *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
+	 *     }
+	 *   });
+	 *
+	 * The usage of `waitFor()` can be chained, for example:
+	 *
+	 *   FlightPriceStore.dispatchToken =
+	 *     flightDispatcher.register(function(payload) {
+	 *       switch (payload.actionType) {
+	 *         case 'country-update':
+	 *         case 'city-update':
+	 *           flightDispatcher.waitFor([CityStore.dispatchToken]);
+	 *           FlightPriceStore.price =
+	 *             getFlightPriceStore(CountryStore.country, CityStore.city);
+	 *           break;
+	 *     }
+	 *   });
+	 *
+	 * The `country-update` payload will be guaranteed to invoke the stores'
+	 * registered callbacks in order: `CountryStore`, `CityStore`, then
+	 * `FlightPriceStore`.
+	 */
+
+	var Dispatcher = (function () {
+	  function Dispatcher() {
+	    _classCallCheck(this, Dispatcher);
+
+	    this._callbacks = {};
+	    this._isDispatching = false;
+	    this._isHandled = {};
+	    this._isPending = {};
+	    this._lastID = 1;
+	  }
+
+	  /**
+	   * Registers a callback to be invoked with every dispatched payload. Returns
+	   * a token that can be used with `waitFor()`.
+	   */
+
+	  Dispatcher.prototype.register = function register(callback) {
+	    var id = _prefix + this._lastID++;
+	    this._callbacks[id] = callback;
+	    return id;
+	  };
+
+	  /**
+	   * Removes a callback based on its token.
+	   */
+
+	  Dispatcher.prototype.unregister = function unregister(id) {
+	    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	    delete this._callbacks[id];
+	  };
+
+	  /**
+	   * Waits for the callbacks specified to be invoked before continuing execution
+	   * of the current callback. This method should only be used by a callback in
+	   * response to a dispatched payload.
+	   */
+
+	  Dispatcher.prototype.waitFor = function waitFor(ids) {
+	    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;
+	    for (var ii = 0; ii < ids.length; ii++) {
+	      var id = ids[ii];
+	      if (this._isPending[id]) {
+	        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;
+	        continue;
+	      }
+	      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	      this._invokeCallback(id);
+	    }
+	  };
+
+	  /**
+	   * Dispatches a payload to all registered callbacks.
+	   */
+
+	  Dispatcher.prototype.dispatch = function dispatch(payload) {
+	    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;
+	    this._startDispatching(payload);
+	    try {
+	      for (var id in this._callbacks) {
+	        if (this._isPending[id]) {
+	          continue;
+	        }
+	        this._invokeCallback(id);
+	      }
+	    } finally {
+	      this._stopDispatching();
+	    }
+	  };
+
+	  /**
+	   * Is this Dispatcher currently dispatching.
+	   */
+
+	  Dispatcher.prototype.isDispatching = function isDispatching() {
+	    return this._isDispatching;
+	  };
+
+	  /**
+	   * Call the callback stored with the given id. Also do some internal
+	   * bookkeeping.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {
+	    this._isPending[id] = true;
+	    this._callbacks[id](this._pendingPayload);
+	    this._isHandled[id] = true;
+	  };
+
+	  /**
+	   * Set up bookkeeping needed when dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {
+	    for (var id in this._callbacks) {
+	      this._isPending[id] = false;
+	      this._isHandled[id] = false;
+	    }
+	    this._pendingPayload = payload;
+	    this._isDispatching = true;
+	  };
+
+	  /**
+	   * Clear bookkeeping used for dispatching.
+	   *
+	   * @internal
+	   */
+
+	  Dispatcher.prototype._stopDispatching = function _stopDispatching() {
+	    delete this._pendingPayload;
+	    this._isDispatching = false;
+	  };
+
+	  return Dispatcher;
+	})();
+
+	module.exports = Dispatcher;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+
+/***/ 237:
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule invariant
+	 */
+
+	"use strict";
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var invariant = function (condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+
+/***/ 238:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.MsgStore = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _events = __webpack_require__(232);
+
+	var _friendStore = __webpack_require__(239);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 21:35:27
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// var io=require('socket.io-client');
+	// import io from './socket.io'
+	// var io=require('socket.io-client')
+	// var io_url=location.protocol+'//'+location.hostname+':'+location.port;
+	// console.log(io_url);
+	// var io_url="http://0.0.0.0:3002"
+	// var socket=io(io_url);
+
+	// alert('kjsndjks');
+
+
+	console.log(_friendStore.socket);
+
+	var MSGSTORE = function (_EventEmitter) {
+		_inherits(MSGSTORE, _EventEmitter);
+
+		function MSGSTORE() {
+			_classCallCheck(this, MSGSTORE);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MSGSTORE).call(this));
+
+			_this.messages = [];
+			return _this;
+		}
+
+		_createClass(MSGSTORE, [{
+			key: 'getAll',
+			value: function getAll() {
+				return this.messages;
+			}
+		}, {
+			key: 'updateMsg',
+			value: function updateMsg(data) {
+				if (data.lx != 'draw') {
+					this.messages.push(data);
+					this.emitUpdate();
+				} else {
+					this.emitDraw(data);
+				}
+			}
+		}, {
+			key: 'sendMsg',
+			value: function sendMsg(data) {
+				if (data.lx != 'draw') {
+					this.updateMsg(data);
+				}
+				_friendStore.socket.emit("sendMsg", data);
+			}
+		}, {
+			key: 'addUpdateListener',
+			value: function addUpdateListener(callback) {
+				this.on('update', callback);
+			}
+		}, {
+			key: 'removeUpdateListener',
+			value: function removeUpdateListener(callback) {
+				this.removeListener('update', callback);
+			}
+		}, {
+			key: 'emitUpdate',
+			value: function emitUpdate() {
+				this.emit('update');
+			}
+		}, {
+			key: 'emitDraw',
+			value: function emitDraw(msg) {
+				this.emit('draw', msg);
+			}
+		}, {
+			key: 'addDrawListener',
+			value: function addDrawListener(callback) {
+				this.on('draw', function (data) {
+					// console.log('msg',data);
+					callback && callback(data.msg.posx, data.msg.posy, data.msg.state);
+				});
+			}
+		}, {
+			key: 'removeDrawListener',
+			value: function removeDrawListener(callback) {
+				this.removeListener('draw', callback);
+			}
+		}]);
+
+		return MSGSTORE;
+	}(_events.EventEmitter);
+
+	var MsgStore = new MSGSTORE();
+
+	_friendStore.socket.on('news', function (data) {
+		// console.log('data',data);
+		MsgStore.updateMsg(data);
+	});
+	exports.MsgStore = MsgStore;
+
+	// var a={
+	// 	name:"jack",
+	// 	add:function(a,b){
+	// 		console.log(this);           
+	// 		var c = function (argument) {
+	// 			console.log(this)
+	// 		}
+	// 		c()
+	// 	}
+	// }
+	// a.add()
+
+	// b.apply(a);
+
+	// var a=function(array,type){
+	// 	if(array instanceof Array||array instanceof Object){
+	// 		if(Object.prototype.toString.apply(array)=="[object Array]"){
+	// 			array.forEach(function(n){
+	// 				console.log(n);
+	// 			})
+	// 		}
+	// 		else{
+	// 			for(j in array){
+	// 				if(type){
+	// 					console.log(j);
+	// 				}
+	// 				else{
+	// 					if(array.hasOwnProperty(j)){
+	// 						console.log(j)
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	else{
+	// 		console.log("can not itera");
+	// 	}
+	// }
+
+	// var each = function (obj, callback) {
+	// 	if(Object.prototype.toString.apply(obj)==="[object Array]"){
+	// 		var value = "";
+	// 		for (var i = 0, l = obj.length; i < l; i++) {
+	// 			value = callback.call(obj[i], i, obj[i]);
+	// 			if (value === false) break;
+	// 		}
+	// 	} else if(Object.prototype.toString.apply(obj)==="[object Object]"){
+	// 		var value="";
+	// 		for (j in obj){
+	// 			if(obj.hasOwnProperty(j)){
+	// 				value=callback.call(obj[j],j,obj[j]);
+	// 				if(value===false) break;
+	// 			}
+	// 		}
+	// 	}
+	// 	return obj;
+	// }
+
+	// $.each()
 
 /***/ },
 
@@ -7848,6 +8401,279 @@ webpackJsonp([4],{
 	};
 
 
+
+/***/ },
+
+/***/ 289:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.MsgActions = undefined;
+
+	var _AppDispatcher = __webpack_require__(234);
+
+	var MsgActions = {
+		sendMsg: function sendMsg(msg) {
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: 'SEND MESSAGE',
+				text: msg
+			});
+		}
+	}; /**
+	    * 
+	    * @authors Your Name (you@example.org)
+	    * @date    2016-03-23 22:11:54
+	    * @version $Id$
+	    */
+
+
+	exports.MsgActions = MsgActions;
+
+/***/ },
+
+/***/ 297:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _MsgAction = __webpack_require__(289);
+
+	var _MsgStore = __webpack_require__(238);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-07-23 10:49:13
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+	// console.log('welcome cvs');
+
+	var Cvs = function (_React$Component) {
+		_inherits(Cvs, _React$Component);
+
+		function Cvs(props) {
+			_classCallCheck(this, Cvs);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cvs).call(this, props));
+
+			_this.state = {
+				width: document.documentElement.clientWidth,
+				height: document.documentElement.clientHeight
+			};
+			_this.cvs = '';
+			_this.ctx = '';
+			_this.beDraw = true;
+			_this.dot = [];
+			_this.dotStart = 1;
+
+			_this.drawRect = function () {
+				// this.ctx.fillStyle='#f00',
+				// this.ctx.fillRect(0,0,100,100);
+			};
+
+			_this.draw = function (x, y, isRecive) {
+				this.ctx.save();
+				this.ctx.beginPath();
+				this.ctx.arc(x, y, 10, Math.PI * 2, false);
+				var gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 10);
+				gradient.addColorStop(0, "rgba(255,0,0,0.8)");
+				gradient.addColorStop(1, "rgba(255,0,0,0)");
+				this.ctx.fillStyle = gradient;
+				this.ctx.fill();
+				this.ctx.closePath();
+				this.ctx.restore();
+				if (!this.isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height
+					};
+					// console.log(this.props.params);
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw' });
+				}
+			};
+
+			_this.drawLineStart = function (x, y, isRecive) {
+				var ctx = this.ctx;
+				ctx.save();
+				ctx.beginPath();
+				// var gradient=this.ctx.createRadialGradient(x,y,0,x,y,5);
+				// gradient.addColorStop(0,"rgba(255,0,0,1)");
+				// gradient.addColorStop(1,"rgba(255,0,0,0.2)");
+				ctx.fillStyle = '#00f';
+				ctx.strokeStyle = '#f00';
+				ctx.lineWidth = 5;
+				ctx.moveTo(x, y);
+				if (!isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height,
+						state: 'start'
+					};
+					// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
+				}
+			}.bind(_this);
+
+			_this.drawLine = function (x, y, isRecive) {
+				var ctx = this.ctx;
+				ctx.lineTo(x, y);
+				ctx.stroke();
+				if (!isRecive) {
+					var msg = {
+						posx: x / this.state.width,
+						posy: y / this.state.height,
+						state: 'move'
+					};
+					// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
+				}
+				// ctx.fill();
+			}.bind(_this);
+
+			_this.drawLineEnd = function (isRecive) {
+				// ctx.lineTo(x,y);
+				this.ctx.closePath();
+				// ctx.stroke();
+				this.ctx.restore();
+
+				if (!isRecive) {
+					// MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
+				}
+			}.bind(_this);
+
+			_this.autoDraw = function (x, y, state) {
+				// if(this.beDraw){
+				// console.log(state);
+
+				if (state == 'start') {
+					var posx = this.state.width * x;
+					var posy = this.state.height * y;
+					this.drawLineStart(posx, posy, true);
+				} else if (state == 'move') {
+					// console.log()
+					var posx = this.state.width * x;
+					var posy = this.state.height * y;
+					this.drawLine(posx, posy, true);
+				} else if (state == 'end') {
+					this.drawLineEnd(true);
+				}
+				// }
+			}.bind(_this);
+
+			_this.clear = function () {
+				this.ctx.clearRect(0, 0, this.state.width, this.state.height);
+			}.bind(_this);
+
+			_this.redrawing = function () {
+				console.log('redrawing');
+				// console.log(this.dot[this.])
+				var dot = this.dot[this.dotStart];
+				if (dot) {
+					this.drawLine(dot.x, dot.y);
+					this.dotStart += 1;
+					requestAnimationFrame(this.redrawing);
+				} else {
+					this.drawLineEnd();
+				}
+			}.bind(_this);
+
+			_this.redraw = function () {
+				if (this.dot[0]) {
+					this.dotStart = 1;
+					this.clear();
+					this.drawLineStart(this.dot[0].x, this.dot[0].y);
+					this.redrawing();
+				}
+			}.bind(_this);
+			return _this;
+		}
+
+		_createClass(Cvs, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				_MsgStore.MsgStore.addDrawListener(function (x, y, state) {
+					if (this.beDraw) {
+						// console.log(state);
+						// var posx=this.state.width*x;
+						// var posy=this.state.height*y;
+						this.autoDraw(x, y, state);
+					}
+				}.bind(this));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.clear, style: { position: 'absolute', top: 0, left: 0 } },
+						'清除'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.redraw, style: { position: 'absolute', top: 0, left: 100 } },
+						'回放'
+					),
+					_react2.default.createElement('canvas', { width: this.state.width, height: this.state.height, ref: function ref(e) {
+							if (e) {
+								_this2.ctx = e.getContext('2d');
+								_this2.cvs = e;
+							}
+						}, onTouchStart: function onTouchStart(e) {
+							e.nativeEvent.preventDefault();
+							_this2.dot = [];
+							_this2.beDraw = false;
+							_this2.drawLineStart(e.nativeEvent.touches[0].clientX, e.nativeEvent.touches[0].clientY);
+							var dot = { x: e.nativeEvent.touches[0].clientX, y: e.nativeEvent.touches[0].clientY };
+							_this2.dot.push(dot);
+						}, onTouchMove: function onTouchMove(e) {
+							var native = e.nativeEvent;
+							// console.log(native);
+							var posx = native.touches[0].clientX;
+							var posy = native.touches[0].clientY;
+							// this.draw(posx,posy,false);
+							_this2.drawLine(posx, posy);
+							var dot = { x: posx, y: posy };
+							_this2.dot.push(dot);
+						}, onTouchEnd: function onTouchEnd(e) {
+							_this2.beDraw = true;
+							_this2.drawLineEnd();
+						} })
+				);
+			}
+		}]);
+
+		return Cvs;
+	}(_react2.default.Component);
+
+	Cvs.contextTypes = {
+		state: _react2.default.PropTypes.object
+	};
+
+	module.exports = Cvs;
 
 /***/ }
 

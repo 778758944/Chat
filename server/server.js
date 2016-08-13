@@ -5,6 +5,10 @@ var http=require('http');
 var https=require('https');
 var sslConfig=require('./ssl-config.js');
 var handle=require('./handle/routeHandle.js');
+var bodyParser=require('body-parser');
+var path=require('path');
+
+
 
 // console.log('ksds')
 
@@ -21,6 +25,7 @@ var app = loopback();
 //   headers:['access_token','X-Access-Token'],
 //   params:['access_token']
 // }))
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(loopback.cookieParser('abc'));
 app.use(loopback.context());
 app.use(loopback.token({

@@ -7,9 +7,29 @@
 <meta name="Viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,minimum-scale=1" id="view">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link href="" rel="stylesheet">
+<link rel='manifest' href='manifest.json'>
 </head>
 <body>
     <div id="wrap"></div>
+    <script>
+    	function initialService(){
+			navigator.serviceWorker.ready.then(function(registration){
+				registration.pushManager.getSubscription().then(function(subscribe){
+					if(subscribe){
+						console.log(subscribe);
+					}
+					else{
+						registration.pushManager.subscribe({userVisibleOnly:true}).then(function(subscription){
+							console.log('key',subscription);
+						})
+					}
+				})
+			})
+		}
+
+	if(navigator.serviceWorker){
+		navigator.serviceWorker.register('./sw.js').then(initialService);
+	}
+    </script>
 <script type="text/javascript" src="bundle.js"></script></body>
 </html>

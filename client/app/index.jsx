@@ -9,6 +9,8 @@ var ReactCSSTransitionGroup=require('react-addons-css-transition-group');
 require('./main.css');
 require('./reset.css');
 
+console.log('kkdddd');
+
 
 const App=React.createClass({
 	transitionName:'viewchange',
@@ -53,12 +55,15 @@ const routes={
 	indexRoute:{
 		getComponent(nextState,cb){
 			require.ensure([],function(require){
-				cb(null,require('./component/register/registerCtrl'));
+				cb(null,require('./component/friend/friendCtrl'));
 			})
 		}
 	},
 	childRoutes:app
 }
+
+
+
 
 
 render((

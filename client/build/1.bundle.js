@@ -94,6 +94,7 @@ webpackJsonp([1,3],{
 							state: { token: res.id, id: res.userId }
 						});
 						// window.location.hash='#/register';
+						// router.goBack();
 					}
 				});
 			}
@@ -1129,12 +1130,12 @@ webpackJsonp([1,3],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore; /**
-	                                        * 
-	                                        * @authors Your Name (you@example.org)
-	                                        * @date    2016-03-23 22:14:17
-	                                        * @version $Id$
-	                                        */
+	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	                                                      * 
+	                                                      * @authors Your Name (you@example.org)
+	                                                      * @date    2016-03-23 22:14:17
+	                                                      * @version $Id$
+	                                                      */
 
 
 	var AppDispatcher = new _flux.Dispatcher();
@@ -1158,6 +1159,13 @@ webpackJsonp([1,3],{
 				__webpack_require__.e/* nsure */(4, function (require) {
 					FrinedStore = __webpack_require__(239).FriendStore;
 					FrinedStore.getUsers(actions.token);
+				});
+				break;
+
+			case 'SAVE INFO':
+				__webpack_require__.e/* nsure */(5, function (require) {
+					SettingStore = __webpack_require__(287).SettingStore;
+					SettingStore.save(actions.username, actions.path);
 				});
 				break;
 

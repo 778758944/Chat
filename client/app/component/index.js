@@ -39,6 +39,14 @@ var app=[
 				cb(null,require('./canvas/cvs'));
 			})
 		}
+	},
+	{
+		path:'/setting',
+		getComponent(nextState,cb){
+			require.ensure([],function(require){
+				cb(null,require('./setting/settingCtrl'));
+			})
+		}
 	}
 ];
 

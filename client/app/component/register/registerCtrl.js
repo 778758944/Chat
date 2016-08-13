@@ -63,6 +63,7 @@ class RegisterCtrl extends React.Component{
 					state:{token:res.id,id:res.userId}
 				})
 				// window.location.hash='#/register';
+				// router.goBack();
 			}
 		})
 	}

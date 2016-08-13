@@ -6,7 +6,7 @@
  */
 import {Dispatcher} from 'flux'
 
-var MsgStore,LoginStore,FrinedStore;
+var MsgStore,LoginStore,FrinedStore,SettingStore;
 
 
 var AppDispatcher=new Dispatcher();
@@ -32,6 +32,15 @@ AppDispatcher.register(function(actions){
 				FrinedStore.getUsers(actions.token);
 			})
 			break;
+
+		case 'SAVE INFO':
+			require.ensure([],function(require){
+				SettingStore=require('../store/settingStore').SettingStore;
+				SettingStore.save(actions.username,actions.path);
+			})
+			break;
+
+
 
 
 		default:

@@ -1,4 +1,5 @@
 var loopback=require('loopback');
+var formidable=require('formidable');
 
 module.exports = function(Yonghu) {
 	Yonghu.friendList=function(cb){
@@ -11,6 +12,7 @@ module.exports = function(Yonghu) {
 				id:true,
 				username:true,
 				email:true,
+				img:true
 			},
 			where:{
 				// id:{
@@ -24,14 +26,19 @@ module.exports = function(Yonghu) {
 				cb(err);
 			}
 			else{
+				var myself;
 				data.map(function(ele,index){
 					if(ele.id==userId){
-						data.splice(index,1);
+						myself=data.splice(index,1);
 					}
 				})
+				var resData={
+					myself:myself[0],
+					friends:data
+				};
 				var resObj={
 					code:200,
-					data:data,
+					data:resData,
 					msg:'success'
 				}
 				cb(null,resObj);
@@ -72,6 +79,83 @@ module.exports = function(Yonghu) {
 			}
 		}
 		return next();
+	});
+
+	Yonghu.updateInfo=function(username,path,cb){
+		console.log(path);
+		var ctx=loopback.getCurrentContext();
+		var userId=ctx.get('accessToken').userId;
+		if(username&&path){
+			Yonghu.updateAll({id:userId},{
+				username:username,
+				img:path
+			},function(err,data){
+				if(err){
+					console.log(err);
+				}
+				else{
+					console.log(data);
+					cb(null,{code:200,msg:'success'});
+				}
+
+			})
+		}
+		else if(username){
+			Yonghu.updateAll({id:userId},{
+				username:username
+			},function(err,data){
+				if(err){
+					console.log(err);
+				}
+				else{
+					console.log(data);
+					cb(null,{code:200,msg:'success'});
+				}
+
+			})
+		}
+		else if(path){
+			Yonghu.updateAll({id:userId},{
+				path:path
+			},function(err,data){
+				if(err){
+					console.log(err);
+				}
+				else{
+					console.log(data);
+					cb(null,{code:200,msg:'success'});
+				}
+
+			})
+		}
+	}
+
+	Yonghu.remoteMethod('updateInfo',{
+		accepts:[
+			{arg:'username',type:'string'},
+			{arg:"path",type:"string"}
+		],
+		returns:{root:true},
+		http:{arg:"/updateInfo",verb:'post'}
+	});
+
+	Yonghu.getImg=function(cb){
+		var ctx=loopback.getCurrentContext();
+		var userId=ctx.get('accessToken').userId;
+		Yonghu.findById(userId,{img:true},function(err,data){
+			if(err){
+				console.log(err);
+			}
+			else{
+				console.log(data);
+				cb(null,{code:200,data:data.img,msg:'success'});
+			}
+		})
+	}
+
+	Yonghu.remoteMethod('getImg',{
+		returns:{root:true},
+		http:{arg:"/getImg",verb:"post"}
 	})
 
 

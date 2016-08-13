@@ -38,7 +38,7 @@ class ChatCtrl extends React.Component{
 	}
 
 	componentDidMount(){
-		// console.log(this.props.params.id);
+		console.log(this.props.location);
 		MsgStore.addUpdateListener(this._onUpdate);
 	}
 
@@ -52,7 +52,7 @@ class ChatCtrl extends React.Component{
 		return (
 			<div className="wrapBox">
 				<audio ref={(e)=>this.audio=e}></audio>
-				<InfoBox msg={this.state.msg} audio={this.audio} toCvs={this.toCvs.bind(this)}/>
+				<InfoBox msg={this.state.msg} audio={this.audio} toCvs={this.toCvs.bind(this)} img={this.props.location.state.other_img} mine_img={this.props.location.state.mine_img}/>
 				<FormBox handle={this.sendMsg} to={this.props.params.id} toCvs={this.toCvs.bind(this)}/>
 			</div>
 			)

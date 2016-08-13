@@ -9,55 +9,21 @@ var HtmlwebpackPlugin=require("html-webpack-plugin");
 var ROOT_PATH=path.resolve(__dirname);
 var APP_PATH=path.resolve(ROOT_PATH,'client/app');
 var BUILD_PATH=path.resolve(ROOT_PATH,'client/build');
-var webpack=require('webpack');
 
 
 
 module.exports={
-	entry:{
-		index:path.resolve(APP_PATH,'index.jsx'),
-		run:path.resolve(APP_PATH,'run.jsx')
-	},
+	entry:path.resolve(APP_PATH,'index.jsx'),
 	output:{
 		path:BUILD_PATH,
-		filename:'[name].js'
+		filename:'bundle.js'
 	},
 	plugins:[
 		new HtmlwebpackPlugin({
 			title:"Chat",
-			filename:'index.html',
-			chunks:['vendors','index'],
 			template:'./client/app/index-tem.html'
-		}),
-		new HtmlwebpackPlugin({
-			title:"百米飞人大战",
-			filename:'run.html',
-			chunks:['vendors','run'],
-			template:'./client/app/index-tem.html'
-		}),
-		new webpack.optimize.CommonsChunkPlugin({
-			name:"vendors",
-			chunks:['index','run'],
-			minChunks:2
 		})
 	],
-	devtool:"eval-source-map",
-	devServer:{
-		historyApiFallback:true,
-		hot:true,
-		inline:true,
-		progress:true,
-		proxy:{
-			'/api/*':{
-				target:"http://0.0.0.0:3002",
-				secure:true
-			},
-			'/userImg/*':{
-				target:'http://0.0.0.0:3002',
-				secure:true
-			}
-		}
-	},
 	module:{
 		loaders:[
 			{
@@ -80,9 +46,7 @@ module.exports={
 		]
 	},
 	postcss:function(){
-		return [require('autoprefixer')({
-			browsers:['IOS >= 6.0','Android >= 4.0']
-		}),require('precss')];
+		return [require('autoprefixer'),require('precss')];
 	}
 };
 

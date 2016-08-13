@@ -20,6 +20,8 @@ class Cvs extends React.Component{
 		this.cvs='';
 		this.ctx='';
 		this.beDraw=true;
+		this.dot=[];
+		this.dotStart=1;
 
 		this.drawRect=function(){
 			// this.ctx.fillStyle='#f00',
@@ -49,12 +51,13 @@ class Cvs extends React.Component{
 
 		this.drawLineStart=function(x,y,isRecive){
 			var ctx=this.ctx;
+			ctx.save();
 			ctx.beginPath();
-			var gradient=this.ctx.createRadialGradient(x,y,0,x,y,5);
-			gradient.addColorStop(0,"rgba(255,0,0,1)");
-			gradient.addColorStop(1,"rgba(255,0,0,0.2)");
+			// var gradient=this.ctx.createRadialGradient(x,y,0,x,y,5);
+			// gradient.addColorStop(0,"rgba(255,0,0,1)");
+			// gradient.addColorStop(1,"rgba(255,0,0,0.2)");
 			ctx.fillStyle='#00f';
-			ctx.strokeStyle=gradient;
+			ctx.strokeStyle='#f00';
 			ctx.lineWidth=5;
 			ctx.moveTo(x,y);
 			if(!isRecive){
@@ -63,7 +66,7 @@ class Cvs extends React.Component{
 					posy:y/this.state.height,
 					state:'start'
 				}
-				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
+				// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
 			}
 		}.bind(this);
 
@@ -77,7 +80,7 @@ class Cvs extends React.Component{
 					posy:y/this.state.height,
 					state:'move'
 				}
-				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
+				// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
 			}
 			// ctx.fill();
 		}.bind(this);
@@ -89,7 +92,7 @@ class Cvs extends React.Component{
 			this.ctx.restore();
 
 			if(!isRecive){
-				MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
+				// MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
 			}
 		}.bind(this);
 
@@ -117,6 +120,29 @@ class Cvs extends React.Component{
 		this.clear=function(){
 			this.ctx.clearRect(0,0,this.state.width,this.state.height);
 		}.bind(this);
+
+		this.redrawing=function(){
+			console.log('redrawing');
+			// console.log(this.dot[this.])
+			var dot=this.dot[this.dotStart];
+			if(dot){
+				this.drawLine(dot.x,dot.y);
+				this.dotStart+=1;
+				requestAnimationFrame(this.redrawing);
+			}
+			else{
+				this.drawLineEnd();
+			}
+		}.bind(this);
+
+		this.redraw=function(){
+			if(this.dot[0]){
+				this.dotStart=1;
+				this.clear();
+				this.drawLineStart(this.dot[0].x,this.dot[0].y);
+				this.redrawing();
+			}
+		}.bind(this);
 	}
 
 	componentWillMount(){
@@ -139,6 +165,7 @@ class Cvs extends React.Component{
 		return (
 			<div>
 				<button onClick={this.clear} style={{position:'absolute',top:0,left:0}}>清除</button>
+				<button onClick={this.redraw} style={{position:'absolute',top:0,left:100}}>回放</button>
 				<canvas width={this.state.width} height={this.state.height} ref={(e)=>{
 					if(e){
 						this.ctx=e.getContext('2d');
@@ -146,8 +173,11 @@ class Cvs extends React.Component{
 					}
 				}} onTouchStart={(e)=>{
 					e.nativeEvent.preventDefault()
+					this.dot=[];
 					this.beDraw=false;
 					this.drawLineStart(e.nativeEvent.touches[0].clientX,e.nativeEvent.touches[0].clientY);
+					var dot={x:e.nativeEvent.touches[0].clientX,y:e.nativeEvent.touches[0].clientY};
+					this.dot.push(dot);
 				}} onTouchMove={(e)=>{
 					var native=e.nativeEvent;
 					// console.log(native);
@@ -155,6 +185,8 @@ class Cvs extends React.Component{
 					var posy=native.touches[0].clientY;
 					// this.draw(posx,posy,false);
 					this.drawLine(posx,posy);
+					var dot={x:posx,y:posy};
+					this.dot.push(dot);
 				}} onTouchEnd={(e)=>{
 					this.beDraw=true
 					this.drawLineEnd()

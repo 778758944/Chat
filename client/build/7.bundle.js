@@ -1,4 +1,4 @@
-webpackJsonp([7,2,4],{
+webpackJsonp([7,4],{
 
 /***/ 232:
 /***/ function(module, exports) {
@@ -321,12 +321,12 @@ webpackJsonp([7,2,4],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore; /**
-	                                        * 
-	                                        * @authors Your Name (you@example.org)
-	                                        * @date    2016-03-23 22:14:17
-	                                        * @version $Id$
-	                                        */
+	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	                                                      * 
+	                                                      * @authors Your Name (you@example.org)
+	                                                      * @date    2016-03-23 22:14:17
+	                                                      * @version $Id$
+	                                                      */
 
 
 	var AppDispatcher = new _flux.Dispatcher();
@@ -350,6 +350,13 @@ webpackJsonp([7,2,4],{
 				__webpack_require__.e/* nsure */(4, function (require) {
 					FrinedStore = __webpack_require__(239).FriendStore;
 					FrinedStore.getUsers(actions.token);
+				});
+				break;
+
+			case 'SAVE INFO':
+				__webpack_require__.e/* nsure */(5, function (require) {
+					SettingStore = __webpack_require__(287).SettingStore;
+					SettingStore.save(actions.username, actions.path);
 				});
 				break;
 
@@ -672,189 +679,6 @@ webpackJsonp([7,2,4],{
 
 /***/ },
 
-/***/ 238:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.MsgStore = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _events = __webpack_require__(232);
-
-	var _friendStore = __webpack_require__(239);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 21:35:27
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-	// var io=require('socket.io-client');
-	// import io from './socket.io'
-	// var io=require('socket.io-client')
-	// var io_url=location.protocol+'//'+location.hostname+':'+location.port;
-	// console.log(io_url);
-	// var io_url="http://0.0.0.0:3002"
-	// var socket=io(io_url);
-
-	// alert('kjsndjks');
-
-
-	console.log(_friendStore.socket);
-
-	var MSGSTORE = function (_EventEmitter) {
-		_inherits(MSGSTORE, _EventEmitter);
-
-		function MSGSTORE() {
-			_classCallCheck(this, MSGSTORE);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MSGSTORE).call(this));
-
-			_this.messages = [];
-			return _this;
-		}
-
-		_createClass(MSGSTORE, [{
-			key: 'getAll',
-			value: function getAll() {
-				return this.messages;
-			}
-		}, {
-			key: 'updateMsg',
-			value: function updateMsg(data) {
-				if (data.lx != 'draw') {
-					this.messages.push(data);
-					this.emitUpdate();
-				} else {
-					this.emitDraw(data);
-				}
-			}
-		}, {
-			key: 'sendMsg',
-			value: function sendMsg(data) {
-				if (data.lx != 'draw') {
-					this.updateMsg(data);
-				}
-				_friendStore.socket.emit("sendMsg", data);
-			}
-		}, {
-			key: 'addUpdateListener',
-			value: function addUpdateListener(callback) {
-				this.on('update', callback);
-			}
-		}, {
-			key: 'removeUpdateListener',
-			value: function removeUpdateListener(callback) {
-				this.removeListener('update', callback);
-			}
-		}, {
-			key: 'emitUpdate',
-			value: function emitUpdate() {
-				this.emit('update');
-			}
-		}, {
-			key: 'emitDraw',
-			value: function emitDraw(msg) {
-				this.emit('draw', msg);
-			}
-		}, {
-			key: 'addDrawListener',
-			value: function addDrawListener(callback) {
-				this.on('draw', function (data) {
-					// console.log('msg',data);
-					callback && callback(data.msg.posx, data.msg.posy, data.msg.state);
-				});
-			}
-		}, {
-			key: 'removeDrawListener',
-			value: function removeDrawListener(callback) {
-				this.removeListener('draw', callback);
-			}
-		}]);
-
-		return MSGSTORE;
-	}(_events.EventEmitter);
-
-	var MsgStore = new MSGSTORE();
-
-	_friendStore.socket.on('news', function (data) {
-		// console.log('data',data);
-		MsgStore.updateMsg(data);
-	});
-	exports.MsgStore = MsgStore;
-
-	// var a={
-	// 	name:"jack",
-	// 	add:function(a,b){
-	// 		console.log(this);           
-	// 		var c = function (argument) {
-	// 			console.log(this)
-	// 		}
-	// 		c()
-	// 	}
-	// }
-	// a.add()
-
-	// b.apply(a);
-
-	// var a=function(array,type){
-	// 	if(array instanceof Array||array instanceof Object){
-	// 		if(Object.prototype.toString.apply(array)=="[object Array]"){
-	// 			array.forEach(function(n){
-	// 				console.log(n);
-	// 			})
-	// 		}
-	// 		else{
-	// 			for(j in array){
-	// 				if(type){
-	// 					console.log(j);
-	// 				}
-	// 				else{
-	// 					if(array.hasOwnProperty(j)){
-	// 						console.log(j)
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// 	else{
-	// 		console.log("can not itera");
-	// 	}
-	// }
-
-	// var each = function (obj, callback) {
-	// 	if(Object.prototype.toString.apply(obj)==="[object Array]"){
-	// 		var value = "";
-	// 		for (var i = 0, l = obj.length; i < l; i++) {
-	// 			value = callback.call(obj[i], i, obj[i]);
-	// 			if (value === false) break;
-	// 		}
-	// 	} else if(Object.prototype.toString.apply(obj)==="[object Object]"){
-	// 		var value="";
-	// 		for (j in obj){
-	// 			if(obj.hasOwnProperty(j)){
-	// 				value=callback.call(obj[j],j,obj[j]);
-	// 				if(value===false) break;
-	// 			}
-	// 		}
-	// 	}
-	// 	return obj;
-	// }
-
-	// $.each()
-
-/***/ },
-
 /***/ 239:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -867,29 +691,41 @@ webpackJsonp([7,2,4],{
 
 	var _events = __webpack_require__(232);
 
-	var io = __webpack_require__(240);
-	// var io_url="http://localhost:3002";
-	/**
-	 * 
-	 * @authors Your Name (you@example.org)
-	 * @date    2016-05-15 11:03:53
-	 * @version $Id$
-	 */
+	var io = __webpack_require__(240); /**
+	                                       * 
+	                                       * @authors Your Name (you@example.org)
+	                                       * @date    2016-05-15 11:03:53
+	                                       * @version $Id$
+	                                       */
 
-	var io_url = "https://chat.xingwentao.top";
+	var io_url = "http://localhost:3002";
+	// var io_url="https://chat.xingwentao.top";
 	var socket = io(io_url);
 
 	var FriendStore = Object.assign({}, _events.EventEmitter.prototype, {
 		users: [],
-
+		myself: {},
 		getUsers: function getUsers(access_token) {
 			var url = '/api/yonghus/friendList';
 			get(url, function (res) {
 				if (res.code == 200) {
-					this.users = res.data;
+					this.users = res.data.friends;
+					this.myself = res.data.myself;
 					this.emitGet();
+				} else {
+					this.emit('fail');
 				}
+			}.bind(this), function () {
+				this.emit('fail');
 			}.bind(this));
+		},
+
+		addFailListener: function addFailListener(cb) {
+			this.on('fail', cb);
+		},
+
+		removeFailListener: function removeFailListener(cb) {
+			this.removeListener('fail', cb);
 		},
 
 		addGetListener: function addGetListener(cb) {
@@ -8385,38 +8221,14 @@ webpackJsonp([7,2,4],{
 
 /***/ },
 
-/***/ 288:
+/***/ 292:
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.MsgActions = undefined;
-
-	var _AppDispatcher = __webpack_require__(234);
-
-	var MsgActions = {
-		sendMsg: function sendMsg(msg) {
-			_AppDispatcher.AppDispatcher.dispatch({
-				actionType: 'SEND MESSAGE',
-				text: msg
-			});
-		}
-	}; /**
-	    * 
-	    * @authors Your Name (you@example.org)
-	    * @date    2016-03-23 22:11:54
-	    * @version $Id$
-	    */
-
-
-	exports.MsgActions = MsgActions;
+	module.exports = __webpack_require__.p + "imgs/11-7af0f9358040f9908800872aca88d1a3.png";
 
 /***/ },
 
-/***/ 296:
+/***/ 294:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8427,9 +8239,15 @@ webpackJsonp([7,2,4],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MsgAction = __webpack_require__(288);
+	var _friend = __webpack_require__(295);
 
-	var _MsgStore = __webpack_require__(238);
+	var _friend2 = _interopRequireDefault(_friend);
+
+	var _friendStore = __webpack_require__(239);
+
+	var _friendAction = __webpack_require__(296);
+
+	var _friendAction2 = _interopRequireDefault(_friendAction);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8440,186 +8258,212 @@ webpackJsonp([7,2,4],{
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-07-23 10:49:13
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:49:59
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	// console.log('welcome cvs');
+	var FriendCtrl = function (_Component) {
+		_inherits(FriendCtrl, _Component);
 
-	var Cvs = function (_React$Component) {
-		_inherits(Cvs, _React$Component);
+		function FriendCtrl(props) {
+			_classCallCheck(this, FriendCtrl);
 
-		function Cvs(props) {
-			_classCallCheck(this, Cvs);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cvs).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FriendCtrl).call(this, props));
 
 			_this.state = {
-				width: document.documentElement.clientWidth,
-				height: document.documentElement.clientHeight
-			};
-			_this.cvs = '';
-			_this.ctx = '';
-			_this.beDraw = true;
-
-			_this.drawRect = function () {
-				// this.ctx.fillStyle='#f00',
-				// this.ctx.fillRect(0,0,100,100);
+				friends: [],
+				myself: {}
 			};
 
-			_this.draw = function (x, y, isRecive) {
-				this.ctx.save();
-				this.ctx.beginPath();
-				this.ctx.arc(x, y, 10, Math.PI * 2, false);
-				var gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 10);
-				gradient.addColorStop(0, "rgba(255,0,0,0.8)");
-				gradient.addColorStop(1, "rgba(255,0,0,0)");
-				this.ctx.fillStyle = gradient;
-				this.ctx.fill();
-				this.ctx.closePath();
-				this.ctx.restore();
-				if (!this.isRecive) {
-					var msg = {
-						posx: x / this.state.width,
-						posy: y / this.state.height
-					};
-					// console.log(this.props.params);
-					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw' });
-				}
-			};
-
-			_this.drawLineStart = function (x, y, isRecive) {
-				var ctx = this.ctx;
-				ctx.beginPath();
-				var gradient = this.ctx.createRadialGradient(x, y, 0, x, y, 5);
-				gradient.addColorStop(0, "rgba(255,0,0,1)");
-				gradient.addColorStop(1, "rgba(255,0,0,0.2)");
-				ctx.fillStyle = '#00f';
-				ctx.strokeStyle = gradient;
-				ctx.lineWidth = 5;
-				ctx.moveTo(x, y);
-				if (!isRecive) {
-					var msg = {
-						posx: x / this.state.width,
-						posy: y / this.state.height,
-						state: 'start'
-					};
-					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "start" });
-				}
+			_this._onGet = function () {
+				this.setState({
+					friends: _friendStore.FriendStore.users,
+					myself: _friendStore.FriendStore.myself
+				});
 			}.bind(_this);
 
-			_this.drawLine = function (x, y, isRecive) {
-				var ctx = this.ctx;
-				ctx.lineTo(x, y);
-				ctx.stroke();
-				if (!isRecive) {
-					var msg = {
-						posx: x / this.state.width,
-						posy: y / this.state.height,
-						state: 'move'
-					};
-					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "move" });
-				}
-				// ctx.fill();
+			_this._onFail = function () {
+				console.log('fail');
+				this.context.router.replace('/register');
 			}.bind(_this);
 
-			_this.drawLineEnd = function (isRecive) {
-				// ctx.lineTo(x,y);
-				this.ctx.closePath();
-				// ctx.stroke();
-				this.ctx.restore();
-
-				if (!isRecive) {
-					_MsgAction.MsgActions.sendMsg({ msg: { state: 'end' }, to: this.props.params.id, lx: 'draw', state: "end" });
-				}
-			}.bind(_this);
-
-			_this.autoDraw = function (x, y, state) {
-				// if(this.beDraw){
-				// console.log(state);
-
-				if (state == 'start') {
-					var posx = this.state.width * x;
-					var posy = this.state.height * y;
-					this.drawLineStart(posx, posy, true);
-				} else if (state == 'move') {
-					// console.log()
-					var posx = this.state.width * x;
-					var posy = this.state.height * y;
-					this.drawLine(posx, posy, true);
-				} else if (state == 'end') {
-					this.drawLineEnd(true);
-				}
-				// }
-			}.bind(_this);
-
-			_this.clear = function () {
-				this.ctx.clearRect(0, 0, this.state.width, this.state.height);
-			}.bind(_this);
 			return _this;
 		}
 
-		_createClass(Cvs, [{
+		_createClass(FriendCtrl, [{
 			key: 'componentWillMount',
-			value: function componentWillMount() {}
+			value: function componentWillMount() {
+				_friendStore.FriendStore.addGetListener(this._onGet);
+				_friendStore.FriendStore.addFailListener(this._onFail);
+				// var token=this.props.location.state.token;
+				_friendAction2.default.getUsers(123);
+			}
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				_MsgStore.MsgStore.addDrawListener(function (x, y, state) {
-					if (this.beDraw) {
-						// console.log(state);
-						// var posx=this.state.width*x;
-						// var posy=this.state.height*y;
-						this.autoDraw(x, y, state);
-					}
-				}.bind(this));
+				// console.log('router',this.context.router);
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				_friendStore.FriendStore.removeGetListener(this._onGet);
+				_friendStore.FriendStore.removeGetListener(this._onFail);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				var _this2 = this;
-
+				var myself = this.state.myself;
+				// console.log(this.state.friends);
+				var friend = this.state.friends.map(function (friend) {
+					// if(friend.id==this.props.location.state.id){
+					// 	return
+					// }
+					return _react2.default.createElement(_friend2.default, { email: friend.username ? friend.username : friend.email, img: friend.img, id: friend.id, key: friend.id, myimg: myself.img });
+				}.bind(this));
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.clear, style: { position: 'absolute', top: 0, left: 0 } },
-						'清除'
-					),
-					_react2.default.createElement('canvas', { width: this.state.width, height: this.state.height, ref: function ref(e) {
-							if (e) {
-								_this2.ctx = e.getContext('2d');
-								_this2.cvs = e;
-							}
-						}, onTouchStart: function onTouchStart(e) {
-							e.nativeEvent.preventDefault();
-							_this2.beDraw = false;
-							_this2.drawLineStart(e.nativeEvent.touches[0].clientX, e.nativeEvent.touches[0].clientY);
-						}, onTouchMove: function onTouchMove(e) {
-							var native = e.nativeEvent;
-							// console.log(native);
-							var posx = native.touches[0].clientX;
-							var posy = native.touches[0].clientY;
-							// this.draw(posx,posy,false);
-							_this2.drawLine(posx, posy);
-						}, onTouchEnd: function onTouchEnd(e) {
-							_this2.beDraw = true;
-							_this2.drawLineEnd();
-						} })
+					_react2.default.createElement(_friend2.default, { email: myself.username ? myself.username : myself.email, img: myself.img, id: myself.id, path: '/setting' }),
+					friend
 				);
 			}
 		}]);
 
-		return Cvs;
-	}(_react2.default.Component);
+		return FriendCtrl;
+	}(_react.Component);
 
-	Cvs.contextTypes = {
+	FriendCtrl.contextTypes = {
+		router: _react2.default.PropTypes.object,
 		state: _react2.default.PropTypes.object
 	};
+	module.exports = FriendCtrl;
 
-	module.exports = Cvs;
+/***/ },
+
+/***/ 295:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:43:06
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+	var img = __webpack_require__(292);
+
+	var Friend = function (_Component) {
+		_inherits(Friend, _Component);
+
+		function Friend(props) {
+			_classCallCheck(this, Friend);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Friend).call(this, props));
+		}
+
+		_createClass(Friend, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				// console.log(this.props.location);
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				// console.log(this.context);
+				// console.log(this.router);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var path = this.props.path;
+				if (!path) {
+					path = '/chat/' + this.props.id;
+				}
+				return _react2.default.createElement(
+					'div',
+					{ className: 'friendWrap' },
+					_react2.default.createElement(
+						_reactRouter.Link,
+						{ to: {
+								pathname: path,
+								state: {
+									other_img: this.props.img ? this.props.img : img,
+									mine_img: this.props.myimg ? this.props.myimg : img
+								}
+							} },
+						_react2.default.createElement('img', { src: this.props.img ? this.props.img : img, className: 'tx' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'friendText' },
+							this.props.email
+						)
+					)
+				);
+			}
+		}]);
+
+		return Friend;
+	}(_react.Component);
+
+	Friend.contextTypes = {
+		color: _react2.default.PropTypes.string,
+		router: _react2.default.PropTypes.object
+	};
+
+	exports.default = Friend;
+
+/***/ },
+
+/***/ 296:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _AppDispatcher = __webpack_require__(234);
+
+	var FriendAction = {
+		getUsers: function getUsers(token) {
+			// console.log("kk");
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: 'GET USER',
+				token: '123'
+			});
+		}
+	}; /**
+	    * 
+	    * @authors Your Name (you@example.org)
+	    * @date    2016-05-15 11:24:32
+	    * @version $Id$
+	    */
+
+
+	exports.default = FriendAction;
 
 /***/ }
 

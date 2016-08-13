@@ -12,6 +12,8 @@
 		isXMLHttpRequest = window.XMLHttpRequest ? true : false,
 		xhr;
 
+		// alert(isPromise);
+
 
 	function getForm(id){
 		// alert('组装formdata')
@@ -56,8 +58,12 @@
 			if(!isFormData){
 				throw new Error('not support formdata');
 			}
-			form = new FormData(document.getElementById(data));
-
+			if(typeof data == 'string'){
+				form = new FormData(document.getElementById(data));
+			}
+			else{
+				form=data;
+			}
 			return form;
 		}
 
@@ -66,11 +72,12 @@
 				for (var i in data) {
 					// console.log(i);
 					if (data.hasOwnProperty(i)) {
-						form += i + '=' + data[i] + '&';
+						form += i + '=' + encodeURIComponent(data[i]) + '&';
 					}
 				}
 				return form.substring(0, form.length - 1);
-			} else if(data){
+			}
+			else if(data){
 				return getForm(data);	
 			}
 			else{
@@ -88,7 +95,9 @@
 			loadend: null,
 			data: null,
 			success: null,
-			failuer: null,
+			failuer: function(e){
+				console.log(e);
+			},
 			url:'',
 			multi:false
 		};
@@ -119,9 +128,18 @@
 						xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 					}
 					xhr.onload = function () {
-						resolve(xhr.response);
+						var readyState=xhr.readyState;
+						var status=xhr.status;
+						var status_condition=status>=200 && status<400;
+						if(readyState==4&&status_condition){
+							resolve(xhr.response);
+						}
+						else{
+							reject(xhr);
+						}
 					};
 					xhr.onerror = function (e) {
+						console.log('error');
 						reject(e);
 					};
 					xhr.withCredentials = true
@@ -132,7 +150,7 @@
 				});
 
 				if (obj.success) {
-					return p.then(obj.success, obj.failuer);
+					return p.then(obj.success,obj.failuer);
 				} else {
 					return p;
 				}
@@ -150,7 +168,8 @@
 
 		xhr.open(obj.method,obj.url,true);
 		xhr.onreadystatechange=function(){
-			if(xhr.readyState==4&&xhr.status==200){
+			// var condition=xhr.status>199 && xhr.status<300;
+			if(xhr.readyState==4&&xhr.status>199&&xhr.status<400){
 				if(obj.success&&window.JSON){
 					// alert("kk")
 					obj.success(JSON.parse(xhr.responseText));
@@ -170,6 +189,11 @@
 
 				}
 			}
+			else if(xhr.readyState==4){
+				if(obj.failuer){
+					obj.failuer(xhr.responseText);
+				}
+			}
 		}
 		if(!obj.multi){
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');	
@@ -177,19 +201,30 @@
 		xhr.send(serialize(obj.data));
 	}
 
-	function get(url, fn) {
+	function get(url,fn,error) {
 		var conf = { url: url, responseType: "json" };
 		if (fn) {
 			conf.success = fn;
+		}
+		if(error){
+			conf.failuer=error;
 		}
 		var p = ajax(conf);
 		return p;
 	}
 
-	function post(url, data, fn) {
+	function post(url,data,fn,err,multi) {
 		var conf = { url: url, data: data, responseType: "json", method: "POST" };
 		if (fn) {
 			conf.success = fn;
+		}
+
+		if(err){
+			conf.failuer=err;
+		}
+
+		if(multi){
+			conf.multi=true;
 		}
 		var p = ajax(conf);
 		return p;

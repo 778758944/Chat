@@ -1,4 +1,4 @@
-webpackJsonp([6,4],{
+webpackJsonp([6,2,4],{
 
 /***/ 232:
 /***/ function(module, exports) {
@@ -321,12 +321,12 @@ webpackJsonp([6,4],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore; /**
-	                                        * 
-	                                        * @authors Your Name (you@example.org)
-	                                        * @date    2016-03-23 22:14:17
-	                                        * @version $Id$
-	                                        */
+	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	                                                      * 
+	                                                      * @authors Your Name (you@example.org)
+	                                                      * @date    2016-03-23 22:14:17
+	                                                      * @version $Id$
+	                                                      */
 
 
 	var AppDispatcher = new _flux.Dispatcher();
@@ -350,6 +350,13 @@ webpackJsonp([6,4],{
 				__webpack_require__.e/* nsure */(4, function (require) {
 					FrinedStore = __webpack_require__(239).FriendStore;
 					FrinedStore.getUsers(actions.token);
+				});
+				break;
+
+			case 'SAVE INFO':
+				__webpack_require__.e/* nsure */(5, function (require) {
+					SettingStore = __webpack_require__(287).SettingStore;
+					SettingStore.save(actions.username, actions.path);
 				});
 				break;
 
@@ -672,6 +679,189 @@ webpackJsonp([6,4],{
 
 /***/ },
 
+/***/ 238:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.MsgStore = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _events = __webpack_require__(232);
+
+	var _friendStore = __webpack_require__(239);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 21:35:27
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// var io=require('socket.io-client');
+	// import io from './socket.io'
+	// var io=require('socket.io-client')
+	// var io_url=location.protocol+'//'+location.hostname+':'+location.port;
+	// console.log(io_url);
+	// var io_url="http://0.0.0.0:3002"
+	// var socket=io(io_url);
+
+	// alert('kjsndjks');
+
+
+	console.log(_friendStore.socket);
+
+	var MSGSTORE = function (_EventEmitter) {
+		_inherits(MSGSTORE, _EventEmitter);
+
+		function MSGSTORE() {
+			_classCallCheck(this, MSGSTORE);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MSGSTORE).call(this));
+
+			_this.messages = [];
+			return _this;
+		}
+
+		_createClass(MSGSTORE, [{
+			key: 'getAll',
+			value: function getAll() {
+				return this.messages;
+			}
+		}, {
+			key: 'updateMsg',
+			value: function updateMsg(data) {
+				if (data.lx != 'draw') {
+					this.messages.push(data);
+					this.emitUpdate();
+				} else {
+					this.emitDraw(data);
+				}
+			}
+		}, {
+			key: 'sendMsg',
+			value: function sendMsg(data) {
+				if (data.lx != 'draw') {
+					this.updateMsg(data);
+				}
+				_friendStore.socket.emit("sendMsg", data);
+			}
+		}, {
+			key: 'addUpdateListener',
+			value: function addUpdateListener(callback) {
+				this.on('update', callback);
+			}
+		}, {
+			key: 'removeUpdateListener',
+			value: function removeUpdateListener(callback) {
+				this.removeListener('update', callback);
+			}
+		}, {
+			key: 'emitUpdate',
+			value: function emitUpdate() {
+				this.emit('update');
+			}
+		}, {
+			key: 'emitDraw',
+			value: function emitDraw(msg) {
+				this.emit('draw', msg);
+			}
+		}, {
+			key: 'addDrawListener',
+			value: function addDrawListener(callback) {
+				this.on('draw', function (data) {
+					// console.log('msg',data);
+					callback && callback(data.msg.posx, data.msg.posy, data.msg.state);
+				});
+			}
+		}, {
+			key: 'removeDrawListener',
+			value: function removeDrawListener(callback) {
+				this.removeListener('draw', callback);
+			}
+		}]);
+
+		return MSGSTORE;
+	}(_events.EventEmitter);
+
+	var MsgStore = new MSGSTORE();
+
+	_friendStore.socket.on('news', function (data) {
+		// console.log('data',data);
+		MsgStore.updateMsg(data);
+	});
+	exports.MsgStore = MsgStore;
+
+	// var a={
+	// 	name:"jack",
+	// 	add:function(a,b){
+	// 		console.log(this);           
+	// 		var c = function (argument) {
+	// 			console.log(this)
+	// 		}
+	// 		c()
+	// 	}
+	// }
+	// a.add()
+
+	// b.apply(a);
+
+	// var a=function(array,type){
+	// 	if(array instanceof Array||array instanceof Object){
+	// 		if(Object.prototype.toString.apply(array)=="[object Array]"){
+	// 			array.forEach(function(n){
+	// 				console.log(n);
+	// 			})
+	// 		}
+	// 		else{
+	// 			for(j in array){
+	// 				if(type){
+	// 					console.log(j);
+	// 				}
+	// 				else{
+	// 					if(array.hasOwnProperty(j)){
+	// 						console.log(j)
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	else{
+	// 		console.log("can not itera");
+	// 	}
+	// }
+
+	// var each = function (obj, callback) {
+	// 	if(Object.prototype.toString.apply(obj)==="[object Array]"){
+	// 		var value = "";
+	// 		for (var i = 0, l = obj.length; i < l; i++) {
+	// 			value = callback.call(obj[i], i, obj[i]);
+	// 			if (value === false) break;
+	// 		}
+	// 	} else if(Object.prototype.toString.apply(obj)==="[object Object]"){
+	// 		var value="";
+	// 		for (j in obj){
+	// 			if(obj.hasOwnProperty(j)){
+	// 				value=callback.call(obj[j],j,obj[j]);
+	// 				if(value===false) break;
+	// 			}
+	// 		}
+	// 	}
+	// 	return obj;
+	// }
+
+	// $.each()
+
+/***/ },
+
 /***/ 239:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -684,29 +874,41 @@ webpackJsonp([6,4],{
 
 	var _events = __webpack_require__(232);
 
-	var io = __webpack_require__(240);
-	// var io_url="http://localhost:3002";
-	/**
-	 * 
-	 * @authors Your Name (you@example.org)
-	 * @date    2016-05-15 11:03:53
-	 * @version $Id$
-	 */
+	var io = __webpack_require__(240); /**
+	                                       * 
+	                                       * @authors Your Name (you@example.org)
+	                                       * @date    2016-05-15 11:03:53
+	                                       * @version $Id$
+	                                       */
 
-	var io_url = "https://chat.xingwentao.top";
+	var io_url = "http://localhost:3002";
+	// var io_url="https://chat.xingwentao.top";
 	var socket = io(io_url);
 
 	var FriendStore = Object.assign({}, _events.EventEmitter.prototype, {
 		users: [],
-
+		myself: {},
 		getUsers: function getUsers(access_token) {
 			var url = '/api/yonghus/friendList';
 			get(url, function (res) {
 				if (res.code == 200) {
-					this.users = res.data;
+					this.users = res.data.friends;
+					this.myself = res.data.myself;
 					this.emitGet();
+				} else {
+					this.emit('fail');
 				}
+			}.bind(this), function () {
+				this.emit('fail');
 			}.bind(this));
+		},
+
+		addFailListener: function addFailListener(cb) {
+			this.on('fail', cb);
+		},
+
+		removeFailListener: function removeFailListener(cb) {
+			this.removeListener('fail', cb);
 		},
 
 		addGetListener: function addGetListener(cb) {
@@ -8202,7 +8404,7 @@ webpackJsonp([6,4],{
 
 /***/ },
 
-/***/ 293:
+/***/ 288:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8213,15 +8415,11 @@ webpackJsonp([6,4],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _friend = __webpack_require__(294);
+	var _MsgAction = __webpack_require__(289);
 
-	var _friend2 = _interopRequireDefault(_friend);
+	var _chat = __webpack_require__(290);
 
-	var _friendStore = __webpack_require__(239);
-
-	var _friendAction = __webpack_require__(295);
-
-	var _friendAction2 = _interopRequireDefault(_friendAction);
+	var _MsgStore = __webpack_require__(238);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8232,77 +8430,86 @@ webpackJsonp([6,4],{
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:49:59
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 17:51:43
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var FriendCtrl = function (_Component) {
-		_inherits(FriendCtrl, _Component);
+	var ChatCtrl = function (_React$Component) {
+		_inherits(ChatCtrl, _React$Component);
 
-		function FriendCtrl(props) {
-			_classCallCheck(this, FriendCtrl);
+		function ChatCtrl(props) {
+			_classCallCheck(this, ChatCtrl);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FriendCtrl).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChatCtrl).call(this, props));
 
 			_this.state = {
-				friends: []
+				msg: _MsgStore.MsgStore.getAll()
 			};
 
-			_this._onGet = function () {
+			_this.audio = '';
+
+			_this.sendMsg = function (msg) {
+				_MsgAction.MsgActions.sendMsg(msg);
+			};
+
+			_this._onUpdate = function () {
 				this.setState({
-					friends: _friendStore.FriendStore.users
+					msg: _MsgStore.MsgStore.getAll()
 				});
 			}.bind(_this);
 
+			_this.toCvs = function () {
+				// console.log('sdsds');
+				this.context.router.push({
+					pathname: '/cvs/' + this.props.params.id
+				});
+				// console.log('cvs end');
+			};
 			return _this;
 		}
 
-		_createClass(FriendCtrl, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				_friendStore.FriendStore.addGetListener(this._onGet);
-				// var token=this.props.location.state.token;
-				_friendAction2.default.getUsers(123);
-			}
-		}, {
+		_createClass(ChatCtrl, [{
 			key: 'componentDidMount',
-			value: function componentDidMount() {}
+			value: function componentDidMount() {
+				console.log(this.props.location);
+				_MsgStore.MsgStore.addUpdateListener(this._onUpdate);
+			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
-				_friendStore.FriendStore.removeGetListener(this._onGet);
+				_MsgStore.MsgStore.removeUpdateListener(this._onUpdate);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				// console.log(this.state.friends);
-				var friend = this.state.friends.map(function (friend) {
-					// if(friend.id==this.props.location.state.id){
-					// 	return
-					// }
-					return _react2.default.createElement(_friend2.default, { email: friend.email, id: friend.id, key: friend.id });
-				}.bind(this));
+				var _this2 = this;
+
+				// console.log('kkk');
 				return _react2.default.createElement(
 					'div',
-					null,
-					friend
+					{ className: 'wrapBox' },
+					_react2.default.createElement('audio', { ref: function ref(e) {
+							return _this2.audio = e;
+						} }),
+					_react2.default.createElement(_chat.InfoBox, { msg: this.state.msg, audio: this.audio, toCvs: this.toCvs.bind(this), img: this.props.location.state.other_img, mine_img: this.props.location.state.mine_img }),
+					_react2.default.createElement(_chat.FormBox, { handle: this.sendMsg, to: this.props.params.id, toCvs: this.toCvs.bind(this) })
 				);
 			}
 		}]);
 
-		return FriendCtrl;
-	}(_react.Component);
+		return ChatCtrl;
+	}(_react2.default.Component);
 
-	FriendCtrl.contextTypes = {
-		router: _react2.default.PropTypes.object,
-		state: _react2.default.PropTypes.object
+	ChatCtrl.contextTypes = {
+		router: _react2.default.PropTypes.object
 	};
-	module.exports = FriendCtrl;
+
+	module.exports = ChatCtrl;
 
 /***/ },
 
-/***/ 294:
+/***/ 289:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8310,6 +8517,38 @@ webpackJsonp([6,4],{
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.MsgActions = undefined;
+
+	var _AppDispatcher = __webpack_require__(234);
+
+	var MsgActions = {
+		sendMsg: function sendMsg(msg) {
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: 'SEND MESSAGE',
+				text: msg
+			});
+		}
+	}; /**
+	    * 
+	    * @authors Your Name (you@example.org)
+	    * @date    2016-03-23 22:11:54
+	    * @version $Id$
+	    */
+
+
+	exports.MsgActions = MsgActions;
+
+/***/ },
+
+/***/ 290:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.InfoBox = exports.FormBox = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8317,7 +8556,7 @@ webpackJsonp([6,4],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(159);
+	var _getaudio = __webpack_require__(291);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8328,91 +8567,533 @@ webpackJsonp([6,4],{
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @authors Your Name (you@example.org)
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-05-14 21:43:06
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @date    2016-03-23 17:39:07
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @version $Id$
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var Friend = function (_Component) {
-		_inherits(Friend, _Component);
+	var my_img = __webpack_require__(292);
+	var other_img = __webpack_require__(293);
 
-		function Friend(props) {
-			_classCallCheck(this, Friend);
+	var MineMsg = function (_React$Component) {
+		_inherits(MineMsg, _React$Component);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Friend).call(this, props));
+		function MineMsg(props) {
+			_classCallCheck(this, MineMsg);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(MineMsg).call(this, props));
 		}
 
-		_createClass(Friend, [{
+		_createClass(MineMsg, [{
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				var data = this.props.data;
+				if (!data.lx) {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'otherMsg oneMsg' },
+						_react2.default.createElement('img', { className: 'otherMsg_img', width: 35, src: this.props.img }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'msgWrap otherWrap' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'otherMsg_text oneText' },
+								this.props.data.msg
+							)
+						)
+					);
+				} else if (data.lx == 'img') {
+
+					return _react2.default.createElement(
+						'div',
+						{ className: 'otherMsg oneMsg' },
+						_react2.default.createElement('img', { className: 'otherMsg_img', width: 35, src: my_img }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'msgWrap otherWrap' },
+							_react2.default.createElement('img', { src: data.msg, className: 'img' })
+						)
+					);
+				} else if (data.lx == 'wav') {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'otherMsg oneMsg' },
+						_react2.default.createElement('img', { className: 'otherMsg_img', width: 35, src: my_img }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'msgWrap otherWrap' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'otherMsg_text oneText', onClick: function onClick() {
+										_this2.props.audio.src = (0, _getaudio.dealWav)(new Blob([data.msg], { type: 'audio/wav' }));
+										_this2.props.audio.play();
+									} },
+								'播放语音'
+							)
+						)
+					);
+				} else {
+					return _react2.default.createElement('div', null);
+				}
+			}
+		}]);
+
+		return MineMsg;
+	}(_react2.default.Component);
+
+	var OtherMsg = function (_React$Component2) {
+		_inherits(OtherMsg, _React$Component2);
+
+		function OtherMsg(props) {
+			_classCallCheck(this, OtherMsg);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(OtherMsg).call(this, props));
+		}
+
+		_createClass(OtherMsg, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				// console.log(this.props.location);
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				// console.log(this.context);
-				// console.log(this.router);
+				if (this.props.data.lx == 'tocvs') {
+					this.props.toCvs();
+				}
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				var path = '/chat/' + this.props.id;
-				return _react2.default.createElement(
-					'div',
-					{ className: 'friendWrap' },
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: path },
+				var _this4 = this;
+
+				var data = this.props.data;
+				if (!data.lx) {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'mineMsg oneMsg' },
+						_react2.default.createElement('img', { width: 35, className: 'mineMsg_img', src: this.props.img }),
 						_react2.default.createElement(
 							'div',
-							{ className: 'friendText' },
-							this.props.email
+							{ className: 'msgWrap mineWrap' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'mineMsg oneText' },
+								this.props.data.msg
+							),
+							_react2.default.createElement('span', { className: 'caret' })
+						)
+					);
+				} else if (data.lx == 'img') {
+
+					return _react2.default.createElement(
+						'div',
+						{ className: 'mineMsg oneMsg' },
+						_react2.default.createElement('img', { width: 35, className: 'mineMsg_img', src: other_img }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'msgWrap mineWrap' },
+							_react2.default.createElement('img', { src: data.msg, className: 'img' }),
+							_react2.default.createElement('span', { className: 'caret' })
+						)
+					);
+				} else if (data.lx == 'wav') {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'mineMsg oneMsg' },
+						_react2.default.createElement('img', { width: 35, className: 'mineMsg_img', src: other_img }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'msgWrap mineWrap' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'mineMsg oneText', onClick: function onClick() {
+										_this4.props.audio.src = (0, _getaudio.dealWav)(new Blob([data.msg], { type: 'audio/wav' }));
+										_this4.props.audio.play();
+									} },
+								'播放语音'
+							)
+						)
+					);
+				} else {
+					return _react2.default.createElement('div', null);
+				}
+			}
+		}]);
+
+		return OtherMsg;
+	}(_react2.default.Component);
+
+	var FormBox = function (_React$Component3) {
+		_inherits(FormBox, _React$Component3);
+
+		function FormBox(props) {
+			_classCallCheck(this, FormBox);
+
+			var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(FormBox).call(this, props));
+
+			_this5.state = {
+				btn: "+"
+			};
+			_this5.recoder;
+			_this5.audio;
+			_this5.sendMsg = function () {
+				var msg = this.refs.txt.value;
+				this.refs.txt.value = "";
+				if (msg) {
+					this.setState({
+						btn: '+'
+					});
+					this.props.handle({ msg: msg, type: 1, to: this.props.to });
+				} else {}
+			}.bind(_this5);
+
+			_this5._onChange = function () {
+				if (this.refs.txt.value) {
+					this.setState({
+						btn: "发送"
+					});
+				} else {
+					this.setState({
+						btn: "+"
+					});
+				}
+			};
+
+			_this5.onFileChange = function (e) {
+				var reader = new FileReader();
+				var img = e.target.files[0];
+				reader.onload = function (res) {
+					var data = res.target.result;
+					console.log(data);
+					this.props.handle({ msg: data, type: 1, to: this.props.to, lx: 'img' });
+				}.bind(this);
+
+				reader.readAsDataURL(img);
+			}.bind(_this5);
+
+			_this5.onRecoderEnd = function (e) {
+				e.nativeEvent.preventDefault();
+				this.recoder.play(this.audio);
+				this.props.handle({ msg: this.recoder.getBlob(true), to: this.props.to, type: 1, lx: 'wav' });
+			}.bind(_this5);
+			return _this5;
+		}
+
+		_createClass(FormBox, [{
+			key: 'render',
+			value: function render() {
+				var _this6 = this;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'formWrap' },
+					_react2.default.createElement('audio', { ref: function ref(e) {
+							_this6.audio = e;
+						}, autoPlay: true }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'formTop' },
+						_react2.default.createElement('textarea', { className: 'inp', resize: 'none', ref: 'txt', onChange: this._onChange.bind(this) }),
+						_react2.default.createElement(
+							'button',
+							{ className: 'sendBtn', onClick: this.sendMsg },
+							this.state.btn
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'label',
+							{ htmlFor: 'fileup', className: 'iconGn' },
+							'图片'
+						),
+						_react2.default.createElement('input', { type: 'file', id: 'fileup', onChange: this.onFileChange }),
+						_react2.default.createElement(
+							'button',
+							{ className: 'iconGn', onTouchStart: function onTouchStart(e) {
+									e.preventDefault();
+									console.log('start');
+									_getaudio.HZRecorder.get(function (rec) {
+										this.recoder = rec;
+										this.recoder.start();
+									}.bind(_this6));
+								}, onTouchEnd: this.onRecoderEnd },
+							'语音'
+						),
+						_react2.default.createElement(
+							'button',
+							{ onClick: function onClick() {
+									_this6.props.handle({ msg: { lx: 'tocvs' }, lx: 'tocvs', to: _this6.props.to, type: 1 });
+									_this6.props.toCvs();
+								} },
+							'我画你猜'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'上传图片'
 						)
 					)
 				);
 			}
 		}]);
 
-		return Friend;
-	}(_react.Component);
+		return FormBox;
+	}(_react2.default.Component);
 
-	Friend.contextTypes = {
-		color: _react2.default.PropTypes.string,
-		router: _react2.default.PropTypes.object
-	};
+	var MsgboxHeight = document.documentElement.clientHeight - 60;
 
-	exports.default = Friend;
+	var InfoBox = function (_React$Component4) {
+		_inherits(InfoBox, _React$Component4);
+
+		function InfoBox(props) {
+			_classCallCheck(this, InfoBox);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(InfoBox).call(this, props));
+		}
+
+		_createClass(InfoBox, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log(this.props.img);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				// console.log(this.props.msg);
+				var inner = this.props.msg.map(function (value, index) {
+					if (value.type == 1) {
+						return _react2.default.createElement(MineMsg, { data: value, key: index, audio: this.props.audio, img: this.props.mine_img });
+					} else {
+						return _react2.default.createElement(OtherMsg, { data: value, key: index, audio: this.props.audio, toCvs: this.props.toCvs, img: this.props.img });
+					}
+				}.bind(this));
+				return _react2.default.createElement(
+					'div',
+					{ className: 'msgBox', style: { height: MsgboxHeight + "px" } },
+					inner
+				);
+			}
+		}]);
+
+		return InfoBox;
+	}(_react2.default.Component);
+
+	exports.FormBox = FormBox;
+	exports.InfoBox = InfoBox;
 
 /***/ },
 
-/***/ 295:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 291:
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
+	/**
+	 * 
+	 * @authors Your Name (you@example.org)
+	 * @date    2016-07-17 14:15:11
+	 * @version $Id$
+	 */
+	window.URL = window.URL || window.webkitURL;
 
-	var _AppDispatcher = __webpack_require__(234);
+	// var URL=window.URL;
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-	var FriendAction = {
-		getUsers: function getUsers(token) {
-			// console.log("kk");
-			_AppDispatcher.AppDispatcher.dispatch({
-				actionType: 'GET USER',
-				token: '123'
-			});
-		}
-	}; /**
-	    * 
-	    * @authors Your Name (you@example.org)
-	    * @date    2016-05-15 11:24:32
-	    * @version $Id$
-	    */
+	var HZRecorder = function HZRecorder(stream, config) {
+	  var config = config || {};
+	  config.sampleBits = config.sampleBits || 8;
+	  config.sampleRate = config.sampleRate || 44100 / 6;
 
+	  var context = new AudioContext();
+	  console.log(context);
+	  var audioInput = context.createMediaStreamSource(stream);
+	  var recorder = context.createScriptProcessor(4096, 1, 1);
 
-	exports.default = FriendAction;
+	  var audioData = {
+	    size: 0 //录音文件长度
+	    , buffer: [] //录音缓存
+	    , inputSampleRate: context.sampleRate //输入采样率
+	    , inputSampleBits: 16 //输入采样数位 8, 16
+	    , outputSampleRate: config.sampleRate //输出采样率
+	    , oututSampleBits: config.sampleBits //输出采样数位 8, 16
+	    , input: function input(data) {
+	      this.buffer.push(new Float32Array(data));
+	      this.size += data.length;
+	    },
+	    compress: function compress() {
+	      //合并压缩
+	      //合并
+	      var data = new Float32Array(this.size);
+	      var offset = 0;
+	      for (var i = 0; i < this.buffer.length; i++) {
+	        data.set(this.buffer[i], offset);
+	        offset += this.buffer[i].length;
+	      }
+	      //压缩
+	      var compression = parseInt(this.inputSampleRate / this.outputSampleRate);
+	      var length = data.length / compression;
+	      var result = new Float32Array(length);
+	      var index = 0,
+	          j = 0;
+	      while (index < length) {
+	        result[index] = data[j];
+	        j += compression;
+	        index++;
+	      }
+	      return result;
+	    },
+	    encodeWAV: function encodeWAV(native) {
+	      var sampleRate = Math.min(this.inputSampleRate, this.outputSampleRate);
+	      var sampleBits = Math.min(this.inputSampleBits, this.oututSampleBits);
+	      var bytes = this.compress();
+	      var dataLength = bytes.length * (sampleBits / 8);
+	      var buffer = new ArrayBuffer(44 + dataLength);
+	      var data = new DataView(buffer);
+
+	      var channelCount = 1; //单声道
+	      var offset = 0;
+
+	      var writeString = function writeString(str) {
+	        for (var i = 0; i < str.length; i++) {
+	          data.setUint8(offset + i, str.charCodeAt(i));
+	        }
+	      };
+
+	      // 资源交换文件标识符
+	      writeString('RIFF');offset += 4;
+	      // 下个地址开始到文件尾总字节数,即文件大小-8
+	      data.setUint32(offset, 36 + dataLength, true);offset += 4;
+	      // WAV文件标志
+	      writeString('WAVE');offset += 4;
+	      // 波形格式标志
+	      writeString('fmt ');offset += 4;
+	      // 过滤字节,一般为 0x10 = 16
+	      data.setUint32(offset, 16, true);offset += 4;
+	      // 格式类别 (PCM形式采样数据)
+	      data.setUint16(offset, 1, true);offset += 2;
+	      // 通道数
+	      data.setUint16(offset, channelCount, true);offset += 2;
+	      // 采样率,每秒样本数,表示每个通道的播放速度
+	      data.setUint32(offset, sampleRate, true);offset += 4;
+	      // 波形数据传输率 (每秒平均字节数) 单声道×每秒数据位数×每样本数据位/8
+	      data.setUint32(offset, channelCount * sampleRate * (sampleBits / 8), true);offset += 4;
+	      // 快数据调整数 采样一次占用字节数 单声道×每样本的数据位数/8
+	      data.setUint16(offset, channelCount * (sampleBits / 8), true);offset += 2;
+	      // 每样本数据位数
+	      data.setUint16(offset, sampleBits, true);offset += 2;
+	      // 数据标识符
+	      writeString('data');offset += 4;
+	      // 采样数据总数,即数据总大小-44
+	      data.setUint32(offset, dataLength, true);offset += 4;
+	      // 写入采样数据
+	      if (sampleBits === 8) {
+	        for (var i = 0; i < bytes.length; i++, offset++) {
+	          var s = Math.max(-1, Math.min(1, bytes[i]));
+	          var val = s < 0 ? s * 0x8000 : s * 0x7FFF;
+	          val = parseInt(255 / (65535 / (val + 32768)));
+	          data.setInt8(offset, val, true);
+	        }
+	      } else {
+	        for (var i = 0; i < bytes.length; i++, offset += 2) {
+	          var s = Math.max(-1, Math.min(1, bytes[i]));
+	          data.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+	        }
+	      }
+	      if (native) {
+	        return data;
+	      }
+
+	      return new Blob([data], { type: 'audio/wav' });
+	    }
+	  };
+
+	  //开始录音
+	  this.start = function () {
+	    audioInput.connect(recorder);
+	    recorder.connect(context.destination);
+	  };
+
+	  //停止
+	  this.stop = function () {
+	    recorder.disconnect();
+	  };
+
+	  //获取音频文件
+	  this.getBlob = function () {
+	    this.stop();
+	    return audioData.encodeWAV();
+	  };
+
+	  this.play = function (audio) {
+	    audio.src = window.URL.createObjectURL(this.getBlob());
+	  };
+
+	  recorder.onaudioprocess = function (e) {
+	    console.log('processing');
+	    audioData.input(e.inputBuffer.getChannelData(0));
+	  };
+	};
+
+	HZRecorder.get = function (callback, config) {
+	  if (navigator.getUserMedia) {
+	    navigator.getUserMedia({ audio: true }, function (stream) {
+	      var rec = new HZRecorder(stream);
+	      callback && callback(rec);
+	    }, function (err) {
+	      console.log(err);
+	    });
+	  } else {
+	    console.log('no user media');
+	  }
+	};
+
+	var dealWav = window.URL.createObjectURL;
+
+	exports.HZRecorder = HZRecorder;
+	exports.dealWav = dealWav;
+
+/***/ },
+
+/***/ 292:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "imgs/11-7af0f9358040f9908800872aca88d1a3.png";
+
+/***/ },
+
+/***/ 293:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "imgs/22-9568731405d7ae03c1b1c4ed1c7f297c.png";
 
 /***/ }
 
