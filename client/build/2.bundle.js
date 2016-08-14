@@ -521,7 +521,7 @@ webpackJsonp([2,4],{
 		myself: {},
 		getUsers: function getUsers(access_token) {
 			var url = '/api/yonghus/friendList';
-			get(url, function (res) {
+			post(url, {}, function (res) {
 				if (res.code == 200) {
 					this.users = res.data.friends;
 					this.myself = res.data.myself;

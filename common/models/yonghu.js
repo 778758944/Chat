@@ -48,7 +48,7 @@ module.exports = function(Yonghu) {
 
 	Yonghu.remoteMethod('friendList',{
 		returns:{root:true},
-		http:{arg:'/friendlist',verb:"get"}
+		http:{arg:'/friendlist',verb:"post"}
 	})
 
 	Yonghu.afterRemote('friendList',function(ctx,acc,next){
