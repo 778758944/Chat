@@ -16,14 +16,14 @@ module.exports=function(app){
 		}
 	]
 
-	user.create(data,function(err,data){
-		if(err){
-			console.log('err',err);
-		}
-		else{
-			console.log('success',data);
-		}
-	})
+	// user.create(data,function(err,data){
+	// 	if(err){
+	// 		console.log('err',err);
+	// 	}
+	// 	else{
+	// 		console.log('success',data);
+	// 	}
+	// })
 
 	// // console.log(mysqlDs);
 
@@ -38,13 +38,13 @@ module.exports=function(app){
 
 	 // console.log('boot script');
 
-	 // mysqlDs.automigrate('AccessToken',function(err){
-	 // 	if(err){
-	 // 		console.log(err);
-	 // 	}
-	 // 	else{
-	 // 		console.log('accessbuilt');
-	 // 	}
-	 // })
+	 mysqlDs.automigrate('AccessToken',function(err){
+	 	if(err){
+	 		console.log(err);
+	 	}
+	 	else{
+	 		console.log('accessbuilt');
+	 	}
+	 })
 
 }
