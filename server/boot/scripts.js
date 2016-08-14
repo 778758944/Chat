@@ -11,11 +11,7 @@ module.exports=function(app){
 
 	var data=[
 		{
-			email:'778758944@qq.com',
-			password:"123456"
-		},
-		{
-			emial:"123456@qq.com",
+			email:"123456@qq.com",
 			password:'123456'
 		}
 	]
