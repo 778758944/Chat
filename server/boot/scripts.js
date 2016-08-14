@@ -38,13 +38,13 @@ module.exports=function(app){
 
 	 // console.log('boot script');
 
-	 mysqlDs.automigrate('AccessToken',function(err){
-	 	if(err){
-	 		console.log(err);
-	 	}
-	 	else{
-	 		console.log('accessbuilt');
-	 	}
-	 })
+	 // mysqlDs.automigrate('AccessToken',function(err){
+	 // 	if(err){
+	 // 		console.log(err);
+	 // 	}
+	 // 	else{
+	 // 		console.log('accessbuilt');
+	 // 	}
+	 // })
 
 }
