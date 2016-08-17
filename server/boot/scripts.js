@@ -19,24 +19,24 @@ module.exports=function(app){
 
 	
 
-	mysqlDs.automigrate('pushkey',function(err){
-		if(err){
-			console.log('err');
-		}
-		else{
-			console.log('success');
-		}
-	})
+	// mysqlDs.automigrate('pushkey',function(err){
+	// 	if(err){
+	// 		console.log('err');
+	// 	}
+	// 	else{
+	// 		console.log('success');
+	// 	}
+	// })
 
 
-	mysqlDs.automigrate('points',function(err){
-		if(err){
-			console.log('err');
-		}
-		else{
-			console.log('success');
-		}
-	})
+	// mysqlDs.automigrate('points',function(err){
+	// 	if(err){
+	// 		console.log('err');
+	// 	}
+	// 	else{
+	// 		console.log('success');
+	// 	}
+	// })
 
 	// user.create(data,function(err,data){
 	// 	if(err){
