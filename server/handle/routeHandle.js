@@ -87,7 +87,7 @@ var socketConnection=function(socket){
 						var request_url=key_arr.join('/');
 						// console.log('test',register_id,url);
 						var bodyData={
-							registration_ids:[register_id]
+							registration_ids:register_id
 						}
 
 						var urlData=url.parse(request_url);
