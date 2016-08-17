@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v3::';
+var version='v5::';
 
 //创建缓存
 function updateStaticCache(){
@@ -107,6 +107,7 @@ self.addEventListener('fetch',function(event){
 self.addEventListener('push',function(event){
 	console.log('push',event);
 	var title='push message';
+	console.log('push',event.data.json());
 	event.waitUntil(
 		self.registration.showNotification(title,{
 			body:"The Message",
