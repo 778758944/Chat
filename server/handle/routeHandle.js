@@ -27,7 +27,10 @@ var pushNotification=function(to){
 			var request_url=key_arr.join('/');
 			// console.log('test',register_id,url);
 			var bodyData={
-				registration_id:register_id
+				to:register_id,
+				data:{
+					name:'jack'
+				}
 			}
 
 			var urlData=url.parse(request_url);
