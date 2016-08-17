@@ -20,7 +20,7 @@ webpackJsonp([3],{
 			}, function (res) {
 				this.emit('tologin', res);
 				console.log('key', key);
-				post('/api/pushkeys/addkey', { key: key.endpoint }, function (res) {
+				post('/api/pushkeys/addkey', { key: JSON.stringify(key) }, function (res) {
 					console.log(res);
 				});
 			}.bind(this));

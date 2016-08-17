@@ -14,6 +14,9 @@ var sockets={},
 var https=require('https');
 var querystring=require('querystring');
 var url=require('url');
+var webPush=require('web-push');
+
+
 
 var pushNotification=function(to){
 	var pushkey=loopback.findModel('pushkey');
@@ -22,51 +25,61 @@ var pushNotification=function(to){
 			console.log(err);
 		}
 		else{
-			var key_arr=data.key.split('/');
-			var register_id=key_arr.splice(key_arr.length-1,1)[0];
-			var request_url=key_arr.join('/');
-			// console.log('test',register_id,url);
-			var bodyData={
-				to:register_id,
-				data:{
-					name:'jack'
-				},
-				notification:{
-					body:'ssssss'
-				}
+			var subscribe=JSON.parse(data);
+
+			var params={
+				payload:'test',
+				userPublicKey:subscribe.keys.p256dh,
+				userAuth:subscribe.keys.auth
 			}
 
-			var urlData=url.parse(request_url);
-			console.log(urlData);
+			webPush.setNotification(subscribe.endpoint,params);
 
-			bodyData=querystring.stringify(bodyData);
-			var option={
-				hostname:urlData.hostname,
-				path:urlData.path,
-				method:"POST",
-				headers:{
-					'Content-Type':"application/x-www-form-urlencoded",
-					'Authorization':"key="+key.pushkey
-				}
-			};
+			// var key_arr=data.key.split('/');
+			// var register_id=key_arr.splice(key_arr.length-1,1)[0];
+			// var request_url=key_arr.join('/');
+			// // console.log('test',register_id,url);
+			// var bodyData={
+			// 	to:register_id,
+			// 	data:{
+			// 		name:'jack'
+			// 	},
+			// 	notification:{
+			// 		body:'ssssss'
+			// 	}
+			// }
 
-			var req=https.request(option,function(res){
-				console.log('status',res.statusCode);
-				var chunks=[];
+			// var urlData=url.parse(request_url);
+			// console.log(urlData);
 
-				res.on('data',function(chunk){
-					chunks.push(chunk);
-				});
+			// bodyData=querystring.stringify(bodyData);
+			// var option={
+			// 	hostname:urlData.hostname,
+			// 	path:urlData.path,
+			// 	method:"POST",
+			// 	headers:{
+			// 		'Content-Type':"application/x-www-form-urlencoded",
+			// 		'Authorization':"key="+key.pushkey
+			// 	}
+			// };
 
-				res.on('end',function(){
-					var final_buf=Buffer.concat(chunks);
-					var dataStr=final_buf.toString('utf8');
-					console.log(dataStr);
-				});
-			})
+			// var req=https.request(option,function(res){
+			// 	console.log('status',res.statusCode);
+			// 	var chunks=[];
 
-			req.write(bodyData);
-			req.end();
+			// 	res.on('data',function(chunk){
+			// 		chunks.push(chunk);
+			// 	});
+
+			// 	res.on('end',function(){
+			// 		var final_buf=Buffer.concat(chunks);
+			// 		var dataStr=final_buf.toString('utf8');
+			// 		console.log(dataStr);
+			// 	});
+			// })
+
+			// req.write(bodyData);
+			// req.end();
 		}
 	})
 }
