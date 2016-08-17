@@ -25,7 +25,7 @@ var pushNotification=function(to){
 			console.log(err);
 		}
 		else{
-			var subscribe=JSON.parse(data);
+			var subscribe=JSON.parser(data);
 
 			var params={
 				payload:'test',
