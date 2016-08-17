@@ -10,6 +10,9 @@ var Path=require('path');
 var fs=require('fs');
 var sockets={},
 	id;
+var https=require('https');
+var querystring=require('querystring');
+var url=require('url');
 
 var socketConnection=function(socket){
 	var userId;
@@ -30,7 +33,7 @@ var socketConnection=function(socket){
 
 		sockets[userId]=socket;
 		socket.on('sendMsg',function(data){
-			console.log('sendMsg',data);
+			// console.log('sendMsg',data);
 			var to=data.to;
 			var lx=data.lx ? data.lx:0;
 			if(sockets[to]){
@@ -40,6 +43,7 @@ var socketConnection=function(socket){
 						return;
 					}
 					else{
+						// console.log(points);
 						var path=points.point;
 						// console.log(path);
 						// console.log('/chat/'+userId);
@@ -48,9 +52,20 @@ var socketConnection=function(socket){
 							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 						}
 						else{
+							// console.log('no response');
+							var pushkey=loopback.findModel('pushkey');
+							pushkey.findById(to,function(err,data){
+								if(err){
+									console.log(err);
+									return;
+								}
+								else{
+									console.log(data);
+								}
+							})
 
 
-							console.log('i will give you a notice for a while');
+							// console.log('i will give you a notice for a while');
 						}
 					}
 
@@ -58,6 +73,56 @@ var socketConnection=function(socket){
 
 				// console.log('msg out');
 				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
+			}
+			else{
+				var pushkey=loopback.findModel('pushkey');
+				pushkey.findById(to,function(err,data){
+					if(err){
+						console.log(err);
+					}
+					else{
+						// console.log('key',data.key);
+						var key_arr=data.key.split('/');
+						var register_id=key_arr.splice(key_arr.length-1,1)[0];
+						var request_url=key_arr.join('/');
+						// console.log('test',register_id,url);
+						var bodyData={
+							registration_ids:[register_id]
+						}
+
+						var urlData=url.parse(request_url);
+						console.log(urlData);
+
+						bodyData=querystring.stringify(bodyData);
+						var option={
+							hostname:urlData.hostname,
+							path:urlData.path,
+							method:"POST",
+							headers:{
+								'Content-Type':"application/x-www-form-urlencoded"
+							}
+						};
+
+						var req=https.request(option,function(res){
+							console.log('status',res.statusCode);
+							var chunks=[];
+
+							res.on('data',function(chunk){
+								chunks.push(chunk);
+							});
+
+							res.on('end',function(){
+								var final_buf=Buffer.concat(chunks);
+								var dataStr=final_buf.toString('utf8');
+								console.log(dataStr);
+							});
+						})
+
+						req.write(bodyData);
+						req.end();
+
+					}
+				})
 			}
 		})
 	}
