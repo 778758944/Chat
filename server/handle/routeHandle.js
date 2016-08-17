@@ -15,7 +15,7 @@ var https=require('https');
 var querystring=require('querystring');
 var url=require('url');
 var webPush=require('web-push');
-
+webPush.setGCMAPIKey(key.pushkey);
 
 
 var pushNotification=function(to){
@@ -25,7 +25,8 @@ var pushNotification=function(to){
 			console.log(err);
 		}
 		else{
-			var subscribe=JSON.parser(data);
+			console.log(data.key);
+			var subscribe=JSON.parse(data.key);
 
 			var params={
 				payload:'test',
@@ -33,7 +34,7 @@ var pushNotification=function(to){
 				userAuth:subscribe.keys.auth
 			}
 
-			webPush.setNotification(subscribe.endpoint,params);
+			webPush.sendNotification(subscribe.endpoint,params);
 
 			// var key_arr=data.key.split('/');
 			// var register_id=key_arr.splice(key_arr.length-1,1)[0];
