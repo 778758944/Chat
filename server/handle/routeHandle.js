@@ -30,6 +30,9 @@ var pushNotification=function(to){
 				to:register_id,
 				data:{
 					name:'jack'
+				},
+				notification:{
+					body:'ssssss'
 				}
 			}
 
