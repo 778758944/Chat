@@ -14,9 +14,9 @@ var sockets={},
 var https=require('https');
 var querystring=require('querystring');
 var url=require('url');
-var pushkey=loopback.findModel('pushkey');
 
 var pushNotification=function(to){
+	var pushkey=loopback.findModel('pushkey');
 	pushkey.findById(to,function(err,data){
 		if(err){
 			console.log(err);
