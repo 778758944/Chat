@@ -99,7 +99,8 @@ var socketConnection=function(socket){
 							path:urlData.path,
 							method:"POST",
 							headers:{
-								'Content-Type':"application/x-www-form-urlencoded"
+								'Content-Type':"application/x-www-form-urlencoded",
+								'Authorization':"key="+'AIzaSyCRq7kXFz_ypyTYyBdeWmNtdpSpur_HHfw'
 							}
 						};
 
