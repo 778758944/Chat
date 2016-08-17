@@ -13,6 +13,12 @@ var FriendAction={
 			actionType:'GET USER',
 			token:'123'
 		})
+	},
+	setPoint:function(path){
+		AppDispatcher.dispatch({
+			actionType:"SET POINT",
+			path:path
+		})
 	}
 }
 

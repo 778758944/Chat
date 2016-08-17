@@ -35,5 +35,13 @@
   "yonghu": {
     "dataSource": "mysqlDs",
     "public": true
+  },
+  "pushkey": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "points": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }

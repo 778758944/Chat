@@ -38,6 +38,14 @@ app.use(loopback.token({
 
 //   app.models.Yonghu.findById()
 // })
+app.use(function(req,res,next){
+  var ctx=loopback.getCurrentContext();
+  var token=ctx.get('accessToken');
+  req.token=token;
+  next();
+});
+
+
 boot(app,__dirname);
 
 

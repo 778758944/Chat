@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v6::';
+var version='v1::';
 
 //创建缓存
 function updateStaticCache(){
@@ -50,10 +50,10 @@ self.addEventListener('activate',function(event){
 
 self.addEventListener('fetch',function(event){
 	var request=event.request;
-	console.log(request,{credentials: 'include'});
+	// console.log(request,{credentials: 'include'});
 	var accept=request.headers.get('Accept');
 	if(request.method !== 'GET'){
-		event.respondWith(fetch(request));
+		event.respondWith(fetch(request,{credentials: 'include'}));
 		return;
 	}
 

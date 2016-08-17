@@ -6,7 +6,7 @@
  */
 import {Dispatcher} from 'flux'
 
-var MsgStore,LoginStore,FrinedStore,SettingStore;
+var MsgStore,LoginStore,FriendStore,SettingStore;
 
 
 var AppDispatcher=new Dispatcher();
@@ -27,10 +27,15 @@ AppDispatcher.register(function(actions){
 			break;
 
 		case 'GET USER':
-			require.ensure([],function(require){
-				FrinedStore=require('../store/friendStore').FriendStore;
-				FrinedStore.getUsers(actions.token);
-			})
+			if(FriendStore){
+				FriendStore.getUsers(actions.token);
+			}
+			else{
+				require.ensure([],function(require){
+					FriendStore=require('../store/friendStore').FriendStore;
+					FriendStore.getUsers(actions.token);
+				})
+			}
 			break;
 
 		case 'SAVE INFO':
@@ -38,6 +43,18 @@ AppDispatcher.register(function(actions){
 				SettingStore=require('../store/settingStore').SettingStore;
 				SettingStore.save(actions.username,actions.path);
 			})
+			break;
+
+		case 'SET POINT':
+			if(FriendStore){
+				FriendStore.setPoint(actions.path);
+			}
+			else{
+				require.ensure([],function(require){
+					FriendStore=require('../store/friendStore').FriendStore;
+					FriendStore.setPoint(actions.path);
+				})
+			}
 			break;
 
 

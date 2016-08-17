@@ -26,12 +26,14 @@ module.exports={
 		new HtmlwebpackPlugin({
 			title:"Chat",
 			filename:'index.html',
+			inject:'head',
 			chunks:['vendors','index'],
 			template:'./client/app/index-tem.html'
 		}),
 		new HtmlwebpackPlugin({
 			title:"百米飞人大战",
 			filename:'run.html',
+			inject:"head",
 			chunks:['vendors','run'],
 			template:'./client/app/index-tem.html'
 		}),

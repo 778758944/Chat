@@ -11,6 +11,39 @@ require('./reset.css');
 
 console.log('kkdddd');
 
+var hidden,visibleChange;
+if(typeof document.hidden !== 'undefined'){
+	hidden='hidden';
+	visibleChange='visibilitychange';
+}
+else if(typeof document.mozHidden !== 'undefined'){
+	hidden='mozHidden';
+	visibleChange='mozvisibilitychange';
+}
+else if(typeof document.msHidden !== 'undefined'){
+	hidden='msHidden';
+	visibleChange='msvisibilitychange';
+}
+else if(typeof document.webkitHidden !== 'undefined'){
+	hidden='webkitHidden';
+	visibleChange='webkitvisibilitychange';
+}
+
+
+function visibleHandle(){
+	if(document[hidden]){
+		post('/api/setPoint',{point:"/offline"},function(res){
+			console.log(res);
+		})
+		// console.log('no visible');
+	}
+	else{
+		//console.log('visible');
+	}
+}
+
+document.addEventListener(visibleChange,visibleHandle);
+
 
 const App=React.createClass({
 	transitionName:'viewchange',
@@ -66,11 +99,20 @@ const routes={
 
 
 
-render((
+window.onload=function(){
+	render((
 	<Router history={hashHistory} routes={routes}>
 		
 	</Router>
 	),document.getElementById('wrap'));
+}
+
+
+// render((
+// 	<Router history={hashHistory} routes={routes}>
+		
+// 	</Router>
+// 	),document.getElementById('wrap'));
 
 
 

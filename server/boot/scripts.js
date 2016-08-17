@@ -8,13 +8,35 @@ module.exports=function(app){
 	var mysqlDs=app.dataSources.mysqlDs;
 	var user=app.models.yonghu;
 	var accessToken=app.models.AccessToken;
+	var points=app.models.points;
 
 	var data=[
 		{
 			email:"123456@qq.com",
 			password:'123456'
 		}
-	]
+	];
+
+	
+
+	mysqlDs.automigrate('pushkey',function(err){
+		if(err){
+			console.log('err');
+		}
+		else{
+			console.log('success');
+		}
+	})
+
+
+	mysqlDs.automigrate('points',function(err){
+		if(err){
+			console.log('err');
+		}
+		else{
+			console.log('success');
+		}
+	})
 
 	// user.create(data,function(err,data){
 	// 	if(err){

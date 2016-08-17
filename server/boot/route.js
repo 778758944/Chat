@@ -23,6 +23,7 @@ module.exports=function(app){
 
 	router.post('/api/Yonghu/login',handle.login);
 	router.post('/api/uploadImg',handle.uploadImg);
+	router.post('/api/setPoint',handle.setPoint);
 	
 	app.use(router);
 }

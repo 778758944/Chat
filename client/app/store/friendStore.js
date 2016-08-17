@@ -7,8 +7,8 @@
 
 import {EventEmitter} from 'events'
 var io=require('socket.io-client');
-// var io_url="http://localhost:3002";
-var io_url="https://chat.xingwentao.top";
+var io_url="http://localhost:3002";
+// var io_url="https://chat.xingwentao.top";
 var socket=io(io_url);
 
 var FriendStore = Object.assign({},EventEmitter.prototype,{
@@ -28,6 +28,15 @@ var FriendStore = Object.assign({},EventEmitter.prototype,{
 		}.bind(this),function(){
 			this.emit('fail');
 		}.bind(this));
+	},
+
+	setPoint:function(path){
+		var url='/api/setPoint';
+		post(url,{
+			point:path,
+		},function(res){
+			console.log(res);
+		})
 	},
 
 	addFailListener:function(cb){

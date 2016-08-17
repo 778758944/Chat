@@ -759,6 +759,10 @@ webpackJsonp([1,3],{
 				password: password
 			}, function (res) {
 				this.emit('tologin', res);
+				console.log('key', key);
+				post('/api/pushkeys/addkey', { key: key.endpoint }, function (res) {
+					console.log(res);
+				});
 			}.bind(this));
 		},
 
@@ -1130,7 +1134,7 @@ webpackJsonp([1,3],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	var MsgStore, LoginStore, FriendStore, SettingStore; /**
 	                                                      * 
 	                                                      * @authors Your Name (you@example.org)
 	                                                      * @date    2016-03-23 22:14:17
@@ -1156,10 +1160,14 @@ webpackJsonp([1,3],{
 				break;
 
 			case 'GET USER':
-				__webpack_require__.e/* nsure */(4, function (require) {
-					FrinedStore = __webpack_require__(239).FriendStore;
-					FrinedStore.getUsers(actions.token);
-				});
+				if (FriendStore) {
+					FriendStore.getUsers(actions.token);
+				} else {
+					__webpack_require__.e/* nsure */(4, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.getUsers(actions.token);
+					});
+				}
 				break;
 
 			case 'SAVE INFO':
@@ -1167,6 +1175,17 @@ webpackJsonp([1,3],{
 					SettingStore = __webpack_require__(287).SettingStore;
 					SettingStore.save(actions.username, actions.path);
 				});
+				break;
+
+			case 'SET POINT':
+				if (FriendStore) {
+					FriendStore.setPoint(actions.path);
+				} else {
+					__webpack_require__.e/* nsure */(4/* duplicate */, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.setPoint(actions.path);
+					});
+				}
 				break;
 
 			default:

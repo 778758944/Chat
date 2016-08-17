@@ -119,6 +119,34 @@
 
 	console.log('kkdddd');
 
+	var hidden, visibleChange;
+	if (typeof document.hidden !== 'undefined') {
+		hidden = 'hidden';
+		visibleChange = 'visibilitychange';
+	} else if (typeof document.mozHidden !== 'undefined') {
+		hidden = 'mozHidden';
+		visibleChange = 'mozvisibilitychange';
+	} else if (typeof document.msHidden !== 'undefined') {
+		hidden = 'msHidden';
+		visibleChange = 'msvisibilitychange';
+	} else if (typeof document.webkitHidden !== 'undefined') {
+		hidden = 'webkitHidden';
+		visibleChange = 'webkitvisibilitychange';
+	}
+
+	function visibleHandle() {
+		if (document[hidden]) {
+			post('/api/setPoint', { point: "/offline" }, function (res) {
+				console.log(res);
+			});
+			// console.log('no visible');
+		} else {
+				//console.log('visible');
+			}
+	}
+
+	document.addEventListener(visibleChange, visibleHandle);
+
 	var App = _react2.default.createClass({
 		displayName: 'App',
 
@@ -172,7 +200,15 @@
 		childRoutes: _index.app
 	};
 
-	(0, _reactDom.render)(_react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: routes }), document.getElementById('wrap'));
+	window.onload = function () {
+		(0, _reactDom.render)(_react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: routes }), document.getElementById('wrap'));
+	};
+
+	// render((
+	// 	<Router history={hashHistory} routes={routes}>
+
+	// 	</Router>
+	// 	),document.getElementById('wrap'));
 
 /***/ },
 /* 1 */

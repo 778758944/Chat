@@ -21,6 +21,7 @@ module.exports={
 	plugins:[
 		new HtmlwebpackPlugin({
 			title:"Chat",
+			inject:"head",
 			template:'./client/app/index-tem.html'
 		})
 	],

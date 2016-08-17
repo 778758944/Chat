@@ -43,6 +43,8 @@ class FriendCtrl extends Component{
 	}
 
 	componentDidMount(){
+		console.log(this.props.location.pathname);
+		FriendAction.setPoint(this.props.location.pathname);
 		// console.log('router',this.context.router);
 	}
 

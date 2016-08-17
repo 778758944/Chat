@@ -12,6 +12,12 @@ var MsgActions={
 			actionType:'SEND MESSAGE',
 			text:msg
 		})
+	},
+	setPoint:function(path){
+		AppDispatcher.dispatch({
+			actionType:"SET POINT",
+			path:path
+		})
 	}
 }
 

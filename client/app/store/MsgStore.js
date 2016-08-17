@@ -29,6 +29,13 @@ class MSGSTORE extends EventEmitter{
 		return this.messages;
 	}
 
+	setPoint(){
+		var url='/api/setPoint';
+		post(url,{point:url},function(res){
+			console.log(res);
+		})
+	}
+
 	updateMsg(data){
 		if(data.lx!='draw'){
 			this.messages.push(data);

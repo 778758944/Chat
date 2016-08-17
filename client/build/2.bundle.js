@@ -367,6 +367,14 @@ webpackJsonp([2,4],{
 				return this.messages;
 			}
 		}, {
+			key: 'setPoint',
+			value: function setPoint() {
+				var url = '/api/setPoint';
+				post(url, { point: url }, function (res) {
+					console.log(res);
+				});
+			}
+		}, {
 			key: 'updateMsg',
 			value: function updateMsg(data) {
 				if (data.lx != 'draw') {
@@ -504,16 +512,15 @@ webpackJsonp([2,4],{
 
 	var _events = __webpack_require__(232);
 
-	var io = __webpack_require__(240);
-	// var io_url="http://localhost:3002";
-	/**
-	 * 
-	 * @authors Your Name (you@example.org)
-	 * @date    2016-05-15 11:03:53
-	 * @version $Id$
-	 */
+	var io = __webpack_require__(240); /**
+	                                       * 
+	                                       * @authors Your Name (you@example.org)
+	                                       * @date    2016-05-15 11:03:53
+	                                       * @version $Id$
+	                                       */
 
-	var io_url = "https://chat.xingwentao.top";
+	var io_url = "http://localhost:3002";
+	// var io_url="https://chat.xingwentao.top";
 	var socket = io(io_url);
 
 	var FriendStore = Object.assign({}, _events.EventEmitter.prototype, {
@@ -532,6 +539,15 @@ webpackJsonp([2,4],{
 			}.bind(this), function () {
 				this.emit('fail');
 			}.bind(this));
+		},
+
+		setPoint: function setPoint(path) {
+			var url = '/api/setPoint';
+			post(url, {
+				point: path
+			}, function (res) {
+				console.log(res);
+			});
 		},
 
 		addFailListener: function addFailListener(cb) {

@@ -8,18 +8,25 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel='manifest' href='manifest.json'>
-</head>
+<script type="text/javascript" src="bundle.js"></script></head>
 <body>
     <div id="wrap"></div>
     <script>
+    	// console.log('post',post);
+    	var key;
     	function initialService(){
 			navigator.serviceWorker.ready.then(function(registration){
 				registration.pushManager.getSubscription().then(function(subscribe){
 					if(subscribe){
-						console.log(subscribe);
+						key=subscribe.toJSON();
+						console.log(key);
 					}
 					else{
 						registration.pushManager.subscribe({userVisibleOnly:true}).then(function(subscription){
+							key=subscription.toJSON();
+							post('/api/pushkeys/addkey',key,function(res){
+								console.log(res);
+							})
 							console.log('key',subscription);
 						})
 					}
@@ -31,5 +38,5 @@
 		navigator.serviceWorker.register('./sw.js').then(initialService);
 	}
     </script>
-<script type="text/javascript" src="bundle.js"></script></body>
+</body>
 </html>

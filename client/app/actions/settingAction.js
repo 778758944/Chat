@@ -14,6 +14,12 @@ var SettingAction={
 			username:username,
 			path:path
 		})
+	},
+	setPoint:function(path){
+		AppDispatcher.dispatch({
+			actionType:"SET POINT",
+			path:path
+		})
 	}
 }
 

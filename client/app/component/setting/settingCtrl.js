@@ -61,7 +61,7 @@ class SettingCtrl extends Component{
 	}
 
 	componentDidMount(){
-
+		SettingAction.setPoint(this.props.location.pathname);
 	}
 
 	componentWillUnmount(){

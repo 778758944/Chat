@@ -12,7 +12,7 @@ webpackJsonp([9],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	var MsgStore, LoginStore, FriendStore, SettingStore; /**
 	                                                      * 
 	                                                      * @authors Your Name (you@example.org)
 	                                                      * @date    2016-03-23 22:14:17
@@ -38,10 +38,14 @@ webpackJsonp([9],{
 				break;
 
 			case 'GET USER':
-				__webpack_require__.e/* nsure */(4, function (require) {
-					FrinedStore = __webpack_require__(239).FriendStore;
-					FrinedStore.getUsers(actions.token);
-				});
+				if (FriendStore) {
+					FriendStore.getUsers(actions.token);
+				} else {
+					__webpack_require__.e/* nsure */(4, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.getUsers(actions.token);
+					});
+				}
 				break;
 
 			case 'SAVE INFO':
@@ -49,6 +53,17 @@ webpackJsonp([9],{
 					SettingStore = __webpack_require__(287).SettingStore;
 					SettingStore.save(actions.username, actions.path);
 				});
+				break;
+
+			case 'SET POINT':
+				if (FriendStore) {
+					FriendStore.setPoint(actions.path);
+				} else {
+					__webpack_require__.e/* nsure */(4/* duplicate */, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.setPoint(actions.path);
+					});
+				}
 				break;
 
 			default:
@@ -455,7 +470,9 @@ webpackJsonp([9],{
 			value: function componentWillMount() {}
 		}, {
 			key: 'componentDidMount',
-			value: function componentDidMount() {}
+			value: function componentDidMount() {
+				_SettingAction2.default.setPoint(this.props.location.pathname);
+			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {}
@@ -743,6 +760,12 @@ webpackJsonp([9],{
 			_AppDispatcher.AppDispatcher.dispatch({
 				actionType: 'SAVE INFO',
 				username: username,
+				path: path
+			});
+		},
+		setPoint: function setPoint(path) {
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: "SET POINT",
 				path: path
 			});
 		}

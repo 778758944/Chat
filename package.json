@@ -5,7 +5,7 @@
   "scripts": {
     "pretest": "jshint .",
     "start": "webpack-dev-server --hot --inline",
-    "deploy": "webpack --config webpack.production.config.js" 
+    "deploy": "webpack --config webpack.production.config.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

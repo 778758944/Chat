@@ -38,7 +38,8 @@ class ChatCtrl extends React.Component{
 	}
 
 	componentDidMount(){
-		console.log(this.props.location);
+		var path=this.props.location.pathname;
+		MsgActions.setPoint(path);
 		MsgStore.addUpdateListener(this._onUpdate);
 	}
 

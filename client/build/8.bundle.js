@@ -321,7 +321,7 @@ webpackJsonp([8,2,4],{
 
 	var _flux = __webpack_require__(235);
 
-	var MsgStore, LoginStore, FrinedStore, SettingStore; /**
+	var MsgStore, LoginStore, FriendStore, SettingStore; /**
 	                                                      * 
 	                                                      * @authors Your Name (you@example.org)
 	                                                      * @date    2016-03-23 22:14:17
@@ -347,10 +347,14 @@ webpackJsonp([8,2,4],{
 				break;
 
 			case 'GET USER':
-				__webpack_require__.e/* nsure */(4, function (require) {
-					FrinedStore = __webpack_require__(239).FriendStore;
-					FrinedStore.getUsers(actions.token);
-				});
+				if (FriendStore) {
+					FriendStore.getUsers(actions.token);
+				} else {
+					__webpack_require__.e/* nsure */(4, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.getUsers(actions.token);
+					});
+				}
 				break;
 
 			case 'SAVE INFO':
@@ -358,6 +362,17 @@ webpackJsonp([8,2,4],{
 					SettingStore = __webpack_require__(287).SettingStore;
 					SettingStore.save(actions.username, actions.path);
 				});
+				break;
+
+			case 'SET POINT':
+				if (FriendStore) {
+					FriendStore.setPoint(actions.path);
+				} else {
+					__webpack_require__.e/* nsure */(4/* duplicate */, function (require) {
+						FriendStore = __webpack_require__(239).FriendStore;
+						FriendStore.setPoint(actions.path);
+					});
+				}
 				break;
 
 			default:
@@ -737,6 +752,14 @@ webpackJsonp([8,2,4],{
 				return this.messages;
 			}
 		}, {
+			key: 'setPoint',
+			value: function setPoint() {
+				var url = '/api/setPoint';
+				post(url, { point: url }, function (res) {
+					console.log(res);
+				});
+			}
+		}, {
 			key: 'updateMsg',
 			value: function updateMsg(data) {
 				if (data.lx != 'draw') {
@@ -874,16 +897,15 @@ webpackJsonp([8,2,4],{
 
 	var _events = __webpack_require__(232);
 
-	var io = __webpack_require__(240);
-	// var io_url="http://localhost:3002";
-	/**
-	 * 
-	 * @authors Your Name (you@example.org)
-	 * @date    2016-05-15 11:03:53
-	 * @version $Id$
-	 */
+	var io = __webpack_require__(240); /**
+	                                       * 
+	                                       * @authors Your Name (you@example.org)
+	                                       * @date    2016-05-15 11:03:53
+	                                       * @version $Id$
+	                                       */
 
-	var io_url = "https://chat.xingwentao.top";
+	var io_url = "http://localhost:3002";
+	// var io_url="https://chat.xingwentao.top";
 	var socket = io(io_url);
 
 	var FriendStore = Object.assign({}, _events.EventEmitter.prototype, {
@@ -902,6 +924,15 @@ webpackJsonp([8,2,4],{
 			}.bind(this), function () {
 				this.emit('fail');
 			}.bind(this));
+		},
+
+		setPoint: function setPoint(path) {
+			var url = '/api/setPoint';
+			post(url, {
+				point: path
+			}, function (res) {
+				console.log(res);
+			});
 		},
 
 		addFailListener: function addFailListener(cb) {
@@ -8422,6 +8453,12 @@ webpackJsonp([8,2,4],{
 			_AppDispatcher.AppDispatcher.dispatch({
 				actionType: 'SEND MESSAGE',
 				text: msg
+			});
+		},
+		setPoint: function setPoint(path) {
+			_AppDispatcher.AppDispatcher.dispatch({
+				actionType: "SET POINT",
+				path: path
 			});
 		}
 	}; /**

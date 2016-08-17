@@ -13,6 +13,7 @@ var sockets={},
 
 var socketConnection=function(socket){
 	var userId;
+	var points=loopback.findModel('points');
 	if(socket.request.headers.cookie){
 		var cookies=socket.request.headers.cookie.split(';');
 		console.log(cookies);
@@ -33,8 +34,30 @@ var socketConnection=function(socket){
 			var to=data.to;
 			var lx=data.lx ? data.lx:0;
 			if(sockets[to]){
-				console.log('msg out');
-				sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
+				points.findById(to,function(err,points){
+					if(err){
+						console.log(err);
+						return;
+					}
+					else{
+						var path=points.point;
+						// console.log(path);
+						// console.log('/chat/'+userId);
+						if(path=='/chat/'+userId){
+							console.log('msg out');
+							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
+						}
+						else{
+
+
+							console.log('i will give you a notice for a while');
+						}
+					}
+
+				});
+
+				// console.log('msg out');
+				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 		})
 	}
@@ -115,11 +138,33 @@ var uploadImg=function(req,res){
 	})
 }
 
+var setPoint=function(req,res){
+	// console.log('token',req.token);
+	var points=loopback.findModel('points');
+	var ctx=loopback.getCurrentContext();
+	var userId=ctx.get('accessToken').userId;
+	// console.log('point',req.body.point);
+	var data={
+		userId:userId,
+		point:req.body.point
+	}
+	points.upsert(data,function(err,data){
+		if(err){
+			console.log(err);
+			return err;
+		}
+		else{
+			res.json({code:200,msg:'success'});
+		}
+	});
+}
+
 module.exports={
 	login:login,
 	socketConnection:socketConnection,
 	updateInfo:updateInfo,
-	uploadImg:uploadImg
+	uploadImg:uploadImg,
+	setPoint:setPoint
 }
 
 
