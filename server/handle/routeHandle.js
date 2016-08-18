@@ -18,41 +18,107 @@ var webPush=require('web-push');
 webPush.setGCMAPIKey(key.pushkey);
 
 
-var pushNotification=function(to,msg){
+var pushNotification=function(to,from,msg){
+	var pushkey=loopback.findModel('pushkey');
 	var yonghu=loopback.findModel('yonghu');
-	yonghu.findById(to,{
-		include:'pushkeys'
-	},function(err,rp){
-		if(err){
-			console.log(err);
-		}
-		else{
-			console.log(rp);
-			// console.log(rp.pushkeys().);
-			var data=rp.pushkeys();
+
+	var p1=new Promise(function(resolve,reject){
+		pushkey.findById(to,function(err,data){
+			if(err){
+				console.log(err);
+				reject(err)
+			}
+			else{
+				resolve(data);
+			}
+		})
+	});
+
+	var p2=new Promise(function(resolve,reject){
+		yonghu.findById(from,{fields:{
+			username:true,
+			email:true,
+			img:true
+		}},function(err,data){
+			if(err){
+				console.log(err);
+				reject(err)
+			}
+			else{
+				resolve(data);
+			}
+		})
+	});
+
+	Promise.all([p1,p2]).then(function(res){
+		// console.log('promise',res);
+		var pushData=res[0];
+		var userData=res[1];
+
 			// console.log('data',rp.pushkeys);
-			var title=rp.username || rp.email;
-			var body=msg;
-			var img=rp.img;
-			// console.log(title,body,img);
-			// console.log();
-			var subscribe=JSON.parse(data.key);
-			var sendData={
-				title:title,
-				body:msg,
-				icon:img,
-				tag:title
-			}
+		var title=userData.username || userData.email;
+		var body=msg;
+		var img=userData.img;
+		// console.log(title,body,img);
+		// console.log();
+		var subscribe=JSON.parse(pushData.key);
+		var sendData={
+			title:title,
+			body:msg,
+			icon:img,
+			tag:title
+		}
 
-			sendData=JSON.stringify(sendData);
+		sendData=JSON.stringify(sendData);
 
-			var params={
-				payload:sendData,
-				userPublicKey:subscribe.keys.p256dh,
-				userAuth:subscribe.keys.auth
-			}
+		var params={
+			payload:sendData,
+			userPublicKey:subscribe.keys.p256dh,
+			userAuth:subscribe.keys.auth
+		}
 
-			webPush.sendNotification(subscribe.endpoint,params);
+		webPush.sendNotification(subscribe.endpoint,params);
+
+	})
+
+
+
+
+
+
+	// yonghu.findById(to,{
+	// 	include:'pushkeys'
+	// },function(err,rp){
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+	// 	else{
+	// 		console.log(rp);
+	// 		// console.log(rp.pushkeys().);
+	// 		var data=rp.pushkeys();
+	// 		// console.log('data',rp.pushkeys);
+	// 		var title=rp.username || rp.email;
+	// 		var body=msg;
+	// 		var img=rp.img;
+	// 		// console.log(title,body,img);
+	// 		// console.log();
+	// 		var subscribe=JSON.parse(data.key);
+	// 		var sendData={
+	// 			title:title,
+	// 			body:msg,
+	// 			icon:img,
+	// 			tag:title
+	// 		}
+
+	// 		sendData=JSON.stringify(sendData);
+
+	// 		var params={
+	// 			payload:sendData,
+	// 			userPublicKey:subscribe.keys.p256dh,
+	// 			userAuth:subscribe.keys.auth
+	// 		}
+
+	// 		webPush.sendNotification(subscribe.endpoint,params);
 
 			// var key_arr=data.key.split('/');
 			// var register_id=key_arr.splice(key_arr.length-1,1)[0];
@@ -99,8 +165,8 @@ var pushNotification=function(to,msg){
 
 			// req.write(bodyData);
 			// req.end();
-		}
-	})
+		// }
+	// })
 }
 
 var socketConnection=function(socket){
@@ -142,7 +208,7 @@ var socketConnection=function(socket){
 						}
 						else{
 							// console.log('no response');
-							pushNotification(to,data.msg);
+							pushNotification(to,userId,data.msg);
 
 
 							// console.log('i will give you a notice for a while');
@@ -155,7 +221,7 @@ var socketConnection=function(socket){
 				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 			else{
-				pushNotification(to,data.msg);
+				pushNotification(to,userId,data.msg);
 			}
 		})
 	}
