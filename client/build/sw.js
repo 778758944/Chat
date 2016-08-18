@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v2::';
+var version='v3::';
 
 //创建缓存
 function updateStaticCache(){
@@ -117,6 +117,13 @@ self.addEventListener('push',function(event){
 		})
 	);
 });
+
+self.addEventListener('notificationclick',function(event){
+	console.log('click');
+	event.notification.close();
+	clients.openWindow('https://www.baidu.com');
+	event.waitUntil(Promise.resolve());
+})
 
 
 
