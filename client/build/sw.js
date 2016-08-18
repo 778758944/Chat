@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v5::';
+var version='v6::';
 
 //创建缓存
 function updateStaticCache(){
@@ -121,6 +121,7 @@ self.addEventListener('push',function(event){
 self.addEventListener('notificationclick',function(event){
 	console.log('click');
 	event.notification.close();
+	console.log(event.notification);
 	clients.openWindow(event.notification.data.url);
 	event.waitUntil(Promise.resolve());
 })
