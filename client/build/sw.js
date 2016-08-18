@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v8::';
+var version='v9::';
 
 //创建缓存
 function updateStaticCache(){
@@ -107,12 +107,13 @@ self.addEventListener('fetch',function(event){
 self.addEventListener('push',function(event){
 	console.log('push',event);
 	var title='push message';
-	console.log('push',event.data.json());
+	console.log(event.data.text());
+	var data=JSON.parse(event.data.text());
 	event.waitUntil(
-		self.registration.showNotification(title,{
-			body:"The Message",
-			icon:"./girl.jpg",
-			tag:"my-tag"
+		self.registration.showNotification(data.title,{
+			body:data.body,
+			icon:data.icon,
+			tag:data.tag
 		})
 	);
 });

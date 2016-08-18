@@ -27,10 +27,17 @@ var pushNotification=function(to){
 		else{
 			console.log(data.key);
 			var subscribe=JSON.parse(data.key);
-			var sendData=new Buffer('push text','utf-8');
+			var sendData={
+				title:"new message",
+				body:'you have a new message',
+				icon:'http://a1.att.hudong.com/24/59/01300396105035134141594781122.jpg',
+				tag:'dede'
+			}
+
+			sendData=JSON.stringify(sendData);
 
 			var params={
-				payload:{name:'jack',age:12},
+				payload:sendData,
 				userPublicKey:subscribe.keys.p256dh,
 				userAuth:subscribe.keys.auth
 			}
