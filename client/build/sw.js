@@ -107,7 +107,7 @@ self.addEventListener('fetch',function(event){
 self.addEventListener('push',function(event){
 	console.log('push',event);
 	var title='push message';
-	console.log('push',event.data.json());
+	console.log('push',event.data.text());
 	event.waitUntil(
 		self.registration.showNotification(title,{
 			body:"The Message",
