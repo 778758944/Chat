@@ -897,15 +897,16 @@ webpackJsonp([8,2,4],{
 
 	var _events = __webpack_require__(232);
 
-	var io = __webpack_require__(240); /**
-	                                       * 
-	                                       * @authors Your Name (you@example.org)
-	                                       * @date    2016-05-15 11:03:53
-	                                       * @version $Id$
-	                                       */
+	var io = __webpack_require__(240);
+	// var io_url="http://localhost:3002";
+	/**
+	 * 
+	 * @authors Your Name (you@example.org)
+	 * @date    2016-05-15 11:03:53
+	 * @version $Id$
+	 */
 
-	var io_url = "http://localhost:3002";
-	// var io_url="https://chat.xingwentao.top";
+	var io_url = "https://chat.xingwentao.top";
 	var socket = io(io_url);
 
 	var FriendStore = Object.assign({}, _events.EventEmitter.prototype, {
