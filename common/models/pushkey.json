@@ -6,11 +6,11 @@
     "validateUpsert": true
   },
   "properties": {
-    "userId": {
+    "id": {
       "type": "number",
+      "id": true,
       "required": true,
-      "id":true,
-      "index":true
+      "index": true
     },
     "key": {
       "type": "string",
@@ -18,7 +18,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "yonghu": {
+      "type": "belongsTo",
+      "model": "yonghu",
+      "foreignKey": "id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

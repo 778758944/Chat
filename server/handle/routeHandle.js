@@ -18,20 +18,26 @@ var webPush=require('web-push');
 webPush.setGCMAPIKey(key.pushkey);
 
 
-var pushNotification=function(to){
-	var pushkey=loopback.findModel('pushkey');
-	pushkey.findById(to,function(err,data){
+var pushNotification=function(to,msg){
+	var yonghu=loopback.findModel('yonghu');
+	yonghu.findById(to,{
+		include:'pushkeys'
+	},function(err,res){
 		if(err){
 			console.log(err);
 		}
 		else{
-			console.log(data.key);
+			console.log(res);
+			var data=res.pushkeys;
+			var title=res.username || res.email;
+			var body=msg;
+			var img=res.img;
 			var subscribe=JSON.parse(data.key);
 			var sendData={
-				title:"new message",
-				body:'you have a new message',
-				icon:'http://a1.att.hudong.com/24/59/01300396105035134141594781122.jpg',
-				tag:'dede'
+				title:title,
+				body:msg,
+				icon:img,
+				tag:title
 			}
 
 			sendData=JSON.stringify(sendData);
@@ -132,7 +138,7 @@ var socketConnection=function(socket){
 						}
 						else{
 							// console.log('no response');
-							pushNotification(to);
+							pushNotification(to,data.msg);
 
 
 							// console.log('i will give you a notice for a while');

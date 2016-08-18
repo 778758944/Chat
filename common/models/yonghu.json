@@ -17,7 +17,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "pushkeys": {
+      "type": "hasOne",
+      "model": "pushkey",
+      "foreignKey": "id"
+    }
+  },
   "acls": [
     {
       "accessType": "EXECUTE",

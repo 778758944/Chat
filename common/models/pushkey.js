@@ -25,7 +25,7 @@ module.exports = function(Pushkey) {
 
 
 		var data={
-			userId:userId,
+			id:userId,
 			key:key
 		}
 		Pushkey.upsert(data,function(err,data){

@@ -8,9 +8,9 @@
   "properties": {
     "userId": {
       "type": "number",
+      "id": true,
       "required": true,
-      "index": true,
-      "id":true
+      "index": true
     },
     "point": {
       "type": "string",

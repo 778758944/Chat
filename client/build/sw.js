@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v9::';
+var version='v1::';
 
 //创建缓存
 function updateStaticCache(){
@@ -113,7 +113,7 @@ self.addEventListener('push',function(event){
 		self.registration.showNotification(data.title,{
 			body:data.body,
 			icon:data.icon,
-			tag:data.tag
+			tag:data.title
 		})
 	);
 });
