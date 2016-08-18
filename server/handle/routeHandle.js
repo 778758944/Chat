@@ -66,7 +66,10 @@ var pushNotification=function(to,from,msg){
 			title:title+'发来一条消息',
 			body:msg,
 			icon:img,
-			tag:title
+			tag:title,
+			data:{
+				url:'https://chat.xingwentao.top/build/index.html#/chat/'+from;
+			}
 		}
 
 		sendData=JSON.stringify(sendData);
