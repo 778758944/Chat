@@ -30,7 +30,7 @@ var pushNotification=function(to){
 			var sendData=new Buffer('push text','utf-8');
 
 			var params={
-				payload:sendData,
+				payload:{name:'jack',age:12},
 				userPublicKey:subscribe.keys.p256dh,
 				userAuth:subscribe.keys.auth
 			}
