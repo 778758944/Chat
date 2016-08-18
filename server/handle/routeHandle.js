@@ -27,9 +27,10 @@ var pushNotification=function(to){
 		else{
 			console.log(data.key);
 			var subscribe=JSON.parse(data.key);
+			var sendData=new Buffer('push text','utf-8');
 
 			var params={
-				payload:'test',
+				payload:sendData,
 				userPublicKey:subscribe.keys.p256dh,
 				userAuth:subscribe.keys.auth
 			}
