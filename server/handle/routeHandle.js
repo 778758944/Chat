@@ -63,7 +63,7 @@ var pushNotification=function(to,from,msg){
 		// console.log();
 		var subscribe=JSON.parse(pushData.key);
 		var sendData={
-			title:title,
+			title:title+'发来一条消息',
 			body:msg,
 			icon:img,
 			tag:title
@@ -80,93 +80,6 @@ var pushNotification=function(to,from,msg){
 		webPush.sendNotification(subscribe.endpoint,params);
 
 	})
-
-
-
-
-
-
-	// yonghu.findById(to,{
-	// 	include:'pushkeys'
-	// },function(err,rp){
-	// 	if(err){
-	// 		console.log(err);
-	// 	}
-	// 	else{
-	// 		console.log(rp);
-	// 		// console.log(rp.pushkeys().);
-	// 		var data=rp.pushkeys();
-	// 		// console.log('data',rp.pushkeys);
-	// 		var title=rp.username || rp.email;
-	// 		var body=msg;
-	// 		var img=rp.img;
-	// 		// console.log(title,body,img);
-	// 		// console.log();
-	// 		var subscribe=JSON.parse(data.key);
-	// 		var sendData={
-	// 			title:title,
-	// 			body:msg,
-	// 			icon:img,
-	// 			tag:title
-	// 		}
-
-	// 		sendData=JSON.stringify(sendData);
-
-	// 		var params={
-	// 			payload:sendData,
-	// 			userPublicKey:subscribe.keys.p256dh,
-	// 			userAuth:subscribe.keys.auth
-	// 		}
-
-	// 		webPush.sendNotification(subscribe.endpoint,params);
-
-			// var key_arr=data.key.split('/');
-			// var register_id=key_arr.splice(key_arr.length-1,1)[0];
-			// var request_url=key_arr.join('/');
-			// // console.log('test',register_id,url);
-			// var bodyData={
-			// 	to:register_id,
-			// 	data:{
-			// 		name:'jack'
-			// 	},
-			// 	notification:{
-			// 		body:'ssssss'
-			// 	}
-			// }
-
-			// var urlData=url.parse(request_url);
-			// console.log(urlData);
-
-			// bodyData=querystring.stringify(bodyData);
-			// var option={
-			// 	hostname:urlData.hostname,
-			// 	path:urlData.path,
-			// 	method:"POST",
-			// 	headers:{
-			// 		'Content-Type':"application/x-www-form-urlencoded",
-			// 		'Authorization':"key="+key.pushkey
-			// 	}
-			// };
-
-			// var req=https.request(option,function(res){
-			// 	console.log('status',res.statusCode);
-			// 	var chunks=[];
-
-			// 	res.on('data',function(chunk){
-			// 		chunks.push(chunk);
-			// 	});
-
-			// 	res.on('end',function(){
-			// 		var final_buf=Buffer.concat(chunks);
-			// 		var dataStr=final_buf.toString('utf8');
-			// 		console.log(dataStr);
-			// 	});
-			// })
-
-			// req.write(bodyData);
-			// req.end();
-		// }
-	// })
 }
 
 var socketConnection=function(socket){
