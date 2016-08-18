@@ -22,16 +22,20 @@ var pushNotification=function(to,msg){
 	var yonghu=loopback.findModel('yonghu');
 	yonghu.findById(to,{
 		include:'pushkeys'
-	},function(err,res){
+	},function(err,rp){
 		if(err){
 			console.log(err);
 		}
 		else{
-			console.log(res);
-			var data=res.pushkeys;
-			var title=res.username || res.email;
+			console.log(rp);
+			// console.log(rp.pushkeys().);
+			var data=rp.pushkeys();
+			// console.log('data',rp.pushkeys);
+			var title=rp.username || rp.email;
 			var body=msg;
-			var img=res.img;
+			var img=rp.img;
+			// console.log(title,body,img);
+			// console.log();
 			var subscribe=JSON.parse(data.key);
 			var sendData={
 				title:title,
@@ -151,7 +155,7 @@ var socketConnection=function(socket){
 				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 			else{
-				pushNotification(to);
+				pushNotification(to,data.msg);
 			}
 		})
 	}

@@ -7,8 +7,14 @@
 
 import {EventEmitter} from 'events'
 var io=require('socket.io-client');
+if(location.href.indexOf('xingwentao') != -1){
+	var io_url="https://chat.xingwentao.top";
+}
+else{
+	var io_url="http://localhost:3002";
+}
 // var io_url="http://localhost:3002";
-var io_url="https://chat.xingwentao.top";
+// var io_url="https://chat.xingwentao.top";
 var socket=io(io_url);
 
 var FriendStore = Object.assign({},EventEmitter.prototype,{

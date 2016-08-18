@@ -19,14 +19,14 @@ module.exports=function(app){
 
 	
 
-	mysqlDs.automigrate('pushkey',function(err){
-		if(err){
-			console.log('err');
-		}
-		else{
-			console.log('success');
-		}
-	})
+	// mysqlDs.automigrate('pushkey',function(err){
+	// 	if(err){
+	// 		console.log('err');
+	// 	}
+	// 	else{
+	// 		console.log('success');
+	// 	}
+	// })
 
 
 	// mysqlDs.automigrate('points',function(err){
