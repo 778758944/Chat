@@ -47,7 +47,7 @@ class MineMsg extends React.Component{
 				<div className='msgWrap otherWrap'>
 					<p className='otherMsg_text oneText' onClick={()=>{
 						this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
-						// this.props.audio.play();
+						this.props.audio.play();
 					}}>播放语音</p>
 				</div>
 			</div>
@@ -163,7 +163,7 @@ class FormBox extends React.Component{
 
 		this.onRecoderEnd=function(e){
 			e.nativeEvent.preventDefault();
-			this.recoder.play(this.audio);
+			// this.recoder.play(this.audio);
 			this.props.handle({msg:this.recoder.getBlob(true),to:this.props.to,type:1,lx:'wav'})
 		}.bind(this);
 	}

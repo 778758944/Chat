@@ -165,7 +165,6 @@ class Cvs extends React.Component{
 		return (
 			<div>
 				<button onClick={this.clear} style={{position:'absolute',top:0,left:0}}>清除</button>
-				<button onClick={this.redraw} style={{position:'absolute',top:0,left:100}}>回放</button>
 				<canvas width={this.state.width} height={this.state.height} ref={(e)=>{
 					if(e){
 						this.ctx=e.getContext('2d');
