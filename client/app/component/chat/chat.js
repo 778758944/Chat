@@ -47,7 +47,7 @@ class MineMsg extends React.Component{
 				<div className='msgWrap otherWrap'>
 					<p className='otherMsg_text oneText' onClick={()=>{
 						this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
-						this.props.audio.play();
+						// this.props.audio.play();
 					}}>播放语音</p>
 				</div>
 			</div>
