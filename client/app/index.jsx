@@ -4,10 +4,11 @@ import {Router,Route,IndexRoute,Link,hashHistory,Redirect,browserHistory} from '
 import './lib/ajax.js'
 import {app} from './component/index'
 var ReactCSSTransitionGroup=require('react-addons-css-transition-group');
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
 // import {registerCtrl} from './component/register/registerCtrl'
-
-require('./main.css');
 require('./reset.css');
+require('./main.css');
 
 console.log('kkdddd');
 

@@ -68,11 +68,11 @@ body{
 }
 .mineWrap{
 	float: left;
-	margin-left: 5px;
+	margin-left: 10px;
 }
 .otherWrap{
 	float: right;
-	margin-right: 5px;
+	margin-right: 10px;
 }
 .mineWrap::after{
 	content: "";
@@ -167,7 +167,7 @@ body{
 	display: block;
 	position: absolute;
 	left: 0;
-	background-color: #5bb8ff;
+	background-color: #43c117;
 	border-width: 0;
 	border-radius: 5px;
 	height: 2.5rem;
@@ -324,6 +324,7 @@ body{
 /*	position: absolute;
 	top:0;
 	left:0;*/
+	padding-top: 10px;
 	display: none;
 	overflow: hidden;
 }

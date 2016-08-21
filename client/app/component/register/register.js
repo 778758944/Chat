@@ -6,12 +6,6 @@
  */
 import React from 'react'
 import {Config,Validator} from '../../lib/validator'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-
-injectTapEventPlugin();
-
-
-
 
 class Register extends React.Component{
 	constructor(props){

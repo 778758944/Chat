@@ -5,6 +5,7 @@
  * @version $Id$
  */
 var path=require('path');
+var webpack=require('webpack');
 var HtmlwebpackPlugin=require("html-webpack-plugin");
 var ROOT_PATH=path.resolve(__dirname);
 var APP_PATH=path.resolve(ROOT_PATH,'client/app');
@@ -23,13 +24,23 @@ module.exports={
 			title:"Chat",
 			inject:"head",
 			template:'./client/app/index-tem.html'
-		})
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+           compress: {
+               warnings: false
+           }
+        })
 	],
 	module:{
 		loaders:[
 			{
 				test:/\.(jpg||png)$/,
 				loader:'url?limit=400&name=imgs/[name]-[hash].[ext]'
+			},
+			{
+				test:/component\.scss$/,
+				loader:'style-loader!css-loader?modules!postcss-loader',
+				include:APP_PATH
 			},
 			{
 				test:/\.css$/,

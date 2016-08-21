@@ -6,6 +6,8 @@
  */
 import React,{Component} from 'react'
 import SettingAction from '../../actions/SettingAction'
+import {SettingStore} from '../../store/settingStore'
+import {Enhance} from '../../lib/enhance.js'
 
 
 
@@ -62,6 +64,14 @@ class SettingCtrl extends Component{
 
 	componentDidMount(){
 		SettingAction.setPoint(this.props.location.pathname);
+		SettingStore.addGetListener(function(){
+			this.props.showTip('success',2000);
+			this.context.router.goBack();
+		}.bind(this));
+
+		SettingStore.addFailListener(function(){
+			this.props.showTip('error',2000);
+		}.bind(this));
 	}
 
 	componentWillUnmount(){
@@ -304,4 +314,6 @@ SettingCtrl.contextTypes={
 	router:React.PropTypes.object,
 	state:React.PropTypes.object
 }
+
+SettingCtrl=Enhance(SettingCtrl);
 module.exports=SettingCtrl;

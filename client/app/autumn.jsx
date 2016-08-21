@@ -44,14 +44,14 @@ class Autumn extends Component{
 	}
 }
 
-var AutumnEnhance=Enhance(Autumn,true)
-var width=document.documentElement.clientWidth;
-var height=document.documentElement.clientHeight;
+var AutumnEnhance=Enhance(Autumn)
+// var width=document.documentElement.clientWidth;
+// var height=document.documentElement.clientHeight;
 
 // console.log(width,height);
 
 
-render(<AutumnEnhance width={width} height={height}/>,document.getElementById('wrap'));
+render(<AutumnEnhance/>,document.getElementById('wrap'));
 
 
 

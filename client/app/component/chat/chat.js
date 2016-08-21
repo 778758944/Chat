@@ -7,8 +7,6 @@
 import React from 'react'
 import {HZRecorder,dealWav} from '../../lib/getaudio'
 import kevent from '../../lib/kevent'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin();
 
 var my_img=require('../../11.png');
 var other_img=require('../../22.png');
@@ -35,7 +33,7 @@ class MineMsg extends React.Component{
 		
 		return (
 			<div className='otherMsg oneMsg'>
-				<img className='otherMsg_img' width={35} src={my_img}/>
+				<img className='otherMsg_img' width={35} src={this.props.img}/>
 				<div className='msgWrap otherWrap'>
 					<img src={data.msg} className="img"/>
 				</div>
@@ -45,7 +43,7 @@ class MineMsg extends React.Component{
 		else if(data.lx=='wav'){
 			return (
 			<div className='otherMsg oneMsg'>
-				<img className='otherMsg_img' width={35} src={my_img}/>
+				<img className='otherMsg_img' width={35} src={this.props.img}/>
 				<div className='msgWrap otherWrap'>
 					<p className='otherMsg_text oneText' onClick={()=>{
 						this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
@@ -87,7 +85,7 @@ class OtherMsg extends React.Component{
 
 			return (
 				<div className="mineMsg oneMsg">
-		  			      <img width={35} className="mineMsg_img" src={other_img}/>
+		  			      <img width={35} className="mineMsg_img" src={this.props.img}/>
 		  			      <div className="msgWrap mineWrap">
 			  			      <img src={data.msg} className="img"/>
 			  			      <span className="caret"></span>
@@ -98,7 +96,7 @@ class OtherMsg extends React.Component{
 		else if(data.lx=='wav'){
 			return (
 				<div className="mineMsg oneMsg">
-  			      <img width={35} className="mineMsg_img" src={other_img}/>
+  			      <img width={35} className="mineMsg_img" src={this.props.img}/>
   			      <div className="msgWrap mineWrap">
 	  			      <p className="mineMsg oneText" onClick={()=>{
 	  			      	this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));

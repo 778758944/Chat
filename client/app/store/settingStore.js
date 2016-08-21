@@ -13,10 +13,10 @@ var SettingStore = Object.assign({},EventEmitter.prototype,{
 		var url='/api/yonghus/updateInfo';
 		// console.log('formId',formId);
 		post(url,{username:username,path:path},function(res){
-			console.log(res);
+			this.emit('get');
 		}.bind(this),function(err){
-			console.log(err);
-		},false);
+			this.emit('fail');
+		}.bind(this),false);
 	},
 
 	addFailListener:function(cb){
