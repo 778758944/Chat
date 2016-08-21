@@ -13,7 +13,7 @@
     <div id="wrap"></div>
     <script>
     	// console.log('post',post);
-    	var key;
+    	var key={name:'jack'};
     	function initialService(){
 			navigator.serviceWorker.ready.then(function(registration){
 				registration.pushManager.getSubscription().then(function(subscribe){
@@ -40,3 +40,6 @@
     </script>
 </body>
 </html>
+
+
+

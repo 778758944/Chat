@@ -162,6 +162,8 @@ webpackJsonp([1,3],{
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
+	(0, _reactTapEventPlugin2.default)();
+
 	var Register = function (_React$Component) {
 		_inherits(Register, _React$Component);
 
@@ -185,13 +187,16 @@ webpackJsonp([1,3],{
 		_createClass(Register, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var configs = [new _validator.Config('email', "isEmail", true), new _validator.Config('password', "isEmpty", true)];
+				// var configs=[
+				// 	new Config('email',"isEmail",true),
+				// 	new Config('password',"isEmpty",true)
+				// ];
 
-				new _validator.Validator(configs, "register", true, function (ele, results) {
-					ele.nextSibling.innerHTML = results.info;
-				}, function (ele, results) {
-					ele.nextSibling.innerHTML = results.info;
-				});
+				// new Validator(configs,"register",true,function(ele,results){
+				// 	ele.nextSibling.innerHTML=results.info;
+				// },function(ele,results){
+				// 	ele.nextSibling.innerHTML=results.info;
+				// })
 			}
 		}, {
 			key: 'render',
@@ -208,29 +213,19 @@ webpackJsonp([1,3],{
 							_react2.default.createElement(
 								'div',
 								{ className: 'input_area_line' },
-								_react2.default.createElement('input', { type: 'text', name: 'email', placeholder: '请输入您的邮箱', value: this.props.email, onChange: this.props.changeEmail }),
-								_react2.default.createElement(
-									'span',
-									null,
-									'请输入正确的邮箱'
-								)
+								_react2.default.createElement('input', { type: 'text', name: 'email', placeholder: '请输入您的邮箱', value: this.props.email, onChange: this.props.changeEmail })
 							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'input_area_line' },
-								_react2.default.createElement('input', { type: 'password', name: 'password', placeholder: '请输入您的密码', value: this.props.password, onChange: this.props.changePasswd }),
-								_react2.default.createElement(
-									'span',
-									null,
-									this.state.nana
-								)
+								_react2.default.createElement('input', { type: 'password', name: 'password', placeholder: '请输入您的密码', value: this.props.password, onChange: this.props.changePasswd })
 							)
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn', id: 'register', onTouchTap: this.props.submit },
+							'登录'
 						)
-					),
-					_react2.default.createElement(
-						'button',
-						{ className: 'btn', id: 'register', onClick: this.props.submit },
-						'登录'
 					)
 				);
 			}

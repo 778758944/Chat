@@ -111,11 +111,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ReactCSSTransitionGroup = __webpack_require__(300);
+	var ReactCSSTransitionGroup = __webpack_require__(301);
 	// import {registerCtrl} from './component/register/registerCtrl'
 
-	__webpack_require__(307);
-	__webpack_require__(311);
+	__webpack_require__(308);
+	__webpack_require__(312);
 
 	console.log('kkdddd');
 
@@ -193,7 +193,7 @@
 		indexRoute: {
 			getComponent: function getComponent(nextState, cb) {
 				__webpack_require__.e/* nsure */(7/* duplicate */, function (require) {
-					cb(null, __webpack_require__(294));
+					cb(null, __webpack_require__(295));
 				});
 			}
 		},
@@ -25658,21 +25658,21 @@
 		path: 'friend',
 		getComponent: function getComponent(nextState, cb) {
 			__webpack_require__.e/* nsure */(7, function (require) {
-				cb(null, __webpack_require__(294));
+				cb(null, __webpack_require__(295));
 			});
 		}
 	}, {
 		path: 'cvs/:id',
 		getComponent: function getComponent(nextState, cb) {
 			__webpack_require__.e/* nsure */(8, function (require) {
-				cb(null, __webpack_require__(297));
+				cb(null, __webpack_require__(298));
 			});
 		}
 	}, {
 		path: '/setting',
 		getComponent: function getComponent(nextState, cb) {
 			__webpack_require__.e/* nsure */(9, function (require) {
-				cb(null, __webpack_require__(298));
+				cb(null, __webpack_require__(299));
 			});
 		}
 	}];
@@ -25757,13 +25757,14 @@
 /* 297 */,
 /* 298 */,
 /* 299 */,
-/* 300 */
+/* 300 */,
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(301);
+	module.exports = __webpack_require__(302);
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25784,8 +25785,8 @@
 
 	var assign = __webpack_require__(39);
 
-	var ReactTransitionGroup = __webpack_require__(302);
-	var ReactCSSTransitionGroupChild = __webpack_require__(304);
+	var ReactTransitionGroup = __webpack_require__(303);
+	var ReactCSSTransitionGroupChild = __webpack_require__(305);
 
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -25851,7 +25852,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25868,7 +25869,7 @@
 	'use strict';
 
 	var React = __webpack_require__(2);
-	var ReactTransitionChildMapping = __webpack_require__(303);
+	var ReactTransitionChildMapping = __webpack_require__(304);
 
 	var assign = __webpack_require__(39);
 	var emptyFunction = __webpack_require__(15);
@@ -26061,7 +26062,7 @@
 	module.exports = ReactTransitionGroup;
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26164,7 +26165,7 @@
 	module.exports = ReactTransitionChildMapping;
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26184,8 +26185,8 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(3);
 
-	var CSSCore = __webpack_require__(305);
-	var ReactTransitionEvents = __webpack_require__(306);
+	var CSSCore = __webpack_require__(306);
+	var ReactTransitionEvents = __webpack_require__(307);
 
 	var onlyChild = __webpack_require__(156);
 
@@ -26334,7 +26335,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -26437,7 +26438,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26551,16 +26552,16 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(308);
+	var content = __webpack_require__(309);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(310)(content, {});
+	var update = __webpack_require__(311)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -26577,21 +26578,21 @@
 	}
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(309)();
+	exports = module.exports = __webpack_require__(310)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/**\n * \n * @authors Your Name (you@example.org)\n * @date    2016-03-20 17:17:01\n * @version $Id$\n */\n\n@charset \"UTF-8\";\n\n/**\n * \n * @authors Your Name (you@example.org)\n * @date    2016-03-21 13:58:49\n * @version $Id$\n */\nhtml{\n\twidth:100%;\n\theight:100%;\n\tbackground: #ececec;\n\tfont: \"Hiragino Sans GB\",\"MicroSoft YaHei\",sans-serif;\n}\nbody{\n\twidth:100%;\n\theight:100%;\n\toverflow: hidden;\n}\n#wrap, .wrap{\n\twidth: 100%;\n\theight: 100%;\n\tposition: relative;\n}\n.msgBox{\n\twidth:100%;\n\theight:90%;\n\tpadding-top: 10px;\n\tpadding-bottom: 10px;\n\toverflow-y: scroll;\n\tbox-sizing:border-box;\n\t/*border: 1px solid #fff;*/\n\n}\n.wrapBox{\n\theight:100%;\n}\n\n.oneMsg{\n\t/*border: 2px solid #00f;*/\n\tpadding:10px 0;\n\toverflow: hidden;\n\tpadding: 0 3px;\n\tmargin-bottom: 20px;\n}\n.mineMsg_img{\n\tfloat: left;\n}\n.otherMsg_img{\n\tfloat: right;\n}\n.oneText{\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\tword-break:break-all;\n}\n.msgWrap{\n\tbackground: #b2e969;\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n\tborder-radius: 5px;\n\tposition: relative;\n\tmax-width: 60%;\n}\n.mineWrap{\n\tfloat: left;\n\tmargin-left: 5px;\n}\n.otherWrap{\n\tfloat: right;\n\tmargin-right: 5px;\n}\n.mineWrap::after{\n\tcontent: \"\";\n\tposition: absolute;\n\tborder-right: 10px solid #b2e969;\n\tborder-bottom: 10px solid transparent;\n\tborder-top:10px solid transparent;\n\ttop:8px;\n\tleft: -7px;\n}\n.otherWrap::after{\n\tcontent: \"\";\n\tposition: absolute;\n\tborder-left: 10px solid #b2e969;\n\tborder-bottom: 10px solid transparent;\n\tborder-top:10px solid transparent;\n\ttop:8px;\n\tright: -7px;\n}\n.formWrap{\n\twidth: 100%;\n\t/*height: 60px;*/\n\t/*background: #00f;*/\n\tposition:absolute;\n\tleft: 0;\n\tbottom:0;\n}\n.inp{\n\twidth: 78%;\n\tline-height: 50px;\n\theight: 50px;\n\tfont-size: 1.5em;\n\tborder-width:0;\n\tpadding: 0;\n\tpadding-left: 5px;\n\tbox-sizing:border-box;\n\tresize:none;\n\tposition:absolute;\n\tbottom: 0;\n\tleft:0;\n}\n.inp:focus{\n\toutline: none;\n}\n\n.sendBtn{\n\theight: 50px;\n\twidth: 20%;\n\tpadding: 0;\n\tfont-size: 1.5em;\n\tborder: 0;\n\tborder-radius: 5px;\n\tbackground:#43c117;\n\tcolor: #fff;\n\tposition: absolute;\n\tbottom:0;\n\tright:0;\n}\n.sendBtn:focus{\n\toutline: none;\n}\n\n.input_area{\n\twidth: 80%;\n\tborder: 2px solid #ccc;\n\tborder-radius: 2px;\n\tposition: absolute;\n\tleft: 50%;\n\tmargin-left: -40%;\n\ttop: 35%;\n}\n\n.input_area_line input{\n\twidth: 100%;\n\tborder-width: 0;\n\tbox-sizing:border-box;\n\tpadding: 5% 14px;\n\tfont-size: 0.9rem;\n}\n\n.input_area_line{\n\twidth: 100%;\n\tborder-bottom: 1px solid #ccc;\n}\n.input_area_line:last-child{\n\tborder-bottom-width: 0;\n}\n\n.input_area_line input:focus{\n\toutline-width: 0;\n}\n.btn{\n\twidth: 80%;\n\tdisplay: block;\n\tposition: absolute;\n\tleft: 50%;\n\tmargin-left: -40%;\n\tbackground-color: #5bb8ff;\n\tborder-width: 0;\n\tborder-radius: 5px;\n\theight: 2.5rem;\n\tcolor: #fff;\n\tfont-size: 1.3rem;\n\tletter-spacing: 0.5rem;\n\tbottom: 35%;\n}\n.friendWrap{\n\twidth:100%;\n\theight:60px;\n\tbackground: #fff;\n\tborder-bottom:1px solid #ccc;\n\tpadding-left: 5px;\n\tposition: relative;\n\toverflow: hidden;\n\tvertical-align: middle;\n}\n.friendText{\n\tposition: absolute;\n\ttop:0;\n\tleft:65px;\n\twidth:100%;\n\tfont-size: 1.5em;\n\tline-height: 60px;\n\tcolor:#000;\n}\n.formTop{\n\twidth:100%;\n\theight:60px;\n\tposition: relative;\n}\n.iconGn{\n\tdisplay: inline-block;\n\twidth:50px;\n\theight:50px;\n\tborder: 1px solid #f00;\n}\n#fileup{\n\tdisplay: none;\n}\n.img{\n\twidth:150px;\n}\n\n.viewchange-enter{\n\topacity:0;\n\tposition: absolute;\n\tleft:100%;\n\ttop: 0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-enter-active{\n\tposition: absolute;\n\topacity:1;\n\tleft:0;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-leave{\n\tposition: absolute;\n\topacity: 1;\n\tleft:0;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-leave-active{\n\tposition: absolute;\n\topacity: 0;\n\tleft:-100%;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.viewback-enter, .viewback-leave{\n\tposition: absolute;\n\t/*opacity:0;*/\n\twidth:100%;\n\theight:100%;\n\ttop:0;\n}\n\n.viewback-enter{\n\tleft:-100%;\n}\n\n.viewback-leave{\n\tleft:0;\n}\n\n.viewback-enter-active{\n\tleft:0;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.viewback-leave-active{\n\tleft:100%;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.setting{\n\twidth:100px;\n\theight:30px;\n\tborder: 1px solid #f00;\n}\n\n.dealPic{\n\tposition: absolute;\n\ttop:0;\n\tleft:0;\n\tbackground: rgba(0,0,0,0.3);\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n.dealCvs{\n\tborder:1px solid #f00;\n}\n.tx{\n\twidth:50px;\n\theight:50px;\n\tmargin-top: 5px;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/**\n * \n * @authors Your Name (you@example.org)\n * @date    2016-03-20 17:17:01\n * @version $Id$\n */\n\n@charset \"UTF-8\";\n\n/**\n * \n * @authors Your Name (you@example.org)\n * @date    2016-03-21 13:58:49\n * @version $Id$\n */\nhtml{\n\twidth:100%;\n\theight:100%;\n\tbackground: #ececec;\n\tfont: \"Hiragino Sans GB\",\"MicroSoft YaHei\",sans-serif;\n}\nbody{\n\twidth:100%;\n\theight:100%;\n\toverflow: hidden;\n}\n#wrap, .wrap{\n\twidth: 100%;\n\theight: 100%;\n\tposition: relative;\n}\n.msgBox{\n\t/*width:100%;*/\n\t/*height:90%;*/\n\tpadding-top: 10px;\n\tpadding-bottom: 10px;\n\toverflow-y: scroll;\n\tbox-sizing:border-box;\n\t-webkit-box-flex:1;\n\t    -ms-flex:1;\n\t        flex:1;\n\t/*border: 1px solid #fff;*/\n\n}\n.wrapBox{\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n\theight:100%;\n}\n\n.oneMsg{\n\t/*border: 2px solid #00f;*/\n\tpadding:10px 0;\n\toverflow: hidden;\n\tpadding: 0 3px;\n\tmargin-bottom: 20px;\n}\n.mineMsg_img{\n\tfloat: left;\n}\n.otherMsg_img{\n\tfloat: right;\n}\n.oneText{\n\tfont-size: 1.5em;\n\tline-height: 35px;\n\tword-break:break-all;\n}\n.msgWrap{\n\tbackground: #b2e969;\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n\tborder-radius: 5px;\n\tposition: relative;\n\tmax-width: 60%;\n}\n.mineWrap{\n\tfloat: left;\n\tmargin-left: 5px;\n}\n.otherWrap{\n\tfloat: right;\n\tmargin-right: 5px;\n}\n.mineWrap::after{\n\tcontent: \"\";\n\tposition: absolute;\n\tborder-right: 10px solid #b2e969;\n\tborder-bottom: 10px solid transparent;\n\tborder-top:10px solid transparent;\n\ttop:8px;\n\tleft: -7px;\n}\n.otherWrap::after{\n\tcontent: \"\";\n\tposition: absolute;\n\tborder-left: 10px solid #b2e969;\n\tborder-bottom: 10px solid transparent;\n\tborder-top:10px solid transparent;\n\ttop:8px;\n\tright: -7px;\n}\n.formWrap{\n\twidth: 100%;\n\t/*height: 60px;*/\n\t/*background: #00f;*/\n}\n.inp{\n\twidth: 78%;\n\tline-height: 50px;\n\theight: 50px;\n\tfont-size: 1.5em;\n\tborder-width:0;\n\tpadding: 0;\n\tpadding-left: 5px;\n\tbox-sizing:border-box;\n\tresize:none;\n\tposition:absolute;\n\tbottom: 0;\n\tleft:0;\n}\n.inp:focus{\n\toutline: none;\n}\n\n.sendBtn{\n\theight: 50px;\n\twidth: 20%;\n\tpadding: 0;\n\tfont-size: 1.5em;\n\tborder: 0;\n\tborder-radius: 5px;\n\tbackground:#43c117;\n\tcolor: #fff;\n\tposition: absolute;\n\tbottom:0;\n\tright:0;\n}\n.sendBtn:focus{\n\toutline: none;\n}\n\n.input_area{\n\twidth: 80%;\n\tborder: 2px solid #ccc;\n\tborder-radius: 2px;\n\tposition: absolute;\n\tleft: 50%;\n\tmargin-left: -40%;\n\ttop: 30%;\n\t/*display: table-cell;*/\n}\n\n.input_area_line input{\n\twidth: 100%;\n\tborder-width: 0;\n\tbox-sizing:border-box;\n\tpadding: 5% 14px;\n\tfont-size: 0.9rem;\n}\n\n.input_area_line{\n\twidth: 100%;\n\tborder-bottom: 1px solid #ccc;\n}\n.input_area_line:last-child{\n\tborder-bottom-width: 0;\n}\n\n.input_area_line input:focus{\n\toutline-width: 0;\n}\n.btn{\n\twidth: 100%;\n\tdisplay: block;\n\tposition: absolute;\n\tleft: 0;\n\tbackground-color: #5bb8ff;\n\tborder-width: 0;\n\tborder-radius: 5px;\n\theight: 2.5rem;\n\tcolor: #fff;\n\tfont-size: 1.3rem;\n\tletter-spacing: 0.5rem;\n\tmargin-top: 20px;\n\t/*bottom: 35%;*/\n}\n.friendWrap{\n\twidth:100%;\n\theight:60px;\n\tbackground: #fff;\n\tborder-bottom:1px solid #ccc;\n\tpadding-left: 5px;\n\tposition: relative;\n\toverflow: hidden;\n\tvertical-align: middle;\n}\n.friendText{\n\tposition: absolute;\n\ttop:0;\n\tleft:65px;\n\twidth:100%;\n\tfont-size: 1.5em;\n\tline-height: 60px;\n\tcolor:#000;\n}\n.formTop{\n\twidth:100%;\n\theight:60px;\n\tposition: relative;\n}\n.iconGn{\n\tdisplay: inline-block;\n\twidth:20%;\n\tborder: 1px solid #ccc;\n\tpadding: 0;\n\tmargin:0;\n\theight:20vw;\n\tfloat: left;\n\tmargin-right: 2.5%;\n\tmargin-left: 2.5%;\n\tmargin-bottom: 10px;\n\tbox-sizing: border-box;\n\tborder-radius: 20px;\n\tbackground: #fff;\n\n}\n.iconGn_label{\n\tline-height: 20vw;\n\ttext-align: center;\n\tfont-size: 12px;\n}\n#fileup{\n\tdisplay: none;\n}\n.img{\n\twidth:150px;\n}\n\n.viewchange-enter{\n\topacity:0;\n\tposition: absolute;\n\tleft:100%;\n\ttop: 0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-enter-active{\n\tposition: absolute;\n\topacity:1;\n\tleft:0;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-leave{\n\tposition: absolute;\n\topacity: 1;\n\tleft:0;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n}\n\n.viewchange-leave-active{\n\tposition: absolute;\n\topacity: 0;\n\tleft:-100%;\n\ttop:0;\n\twidth:100%;\n\theight:100%;\n\t/*background:#f00;*/\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.viewback-enter, .viewback-leave{\n\tposition: absolute;\n\t/*opacity:0;*/\n\twidth:100%;\n\theight:100%;\n\ttop:0;\n}\n\n.viewback-enter{\n\tleft:-100%;\n}\n\n.viewback-leave{\n\tleft:0;\n}\n\n.viewback-enter-active{\n\tleft:0;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.viewback-leave-active{\n\tleft:100%;\n\t-webkit-transition:all 0.5s ease-out;\n\ttransition: all 0.5s ease-out;\n}\n\n.setting{\n\twidth:100px;\n\theight:30px;\n\tborder: 1px solid #f00;\n}\n\n.dealPic{\n\tposition: absolute;\n\ttop:0;\n\tleft:0;\n\tbackground: rgba(0,0,0,0.3);\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n.dealCvs{\n\tborder:1px solid #f00;\n}\n.tx{\n\twidth:50px;\n\theight:50px;\n\tmargin-top: 5px;\n}\n.fn_area{\n/*\tposition: absolute;\n\ttop:0;\n\tleft:0;*/\n\tdisplay: none;\n\toverflow: hidden;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports) {
 
 	/*
@@ -26647,7 +26648,7 @@
 
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -26899,16 +26900,16 @@
 
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(312);
+	var content = __webpack_require__(313);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(310)(content, {});
+	var update = __webpack_require__(311)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -26925,10 +26926,10 @@
 	}
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(309)();
+	exports = module.exports = __webpack_require__(310)();
 	// imports
 
 

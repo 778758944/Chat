@@ -1,6 +1,298 @@
-webpackJsonp([6,2,4],{
+webpackJsonp([6,2,4],Array(226).concat([
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 232:
+	var defaultClickRejectionStrategy = __webpack_require__(227);
+
+	module.exports = function injectTapEventPlugin (strategyOverrides) {
+	  strategyOverrides = strategyOverrides || {}
+	  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
+
+	  __webpack_require__(31).injection.injectEventPluginsByName({
+	    "TapEventPlugin":       __webpack_require__(228)(shouldRejectClick)
+	  });
+	};
+
+
+/***/ },
+/* 227 */
+/***/ function(module, exports) {
+
+	module.exports = function(lastTouchEvent, clickTimestamp) {
+	  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {
+	    return true;
+	  }
+	};
+
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TapEventPlugin
+	 * @typechecks static-only
+	 */
+
+	"use strict";
+
+	var EventConstants = __webpack_require__(30);
+	var EventPluginUtils = __webpack_require__(33);
+	var EventPropagators = __webpack_require__(73);
+	var SyntheticUIEvent = __webpack_require__(87);
+	var TouchEventUtils = __webpack_require__(229);
+	var ViewportMetrics = __webpack_require__(38);
+
+	var keyOf = __webpack_require__(230);
+	var topLevelTypes = EventConstants.topLevelTypes;
+
+	var isStartish = EventPluginUtils.isStartish;
+	var isEndish = EventPluginUtils.isEndish;
+
+	var isTouch = function(topLevelType) {
+	  var touchTypes = [
+	    topLevelTypes.topTouchCancel,
+	    topLevelTypes.topTouchEnd,
+	    topLevelTypes.topTouchStart,
+	    topLevelTypes.topTouchMove
+	  ];
+	  return touchTypes.indexOf(topLevelType) >= 0;
+	}
+
+	/**
+	 * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`
+	 * in order to still be considered a 'tap' event.
+	 */
+	var tapMoveThreshold = 10;
+	var ignoreMouseThreshold = 750;
+	var startCoords = {x: null, y: null};
+	var lastTouchEvent = null;
+
+	var Axis = {
+	  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},
+	  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}
+	};
+
+	function getAxisCoordOfEvent(axis, nativeEvent) {
+	  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);
+	  if (singleTouch) {
+	    return singleTouch[axis.page];
+	  }
+	  return axis.page in nativeEvent ?
+	    nativeEvent[axis.page] :
+	    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];
+	}
+
+	function getDistance(coords, nativeEvent) {
+	  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	  return Math.pow(
+	    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),
+	    0.5
+	  );
+	}
+
+	var touchEvents = [
+	  topLevelTypes.topTouchStart,
+	  topLevelTypes.topTouchCancel,
+	  topLevelTypes.topTouchEnd,
+	  topLevelTypes.topTouchMove,
+	];
+
+	var dependencies = [
+	  topLevelTypes.topMouseDown,
+	  topLevelTypes.topMouseMove,
+	  topLevelTypes.topMouseUp,
+	].concat(touchEvents);
+
+	var eventTypes = {
+	  touchTap: {
+	    phasedRegistrationNames: {
+	      bubbled: keyOf({onTouchTap: null}),
+	      captured: keyOf({onTouchTapCapture: null})
+	    },
+	    dependencies: dependencies
+	  }
+	};
+
+	var now = (function() {
+	  if (Date.now) {
+	    return Date.now;
+	  } else {
+	    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in
+	    return function () {
+	      return +new Date;
+	    }
+	  }
+	})();
+
+	function createTapEventPlugin(shouldRejectClick) {
+	  return {
+
+	    tapMoveThreshold: tapMoveThreshold,
+
+	    ignoreMouseThreshold: ignoreMouseThreshold,
+
+	    eventTypes: eventTypes,
+
+	    /**
+	     * @param {string} topLevelType Record from `EventConstants`.
+	     * @param {DOMEventTarget} topLevelTarget The listening component root node.
+	     * @param {string} topLevelTargetID ID of `topLevelTarget`.
+	     * @param {object} nativeEvent Native browser event.
+	     * @return {*} An accumulation of synthetic events.
+	     * @see {EventPluginHub.extractEvents}
+	     */
+	    extractEvents: function(
+	        topLevelType,
+	        topLevelTarget,
+	        topLevelTargetID,
+	        nativeEvent,
+	        nativeEventTarget) {
+
+	      if (isTouch(topLevelType)) {
+	        lastTouchEvent = now();
+	      } else {
+	        if (shouldRejectClick(lastTouchEvent, now())) {
+	          return null;
+	        }
+	      }
+
+	      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {
+	        return null;
+	      }
+	      var event = null;
+	      var distance = getDistance(startCoords, nativeEvent);
+	      if (isEndish(topLevelType) && distance < tapMoveThreshold) {
+	        event = SyntheticUIEvent.getPooled(
+	          eventTypes.touchTap,
+	          topLevelTargetID,
+	          nativeEvent,
+	          nativeEventTarget
+	        );
+	      }
+	      if (isStartish(topLevelType)) {
+	        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	      } else if (isEndish(topLevelType)) {
+	        startCoords.x = 0;
+	        startCoords.y = 0;
+	      }
+	      EventPropagators.accumulateTwoPhaseDispatches(event);
+	      return event;
+	    }
+
+	  };
+	}
+
+	module.exports = createTapEventPlugin;
+
+
+/***/ },
+/* 229 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TouchEventUtils
+	 */
+
+	var TouchEventUtils = {
+	  /**
+	   * Utility function for common case of extracting out the primary touch from a
+	   * touch event.
+	   * - `touchEnd` events usually do not have the `touches` property.
+	   *   http://stackoverflow.com/questions/3666929/
+	   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed
+	   *
+	   * @param {Event} nativeEvent Native event that may or may not be a touch.
+	   * @return {TouchesObject?} an object with pageX and pageY or null.
+	   */
+	  extractSingleTouch: function(nativeEvent) {
+	    var touches = nativeEvent.touches;
+	    var changedTouches = nativeEvent.changedTouches;
+	    var hasTouches = touches && touches.length > 0;
+	    var hasChangedTouches = changedTouches && changedTouches.length > 0;
+
+	    return !hasTouches && hasChangedTouches ? changedTouches[0] :
+	           hasTouches ? touches[0] :
+	           nativeEvent;
+	  }
+	};
+
+	module.exports = TouchEventUtils;
+
+
+/***/ },
+/* 230 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule keyOf
+	 */
+
+	/**
+	 * Allows extraction of a minified key. Let's the build system minify keys
+	 * without losing the ability to dynamically use key strings as values
+	 * themselves. Pass in an object with a single key/val pair and it will return
+	 * you the string key of that single record. Suppose you want to grab the
+	 * value for a key 'className' inside of an object. Key/val minification may
+	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+	 * reuse those resolutions.
+	 */
+	"use strict";
+
+	var keyOf = function (oneKeyObj) {
+	  var key;
+	  for (key in oneKeyObj) {
+	    if (!oneKeyObj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    return key;
+	  }
+	  return null;
+	};
+
+	module.exports = keyOf;
+
+/***/ },
+/* 231 */,
+/* 232 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -308,8 +600,8 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 234:
+/* 233 */,
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -382,8 +674,7 @@ webpackJsonp([6,2,4],{
 	exports.AppDispatcher = AppDispatcher;
 
 /***/ },
-
-/***/ 235:
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -399,8 +690,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 236:
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -637,8 +927,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-
-/***/ 237:
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -693,8 +982,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-
-/***/ 238:
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -884,8 +1172,7 @@ webpackJsonp([6,2,4],{
 	// $.each()
 
 /***/ },
-
-/***/ 239:
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -968,8 +1255,7 @@ webpackJsonp([6,2,4],{
 	// export {socket,FriendStore}
 
 /***/ },
-
-/***/ 240:
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1067,8 +1353,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 241:
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -1151,8 +1436,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 242:
+/* 242 */
 /***/ function(module, exports) {
 
 	/**
@@ -1197,8 +1481,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 243:
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1372,8 +1655,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 244:
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1576,8 +1858,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 245:
+/* 245 */
 /***/ function(module, exports) {
 
 	/**
@@ -1708,8 +1989,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 246:
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -2115,8 +2395,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 247:
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
@@ -3025,8 +3304,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(248)(module), (function() { return this; }())))
 
 /***/ },
-
-/***/ 248:
+/* 248 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -3042,8 +3320,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 249:
+/* 249 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -3051,8 +3328,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-
-/***/ 250:
+/* 250 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -3061,8 +3337,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 251:
+/* 251 */
 /***/ function(module, exports) {
 
 	
@@ -3232,8 +3507,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 252:
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -3381,8 +3655,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 253:
+/* 253 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -3402,8 +3675,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 254:
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -3966,8 +4238,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 255:
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -3975,8 +4246,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 256:
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -3992,8 +4262,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 257:
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -4728,8 +4997,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 258:
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -4789,8 +5057,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 259:
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
@@ -4832,8 +5099,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 260:
+/* 260 */
 /***/ function(module, exports) {
 
 	
@@ -4856,8 +5122,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 261:
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -5276,8 +5541,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 262:
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5530,8 +5794,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 263:
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5692,8 +5955,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 264:
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -6294,8 +6556,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 265:
+/* 265 */
 /***/ function(module, exports) {
 
 	
@@ -6320,8 +6581,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 266:
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -6386,8 +6646,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 267:
+/* 267 */
 /***/ function(module, exports) {
 
 	/**
@@ -6422,8 +6681,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 268:
+/* 268 */
 /***/ function(module, exports) {
 
 	/*
@@ -6488,8 +6746,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 269:
+/* 269 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -6523,8 +6780,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 270:
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -6773,8 +7029,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(248)(module), (function() { return this; }())))
 
 /***/ },
-
-/***/ 271:
+/* 271 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -6877,8 +7132,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 272:
+/* 272 */
 /***/ function(module, exports) {
 
 	/**
@@ -6921,8 +7175,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 273:
+/* 273 */
 /***/ function(module, exports) {
 
 	
@@ -6934,8 +7187,7 @@ webpackJsonp([6,2,4],{
 	};
 
 /***/ },
-
-/***/ 274:
+/* 274 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7009,8 +7261,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 275:
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -7255,8 +7506,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 276:
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -7551,15 +7801,13 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 277:
+/* 277 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-
-/***/ 278:
+/* 278 */
 /***/ function(module, exports) {
 
 	
@@ -7574,8 +7822,7 @@ webpackJsonp([6,2,4],{
 	};
 
 /***/ },
-
-/***/ 279:
+/* 279 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -7613,8 +7860,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 280:
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -8032,8 +8278,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 281:
+/* 281 */
 /***/ function(module, exports) {
 
 	
@@ -8200,8 +8445,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 282:
+/* 282 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -8220,8 +8464,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 283:
+/* 283 */
 /***/ function(module, exports) {
 
 	
@@ -8251,8 +8494,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 284:
+/* 284 */
 /***/ function(module, exports) {
 
 	/**
@@ -8281,8 +8523,7 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 285:
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -8348,8 +8589,7 @@ webpackJsonp([6,2,4],{
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-
-/***/ 286:
+/* 286 */
 /***/ function(module, exports) {
 
 	
@@ -8440,8 +8680,8 @@ webpackJsonp([6,2,4],{
 
 
 /***/ },
-
-/***/ 288:
+/* 287 */,
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8546,8 +8786,7 @@ webpackJsonp([6,2,4],{
 	module.exports = ChatCtrl;
 
 /***/ },
-
-/***/ 289:
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8583,8 +8822,7 @@ webpackJsonp([6,2,4],{
 	exports.MsgActions = MsgActions;
 
 /***/ },
-
-/***/ 290:
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8602,6 +8840,14 @@ webpackJsonp([6,2,4],{
 
 	var _getaudio = __webpack_require__(291);
 
+	var _kevent = __webpack_require__(292);
+
+	var _kevent2 = _interopRequireDefault(_kevent);
+
+	var _reactTapEventPlugin = __webpack_require__(226);
+
+	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8616,8 +8862,10 @@ webpackJsonp([6,2,4],{
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var my_img = __webpack_require__(292);
-	var other_img = __webpack_require__(293);
+	(0, _reactTapEventPlugin2.default)();
+
+	var my_img = __webpack_require__(293);
+	var other_img = __webpack_require__(294);
 
 	var MineMsg = function (_React$Component) {
 		_inherits(MineMsg, _React$Component);
@@ -8779,6 +9027,7 @@ webpackJsonp([6,2,4],{
 			};
 			_this5.recoder;
 			_this5.audio;
+			_this5.fn_area;
 			_this5.sendMsg = function () {
 				var msg = this.refs.txt.value;
 				this.refs.txt.value = "";
@@ -8787,7 +9036,9 @@ webpackJsonp([6,2,4],{
 						btn: '+'
 					});
 					this.props.handle({ msg: msg, type: 1, to: this.props.to });
-				} else {}
+				} else {
+					this.fn_area.style.display = 'block';
+				}
 			}.bind(_this5);
 
 			_this5._onChange = function () {
@@ -8823,6 +9074,13 @@ webpackJsonp([6,2,4],{
 		}
 
 		_createClass(FormBox, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				_kevent2.default.on('hide', function () {
+					this.fn_area.style.display = 'none';
+				}.bind(this));
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var _this6 = this;
@@ -8836,7 +9094,9 @@ webpackJsonp([6,2,4],{
 					_react2.default.createElement(
 						'div',
 						{ className: 'formTop' },
-						_react2.default.createElement('textarea', { className: 'inp', resize: 'none', ref: 'txt', onChange: this._onChange.bind(this) }),
+						_react2.default.createElement('textarea', { className: 'inp', resize: 'none', ref: 'txt', onChange: this._onChange.bind(this), onFocus: function onFocus() {
+								_this6.fn_area.style.display = 'none';
+							} }),
 						_react2.default.createElement(
 							'button',
 							{ className: 'sendBtn', onClick: this.sendMsg },
@@ -8845,10 +9105,12 @@ webpackJsonp([6,2,4],{
 					),
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'fn_area', ref: function ref(e) {
+								return _this6.fn_area = e;
+							} },
 						_react2.default.createElement(
 							'label',
-							{ htmlFor: 'fileup', className: 'iconGn' },
+							{ htmlFor: 'fileup', className: 'iconGn iconGn_label' },
 							'图片'
 						),
 						_react2.default.createElement('input', { type: 'file', id: 'fileup', onChange: this.onFileChange }),
@@ -8869,37 +9131,37 @@ webpackJsonp([6,2,4],{
 							{ onClick: function onClick() {
 									_this6.props.handle({ msg: { lx: 'tocvs' }, lx: 'tocvs', to: _this6.props.to, type: 1 });
 									_this6.props.toCvs();
-								} },
+								}, className: 'iconGn' },
 							'我画你猜'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{ className: 'iconGn' },
 							'上传图片'
 						)
 					)
@@ -8939,7 +9201,9 @@ webpackJsonp([6,2,4],{
 				}.bind(this));
 				return _react2.default.createElement(
 					'div',
-					{ className: 'msgBox', style: { height: MsgboxHeight + "px" } },
+					{ className: 'msgBox', onTouchTap: function onTouchTap() {
+							_kevent2.default.trigger('hide');
+						} },
 					inner
 				);
 			}
@@ -8952,8 +9216,7 @@ webpackJsonp([6,2,4],{
 	exports.InfoBox = InfoBox;
 
 /***/ },
-
-/***/ 291:
+/* 291 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9126,19 +9389,45 @@ webpackJsonp([6,2,4],{
 	exports.dealWav = dealWav;
 
 /***/ },
+/* 292 */
+/***/ function(module, exports) {
 
-/***/ 292:
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var Messager = {
+	    _events: {},
+	    trigger: function trigger(event, data) {
+	        if (!this._events[event]) return;
+	        for (var i = 0; i < this._events[event].length; i++) {
+	            this._events[event][i](data);
+	        }
+	    },
+	    on: function on(event, callback) {
+	        if (!this._events[event]) this._events[event] = [];
+	        this._events[event].push(callback);
+	    },
+	    off: function off(event) {
+	        if (this._events && this._events[event]) {
+	            delete this._events[event];
+	        }
+	    }
+	};
+	exports.default = Messager;
+
+/***/ },
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "imgs/11-7af0f9358040f9908800872aca88d1a3.png";
 
 /***/ },
-
-/***/ 293:
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "imgs/22-9568731405d7ae03c1b1c4ed1c7f297c.png";
 
 /***/ }
-
-});
+]));

@@ -90,7 +90,7 @@ var pushNotification=function(to,from,msg,lx){
 			icon:img,
 			tag:title,
 			data:{
-				url:'https://chat.xingwentao.top/build/index.html#/chat/'+from
+				url:'https://chat.xingwentao.top/build/index.html'
 			}
 		}
 

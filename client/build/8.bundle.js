@@ -8478,7 +8478,7 @@ webpackJsonp([8,2,4],{
 
 /***/ },
 
-/***/ 297:
+/***/ 298:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8570,7 +8570,7 @@ webpackJsonp([8,2,4],{
 						posy: y / this.state.height,
 						state: 'start'
 					};
-					// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "start" });
 				}
 			}.bind(_this);
 
@@ -8584,7 +8584,7 @@ webpackJsonp([8,2,4],{
 						posy: y / this.state.height,
 						state: 'move'
 					};
-					// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
+					_MsgAction.MsgActions.sendMsg({ msg: msg, to: this.props.params.id, lx: 'draw', state: "move" });
 				}
 				// ctx.fill();
 			}.bind(_this);
@@ -8596,7 +8596,7 @@ webpackJsonp([8,2,4],{
 				this.ctx.restore();
 
 				if (!isRecive) {
-					// MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
+					_MsgAction.MsgActions.sendMsg({ msg: { state: 'end' }, to: this.props.params.id, lx: 'draw', state: "end" });
 				}
 			}.bind(_this);
 
@@ -8691,7 +8691,7 @@ webpackJsonp([8,2,4],{
 							_this2.beDraw = false;
 							_this2.drawLineStart(e.nativeEvent.touches[0].clientX, e.nativeEvent.touches[0].clientY);
 							var dot = { x: e.nativeEvent.touches[0].clientX, y: e.nativeEvent.touches[0].clientY };
-							_this2.dot.push(dot);
+							// this.dot.push(dot);
 						}, onTouchMove: function onTouchMove(e) {
 							var native = e.nativeEvent;
 							// console.log(native);
@@ -8700,7 +8700,7 @@ webpackJsonp([8,2,4],{
 							// this.draw(posx,posy,false);
 							_this2.drawLine(posx, posy);
 							var dot = { x: posx, y: posy };
-							_this2.dot.push(dot);
+							// this.dot.push(dot);
 						}, onTouchEnd: function onTouchEnd(e) {
 							_this2.beDraw = true;
 							_this2.drawLineEnd();

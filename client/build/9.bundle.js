@@ -385,7 +385,7 @@ webpackJsonp([9],{
 
 /***/ },
 
-/***/ 298:
+/***/ 299:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -396,7 +396,7 @@ webpackJsonp([9],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SettingAction = __webpack_require__(299);
+	var _SettingAction = __webpack_require__(300);
 
 	var _SettingAction2 = _interopRequireDefault(_SettingAction);
 
@@ -743,7 +743,7 @@ webpackJsonp([9],{
 
 /***/ },
 
-/***/ 299:
+/***/ 300:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -8250,14 +8250,14 @@ webpackJsonp([7,4],{
 
 /***/ },
 
-/***/ 292:
+/***/ 293:
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "imgs/11-7af0f9358040f9908800872aca88d1a3.png";
 
 /***/ },
 
-/***/ 294:
+/***/ 295:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8268,13 +8268,13 @@ webpackJsonp([7,4],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _friend = __webpack_require__(295);
+	var _friend = __webpack_require__(296);
 
 	var _friend2 = _interopRequireDefault(_friend);
 
 	var _friendStore = __webpack_require__(239);
 
-	var _friendAction = __webpack_require__(296);
+	var _friendAction = __webpack_require__(297);
 
 	var _friendAction2 = _interopRequireDefault(_friendAction);
 
@@ -8372,7 +8372,7 @@ webpackJsonp([7,4],{
 
 /***/ },
 
-/***/ 295:
+/***/ 296:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8403,7 +8403,7 @@ webpackJsonp([7,4],{
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var img = __webpack_require__(292);
+	var img = __webpack_require__(293);
 
 	var Friend = function (_Component) {
 		_inherits(Friend, _Component);
@@ -8467,7 +8467,7 @@ webpackJsonp([7,4],{
 
 /***/ },
 
-/***/ 296:
+/***/ 297:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

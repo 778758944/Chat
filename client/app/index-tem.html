@@ -14,29 +14,29 @@
     <script>
     	// console.log('post',post);
     	var key={name:'jack'};
- //    	function initialService(){
-	// 		navigator.serviceWorker.ready.then(function(registration){
-	// 			registration.pushManager.getSubscription().then(function(subscribe){
-	// 				if(subscribe){
-	// 					key=subscribe.toJSON();
-	// 					console.log(key);
-	// 				}
-	// 				else{
-	// 					registration.pushManager.subscribe({userVisibleOnly:true}).then(function(subscription){
-	// 						key=subscription.toJSON();
-	// 						post('/api/pushkeys/addkey',key,function(res){
-	// 							console.log(res);
-	// 						})
-	// 						console.log('key',subscription);
-	// 					})
-	// 				}
-	// 			})
-	// 		})
-	// 	}
+    	function initialService(){
+			navigator.serviceWorker.ready.then(function(registration){
+				registration.pushManager.getSubscription().then(function(subscribe){
+					if(subscribe){
+						key=subscribe.toJSON();
+						console.log(key);
+					}
+					else{
+						registration.pushManager.subscribe({userVisibleOnly:true}).then(function(subscription){
+							key=subscription.toJSON();
+							post('/api/pushkeys/addkey',key,function(res){
+								console.log(res);
+							})
+							console.log('key',subscription);
+						})
+					}
+				})
+			})
+		}
 
-	// if(navigator.serviceWorker){
-	// 	navigator.serviceWorker.register('./sw.js').then(initialService);
-	// }
+	if(navigator.serviceWorker){
+		navigator.serviceWorker.register('./sw.js').then(initialService);
+	}
     </script>
 </body>
 </html>
