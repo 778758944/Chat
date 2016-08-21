@@ -66,7 +66,7 @@ class Cvs extends React.Component{
 					posy:y/this.state.height,
 					state:'start'
 				}
-				// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
+				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"start"});
 			}
 		}.bind(this);
 
@@ -80,7 +80,7 @@ class Cvs extends React.Component{
 					posy:y/this.state.height,
 					state:'move'
 				}
-				// MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
+				MsgActions.sendMsg({msg:msg,to:this.props.params.id,lx:'draw',state:"move"});
 			}
 			// ctx.fill();
 		}.bind(this);
@@ -92,7 +92,7 @@ class Cvs extends React.Component{
 			this.ctx.restore();
 
 			if(!isRecive){
-				// MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
+				MsgActions.sendMsg({msg:{state:'end'},to:this.props.params.id,lx:'draw',state:"end"});
 			}
 		}.bind(this);
 
@@ -177,7 +177,7 @@ class Cvs extends React.Component{
 					this.beDraw=false;
 					this.drawLineStart(e.nativeEvent.touches[0].clientX,e.nativeEvent.touches[0].clientY);
 					var dot={x:e.nativeEvent.touches[0].clientX,y:e.nativeEvent.touches[0].clientY};
-					this.dot.push(dot);
+					// this.dot.push(dot);
 				}} onTouchMove={(e)=>{
 					var native=e.nativeEvent;
 					// console.log(native);
@@ -186,7 +186,7 @@ class Cvs extends React.Component{
 					// this.draw(posx,posy,false);
 					this.drawLine(posx,posy);
 					var dot={x:posx,y:posy};
-					this.dot.push(dot);
+					// this.dot.push(dot);
 				}} onTouchEnd={(e)=>{
 					this.beDraw=true
 					this.drawLineEnd()

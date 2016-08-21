@@ -43,5 +43,9 @@
   "points": {
     "dataSource": "mysqlDs",
     "public": true
+  },
+  "unread": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }

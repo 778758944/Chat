@@ -16,7 +16,9 @@ var webpack=require('webpack');
 module.exports={
 	entry:{
 		index:path.resolve(APP_PATH,'index.jsx'),
-		run:path.resolve(APP_PATH,'run.jsx')
+		run:path.resolve(APP_PATH,'run.jsx'),
+		autumn:path.resolve(APP_PATH,'autumn.jsx'),
+		autumnWechat:path.resolve(APP_PATH,'autumnWechat.jsx')
 	},
 	output:{
 		path:BUILD_PATH,
@@ -37,9 +39,21 @@ module.exports={
 			chunks:['vendors','run'],
 			template:'./client/app/index-tem.html'
 		}),
+		new HtmlwebpackPlugin({
+			title:"autumn",
+			filename:"autumn.html",
+			chunks:['vendors','autumn'],
+			template:'./client/app/index-tmp2.html'
+		}),
+		new HtmlwebpackPlugin({
+			title:"autumnWechat",
+			filename:"autumnWechat.html",
+			chunks:['vendors','autumnWechat'],
+			template:'./client/app/index-tmp2.html'
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name:"vendors",
-			chunks:['index','run'],
+			chunks:['index','run','autumn','autumnWechat'],
 			minChunks:2
 		})
 	],
@@ -65,6 +79,11 @@ module.exports={
 			{
 				test:/\.(jpg||png)$/,
 				loader:'url?limit=400&name=imgs/[name]-[hash].[ext]'
+			},
+			{
+				test:/component\.scss$/,
+				loader:'style-loader!css-loader?modules!postcss-loader',
+				include:APP_PATH
 			},
 			{
 				test:/\.css$/,

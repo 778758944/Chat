@@ -1,0 +1,33 @@
+{
+  "name": "unread",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "msg": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": "1"
+    },
+    "from": {
+      "type": "number"
+    },
+    "lx": {
+      "type": "string",
+      "required": true
+    },
+    "to":{
+      "type":"number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

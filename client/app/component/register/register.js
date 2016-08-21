@@ -8,6 +8,10 @@ import React from 'react'
 import {Config,Validator} from '../../lib/validator'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
+injectTapEventPlugin();
+
+
+
 
 class Register extends React.Component{
 	constructor(props){
@@ -24,16 +28,16 @@ class Register extends React.Component{
 	}
 
 	componentDidMount(){
-		var configs=[
-			new Config('email',"isEmail",true),
-			new Config('password',"isEmpty",true)
-		];
+		// var configs=[
+		// 	new Config('email',"isEmail",true),
+		// 	new Config('password',"isEmpty",true)
+		// ];
 
-		new Validator(configs,"register",true,function(ele,results){
-			ele.nextSibling.innerHTML=results.info;
-		},function(ele,results){
-			ele.nextSibling.innerHTML=results.info;
-		})
+		// new Validator(configs,"register",true,function(ele,results){
+		// 	ele.nextSibling.innerHTML=results.info;
+		// },function(ele,results){
+		// 	ele.nextSibling.innerHTML=results.info;
+		// })
 	}
 
 
@@ -44,15 +48,13 @@ class Register extends React.Component{
 					<form id="form1">
 						<div className="input_area_line">
 							<input type="text" name="email" placeholder="请输入您的邮箱" value={this.props.email} onChange={this.props.changeEmail}/>
-							<span>请输入正确的邮箱</span>
 						</div>
 						<div className="input_area_line">
 							<input type="password" name="password" placeholder="请输入您的密码" value={this.props.password} onChange={this.props.changePasswd}/>
-							<span>{this.state.nana}</span>
 						</div>
 					</form>
+					<button className="btn" id='register' onTouchTap={this.props.submit}>登录</button>
 				</div>
-				<button className="btn" id='register' onClick={this.props.submit}>登录</button>
 			</div>
 			)
 	}

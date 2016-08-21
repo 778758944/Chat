@@ -6,6 +6,9 @@
  */
 import React from 'react'
 import {HZRecorder,dealWav} from '../../lib/getaudio'
+import kevent from '../../lib/kevent'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
 
 var my_img=require('../../11.png');
 var other_img=require('../../22.png');
@@ -119,6 +122,7 @@ class FormBox extends React.Component{
 		}
 		this.recoder;
 		this.audio;
+		this.fn_area;
 		this.sendMsg=function(){
 			var msg=this.refs.txt.value;
   			this.refs.txt.value="";
@@ -129,7 +133,7 @@ class FormBox extends React.Component{
   				this.props.handle({msg:msg,type:1,to:this.props.to});
   			}
   			else{
-
+  				this.fn_area.style.display='block';
   			}
 		}.bind(this);
 
@@ -165,6 +169,12 @@ class FormBox extends React.Component{
 			this.props.handle({msg:this.recoder.getBlob(true),to:this.props.to,type:1,lx:'wav'})
 		}.bind(this);
 	}
+
+	componentDidMount(){
+		kevent.on('hide',function(){
+			this.fn_area.style.display='none';
+		}.bind(this))
+	}
 	render(){
 		return (
 			<div className='formWrap'>
@@ -172,11 +182,13 @@ class FormBox extends React.Component{
 					this.audio=e;
 				}} autoPlay></audio>
 				<div className="formTop">
-					<textarea className='inp' resize='none' ref='txt' onChange={this._onChange.bind(this)}></textarea>
+					<textarea className='inp' resize='none' ref='txt' onChange={this._onChange.bind(this)} onFocus={()=>{
+						this.fn_area.style.display='none';
+					}}></textarea>
 					<button className="sendBtn" onClick={this.sendMsg}>{this.state.btn}</button>
 				</div>
-				<div>
-					<label htmlFor="fileup" className='iconGn'>图片</label>
+				<div className='fn_area' ref={(e)=>this.fn_area=e}>
+					<label htmlFor="fileup" className='iconGn iconGn_label'>图片</label>
 					<input type="file" id='fileup' onChange={this.onFileChange}/>
 					<button className='iconGn' onTouchStart={(e)=>{
 						e.preventDefault();
@@ -189,13 +201,13 @@ class FormBox extends React.Component{
 					<button onClick={()=>{
 						this.props.handle({msg:{lx:'tocvs'},lx:'tocvs',to:this.props.to,type:1})
 						this.props.toCvs()
-					}}>我画你猜</button>
-					<button>上传图片</button>
-					<button>上传图片</button>
-					<button>上传图片</button>
-					<button>上传图片</button>
-					<button>上传图片</button>
-					<button>上传图片</button>
+					}} className='iconGn'>我画你猜</button>
+					<button className='iconGn'>上传图片</button>
+					<button className='iconGn'>上传图片</button>
+					<button className='iconGn'>上传图片</button>
+					<button className='iconGn'>上传图片</button>
+					<button className='iconGn'>上传图片</button>
+					<button className='iconGn'>上传图片</button>
 				</div>
 			</div>
 			)
@@ -223,7 +235,9 @@ class InfoBox extends React.Component{
 			}
 		}.bind(this));
 		return (
-			<div className='msgBox' style={{height:MsgboxHeight+"px"}}>
+			<div className='msgBox' onTouchTap={()=>{
+				kevent.trigger('hide');
+			}}>
 				{inner}
 			</div>
 			)

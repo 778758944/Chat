@@ -18,9 +18,30 @@ var webPush=require('web-push');
 webPush.setGCMAPIKey(key.pushkey);
 
 
-var pushNotification=function(to,from,msg){
+var pushNotification=function(to,from,msg,lx){
+	var unread=loopback.findModel('unread');
 	var pushkey=loopback.findModel('pushkey');
 	var yonghu=loopback.findModel('yonghu');
+
+	var unreadData={
+		type:2,
+		to:to,
+		from:from,
+		msg:msg,
+		lx:lx
+	}
+
+	var p3=new Promise(function(resolve,reject){
+		unread.create(unreadData,function(err,data){
+			if(err){
+				console.log(err);
+				reject(err);
+			}
+			else{
+				resolve(data);
+			}
+		})
+	})
 
 	var p1=new Promise(function(resolve,reject){
 		pushkey.findById(to,function(err,data){
@@ -50,10 +71,11 @@ var pushNotification=function(to,from,msg){
 		})
 	});
 
-	Promise.all([p1,p2]).then(function(res){
+	Promise.all([p1,p2,p3]).then(function(res){
 		// console.log('promise',res);
 		var pushData=res[0];
 		var userData=res[1];
+		console.log(res[2]);
 
 			// console.log('data',rp.pushkeys);
 		var title=userData.username || userData.email;
@@ -124,7 +146,7 @@ var socketConnection=function(socket){
 						}
 						else{
 							// console.log('no response');
-							pushNotification(to,userId,data.msg);
+							pushNotification(to,userId,data.msg,lx);
 
 
 							// console.log('i will give you a notice for a while');
@@ -137,7 +159,7 @@ var socketConnection=function(socket){
 				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 			else{
-				pushNotification(to,userId,data.msg);
+				pushNotification(to,userId,data.msg,lx);
 			}
 		})
 	}
