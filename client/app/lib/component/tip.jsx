@@ -33,7 +33,7 @@ class Tip extends Component{
 
 	render(){
 		return (
-				<div className={style.tipWrap} ref={(e)=>this.tip=e} onClick={()=>{alert('sdsds')}}>
+				<div className={style.tipWrap} ref={(e)=>this.tip=e}>
 					<div className={style.tipInner}>
 						<span className={style.tipMsg}>{this.state.msg}</span>
 					</div>

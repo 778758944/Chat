@@ -44,8 +44,8 @@ export var Enhance=(ComposedComponent,needLoading) => class extends Component {
 		else{
 			return (
 				<div>
-					<Tip ref={(e)=>this.tip=e}/>
 					<ComposedComponent {...this.props} showTip={this.showTip} loaded={this.loaded}/>
+					<Tip ref={(e)=>this.tip=e}/>
 				</div>
 			)
 		}

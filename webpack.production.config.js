@@ -14,16 +14,27 @@ var BUILD_PATH=path.resolve(ROOT_PATH,'client/build');
 
 
 module.exports={
-	entry:path.resolve(APP_PATH,'index.jsx'),
+	entry:{
+		index:path.resolve(APP_PATH,'index.jsx'),
+		autumnWechat:path.resolve(APP_PATH,'autumnWechat.jsx')
+	},
 	output:{
 		path:BUILD_PATH,
-		filename:'bundle.js'
+		filename:'[name].js'
 	},
 	plugins:[
 		new HtmlwebpackPlugin({
 			title:"Chat",
-			inject:"head",
+			filename:'index.html',
+			inject:'head',
+			chunks:['vendors','index'],
 			template:'./client/app/index-tem.html'
+		}),
+		new HtmlwebpackPlugin({
+			title:"【中秋嘉年华】玩分享点赞，赢加倍红包",
+			filename:"autumnWechat.html",
+			chunks:['vendors','autumnWechat'],
+			template:'./client/app/index-tmp2.html'
 		}),
 		new webpack.optimize.UglifyJsPlugin({
            compress: {

@@ -18,7 +18,9 @@ module.exports={
 		index:path.resolve(APP_PATH,'index.jsx'),
 		run:path.resolve(APP_PATH,'run.jsx'),
 		autumn:path.resolve(APP_PATH,'autumn.jsx'),
-		autumnWechat:path.resolve(APP_PATH,'autumnWechat.jsx')
+		autumnWechat:path.resolve(APP_PATH,'autumnWechat.jsx'),
+		newslist:path.resolve(APP_PATH,'newslist.jsx'),
+		newsdetail:path.resolve(APP_PATH,'newsdetail.jsx')
 	},
 	output:{
 		path:BUILD_PATH,
@@ -46,14 +48,26 @@ module.exports={
 			template:'./client/app/index-tmp2.html'
 		}),
 		new HtmlwebpackPlugin({
-			title:"autumnWechat",
+			title:"【中秋嘉年华】玩分享点赞，赢加倍红包",
 			filename:"autumnWechat.html",
 			chunks:['vendors','autumnWechat'],
 			template:'./client/app/index-tmp2.html'
 		}),
+		new HtmlwebpackPlugin({
+			title:"new list",
+			filename:"newslist.html",
+			chunks:['vendors','newslist'],
+			template:'./client/app/index-tem3.html'
+		}),
+		new HtmlwebpackPlugin({
+			title:'newsdetail',
+			filename:'newsdetail.html',
+			chunks:['vendors','newsdetail'],
+			template:"./client/app/index-tem3.html"
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name:"vendors",
-			chunks:['index','run','autumn','autumnWechat'],
+			chunks:['index','run','autumn','autumnWechat','newslist','newsdetail'],
 			minChunks:2
 		})
 	],

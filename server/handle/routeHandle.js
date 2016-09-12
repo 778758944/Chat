@@ -19,6 +19,7 @@ webPush.setGCMAPIKey(key.pushkey);
 
 
 var pushNotification=function(to,from,msg,lx){
+	console.log('lx',lx);
 	var unread=loopback.findModel('unread');
 	var pushkey=loopback.findModel('pushkey');
 	var yonghu=loopback.findModel('yonghu');
@@ -71,11 +72,11 @@ var pushNotification=function(to,from,msg,lx){
 		})
 	});
 
-	Promise.all([p1,p2,p3]).then(function(res){
+	Promise.all([p1,p2]).then(function(res){
 		// console.log('promise',res);
 		var pushData=res[0];
 		var userData=res[1];
-		console.log(res[2]);
+		// console.log(res[2]);
 
 			// console.log('data',rp.pushkeys);
 		var title=userData.username || userData.email;
@@ -84,15 +85,41 @@ var pushNotification=function(to,from,msg,lx){
 		// console.log(title,body,img);
 		// console.log();
 		var subscribe=JSON.parse(pushData.key);
-		var sendData={
-			title:title+'发来一条消息',
-			body:msg,
-			icon:img,
-			tag:title,
-			data:{
-				url:'https://chat.xingwentao.top/build/index.html'
+
+		if(lx==0){
+			var sendData={
+				title:title+'发来一条消息',
+				body:msg,
+				icon:img,
+				tag:title,
+				data:{
+					url:'https://chat.xingwentao.top/build/index.html'
+				}
 			}
 		}
+		else if(lx=='img'){
+			var sendData={
+				title:title+'发来一条消息',
+				body:'发来一张图片',
+				icon:img,
+				tag:title,
+				data:{
+					url:'https://chat.xingwentao.top/build/index.html'
+				}
+			}
+		}
+		else if(lx=='wav'){
+			var sendData={
+				title:title+'发来一条消息',
+				body:'发来一段语音',
+				icon:img,
+				tag:title,
+				data:{
+					url:'https://chat.xingwentao.top/build/index.html'
+				}
+			}
+		}
+
 
 		sendData=JSON.stringify(sendData);
 

@@ -6,5 +6,189 @@
  * @version $Id$
  */
 body{
-	background: #ff0;
+	
 }
+
+img{
+	width:100%;
+	vertical-align: middle;
+}
+
+.toAutumn{
+	height: 50px;
+	width:100%;
+	background: #fff899;
+}
+
+.toAutumnText{
+	font-size: 20px;
+	color:#e56300;
+	line-height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+.b_img{
+	width:33.3333%;
+}
+.hongbao{
+	width:23.2%;
+	margin-left: 5%;
+}
+
+.hongbaoWrap{
+	position: relative;
+}
+
+.hongbaoInner{
+	position: absolute;
+	top: 10px;
+	right: 5%;
+	text-align: right;
+}
+
+.hongbao_get{
+	margin-top: 2.5%;
+	text-align: right;
+}
+
+.hongbao_btn{
+	display: inline-block;
+	text-align: center;
+	font-size: 14px;
+	width: 51.5%;
+	color:#fb0f30;
+	background: #ffed48;
+	padding-top: 1.5%;
+	padding-bottom: 1.5%;
+	border-radius: 12px;
+}
+.ptext{
+	color:rgb(255,248,162);
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.dz_wrap{
+	background:rgb(37,13,40);
+	
+}
+.zc_wrap{
+	background: rgb(37,13,40);
+}
+.dz_inner{
+	position: relative;
+}
+.dzbtn_wrap{
+	position: absolute;
+	width: 75%;
+	left:50%;
+	margin-left: -37.5%;
+	bottom: 13%;
+}
+
+.hongbao_btn2{
+	width: 100%;
+	padding-top: 4.5%;
+	padding-bottom: 4.5%;
+	border-radius: 20px;
+	font-size: 16px;
+}
+
+
+.modal{
+	position: fixed;
+	left:0;
+	top:0;
+	background: rgba(0,0,0,0.6);
+}
+
+.modal_inner{
+	padding-top: 35px;
+	box-sizing: border-box;
+	width:300px;
+	height:150px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	margin-left: -150px;
+	margin-top: -75px;
+	background: rgb(254,226,226);
+	border-radius: 5px;
+}
+
+.modal_input{
+	width: 156.5px;
+	height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+	text-indent: 10px;
+	padding: 0;
+	-webkit-appearance: none;
+}
+
+.modal_btn{
+	display: inline-block;
+	width:91px;
+	height:30px;
+	background: #f00;
+	border: 1px solid #f00;
+	text-align: center;
+	line-height: 30px;
+	font-size: 14px;
+	color:rgb(255,248,50);
+	border-radius: 5px;
+	margin-left: 5px;
+}
+.text_wrap{
+	width:260px;
+	overflow: hidden;
+	margin:0 auto;
+	margin-bottom: 8px;
+}
+.dz_num{
+	position: absolute;
+	color:#ffed48;
+	bottom: 36%;
+	text-align: center;
+	width:100px;
+	left: 50%;
+	margin-left: -50px;
+	font-size: 18px;
+}
+#tms_inner{
+	padding:5px;
+	background: rgb(238,238,238);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
