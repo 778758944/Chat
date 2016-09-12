@@ -24,24 +24,105 @@ var pushNotification=function(to,from,msg,lx){
 	var pushkey=loopback.findModel('pushkey');
 	var yonghu=loopback.findModel('yonghu');
 
-	var unreadData={
-		type:2,
-		to:to,
-		from:from,
-		msg:msg,
-		lx:lx
-	}
+	if(lx==0){
+		var unreadData={
+			type:2,
+			to:to,
+			from:from,
+			msg:msg,
+			lx:lx
+		}
 
-	var p3=new Promise(function(resolve,reject){
-		unread.create(unreadData,function(err,data){
+		unread.create(unreadData,function(err){
 			if(err){
 				console.log(err);
-				reject(err);
-			}
-			else{
-				resolve(data);
 			}
 		})
+	}
+	else if(lx=='img'){
+		var imgName=new Date().getTime().toString()+to+from+'.jpg';
+		var img_path=Path.resolve(__dirname,'../../client/media/'+imgName);
+		var base64_data=msg.substr(22);
+		var data=new Buffer(base64_data,'base64');
+		fs.exists(img_path,function(exists){
+			if(!exists){
+				fs.writeFile(img_path,data,function(err){
+					if(err){
+						console.log(err);
+						return;
+					}
+					else{
+						var web_img_path='https://chat.xingwentao.top/media/'+imgName;
+						var unreadData={
+							type:2,
+							to:to,
+							from:from,
+							msg:web_img_path,
+							lx:lx
+						}
+						unread.create(unreadData,function(err,data){
+							if(err){
+								console.log(err);
+							}
+							else{
+								console.log(data);
+							}
+						})
+					}
+				})
+			}
+		})
+	}
+	else if(lx=='wav'){
+		console.log(msg instanceof Buffer);
+		var wavName=new Date().getTime().toString()+to+from+'.wav';
+		var wav_path=Path.resolve(__dirname,'../../client/media/',wavName);
+		console.log(wav_path);
+		fs.exists(wav_path,function(exists){
+			if(!exists){
+				fs.writeFile(wav_path,msg,function(err,data){
+					if(err){
+						console.log(err);
+						return;
+					}
+					var unreadData={
+						type:2,
+						to:to,
+						from:from,
+						msg:'https://chat.xingwentao.top/media/'+wavName,
+						lx:lx
+					}
+
+					unread.create(unreadData,function(err){
+						if(err){
+							console.log(err);
+						}
+					})
+				})
+			}
+		})
+	}
+
+	// var unreadData={
+	// 	type:2,
+	// 	to:to,
+	// 	from:from,
+	// 	msg:msg,
+	// 	lx:lx
+	// }
+
+	var p3=new Promise(function(resolve,reject){
+		if(lx==0){
+			unread.create(unreadData,function(err,data){
+				if(err){
+					console.log(err);
+					reject(err);
+				}
+				else{
+					resolve(data);
+				}
+			})
+		}
 	})
 
 	var p1=new Promise(function(resolve,reject){
