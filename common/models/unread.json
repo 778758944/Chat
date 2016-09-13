@@ -22,8 +22,8 @@
       "type": "string",
       "required": true
     },
-    "to":{
-      "type":"number"
+    "to": {
+      "type": "number"
     }
   },
   "validations": [],

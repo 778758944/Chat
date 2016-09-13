@@ -22,6 +22,11 @@
       "type": "hasOne",
       "model": "pushkey",
       "foreignKey": "id"
+    },
+    "unreads": {
+      "type": "hasMany",
+      "model": "unread",
+      "foreignKey": "from"
     }
   },
   "acls": [

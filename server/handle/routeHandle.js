@@ -111,19 +111,19 @@ var pushNotification=function(to,from,msg,lx){
 	// 	lx:lx
 	// }
 
-	var p3=new Promise(function(resolve,reject){
-		if(lx==0){
-			unread.create(unreadData,function(err,data){
-				if(err){
-					console.log(err);
-					reject(err);
-				}
-				else{
-					resolve(data);
-				}
-			})
-		}
-	})
+	// var p3=new Promise(function(resolve,reject){
+	// 	if(lx==0){
+	// 		unread.create(unreadData,function(err,data){
+	// 			if(err){
+	// 				console.log(err);
+	// 				reject(err);
+	// 			}
+	// 			else{
+	// 				resolve(data);
+	// 			}
+	// 		})
+	// 	}
+	// })
 
 	var p1=new Promise(function(resolve,reject){
 		pushkey.findById(to,function(err,data){

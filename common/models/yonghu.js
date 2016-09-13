@@ -14,6 +14,14 @@ module.exports = function(Yonghu) {
 				email:true,
 				img:true
 			},
+			include:{
+				relation:"unreads",
+				scope:{
+					where:{
+						to:userId
+					}
+				}
+			},
 			where:{
 				// id:{
 				// 	// regexp:'^(?!'+userId+'$)'
