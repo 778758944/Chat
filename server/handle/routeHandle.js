@@ -253,6 +253,9 @@ var socketConnection=function(socket){
 							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 						}
 						else{
+							if(path=='/friend'){
+								sockets[to].emit('addCounter',userId);
+							}
 							// console.log('no response');
 							pushNotification(to,userId,data.msg,lx);
 

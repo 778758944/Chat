@@ -47,7 +47,6 @@ class MSGSTORE extends EventEmitter{
 	}
 
 	updateMsg(data){
-		console.log(this.messages);
 		if(data.lx!='draw'){
 			this.messages.push(data);
 			this.emitUpdate();

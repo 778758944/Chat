@@ -20,13 +20,21 @@ var socket=io(io_url);
 var FriendStore = Object.assign({},EventEmitter.prototype,{
 	users:[],
 	myself:{},
+	counter:{},
 	getUsers:function(access_token){
 		var url='/api/yonghus/friendList'
 		post(url,{},function(res){
 			if(res.code==200){
 				this.users=res.data.friends;	
 				this.myself=res.data.myself;
+				var friends=res.data.friends;
+
+				for(var i=0;i<friends.length;i++){
+					this.counter[friends[i].userId]=friends[i].unreads.length;
+				}
+				// console.log('counter',this.counter);
 				this.emitGet();
+				this.emitAdd();
 			}
 			else{
 				this.emit('fail');
@@ -64,9 +72,27 @@ var FriendStore = Object.assign({},EventEmitter.prototype,{
 
 	emitGet:function(){
 		this.emit('get');
+	},
+
+	addAddListener:function(cb){
+		this.on('add',cb);
+	},
+
+	removeAddListener:function(cb){
+		this.removeListener('add',cb);
+	},
+
+	emitAdd:function(){
+		this.emit('add')
 	}
 
 })
+
+socket.on('addCount',function(userId){
+	FriendStore.counter[userId]++;
+	FriendStore.emitAdd();
+
+});
 
 export {FriendStore,socket}
 // export {socket,FriendStore}

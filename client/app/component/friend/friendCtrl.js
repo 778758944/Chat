@@ -17,7 +17,8 @@ class FriendCtrl extends Component{
 		super(props);
 		this.state={
 			friends:[],
-			myself:{}
+			myself:{},
+			counter:[]
 		};
 
 		this._onGet=function(){
@@ -25,6 +26,12 @@ class FriendCtrl extends Component{
 				friends:FriendStore.users,
 				myself:FriendStore.myself
 			});
+		}.bind(this);
+
+		this._onAdd=function(){
+			this.setState({
+				counter:FriendStore.counter
+			})
 		}.bind(this);
 
 		this._onFail=function(){
@@ -37,6 +44,7 @@ class FriendCtrl extends Component{
 	componentWillMount(){
 		FriendStore.addGetListener(this._onGet);
 		FriendStore.addFailListener(this._onFail);
+		FriendStore.addAddListener(this._onAdd);
 		// var token=this.props.location.state.token;
 		FriendAction.getUsers(123);
 
@@ -45,12 +53,14 @@ class FriendCtrl extends Component{
 	componentDidMount(){
 		console.log(this.props.location.pathname);
 		FriendAction.setPoint(this.props.location.pathname);
+
 		// console.log('router',this.context.router);
 	}
 
 	componentWillUnmount(){
 		FriendStore.removeGetListener(this._onGet);
 		FriendStore.removeGetListener(this._onFail);
+		FriendStore.removeAddListener(this._onAdd);
 	}
 
 
@@ -58,15 +68,14 @@ class FriendCtrl extends Component{
 	render(){
 		var myself=this.state.myself;
 		// console.log(this.state.friends);
-		var friend=this.state.friends.map(function(friend){
+		var friend=this.state.friends.map(function(friend,index){
 			// if(friend.id==this.props.location.state.id){
 			// 	return
 			// }
 
-			var unread=friend.unreads.length;
-			if(unread>9){
-				unread=9+'+';
-			}
+			var unread=this.state.counter[friend.userId];
+
+			unread=unread > 9 ? 9+'+' : unread;
 			return (
 				<Friend email={friend.username ? friend.username:friend.email} img={friend.img} id={friend.id} key={friend.id} myimg={myself.img} unread={unread}/>
 				)
