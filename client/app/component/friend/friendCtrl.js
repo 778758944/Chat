@@ -73,9 +73,10 @@ class FriendCtrl extends Component{
 			// 	return
 			// }
 
-			var unread=this.state.counter[friend.userId];
+			var unread=this.state.counter[friend.id];
 
 			unread=unread > 9 ? 9+'+' : unread;
+
 			return (
 				<Friend email={friend.username ? friend.username:friend.email} img={friend.img} id={friend.id} key={friend.id} myimg={myself.img} unread={unread}/>
 				)

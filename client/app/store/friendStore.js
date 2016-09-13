@@ -30,7 +30,7 @@ var FriendStore = Object.assign({},EventEmitter.prototype,{
 				var friends=res.data.friends;
 
 				for(var i=0;i<friends.length;i++){
-					this.counter[friends[i].userId]=friends[i].unreads.length;
+					this.counter[friends[i].id]=friends[i].unreads.length;
 				}
 				// console.log('counter',this.counter);
 				this.emitGet();
@@ -88,8 +88,8 @@ var FriendStore = Object.assign({},EventEmitter.prototype,{
 
 })
 
-socket.on('addCount',function(userId){
-	FriendStore.counter[userId]++;
+socket.on('addCounter',function(userId){
+	FriendStore.counter[userId]=FriendStore.counter[userId]+1;
 	FriendStore.emitAdd();
 
 });
