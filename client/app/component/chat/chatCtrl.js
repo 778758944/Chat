@@ -41,10 +41,13 @@ class ChatCtrl extends React.Component{
 		var path=this.props.location.pathname;
 		MsgActions.setPoint(path);
 		MsgStore.addUpdateListener(this._onUpdate);
+		MsgStore.addInitListener(this._onUpdate);
+		MsgStore.getUnreadMsg(parseInt(this.props.params.id,10));
 	}
 
 	componentWillUnmount(){
 		MsgStore.removeUpdateListener(this._onUpdate);
+		MsgStore.removeInitListener(this._onUpdate);
 	}
 
 

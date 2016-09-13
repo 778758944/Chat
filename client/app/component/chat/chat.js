@@ -18,7 +18,7 @@ class MineMsg extends React.Component{
 
 	render(){
 		var data=this.props.data;
-		if(!data.lx){
+		if(data.lx==0 || !data.lx){
 			return (
 				<div className='otherMsg oneMsg'>
 					<img className='otherMsg_img' width={35} src={this.props.img}/>
@@ -46,8 +46,15 @@ class MineMsg extends React.Component{
 				<img className='otherMsg_img' width={35} src={this.props.img}/>
 				<div className='msgWrap otherWrap'>
 					<p className='otherMsg_text oneText' onClick={()=>{
-						this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
-						this.props.audio.play();
+						if(typeof data.msg == 'string'){
+							console.log('string');
+							this.props.audio.src=data.msg;
+							this.props.audio.play();
+						}
+						else{
+							this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
+							this.props.audio.play();
+						}
 					}}>播放语音</p>
 				</div>
 			</div>
@@ -70,7 +77,7 @@ class OtherMsg extends React.Component{
 	}
 	render(){
 		var data=this.props.data;
-		if(!data.lx){
+		if(data.lx==0 || !data.lx){
 			return (
 				<div className="mineMsg oneMsg">
 		  			      <img width={35} className="mineMsg_img" src={this.props.img}/>
@@ -99,8 +106,15 @@ class OtherMsg extends React.Component{
   			      <img width={35} className="mineMsg_img" src={this.props.img}/>
   			      <div className="msgWrap mineWrap">
 	  			      <p className="mineMsg oneText" onClick={()=>{
-	  			      	this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
-	  			      	this.props.audio.play();
+	  			      	if(typeof data.msg == 'string'){
+							console.log('string');
+							this.props.audio.src=data.msg;
+							this.props.audio.play();
+						}
+						else{
+							this.props.audio.src=dealWav(new Blob([data.msg],{type: 'audio/wav'}));
+							this.props.audio.play();
+						}
 	  			      }}>播放语音</p>
   			      </div>
   			   </div>
@@ -225,6 +239,7 @@ class InfoBox extends React.Component{
 	render(){
 		// console.log(this.props.msg);
 		var inner=this.props.msg.map(function(value,index){
+			console.log(value);
 			if(value.type==1){
 				return <MineMsg data={value} key={index} audio={this.props.audio} img={this.props.mine_img}/>
 			}

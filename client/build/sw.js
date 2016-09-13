@@ -13,7 +13,7 @@ var urlToCache=[
 
 
 var staticCacheName='static';
-var version='v7::';
+var version='v8::';
 
 //创建缓存
 function updateStaticCache(){

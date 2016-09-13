@@ -29,6 +29,16 @@ class MSGSTORE extends EventEmitter{
 		return this.messages;
 	}
 
+	getUnreadMsg(from){
+		var url='/api/unreads/getUnreadMsg';
+		post(url,{from:from},function(res){
+			if(res.code==200 && res.data.length){
+				this.messages=res.data;
+				this.emit('init',res.data);
+			}
+		}.bind(this));
+	}
+
 	setPoint(){
 		var url='/api/setPoint';
 		post(url,{point:url},function(res){
@@ -37,6 +47,7 @@ class MSGSTORE extends EventEmitter{
 	}
 
 	updateMsg(data){
+		console.log(this.messages);
 		if(data.lx!='draw'){
 			this.messages.push(data);
 			this.emitUpdate();
@@ -57,6 +68,10 @@ class MSGSTORE extends EventEmitter{
 		this.on('update',callback);
 	}
 
+	addInitListener(callback){
+		this.on('init',callback);
+	}
+
 	removeUpdateListener(callback){
 		this.removeListener('update',callback);
 	}
@@ -74,6 +89,10 @@ class MSGSTORE extends EventEmitter{
 			// console.log('msg',data);
 			callback&&callback(data.msg.posx,data.msg.posy,data.msg.state);
 		});
+	}
+
+	removeInitListener(callback){
+		this.removeListener('init',callback);
 	}
 
 	removeDrawListener(callback){
