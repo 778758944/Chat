@@ -62,8 +62,13 @@ class FriendCtrl extends Component{
 			// if(friend.id==this.props.location.state.id){
 			// 	return
 			// }
+
+			var unread=friend.unreads.length;
+			if(unread>9){
+				unread=9+'+';
+			}
 			return (
-				<Friend email={friend.username ? friend.username:friend.email} img={friend.img} id={friend.id} key={friend.id} myimg={myself.img}/>
+				<Friend email={friend.username ? friend.username:friend.email} img={friend.img} id={friend.id} key={friend.id} myimg={myself.img} unread={unread}/>
 				)
 		}.bind(this));
 		return (

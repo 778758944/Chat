@@ -29,6 +29,9 @@ class Friend extends Component{
 		if(!path){
 			path='/chat/'+this.props.id;
 		}
+		if(this.props.unread){
+			var unread=<span className='notice_tip'>{this.props.unread}</span>
+		}
 		return (
 			<div className="friendWrap">
 				<Link to={{
@@ -40,7 +43,7 @@ class Friend extends Component{
 				}}>
 					<div style={{display:'inline-block',marginTop:"5px",position:"relative"}}>
 						<img src={this.props.img ? this.props.img:img} className='tx'/>
-						<span className='notice_tip'>2</span>
+						{unread}
 					</div>
 					<div className="friendText">{this.props.email}</div>
 				</Link>
