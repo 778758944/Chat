@@ -7,6 +7,15 @@ module.exports = function(Unread) {
 				console.log(err);
 			}
 			else{
+				Unread.remove({where:{to:userId,from:from}},function(err,data){
+					if(err){
+						console.log(err);
+						return;
+					}
+
+					console.log(data);
+
+				})
 				var resData={
 					code:200,
 					data:data,
