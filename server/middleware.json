@@ -15,10 +15,13 @@
   "session": {},
   "auth": {},
   "parse": {
-    "body-parser#json": {},
+    "body-parser#json": {
+      "limit":"500mb"
+    },
     "body-parser#urlencoded": {
       "params": {
-        "extended": true
+        "extended": true,
+        "limit":"500mb"
       }
     }
   },

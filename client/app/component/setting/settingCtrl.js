@@ -40,7 +40,7 @@ class SettingCtrl extends Component{
 
 
 			fileReader.onload=function(e){
-				console.log(e);
+				// console.log(e);
 				var img=e.target.result;
 				this.setState({
 					needPic:true,

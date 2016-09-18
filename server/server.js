@@ -25,7 +25,8 @@ var app = loopback();
 //   headers:['access_token','X-Access-Token'],
 //   params:['access_token']
 // }))
-app.use(bodyParser.urlencoded({extended:true,limit:'1024mb'}));
+// app.use(bodyParser.json({limit: '500mb'}));
+// app.use(bodyParser.urlencoded({extended:true,limit:'500mb'}));
 app.use(loopback.cookieParser('abc'));
 app.use(loopback.context());
 app.use(loopback.token({
@@ -47,6 +48,9 @@ app.use(function(req,res,next){
 
 
 boot(app,__dirname);
+
+// app.use(bodyParser.json({limit: 524288000}));
+// app.use(bodyParser.urlencoded({extended:true,limit:524288000}));
 
 
 
