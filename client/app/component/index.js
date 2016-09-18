@@ -41,7 +41,7 @@ var app=[
 		}
 	},
 	{
-		path:'/setting',
+		path:'/setting/:id',
 		getComponent(nextState,cb){
 			require.ensure([],function(require){
 				cb(null,require('./setting/settingCtrl'));

@@ -11,6 +11,7 @@ import {Enhance} from '../../lib/enhance.js'
 
 
 
+
 class SettingCtrl extends Component{
 	constructor(props){
 		super(props);
@@ -39,6 +40,7 @@ class SettingCtrl extends Component{
 
 
 			fileReader.onload=function(e){
+				console.log(e);
 				var img=e.target.result;
 				this.setState({
 					needPic:true,
@@ -56,6 +58,13 @@ class SettingCtrl extends Component{
 			})
 		}.bind(this)
 
+		this.init=function(name,img){
+			this.setState({
+				name:name,
+				imgPath:img
+			})
+		}.bind(this);
+
 	}
 
 	componentWillMount(){
@@ -63,6 +72,9 @@ class SettingCtrl extends Component{
 	}
 
 	componentDidMount(){
+
+		var id=this.props.params.id;
+		SettingStore.addGetInfoListener(this.init);
 		SettingAction.setPoint(this.props.location.pathname);
 		SettingStore.addGetListener(function(){
 			this.props.showTip('success',2000);
@@ -72,10 +84,12 @@ class SettingCtrl extends Component{
 		SettingStore.addFailListener(function(){
 			this.props.showTip('error',2000);
 		}.bind(this));
+
+		SettingStore.getInfo(id);
 	}
 
 	componentWillUnmount(){
-
+		SettingStore.removeGetInfoListener(this.init);
 	}
 
 
@@ -88,20 +102,21 @@ class SettingCtrl extends Component{
 			pic=<DealPic img={this.state.imgurl} bl={1} uploaded={this.uploaded}/>
 		}
 		return (
-			<div className='warp'>
+			<div className='set_allwrap'>
 				{pic}
 				<form id='from1'>
-					<div>
-						<span>头像:</span>
-						<input type="file" name='tx' onChange={this._onChange}/>
+					<div className='set_imgWrap' style={{borderBottom:'1px solid #ccc',height:'80px'}}>
+						<span style={{lineHeight:'80px',fontSize:'16px'}}>头像:</span>
+						<label htmlFor='userImg' className='set_label'><img src={this.state.imgPath} className='set_img'/></label>
+						<input type="file" id='userImg' name='tx' onChange={this._onChange}/>
 					</div>
-					<div>
-						<span>昵称:</span>
-						<input type="text" name="username" onChange={this.onChangeText} value={this.state.name}/>
+					<div className='set_imgWrap'>
+						<span style={{lineHeight:'30px',fontSize:'16px'}}>昵称:</span>
+						<input type="text" name="username" className='set_name' onChange={this.onChangeText} value={this.state.name}/>
 						<input type='hidden' name='imgPath' value={this.state.imgPath}/>
 					</div>
 				</form>
-				<button onClick={this.submit}>保存</button>
+				<div onClick={this.submit} className='set_save'>保存</div>
 			</div>
 			)
 	}
@@ -136,6 +151,10 @@ class DealPic extends React.Component{
 
 
 		img.onload=function(){
+
+
+
+
 			var c_height=this.state.width/img.width*img.height;
 
 			var cvs_height=(this.state.width)/this.props.bl;
@@ -166,6 +185,9 @@ class DealPic extends React.Component{
 
 
 
+
+
+
 		return (
 			<div style={{
 				width:this.state.width,
@@ -174,6 +196,7 @@ class DealPic extends React.Component{
 				top:0,
 				left:0,
 				display:'table-cell',
+				textAlign:'center',
 				verticalAlign:"middle"
 			}}>
 				{img}
@@ -187,12 +210,12 @@ class DealPic extends React.Component{
 					left:0,
 					top:0
 				}}></canvas>
-				<button style={{position:"absolute",top:0,left:0}} onClick={()=>{
+				<div className='set_save' style={{position:"absolute",bottom:"30px",left:'50%',marginLeft:"-15%"}} onClick={()=>{
 					var data=this.rect.getImage();
 					post('/api/uploadImg',{data:data},function(res){
 						this.props.uploaded(res.path);
 					}.bind(this));
-				}}>确定</button>
+				}}>确定</div>
 			</div>
 			)
 	}
@@ -223,6 +246,7 @@ class Select{
 		var startX,startY,canDrag=false;
 
 		this.cvs.addEventListener('touchstart',function(e){
+			e.preventDefault();
 			var touch=e.touches[0];
 			startX=e.touches[0].clientX;
 			startY=e.touches[0].clientY;
@@ -234,6 +258,7 @@ class Select{
 		}.bind(this));
 
 		this.cvs.addEventListener('touchmove',function(e){
+			e.preventDefault();
 			if(canDrag){
 				var endx=e.touches[0].clientX;
 				var endy=e.touches[0].clientY;
@@ -255,6 +280,15 @@ class Select{
 						startY=endy;
 						this.move(this.posx,this.posy);
 					}
+
+					if(fy<ch){
+						startY=endy;
+						this.move(this.posx,ch);
+					}
+					else if(fy+this.height>this.cvs.height-ch){
+						startY=endy;
+						this.move(this.posx,this.cvs.height-ch-this.height);
+					}
 				}
 				else{
 					var if1=fx>0&&fx+this.width<this.cvs.width;
@@ -262,6 +296,15 @@ class Select{
 						this.posx=fx;
 						startX=endx;
 						this.move(this.posx,this.posy);
+					}
+
+					if(fx<0){
+						startX=endx;
+						this.move(0,this.posy);
+					}
+					else if(fx+this.width>this.cvs.width){
+						startX=endx;
+						this.move(this.cvs.width-this.width,this.posy);
 					}
 				}
 			}

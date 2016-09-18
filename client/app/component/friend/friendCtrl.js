@@ -83,7 +83,7 @@ class FriendCtrl extends Component{
 		}.bind(this));
 		return (
 			<div>
-				<Friend email={myself.username ? myself.username:myself.email} img={myself.img} id={myself.id} path={'/setting'}/>
+				<Friend email={myself.username ? myself.username:myself.email} img={myself.img} id={myself.id} path={'/setting/'+myself.id}/>
 				{friend}
 			</div>
 			)

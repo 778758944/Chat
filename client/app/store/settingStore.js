@@ -9,6 +9,14 @@ import {EventEmitter} from 'events'
 var SettingStore = Object.assign({},EventEmitter.prototype,{
 	users:[],
 
+	getInfo:function(id){
+		get('/api/yonghus/'+id,function(res){
+			var name=res.username;
+			var img=res.img;
+			this.emit('info',name,img);
+		}.bind(this));
+	},
+
 	save:function(username,path){
 		var url='/api/yonghus/updateInfo';
 		// console.log('formId',formId);
@@ -25,6 +33,14 @@ var SettingStore = Object.assign({},EventEmitter.prototype,{
 
 	removeFailListener:function(cb){
 		this.removeListener('fail',cb);
+	},
+
+	addGetInfoListener:function(cb){
+		this.on('info',cb);
+	},
+
+	removeGetInfoListener:function(cb){
+		this.removeListener('info',cb);
 	},
 
 	addGetListener:function(cb){
