@@ -231,10 +231,26 @@ var MsgboxHeight=document.documentElement.clientHeight-60;
 
 class InfoBox extends React.Component{
 	constructor(props){
-		super(props)
+		super(props);
+		this.msgBox;
+
+		this.ctrlHeight=function(){
+			var height=this.msgBox.offsetHeight;
+			var scroll_height=this.msgBox.scrollHeight;
+
+			console.log(height);
+			console.log(scroll_height);
+			var dish=scroll_height-height;
+			if(dish>0){
+				this.msgBox.scrollTop=dish;
+			}
+		}
 	}
 	componentDidMount(){
-		console.log(this.props.img);
+		this.ctrlHeight();
+	}
+	componentDidUpdate(){
+		this.ctrlHeight();
 	}
 	render(){
 		// console.log(this.props.msg);
@@ -247,8 +263,10 @@ class InfoBox extends React.Component{
 				return <OtherMsg data={value} key={index} audio={this.props.audio} toCvs={this.props.toCvs} img={this.props.img}/>
 			}
 		}.bind(this));
+
+
 		return (
-			<div className='msgBox' onTouchTap={()=>{
+			<div className='msgBox' ref={(ele)=>{this.msgBox=ele}} onTouchTap={()=>{
 				kevent.trigger('hide');
 			}}>
 				{inner}

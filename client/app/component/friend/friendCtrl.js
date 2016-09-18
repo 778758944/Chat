@@ -29,6 +29,7 @@ class FriendCtrl extends Component{
 		}.bind(this);
 
 		this._onAdd=function(){
+			navigator.vibrate(200);
 			this.setState({
 				counter:FriendStore.counter
 			})

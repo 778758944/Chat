@@ -23,6 +23,7 @@ class ChatCtrl extends React.Component{
 		}
 
 		this._onUpdate=function(){
+			navigator.vibrate(200)
 			this.setState({
 				msg:MsgStore.getAll()
 			});
