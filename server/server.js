@@ -25,7 +25,7 @@ var app = loopback();
 //   headers:['access_token','X-Access-Token'],
 //   params:['access_token']
 // }))
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true,limit:'1024mb'}));
 app.use(loopback.cookieParser('abc'));
 app.use(loopback.context());
 app.use(loopback.token({
