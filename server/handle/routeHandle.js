@@ -330,14 +330,15 @@ var updateInfo=function(req,res){
 var uploadImg=function(req,res){
 	var ctx=loopback.getCurrentContext();
 	var userId=ctx.get('accessToken').userId;
-	console.log(userId);
-	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+'.png');
-	var filePath=Path.resolve("/userImg/"+userId+'.png');
+	// console.log(userId);
+	var timestamp=new Date().getTime();
+	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+'.png');
+	var filePath=Path.resolve("/userImg/"+userId+timestamp+'.png');
 	var data=new Buffer(req.body.data,'base64');
-	fs.exists(savePath,function(exits){
-		if(exits){
-			fs.unlinkSync(savePath);
-		}
+	// fs.exists(savePath,function(exits){
+	// 	if(exits){
+	// 		fs.unlinkSync(savePath);
+	// 	}
 
 		fs.writeFile(savePath,data,function(err){
 			if(err){
@@ -349,7 +350,7 @@ var uploadImg=function(req,res){
 			}
 
 		})
-	})
+	// })
 }
 
 var setPoint=function(req,res){
