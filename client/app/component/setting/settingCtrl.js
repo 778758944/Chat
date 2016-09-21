@@ -65,6 +65,16 @@ class SettingCtrl extends Component{
 			})
 		}.bind(this);
 
+		this.logout=function(){
+			SettingStore.logout();
+		}
+
+		this.onLogout=function(){
+			// alert('sds');
+			// console.log(this.props.c)
+			this.context.router.goBack();
+		}.bind(this);
+
 	}
 
 	componentWillMount(){
@@ -75,6 +85,7 @@ class SettingCtrl extends Component{
 
 		var id=this.props.params.id;
 		SettingStore.addGetInfoListener(this.init);
+		SettingStore.addLogoutListener(this.onLogout);
 		SettingAction.setPoint(this.props.location.pathname);
 		SettingStore.addGetListener(function(){
 			this.props.showTip('success',2000);
@@ -89,6 +100,7 @@ class SettingCtrl extends Component{
 	}
 
 	componentWillUnmount(){
+		SettingStore.removeLogoutListener(this.onLogout);
 		SettingStore.removeGetInfoListener(this.init);
 	}
 
@@ -117,6 +129,9 @@ class SettingCtrl extends Component{
 					</div>
 				</form>
 				<div onClick={this.submit} className='set_save'>保存</div>
+				<div>
+					<div onClick={this.logout} className='set_save' style={{background:'#f00'}}>退出登录</div>
+				</div>
 			</div>
 			)
 	}

@@ -82,9 +82,14 @@ class FriendCtrl extends Component{
 				<Friend email={friend.username ? friend.username:friend.email} img={friend.img} id={friend.id} key={friend.id} myimg={myself.img} unread={unread}/>
 				)
 		}.bind(this));
+
+		if(myself.username){
+			var selfCom=<Friend email={myself.username ? myself.username:myself.email} img={myself.img} id={myself.id} path={'/setting/'+myself.id}/>;
+		}
+
 		return (
 			<div>
-				<Friend email={myself.username ? myself.username:myself.email} img={myself.img} id={myself.id} path={'/setting/'+myself.id}/>
+				{selfCom}
 				{friend}
 			</div>
 			)

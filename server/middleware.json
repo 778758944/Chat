@@ -16,12 +16,12 @@
   "auth": {},
   "parse": {
     "body-parser#json": {
-      "limit":"500mb"
+      "limit": "500mb"
     },
     "body-parser#urlencoded": {
       "params": {
         "extended": true,
-        "limit":"500mb"
+        "limit": "500mb"
       }
     }
   },
