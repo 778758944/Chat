@@ -21,3 +21,4 @@ server/datasources.json
 server/key.js
 client/media
 client/userImg
+nohup.out
