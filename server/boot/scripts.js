@@ -19,6 +19,7 @@ module.exports=function(app){
       password: '123321q'
     }
 	];
+  /*
 
 
 	mysqlDs.automigrate('unread',function(err){
@@ -82,5 +83,6 @@ module.exports=function(app){
 	 		console.log('accessbuilt');
 	 	}
 	 })
+   */
 
 }
