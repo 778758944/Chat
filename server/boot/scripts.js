@@ -12,9 +12,12 @@ module.exports=function(app){
 
 	var data=[
 		{
-			email:"123456@qq.com",
+			email:"123456@test.com",
 			password:'123456'
-		}
+		}, {
+      email:"778758944@qq.com",
+      password: '123321q'
+    }
 	];
 
 
@@ -60,12 +63,13 @@ module.exports=function(app){
 	// // console.log(mysqlDs);
 
 	 mysqlDs.automigrate('yonghu',function(err){
-		// user.create({
-		//  	email:"123456@qq.com",
-		//  	password:"123456"
-		// },function(err,results){
-		// 	console.log(results);
-		//  })
+		user.create(data,function(err,results){
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(results);
+      }
+		 })
 	 })
 
 	 // console.log('boot script');
