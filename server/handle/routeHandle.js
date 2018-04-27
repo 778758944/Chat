@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @authors Your Name (you@example.org)
  * @date    2016-03-25 16:29:55
  * @version $Id$
@@ -52,7 +52,7 @@ var pushNotification=function(to,from,msg,lx){
 						return;
 					}
 					else{
-						var web_img_path='https://chat.xingwentao.top/media/'+imgName;
+						var web_img_path='https://'+location.host+'/media/'+imgName;
 						var unreadData={
 							type:2,
 							to:to,
@@ -89,7 +89,7 @@ var pushNotification=function(to,from,msg,lx){
 						type:2,
 						to:to,
 						from:from,
-						msg:'https://chat.xingwentao.top/media/'+wavName,
+						msg:'https://'+location.host+'/media/'+wavName,
 						lx:lx
 					}
 
@@ -174,7 +174,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.top/build/index.html'
+					url:'https://'+location.host+'/build/index.html'
 				}
 			}
 		}
@@ -185,7 +185,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.top/build/index.html'
+					url:'https://'+location.host+'/build/index.html'
 				}
 			}
 		}
@@ -196,7 +196,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.top/build/index.html'
+					url:'https://'+location.host+'/build/index.html'
 				}
 			}
 		}
