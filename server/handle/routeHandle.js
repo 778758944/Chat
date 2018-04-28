@@ -157,7 +157,9 @@ var pushNotification=function(to,from,msg,lx){
 		// console.log('promise',res);
 		var pushData=res[0];
 		var userData=res[1];
-		// console.log(res[2]);
+
+    console.log('pushData', pushData);
+		console.log('userData', userData);
 
 			// console.log('data',rp.pushkeys);
 		var title=userData.username || userData.email;
