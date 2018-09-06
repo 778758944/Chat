@@ -126,6 +126,7 @@ var pushNotification=function(to,from,msg,lx){
 	// })
 
 	var p1=new Promise(function(resolve,reject){
+		console.log("pushkey", to);
 		pushkey.findById(to,function(err,data){
 			if(err){
 				console.log(err);
@@ -138,6 +139,7 @@ var pushNotification=function(to,from,msg,lx){
 	});
 
 	var p2=new Promise(function(resolve,reject){
+		console.log("yonghu", from);
 		yonghu.findById(from,{fields:{
 			username:true,
 			email:true,
@@ -218,27 +220,32 @@ var pushNotification=function(to,from,msg,lx){
 }
 
 var socketConnection=function(socket){
+	console.log("websocket connected");
 	var userId;
 	var points=loopback.findModel('points');
+	console.log("socket cookie", socket.request.headers.cookie);
 	if(socket.request.headers.cookie){
 		var cookies=socket.request.headers.cookie.split(';');
 		console.log(cookies);
 		cookies.map(function(ele,index){
-			// console.log(ele.indexOf('userId'));
-			if(ele.indexOf('userId')==1){
+			console.log(ele.indexOf('userId'));
+			if(ele.indexOf('userId')!=-1){
+				console.log("find userId");
 				userId=ele.split('=')[1];
 			}
 		})
 
-		console.log('userid',userId);
+		console.log('userid in socket connection',userId);
 
 
 
 		sockets[userId]=socket;
 		socket.on('sendMsg',function(data){
-			// console.log('sendMsg',data);
+			console.log('sendMsg',data);
 			var to=data.to;
 			var lx=data.lx ? data.lx:0;
+		//	console.log("emit socket", sockets[to]);
+			console.log("emit userid", userId);
 			if(sockets[to]){
 				points.findById(to,function(err,points){
 					if(err){
@@ -248,14 +255,16 @@ var socketConnection=function(socket){
 					else{
 						// console.log(points);
 						var path=points.point;
-						// console.log(path);
-						// console.log('/chat/'+userId);
+						console.log(path);
+						console.log('/chat/'+userId);
 						if(path=='/chat/'+userId){
 							console.log('msg out');
+							console.log("to:", to);
+							console.log("sockets key:", Object.keys(sockets));
 							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 						}
 						else{
-							if(path=='/friend' || path=='/'){
+							if(true ||path=='/friend' || path=='/'){
 								console.log('counter');
 								sockets[to].emit('addCounter',userId);
 							}
@@ -273,6 +282,7 @@ var socketConnection=function(socket){
 				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 			else{
+				console.log("just push notification");
 				pushNotification(to,userId,data.msg,lx);
 			}
 		})
@@ -330,9 +340,10 @@ var updateInfo=function(req,res){
 
 
 var uploadImg=function(req,res){
+	console.log("upload image");
 	var ctx=loopback.getCurrentContext();
 	var userId=ctx.get('accessToken').userId;
-	// console.log(userId);
+	console.log("upload image userid:", userId);
 	var timestamp=new Date().getTime();
 	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+'.png');
 	var filePath=Path.resolve("/userImg/"+userId+timestamp+'.png');
@@ -356,7 +367,7 @@ var uploadImg=function(req,res){
 }
 
 var setPoint=function(req,res){
-	// console.log('token',req.token);
+	console.log('token',req.token);
 	var points=loopback.findModel('points');
 	var ctx=loopback.getCurrentContext();
 	var userId=ctx.get('accessToken').userId;

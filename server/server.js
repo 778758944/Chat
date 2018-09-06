@@ -7,7 +7,7 @@ var sslConfig=require('./ssl-config.js');
 var handle=require('./handle/routeHandle.js');
 var bodyParser=require('body-parser');
 var path=require('path');
-
+var cookieParser = require("cookie-parser");
 
 
 // console.log('ksds')
@@ -27,7 +27,7 @@ var app = loopback();
 // }))
 // app.use(bodyParser.json({limit: '500mb'}));
 // app.use(bodyParser.urlencoded({extended:true,limit:'500mb'}));
-app.use(loopback.cookieParser('abc'));
+app.use(cookieParser('abc'));
 app.use(loopback.context());
 app.use(loopback.token({
   model: app.models.accessToken
