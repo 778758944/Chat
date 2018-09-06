@@ -20,7 +20,7 @@ module.exports=function(app){
     }
 	];
 
-
+/*
 	mysqlDs.automigrate('unread',function(err){
 		if(err){
 			console.log('err');
@@ -30,8 +30,7 @@ module.exports=function(app){
 		}
 	})
 
-
-/*
+	
 	mysqlDs.automigrate('pushkey',function(err){
 		if(err){
 			console.log('err');
