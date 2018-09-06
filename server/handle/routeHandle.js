@@ -38,7 +38,7 @@ var pushNotification=function(to,from,msg,lx){
 			from:from,
 			msg:msg,
 			lx:lx,
-			createAt: getTime()
+			createAt: getUtcTime()
 		}
 
 		unread.create(unreadData,function(err){
@@ -66,7 +66,8 @@ var pushNotification=function(to,from,msg,lx){
 							to:to,
 							from:from,
 							msg:web_img_path,
-							lx:lx
+							lx:lx,
+							createAt: getUtcTime()
 						}
 						unread.create(unreadData,function(err,data){
 							if(err){
@@ -98,7 +99,8 @@ var pushNotification=function(to,from,msg,lx){
 						to:to,
 						from:from,
 						msg:'https://'+location.host+'/media/'+wavName,
-						lx:lx
+						lx:lx,
+						createAt: getUtcTime()
 					}
 
 					unread.create(unreadData,function(err){
