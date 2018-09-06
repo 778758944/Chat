@@ -24,6 +24,9 @@
     },
     "to": {
       "type": "number"
+    },
+    "createAt": {
+      "type": "number"
     }
   },
   "validations": [],
