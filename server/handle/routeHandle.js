@@ -18,6 +18,13 @@ var webPush=require('web-push');
 webPush.setGCMAPIKey(key.pushkey);
 
 
+function getUtcTime() {
+	var d1 = new Date();
+	var d2 = new Date( d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate(), d1.getUTCHours(), d1.getUTCMinutes(), d1.getUTCSeconds());
+	return d2.getTime()/1000;
+}
+
+
 var pushNotification=function(to,from,msg,lx){
 	console.log('lx',lx);
 	var unread=loopback.findModel('unread');
@@ -30,7 +37,8 @@ var pushNotification=function(to,from,msg,lx){
 			to:to,
 			from:from,
 			msg:msg,
-			lx:lx
+			lx:lx,
+			createAt: getTime()
 		}
 
 		unread.create(unreadData,function(err){
@@ -261,7 +269,8 @@ var socketConnection=function(socket){
 							console.log('msg out');
 							console.log("to:", to);
 							console.log("sockets key:", Object.keys(sockets));
-							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
+							console.log(getUtcTime());
+							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx, createAt: getUtcTime()});
 						}
 						else{
 							if(true ||path=='/friend' || path=='/'){
@@ -367,10 +376,11 @@ var uploadImg=function(req,res){
 }
 
 var setPoint=function(req,res){
-	console.log('token',req.token);
+	console.log('setPonit token',req.token);
 	var points=loopback.findModel('points');
 	var ctx=loopback.getCurrentContext();
 	var userId=ctx.get('accessToken').userId;
+	console.log("setPoint userId:", userId);
 	// console.log('point',req.body.point);
 	var data={
 		userId:userId,
