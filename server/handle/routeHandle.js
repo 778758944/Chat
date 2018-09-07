@@ -21,7 +21,7 @@ webPush.setGCMAPIKey(key.pushkey);
 function getUtcTime() {
 	var d1 = new Date();
 	var d2 = new Date( d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate(), d1.getUTCHours(), d1.getUTCMinutes(), d1.getUTCSeconds());
-	return d2.getTime()/1000;
+	return (d2.getTime()/1000)-(3600 * 8);
 }
 
 
