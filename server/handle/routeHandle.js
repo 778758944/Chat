@@ -272,7 +272,7 @@ var socketConnection=function(socket){
 							console.log("to:", to);
 							console.log("sockets key:", Object.keys(sockets));
 							console.log(getUtcTime());
-							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx, createAt: getUtcTime()});
+							sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx, createAt: getUtcTime(), to: to});
 						}
 						else{
 							if(true ||path=='/friend' || path=='/'){
