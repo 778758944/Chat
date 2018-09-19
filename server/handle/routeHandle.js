@@ -362,14 +362,13 @@ var uploadImg=function(req,res){
 			console.log(err);
 			return err;
 		}
-
-		console.log(fields, files);
 		var file = files.data;
-		var tmpPath = Path.resolve(file.path, "/", file.name);
+		var tmpPath = file.path + "/" + file.name;
+		console.log("tmpPath", tmpPath);
 		var fileExt = file.name.substring(file.name.indexOf('.'));
 		var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+fileExt);
 		var filePath=Path.resolve("/userImg/"+userId+timestamp+fileExt);
-		var readStream = fs.createReadStream(tmpPath);
+		var readStream = fs.createReadStream(file.path);
 		var writeStream = fs.createWriteStream(savePath);
 		readStream.pipe(writeStream);
 		res.json({path:filePath});
