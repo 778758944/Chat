@@ -216,8 +216,9 @@ body{
 	border-radius: 20px;
 	background: #fff;
 	user-select: none;
+	-webkit-touch-callout: none;
 }
-.iconGn:foucs {
+.iconGn::foucs {
 	outline: none;
 }
 .iconGn_label{
