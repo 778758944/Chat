@@ -364,9 +364,18 @@ var uploadImg=function(req,res){
 		}
 
 		console.log(fields, files);
+		var file = files.data;
+		var tmpPath = Path.resolve(file.path, "/", file.name);
+		var fileExt = file.name.substring(file.name.indexOf('.'));
+		var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+fileExt);
+		var filePath=Path.resolve("/userImg/"+userId+timestamp+fileExt);
+		var readStream = fs.createReadStream(tmpPath);
+		var writeStream = fs.createWriteStream(savePath);
+		readStream.pipe(writeStream);
+		res.json({path:filePath});
+
+		
 	});
-	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+'.png');
-	var filePath=Path.resolve("/userImg/"+userId+timestamp+'.png');
 
 /*
 	var data=new Buffer(req.body.data,'base64');
