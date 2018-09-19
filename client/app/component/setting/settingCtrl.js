@@ -54,10 +54,17 @@ class SettingCtrl extends Component{
 
 			var formData = new FormData();
 			formData.append("data", e.target.files[0]);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/api/uploadImg");
+			xhr.send(formData);
+			xhr.onload = function(res) {
+				console.log(res);
+			}
+			/*
 			post('/api/uploadImg',formData,function(res){
 				console.log("upload success");
 				console.log(res);
-			})
+			})*/
 		}.bind(this);
 
 		this.uploaded=function(path){
