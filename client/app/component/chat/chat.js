@@ -207,10 +207,14 @@ class FormBox extends React.Component{
 					<button className='iconGn' onTouchStart={(e)=>{
 						e.preventDefault();
 						console.log('start');
-						HZRecorder.get(function(rec){
-							this.recoder=rec;
+						if (!this.recoder) {
+							HZRecorder.get(function(rec){
+								this.recoder=rec;
+								this.recoder.start();
+							}.bind(this));
+						} else {
 							this.recoder.start();
-						}.bind(this))
+						}
 					}} onTouchEnd={this.onRecoderEnd}>语音</button>
 					<button onClick={()=>{
 						this.props.handle({msg:{lx:'tocvs'},lx:'tocvs',to:this.props.to,type:1})
