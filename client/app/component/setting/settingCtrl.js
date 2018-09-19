@@ -57,8 +57,12 @@ class SettingCtrl extends Component{
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "/api/uploadImg");
 			xhr.send(formData);
+			var that = this;
 			xhr.onload = function(res) {
-				console.log(this.response);
+				var res = JOSN.parse(this.response);
+				that.setState({
+					imgPath:res.path
+				});
 			}
 		}.bind(this);
 
