@@ -215,7 +215,10 @@ body{
 	box-sizing: border-box;
 	border-radius: 20px;
 	background: #fff;
-
+	user-select: none;
+}
+.iconGn:selected {
+	outline: none;
 }
 .iconGn_label{
 	line-height: 20vw;
