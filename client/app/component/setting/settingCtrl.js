@@ -59,7 +59,7 @@ class SettingCtrl extends Component{
 			xhr.send(formData);
 			var that = this;
 			xhr.onload = function(res) {
-				var res = JOSN.parse(this.response);
+				var res = JSON.parse(this.response);
 				that.setState({
 					imgPath:res.path
 				});
