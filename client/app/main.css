@@ -217,7 +217,7 @@ body{
 	background: #fff;
 	user-select: none;
 }
-.iconGn:selected {
+.iconGn:foucs {
 	outline: none;
 }
 .iconGn_label{

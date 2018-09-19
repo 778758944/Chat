@@ -127,6 +127,7 @@
 
     //停止
     this.stop=function(){
+      console.log("disconnect");
     	recorder.disconnect();
     }
 

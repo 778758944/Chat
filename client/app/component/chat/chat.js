@@ -179,6 +179,7 @@ class FormBox extends React.Component{
 			e.nativeEvent.preventDefault();
 			// this.recoder.play(this.audio);
 			this.recoder && this.recoder.stop();
+			console.log("end");
 			this.props.handle({msg:this.recoder.getBlob(true),to:this.props.to,type:1,lx:'wav'})
 		}.bind(this);
 	}
