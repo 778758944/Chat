@@ -218,8 +218,9 @@ body{
 	user-select: none;
 	-webkit-touch-callout: none;
 }
-.iconGn::foucs {
+button.iconGn:focus {
 	outline: none;
+	-webkit-touch-callout: none;
 }
 .iconGn_label{
 	line-height: 20vw;
