@@ -364,7 +364,7 @@ var uploadImg=function(req,res){
 		}
 
 		console.log(fields, files);
-	})
+	});
 	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+'.png');
 	var filePath=Path.resolve("/userImg/"+userId+timestamp+'.png');
 
