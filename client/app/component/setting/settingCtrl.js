@@ -35,6 +35,7 @@ class SettingCtrl extends Component{
 		}.bind(this);
 
 		this._onChange=function(e){
+			/*
 			var file=e.target.files[0];
 			var fileReader=new FileReader();
 
@@ -49,6 +50,14 @@ class SettingCtrl extends Component{
 			}.bind(this);
 
 			fileReader.readAsDataURL(file);
+			*/
+
+			var formData = new FormData();
+			formData.append("data", e.target.files[0]);
+			post('/api/uploadImg',formData,function(res){
+				console.log("upload success");
+				console.log(res);
+			})
 		}.bind(this);
 
 		this.uploaded=function(path){

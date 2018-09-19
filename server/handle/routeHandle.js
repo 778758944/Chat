@@ -356,25 +356,33 @@ var uploadImg=function(req,res){
 	var userId=ctx.get('accessToken').userId;
 	console.log("upload image userid:", userId);
 	var timestamp=new Date().getTime();
+	var form = new formidable.IncomingForm();
+	form.parse(req, function(err, fields, files) {
+		if (err) {
+			console.log(err);
+			return err;
+		}
+
+		console.log(fields, files);
+	})
 	var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+'.png');
 	var filePath=Path.resolve("/userImg/"+userId+timestamp+'.png');
+
+/*
 	var data=new Buffer(req.body.data,'base64');
-	// fs.exists(savePath,function(exits){
-	// 	if(exits){
-	// 		fs.unlinkSync(savePath);
-	// 	}
+	fs.writeFile(savePath,data,function(err){
+		if(err){
+			console.log(err);
+		}
+		else{
+			console.log('ok');
+			res.json({path:filePath});
+		}
 
-		fs.writeFile(savePath,data,function(err){
-			if(err){
-				console.log(err);
-			}
-			else{
-				console.log('ok');
-				res.json({path:filePath});
-			}
+	});
+	*/
 
-		})
-	// })
+
 }
 
 var setPoint=function(req,res){
