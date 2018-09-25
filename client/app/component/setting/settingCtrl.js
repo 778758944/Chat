@@ -257,7 +257,7 @@ class DealPic extends React.Component{
 				}}></canvas>
 				<div className='set_save' style={{position:"absolute",bottom:"30px",left:'50%',marginLeft:"-15%"}} onClick={()=>{
 					var data=this.rect.getImage();
-					file = this.base64ToFile(data, "avator.png");
+					var file = this.base64ToFile(data, "avator.png");
 					/*
 					post('/api/uploadImg',{data:data},function(res){
 						this.props.uploaded(res.path);
