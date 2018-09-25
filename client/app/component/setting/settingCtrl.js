@@ -207,6 +207,20 @@ class DealPic extends React.Component{
 		img.src=this.props.img;
 	}
 
+	base64ToFile(data, filename) {
+		var arr = data.split(",");
+		var mime = arr[0].match(/:(.*?);/)[1];
+		var bstr = atob(arr[1]);
+		console.log(bstr);
+		var n = bstr.length;
+		var u8arr = new Uint8Array(n);
+		while(n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+
+		return new File([u8arr], filename, {type: mime});
+	}
+
 	render(){
 
 
@@ -243,9 +257,22 @@ class DealPic extends React.Component{
 				}}></canvas>
 				<div className='set_save' style={{position:"absolute",bottom:"30px",left:'50%',marginLeft:"-15%"}} onClick={()=>{
 					var data=this.rect.getImage();
+					file = this.base64ToFile(data, "avator.png");
+					/*
 					post('/api/uploadImg',{data:data},function(res){
 						this.props.uploaded(res.path);
 					}.bind(this));
+					*/
+					var formData = new FormData();
+					formData.append("data", file);
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", "/api/uploadImg");
+					xhr.send(formData);
+					var that = this;
+					xhr.onload = function(res) {
+						var res = JSON.parse(this.response);
+						that.props.uploaded(res.path);
+					}
 				}}>确定</div>
 			</div>
 			)
@@ -376,7 +403,7 @@ class Select{
 			ctx.drawImage(this.img,0,ch,this.cvs.width,this.img_h);
 		}
 		var data=cvs.toDataURL();
-		return data.substr(22);
+		return data;
 	}
 }
 
