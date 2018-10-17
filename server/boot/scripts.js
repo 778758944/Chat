@@ -17,8 +17,19 @@ module.exports=function(app){
 		}, {
       email:"778758944@qq.com",
       password: '123321q'
-    }
+    }, {
+		email: "654321@test.com",
+		password: "123456"
+	}
 	];
+
+	user.create({
+		email: "654321@test.com",
+		password: "123456"
+	}, function(err, data) {
+		if (err) console.log(err);
+		console.log(data);
+	});
 
 /*
 	mysqlDs.automigrate('unread',function(err){
