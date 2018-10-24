@@ -252,6 +252,7 @@ var socketConnection=function(socket){
 		sockets[userId]=socket;
 		socket.on('sendMsg',function(data){
 			console.log('sendMsg',data);
+			socket.emit("msgRes", data);
 			var to=data.to;
 			var lx=data.lx ? data.lx:0;
 		//	console.log("emit socket", sockets[to]);
