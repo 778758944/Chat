@@ -250,6 +250,14 @@ var socketConnection=function(socket){
 
 
 		sockets[userId]=socket;
+		// signaling
+		socket.on("signalingMsg", function(data) {
+			var to = data.to;
+			sockets[to].emit("signalingMsg", data);
+		});
+
+
+
 		socket.on('sendMsg',function(data){
 			console.log('sendMsg',data);
 			socket.emit("msgRes", data);
