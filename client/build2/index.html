@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    var html = document.querySelector("html");
+    var width = document.documentElement.clientWidth;
+    html.style.fontSize = width/10 + "px";
+
+    document.body.addEventListener("touchmove", function(evt) {
+      if (!evt._isScroller) {
+        evt.preventDefault();
+      }
+    }, {passive: true});
+  </script>
+<script type="text/javascript" src="./app.js"></script></body>
+</html>
