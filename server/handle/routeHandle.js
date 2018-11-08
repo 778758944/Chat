@@ -286,7 +286,7 @@ var socketConnection=function(socket){
 						else{
 							if(true ||path=='/friend' || path=='/'){
 								console.log('counter');
-								sockets[to].emit('addCounter', {msg:data.msg,type:2,from:userId,lx:lx, createAt: getUtcTime(), to: to});
+								sockets[to].emit('addCounter', {msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
 							}
 							// console.log('no response');
 							pushNotification(to,userId,data.msg,lx);
