@@ -1,12 +1,12 @@
 {
-	"name":"push Notication",
-	"short_name":"push demo",
+	"name":"Chat",
+	"short_name":"Chat",
 	"icons":[{
-		"src":"girl.jpg",
+		"src":"static/app.jpg",
 		"size":"192x192",
 		"type":"image/jpg"
 	}],
-	"start_url":"/build/index.html",
+	"start_url":"index.html",
 	"display":"standalone",
 	"gcm_sender_id":"873411002047"
 }

@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- full screen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Chat">
+  <meta name="format-detection" content="telephone=no">
   <title>Chat</title>
   <script src="https://cdn.bootcss.com/react/15.6.2/react.min.js"></script>
   <script src="https://cdn.bootcss.com/react-dom/15.6.2/react-dom.min.js"></script>
   <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-  <link rel='manifest' href='manifest.json'/>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="./static/app.jpg" />
 </head>
 <body>
   <div id="root"></div>
-  <audio autoplay id="notice_audio"></audio>
   <script>
     var html = document.querySelector("html");
     var width = document.documentElement.clientWidth;
