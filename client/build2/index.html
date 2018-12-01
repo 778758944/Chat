@@ -9,9 +9,11 @@
   <script src="https://cdn.bootcss.com/react-dom/15.6.2/react-dom.min.js"></script>
   <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <link rel='manifest' href='manifest.json'/>
 </head>
 <body>
   <div id="root"></div>
+  <audio autoplay id="notice_audio"></audio>
   <script>
     var html = document.querySelector("html");
     var width = document.documentElement.clientWidth;
@@ -22,6 +24,8 @@
         evt.preventDefault();
       }
     }, {passive: true});
+
+
   </script>
 <script type="text/javascript" src="./app.js"></script></body>
 </html>
