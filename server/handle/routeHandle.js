@@ -188,7 +188,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.xyz/build/index.html'
+					url:'https://chat.xingwentao.xyz/index.html'
 				}
 			}
 		}
@@ -199,7 +199,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.xyz/build/index.html'
+					url:'https://chat.xingwentao.xyz/index.html'
 				}
 			}
 		}
@@ -210,7 +210,7 @@ var pushNotification=function(to,from,msg,lx){
 				icon:img,
 				tag:title,
 				data:{
-					url:'https://chat.xingwentao.xyz/build/index.html'
+					url:'https://chat.xingwentao.xyz/index.html'
 				}
 			}
 		}
