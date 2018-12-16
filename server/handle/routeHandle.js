@@ -375,7 +375,7 @@ var uploadImg=function(req,res){
 		var tmpPath = file.path + "/" + file.name;
 		console.log("tmpPath", tmpPath);
 		var fileExt = file.name.substring(file.name.indexOf('.'));
-		var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+timestamp+fileExt);
+		var savePath=Path.resolve(__dirname,'../../client/build2/userImg/'+userId+timestamp+fileExt);
 		var filePath=Path.resolve("/userImg/"+userId+timestamp+fileExt);
 		var readStream = fs.createReadStream(file.path);
 		var writeStream = fs.createWriteStream(savePath);
