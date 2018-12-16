@@ -394,6 +394,7 @@
   display: none;
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
+  z-index: 9998;
 }
 .image-view-img-full {
   position: fixed;
@@ -403,6 +404,7 @@
   display: none;
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
+  z-index: 9999;
 }
 .image-view-img-ani {
   -webkit-transition: -webkit-transform 0.2s ease-out;
