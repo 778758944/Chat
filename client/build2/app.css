@@ -351,6 +351,7 @@
   height: 0;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
 
 .text-msg-container {
