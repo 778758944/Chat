@@ -22,3 +22,4 @@ server/key.js
 client/media
 client/userImg
 nohup.out
+package-lock.json
