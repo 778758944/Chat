@@ -375,12 +375,8 @@
 
 .image-view-wrap {
   display: none;
-  background-repeat: no-repeat;
-  background-position: center center;
   overflow: hidden;
-  border: 1px solid #d4d4d4;
   border-radius: 0.15625rem;
-  background-size: cover;
 }
 .image-view-wrap-full {
   position: fixed;
@@ -412,6 +408,58 @@
   transition: -webkit-transform 0.2s ease-out;
   transition: transform 0.2s ease-out;
   transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.show-image-view {
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  z-index: 9999;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+
+.svg-icon-container {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.file-msg-wrap {
+  display: grid;
+  grid-template-columns: 1.40625rem 1fr;
+  grid-template-rows: auto 1fr;
+  grid-row-gap: 0.3125rem;
+  grid-column-gap: 0.23438rem;
+  padding: 0.375rem 0.375rem;
+  width: 6.59375rem;
+  background-color: #fff;
+  grid-template-areas: "icon name" "icon size";
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 0.15625rem;
+  border: 1px solid #cccccc;
+}
+.file-msg-icon {
+  grid-area: icon;
+  width: 1.40625rem;
+  height: 1.40625rem;
+}
+.file-msg-name {
+  font-size: 0.5rem;
+  grid-area: name;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.file-msg-size {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  font-size: 0.4375rem;
+  grid-area: size;
+  color: #888888;
 }
 
 .am-icon {
@@ -455,11 +503,6 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
-
-.svg-icon-container {
-  width: 0.9375rem;
-  height: 0.9375rem;
 }
 
 .msg-container {
