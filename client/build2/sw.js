@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V8";
+const cacheName = "CHAT-CACHE-V9";
 
 const urlsToCache = [
    "./"
