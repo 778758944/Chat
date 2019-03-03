@@ -755,12 +755,12 @@
   color: #ccc;
   padding-left: 0.125rem;
 }
-.am-modal-input input::-ms-input-placeholder {
+.am-modal-input input:-ms-input-placeholder {
   font-size: 0.21875rem;
   color: #ccc;
   padding-left: 0.125rem;
 }
-.am-modal-input input:-ms-input-placeholder {
+.am-modal-input input::-ms-input-placeholder {
   font-size: 0.21875rem;
   color: #ccc;
   padding-left: 0.125rem;
@@ -908,6 +908,46 @@
   overflow: hidden;
 }
 
+.progress-wrapper {
+  width: 100%;
+  height: 0.09375rem;
+  border-radius: 0.04688rem;
+  background-color: #dedede;
+  overflow: hidden;
+}
+@-webkit-keyframes waiting {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: 6.625rem;
+  }
+}
+@keyframes waiting {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: 6.625rem;
+  }
+}
+.progress-waiting {
+  background-image: -webkit-gradient(linear, left top, right top, from(#408bf9), color-stop(white), to(#408bf9));
+  background-image: linear-gradient(to right, #408bf9, white, #408bf9);
+  background-position-x: 0px;
+  background-position-y: top;
+  background-size: cover;
+  -webkit-animation: waiting linear 0.8s infinite;
+          animation: waiting linear 0.8s infinite;
+}
+.progress-inner {
+  width: 1px;
+  height: 100%;
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  background-color: #408bf9;
+}
+
 .svg-icon-container {
   width: 0.9375rem;
   height: 0.9375rem;
@@ -954,9 +994,11 @@
   margin-top: 0.15625rem;
   padding-bottom: 0.03125rem;
   font-size: 0;
+  height: 0.3125rem;
 }
 .file-progress {
   width: 100%;
+  height: 100%;
 }
 .file-send-fail {
   font-size: 0.375rem;
@@ -1123,8 +1165,8 @@
   transition: all 0.5s ease;
 }
 .video-call-opera-btn {
-  width: 2.0625rem;
-  height: 2.0625rem;
+  width: 1.875rem;
+  height: 1.875rem;
 }
 .video-call-remoteVideo {
   position: absolute;
@@ -1446,7 +1488,7 @@ img {
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-#notice_audio {
+.notice_audio {
   visibility: 0;
   position: absolute;
   top: 0;
