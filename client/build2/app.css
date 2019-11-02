@@ -1,7 +1,7 @@
 .input-item-wrap {
   display: grid;
   width: 100%;
-  grid-template-columns: 2.1875rem 1fr;
+  grid-template-columns: 2.34375rem 1fr;
   grid-template-rows: 1.375rem;
   grid-column-gap: 0.3125rem;
   border-bottom: 1PX solid #ccc;
@@ -14,6 +14,7 @@
           align-self: center;
 }
 .input-text-input {
+  width: 100%;
   font-size: 0.5625rem;
   border-width: 0;
   -webkit-align-self: center;
@@ -352,6 +353,21 @@
   top: 0;
   left: 0;
   pointer-events: none;
+}
+.chat-voice-input {
+  background-color: #fff;
+  border-radius: 0.07813rem;
+  font-size: 0.5rem;
+  height: 1.125rem;
+  text-align: center;
+  line-height: 1.125rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.chat-voice-input:active {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .text-msg-container {

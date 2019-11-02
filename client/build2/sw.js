@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V9";
+const cacheName = "CHAT-CACHE-V20";
 
 const urlsToCache = [
    "./"
@@ -14,7 +14,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
     // console.log("fetch event:", event);
 
-    if (event.request.method === 'GET') {
+    if (event.request.method === 'HEAD') {
         event.respondWith(
             caches.match(event.request).then((response) => {
                 if (response) {
