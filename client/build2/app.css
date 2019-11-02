@@ -771,12 +771,12 @@
   color: #ccc;
   padding-left: 0.125rem;
 }
-.am-modal-input input::-ms-input-placeholder {
+.am-modal-input input:-ms-input-placeholder {
   font-size: 0.21875rem;
   color: #ccc;
   padding-left: 0.125rem;
 }
-.am-modal-input input:-ms-input-placeholder {
+.am-modal-input input::-ms-input-placeholder {
   font-size: 0.21875rem;
   color: #ccc;
   padding-left: 0.125rem;
