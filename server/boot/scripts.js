@@ -22,7 +22,7 @@ module.exports=function(app){
 		password: "123456"
 	}
 	];
-
+/*
 	user.create({
 		email: "654321@test.com",
 		password: "123456"
@@ -31,7 +31,6 @@ module.exports=function(app){
 		console.log(data);
 	});
 
-/*
 	mysqlDs.automigrate('unread',function(err){
 		if(err){
 			console.log('err');
@@ -92,6 +91,5 @@ module.exports=function(app){
 	 		console.log('accessbuilt');
 	 	}
 	 })
-  
-*/
+*/ 
 }
