@@ -222,15 +222,8 @@ var pushNotification=function(to,from,msg,lx){
 
 
 		sendData=JSON.stringify(sendData);
-
-		var params={
-			payload:sendData,
-			userPublicKey:subscribe.keys.p256dh,
-			userAuth:subscribe.keys.auth
-		}
-		console.log("send notification: ", subscribe);
-		webPush.sendNotification(subscribe,"new message from " + title).then(function() {
-			console.log("success");
+		webPush.sendNotification(subscribe,sendData).then(function() {
+			console.log("notify successfully");
 		}).catch(function(err) {
 			console.log(err);
 		})

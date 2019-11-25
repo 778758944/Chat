@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V24";
+const cacheName = "CHAT-CACHE-V30";
 
 const urlsToCache = [
    "./"
@@ -52,17 +52,14 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("push", (event) => {
     console.log("push event", event);
     console.log(event.data.text());
-    //var data=JSON.parse(event.data.text());
+    var data=JSON.parse(event.data.text());
 	event.waitUntil(
-		/*
 		self.registration.showNotification(data.title,{
 			body:data.body,
 			icon:data.icon,
 			tag:data.title,
 			data:data.data
 		})
-		*/
-		self.registration.showNotification(event.data.text());
 	);
 });
 
