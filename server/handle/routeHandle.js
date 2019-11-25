@@ -16,6 +16,11 @@ var querystring=require('querystring');
 var url=require('url');
 var webPush=require('web-push');
 webPush.setGCMAPIKey(key.pushkey);
+webPush.setVapidDetails(
+  'mailto:77875894q@gmail.com',
+  key.publickey,
+  key.privkey
+);
 
 
 function getUtcTime() {
@@ -223,8 +228,12 @@ var pushNotification=function(to,from,msg,lx){
 			userPublicKey:subscribe.keys.p256dh,
 			userAuth:subscribe.keys.auth
 		}
-
-		webPush.sendNotification(subscribe.endpoint,params);
+		console.log("send notification: ", subscribe);
+		webPush.sendNotification(subscribe,"new message from " + title).then(function() {
+			console.log("success");
+		}).catch(function(err) {
+			console.log(err);
+		})
 
 	})
 }
