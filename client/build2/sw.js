@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V35";
+const cacheName = "CHAT-CACHE-V39";
 
 const urlsToCache = [
    "./"
@@ -57,24 +57,35 @@ self.addEventListener("push", (event) => {
 	event.waitUntil(
         self.registration.getNotifications().then((notifications) => {
             console.log("notification", notifications);
-            return self.registration.showNotification(data.title,{
-                body:data.body,
-                icon:data.icon,
-                tag:data.title,
-                data:data.tag,
-                badge: '/static/app.jpg',
-                renotify: true,
-            })
-        })
+            let existNotify = null;
+            for (let i = 0, len = notifications.length; i < len; i++) {
+                const notify = notifications[i];
+                if (notify.tag === data.tag) {
+                    existNotify = notify;
+                    break;
+                }
+            }
 
-		// self.registration.showNotification(data.title,{
-		// 	body:data.body,
-		// 	icon:data.icon,
-		// 	tag:data.title,
-        //     data:data.data,
-        //     badge: '/static/app.jpg',
-        //     renotify: true,
-		// })
+            const option = {
+                icon:data.icon,
+                tag:data.tag,
+                data:data.data,
+                badge: '/static/app_icon.jpg',
+                renotify: true,
+            }
+
+            if (existNotify) {
+                let count = existNotify.data.count + 1;
+                option.body = `Send you ${count} messages`;
+                option.data.count = count;
+                existNotify.close();
+            } else {
+                option.body = data.body;
+                option.data.count = 1;
+            }
+
+            return self.registration.showNotification(data.title, option);
+        })
 	);
 });
 
