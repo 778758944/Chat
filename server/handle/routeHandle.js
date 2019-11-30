@@ -188,10 +188,10 @@ var pushNotification=function(to,from,msg,lx){
 
 		if(lx==0){
 			var sendData={
-				title:title+'发来一条消息',
+				title:title,
 				body:msg,
 				icon:img,
-				tag:title,
+				tag:from,
 				data:{
 					url:'https://chat.xingwentao.xyz/index.html'
 				}
@@ -199,10 +199,10 @@ var pushNotification=function(to,from,msg,lx){
 		}
 		else if(lx=='img'){
 			var sendData={
-				title:title+'发来一条消息',
-				body:'发来一张图片',
+				title:title,
+				body:'send you a picture',
 				icon:img,
-				tag:title,
+				tag:from,
 				data:{
 					url:'https://chat.xingwentao.xyz/index.html'
 				}
@@ -210,16 +210,17 @@ var pushNotification=function(to,from,msg,lx){
 		}
 		else if(lx=='wav'){
 			var sendData={
-				title:title+'发来一条消息',
-				body:'发来一段语音',
+				title:title,
+				body:'send you a voice message',
 				icon:img,
-				tag:title,
+				tag:from,
 				data:{
 					url:'https://chat.xingwentao.xyz/index.html'
 				}
 			}
 		}
 
+		sendData.data.url = "/#/chat/" + from;
 
 		sendData=JSON.stringify(sendData);
 		webPush.sendNotification(subscribe,sendData).then(function() {

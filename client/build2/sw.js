@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V30";
+const cacheName = "CHAT-CACHE-V35";
 
 const urlsToCache = [
    "./"
@@ -14,7 +14,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
     // console.log("fetch event:", event);
 
-    if (event.request.method === 'HEAD') {
+    if (event.request.method === 'GET') {
         event.respondWith(
             caches.match(event.request).then((response) => {
                 if (response) {
@@ -51,23 +51,63 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("push", (event) => {
     console.log("push event", event);
-    console.log(event.data.text());
-    var data=JSON.parse(event.data.text());
+    console.log(event.data.json());
+    var data = event.data.json();
+    // keep running until the promise pass to waitUntil has settled
 	event.waitUntil(
-		self.registration.showNotification(data.title,{
-			body:data.body,
-			icon:data.icon,
-			tag:data.title,
-			data:data.data
-		})
+        self.registration.getNotifications().then((notifications) => {
+            console.log("notification", notifications);
+            return self.registration.showNotification(data.title,{
+                body:data.body,
+                icon:data.icon,
+                tag:data.title,
+                data:data.tag,
+                badge: '/static/app.jpg',
+                renotify: true,
+            })
+        })
+
+		// self.registration.showNotification(data.title,{
+		// 	body:data.body,
+		// 	icon:data.icon,
+		// 	tag:data.title,
+        //     data:data.data,
+        //     badge: '/static/app.jpg',
+        //     renotify: true,
+		// })
 	);
 });
 
 
 self.addEventListener('notificationclick', function(event) {
     console.log('[Service Worker] Notification click Received.');
+    const path = event.notification.data.url;
+    const url = new URL(path, self.location.origin);
     event.notification.close();
+
+    // keep service work alive
     event.waitUntil(
-      clients.openWindow(event.notification.data.url)
+    //   clients.openWindow(event.notification.data.url)
+        clients.matchAll({
+            type: "window",
+            includeUncontrolled: true,
+        }).then((windowClients) => {
+            const isTotMatch = false;
+            let matchClient = (windowClients && windowClients[0]) || null;
+            for (let i = 1, len = windowClients.length; i < len; i++) {
+                const wc = windowClients[i];
+                if (wc.url === url) {
+                    mactchClient = wc;
+                    isTotMatch = true;
+                    break;
+                }
+            }
+
+            if (!matchClient) {
+                return clients.openWindow(event.notification.data.url);
+            } else {
+                return matchClient.focus();
+            }
+        })
     );
 });
