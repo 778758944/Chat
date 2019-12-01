@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V40";
+const cacheName = "CHAT-CACHE-V41";
 
 const urlsToCache = [
    "./"
@@ -117,6 +117,12 @@ self.addEventListener('notificationclick', function(event) {
             if (!matchClient) {
                 return clients.openWindow(event.notification.data.url);
             } else {
+                if (!isTotMatch) {
+                    matchClient.postMessage({
+                        type: "NOTIFY_ROUTE",
+                        path
+                    });
+                }
                 return matchClient.focus();
             }
         })
