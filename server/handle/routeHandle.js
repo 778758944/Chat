@@ -220,7 +220,7 @@ var pushNotification=function(to,from,msg,lx){
 			}
 		}
 
-		sendData.data.url = "/#/chat/" + from;
+		sendData.data.url = "/chat/" + from;
 
 		sendData=JSON.stringify(sendData);
 		webPush.sendNotification(subscribe,sendData).then(function() {
