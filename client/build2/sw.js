@@ -1,4 +1,4 @@
-const cacheName = "CHAT-CACHE-V41";
+const cacheName = "CHAT-CACHE-V42";
 
 const urlsToCache = [
    "./"
@@ -93,7 +93,7 @@ self.addEventListener("push", (event) => {
 self.addEventListener('notificationclick', function(event) {
     console.log('[Service Worker] Notification click Received.');
     const path = event.notification.data.url;
-    const url = new URL(path, self.location.origin);
+    const url = new URL(path, self.location.origin).href;
     event.notification.close();
 
     // keep service work alive
@@ -103,9 +103,9 @@ self.addEventListener('notificationclick', function(event) {
             type: "window",
             includeUncontrolled: true,
         }).then((windowClients) => {
-            const isTotMatch = false;
+            let isTotMatch = false;
             let matchClient = (windowClients && windowClients[0]) || null;
-            for (let i = 1, len = windowClients.length; i < len; i++) {
+            for (let i = 0, len = windowClients.length; i < len; i++) {
                 const wc = windowClients[i];
                 if (wc.url === url) {
                     mactchClient = wc;
