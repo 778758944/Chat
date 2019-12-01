@@ -54,9 +54,11 @@ var pushNotification=function(to,from,msg,lx){
 	}
 	else if(lx=='img'){
 		var imgName=new Date().getTime().toString()+to+from+'.jpg';
-		var img_path=Path.resolve(__dirname,'../../client/media/'+imgName);
-		var base64_data=msg.substr(22);
-		var data=new Buffer(base64_data,'base64');
+		var img_path=Path.resolve(__dirname,'../../client/build2/media/'+imgName);
+		console.log("msg type", msg);
+		//var base64_data=msg.substr(22);
+		//var data=new Buffer(base64_data,'base64');
+		var data = msg;
 		fs.exists(img_path,function(exists){
 			if(!exists){
 				fs.writeFile(img_path,data,function(err){
@@ -65,7 +67,7 @@ var pushNotification=function(to,from,msg,lx){
 						return;
 					}
 					else{
-						var web_img_path='https://'+location.host+'/media/'+imgName;
+						var web_img_path='https://chat.xingwentao.xyz:10027/media/'+imgName;
 						var unreadData={
 							type:2,
 							to:to,
@@ -90,7 +92,7 @@ var pushNotification=function(to,from,msg,lx){
 	else if(lx=='wav'){
 		console.log(msg instanceof Buffer);
 		var wavName=new Date().getTime().toString()+to+from+'.wav';
-		var wav_path=Path.resolve(__dirname,'../../client/media/',wavName);
+		var wav_path=Path.resolve(__dirname,'../../client/build2/media/',wavName);
 		console.log(wav_path);
 		fs.exists(wav_path,function(exists){
 			if(!exists){
@@ -344,7 +346,7 @@ var updateInfo=function(req,res){
 		var img=files.tx;
 		// console.log(img);
 		var imgPath=img.path;
-		var savePath=Path.resolve(__dirname,'../../client/userImg/'+userId+img.name);
+		var savePath=Path.resolve(__dirname,'../../client/build2/userImg/'+userId+img.name);
 		var filePath=Path.resolve("/userImg/"+userId+img.name);
 		var read=fs.createReadStream(imgPath);
 		var write=fs.createWriteStream(savePath);

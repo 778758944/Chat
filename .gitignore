@@ -23,3 +23,5 @@ client/media
 client/userImg
 nohup.out
 package-lock.json
+client/build2/media
+client/build2/userImg
