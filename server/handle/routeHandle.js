@@ -279,15 +279,18 @@ var socketConnection=function(socket){
 						var path=points.point;
 						console.log(path);
 						console.log('/chat/'+userId);
-						if(path=='/chat/'+userId){
+						if(path.indexOf('/chat/'+userId) !== -1){
 							console.log('msg out');
 							console.log("to:", to);
 							console.log("sockets key:", Object.keys(sockets));
 							console.log(getUtcTime());
 							sockets[to].emit('news',{msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
+							if (path.indexOf("hidden") !== -1) {
+								pushNotification(to,userId,data.msg,lx);
+							}
 						}
 						else{
-							if(true ||path=='/friend' || path=='/'){
+							if(true || path=='/friend' || path=='/' || path == '/hidden' || path == "/friend/hidden"){
 								console.log('counter');
 								sockets[to].emit('addCounter', {msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
 							}
