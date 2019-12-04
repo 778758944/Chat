@@ -172,13 +172,20 @@ var pushNotification=function(to,from,msg,lx){
 		})
 	});
 
-	Promise.all([p1,p2]).then(function(res){
+	var p3 = new Promise(function(resolve, reject) {
+		unread.find({where: {to: to, from: from}}, function(err, data) {
+			if (err) reject(err);
+			resolve(data.length);
+		})
+	})
+
+	Promise.all([p1,p2,p3]).then(function(res){
 		// console.log('promise',res);
 		var pushData=res[0];
 		var userData=res[1];
+		var count = res[2];
+		console.log("count", count);
 
-    console.log('pushData', pushData);
-		console.log('userData', userData);
 
 			// console.log('data',rp.pushkeys);
 		var title=userData.username || userData.email;
@@ -252,13 +259,21 @@ var socketConnection=function(socket){
 
 		console.log('userid in socket connection',userId);
 
+		socket.on("disconnect", () => {
+			console.log("client disconnect");
+		})
+
 
 
 		sockets[userId]=socket;
 		// signaling
 		socket.on("signalingMsg", function(data) {
 			var to = data.to;
-			sockets[to].emit("signalingMsg", data);
+			if (sockets[to]) {
+				sockets[to].emit("signalingMsg", data);
+			} else {
+				console.log("no socket");
+			}
 		});
 
 
