@@ -120,27 +120,6 @@ var pushNotification=function(to,from,msg,lx){
 		})
 	}
 
-	// var unreadData={
-	// 	type:2,
-	// 	to:to,
-	// 	from:from,
-	// 	msg:msg,
-	// 	lx:lx
-	// }
-
-	// var p3=new Promise(function(resolve,reject){
-	// 	if(lx==0){
-	// 		unread.create(unreadData,function(err,data){
-	// 			if(err){
-	// 				console.log(err);
-	// 				reject(err);
-	// 			}
-	// 			else{
-	// 				resolve(data);
-	// 			}
-	// 		})
-	// 	}
-	// })
 
 	var p1=new Promise(function(resolve,reject){
 		console.log("pushkey", to);
@@ -241,6 +220,42 @@ var pushNotification=function(to,from,msg,lx){
 	})
 }
 
+function pushSignalingNotification(msg) {
+	const to	= msg.to,
+		  from 	= msg.from,
+		  data 	= msg.data,
+		  type	= msg.type;
+
+	const pushkey=loopback.findModel('pushkey');
+
+	pushkey.findById(to,function(err,data){
+		if(err){
+			console.log(err);
+		}
+		else{
+			var subscribe = JSON.parse(data.key);
+			var sendData={
+				title:title,
+				body:'send you a voice message',
+				icon:null,
+				tag: 'video_call',
+				data:{
+					url:'/video/'+to+'/0',
+					data: data
+				}
+			}
+			webPush.sendNotification(subscribe,sendData).then(function() {
+				console.log("notify successfully");
+			}).catch(function(err) {
+				console.log(err);
+			});
+		}
+	})
+
+
+	
+}
+
 var socketConnection=function(socket){
 	console.log("websocket connected");
 	var userId;
@@ -260,31 +275,40 @@ var socketConnection=function(socket){
 		console.log('userid in socket connection',userId);
 
 		socket.on("disconnect", () => {
-			console.log("client disconnect");
-		})
+			socket.removeAllListeners();
+			sockets[userId] = null;
+		});
 
+		socket.on("stateChange", (data) => {
+			if (data.hidden) {
+				socket.isBackMode = true;
+			} else {
+				socket.isBackMode = false;
+			}
+		});
 
-
+		socket.isBackMode = false;
 		sockets[userId]=socket;
 		// signaling
 		socket.on("signalingMsg", function(data) {
 			var to = data.to;
 			if (sockets[to]) {
 				sockets[to].emit("signalingMsg", data);
-			} else {
-				console.log("no socket");
+			}
+
+			if (!sockets[to] || sockets[to].isBackMode) {
+				if (data.data && data.data.type === "offer") {
+					pushSignalingNotification(data);
+				}
 			}
 		});
 
 
 
 		socket.on('sendMsg',function(data){
-			console.log('sendMsg',data);
 			socket.emit("msgRes", data);
 			var to=data.to;
 			var lx=data.lx ? data.lx:0;
-		//	console.log("emit socket", sockets[to]);
-			console.log("emit userid", userId);
 			if(sockets[to]){
 				points.findById(to,function(err,points){
 					if(err){
@@ -294,35 +318,22 @@ var socketConnection=function(socket){
 					else{
 						// console.log(points);
 						var path=points.point;
-						console.log(path);
-						console.log('/chat/'+userId);
+						// console.log(path);
+						// console.log('/chat/'+userId);
 						if(path.indexOf('/chat/'+userId) !== -1){
 							console.log('msg out');
-							console.log("to:", to);
-							console.log("sockets key:", Object.keys(sockets));
-							console.log(getUtcTime());
+							// console.log("to:", to);
+							// console.log("sockets key:", Object.keys(sockets));
+							// console.log(getUtcTime());
 							sockets[to].emit('news',{msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
-							if (path.indexOf("hidden") !== -1) {
-								pushNotification(to,userId,data.msg,lx);
-							}
-						}
-						else{
-							if(true || path=='/friend' || path=='/' || path == '/hidden' || path == "/friend/hidden"){
-								console.log('counter');
-								sockets[to].emit('addCounter', {msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
-							}
-							// console.log('no response');
+							socket.isBackMode && pushNotification(to,userId,data.msg,lx);
+						} else {
+							console.log('counter');
+							sockets[to].emit('addCounter', {msg:data.msg,type:2,from:data.from,lx:lx, createAt: getUtcTime(), to: to});
 							pushNotification(to,userId,data.msg,lx);
-
-
-							// console.log('i will give you a notice for a while');
 						}
 					}
-
 				});
-
-				// console.log('msg out');
-				// sockets[to].emit('news',{msg:data.msg,type:2,from:userId,lx:lx});
 			}
 			else{
 				console.log("just push notification");
