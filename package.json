@@ -17,7 +17,7 @@
     "flux": "^2.1.1",
     "formidable": "^1.0.17",
     "jquery": "^2.2.2",
-    "loopback": "^2.22.0",
+    "loopback": "^3.25.1",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^2.1.0",
     "loopback-connector-mongodb": "^3.4.3",
